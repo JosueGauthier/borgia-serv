@@ -1,3 +1,4 @@
+import datetime
 from django.db.models import Avg, Max, Min, Sum, Count, F
 from django.db.models import F
 from rest_framework.decorators import api_view
@@ -143,10 +144,76 @@ class SaleRetrieve(SaleMixin, BorgiaView):
 from rest_framework.response import Response
 
 
+class SaleViewSet(viewsets.ModelViewSet):
+    queryset = Sale.objects.all()
+    serializer_class = SaleSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['sender', 'datetime']
+
+
 @api_view(('GET',))
 def get_total_sale(request):
     data = []
     data.append(SaleProduct.objects.all().aggregate(Sum('price')))
     data.append(SaleProduct.objects.all().count())
     return Response(data)
+
+@api_view(('GET',))
+def get_history_sale(request):
+    data = []
+    day_of_year = datetime.datetime.now().timetuple().tm_yday
+    nombre_de_jour = day_of_year
+
+    for i in range(0, nombre_de_jour):
+        start_day = strftime(str(datetime.datetime.strptime(
+            "2022-01-01", "%Y-%m-%d") + datetime.timedelta(days=i)))
+        end_day = strftime(str(datetime.datetime.strptime(
+            "2022-01-01", "%Y-%m-%d") + datetime.timedelta(days=1+i)))
+        price_sum = SaleProduct.objects.filter(
+            sale__datetime__range=[start_day, end_day]).aggregate(Sum('price'))
+        
+        data.append({
+            "start_day": start_day,
+            "price_sum": price_sum["price__sum"],
+        })
+
+    return Response(data)
+
+
+@api_view(('GET',))
+def get_sales_podium(request):
+
+    #user = self.request.user
+
+    data = []
+    user_sum = SaleProduct.objects.filter(
+        sale__sender__username="73An220").aggregate(Sum('price'))
+
+    data.append(SaleProduct.objects.filter(
+        sale__sender__username='73An220').aggregate(Sum('price')))
+    data.append(SaleProduct.objects.filter(
+        sale__sender__username='73An220').count())
+
+    data.append({"user_sum": user_sum["price__sum"]})
+
+    # with open("/borgia-serv/Borgia/borgia/sales/test.text", "a") as o:
+    #    o.write(str(totalsale = Sale.objects.all().aggregate(total_sale=Count('shop'))))
+    return Response(data)
+
+
+@api_view(['GET'])
+def all_high_scores(request):
+    queryset = User.objects.order_by('-balance')
+    serializer = HighScoreSerializer(queryset, many=True)
+    return Response(serializer.data)
+
+
+class StatUserPurchase(viewsets.ViewSet):
+    def list(self, request):
+        queryset = User.objects.all()
+        username = self.request.query_params.get('username')
+        if username is not None:
+            queryset = queryset.filter(username=username)
+        serializer = HighScoreSerializer(queryset, many=True)
+        return Response(serializer.data)
 
