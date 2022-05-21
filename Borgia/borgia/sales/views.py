@@ -1,8 +1,6 @@
 from django.db.models import Avg, Max, Min, Sum, Count, F
-import datetime
 from django.db.models import F
 from rest_framework.decorators import api_view
-from rest_framework.response import Response
 from .serializers import *
 from .models import Sale, SaleProduct
 from rest_framework import viewsets
@@ -11,7 +9,6 @@ from time import strftime
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Q
 from django.shortcuts import render
-from requests import Response
 
 from borgia.views import BorgiaFormView, BorgiaView
 from sales.forms import SaleListSearchDateForm
@@ -142,44 +139,8 @@ class SaleRetrieve(SaleMixin, BorgiaView):
         return render(request, self.template_name, context=context)
 
 
-# partie API
-
-
-class SaleViewSet(viewsets.ModelViewSet):
-    queryset = Sale.objects.all()
-    serializer_class = SaleSerializer
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['sender', 'datetime']
-
-
-""" def get_total_sale(request, *args, **kwargs):
-
-    data = []
-
-    #Company.objects.filter(num_employees__gt=F('num_chairs') * 2)
-
-    #data.append(Sale.objects.all().aggregate(Avg('shop'),Min('shop'),Max('shop'),Sum('shop'),Count('shop')))
-    data.append(Sale.objects.all().count())
-    data.append(SaleProduct.objects.all().aggregate(Sum('price')))
- 
-
-    #Book.objects.filter(publisher__name='BaloneyPress').count()
-
-    
-
-    #Store.objects.aggregate(youngest_age=Min('books__authors__age'))
-
-    #! Jointure
-    #data.append(SaleProduct.objects.aggregate(a=Min('sale__shop_id')))
-
-    #Book.objects.filter(name__startswith="Django").annotate(num_authors=Count('authors'))
-
-    #! filtre + jointure
-    for i in range(1,Shop.objects.all().count()) :
-        data.append(SaleProduct.objects.filter(sale__shop__id=i).aggregate(Sum('price')))
-
-    return Response(data) """
-# return JsonResponse(data, safe=False)
+#! partie API
+from rest_framework.response import Response
 
 
 @api_view(('GET',))
@@ -189,59 +150,3 @@ def get_total_sale(request):
     data.append(SaleProduct.objects.all().count())
     return Response(data)
 
-
-@api_view(('GET',))
-def get_history_sale(request):
-    data = []
-    day_of_year = datetime.datetime.now().timetuple().tm_yday
-    nombre_de_jour = day_of_year
-
-    for i in range(0, nombre_de_jour):
-        start_day = strftime(str(datetime.datetime.strptime(
-            "2022-01-01", "%Y-%m-%d") + datetime.timedelta(days=i)))
-        end_day = strftime(str(datetime.datetime.strptime(
-            "2022-01-01", "%Y-%m-%d") + datetime.timedelta(days=1+i)))
-        price_sum = SaleProduct.objects.filter(
-            sale__datetime__range=[start_day, end_day]).aggregate(Sum('price'))
-        
-        data.append({
-            "start_day": start_day,
-            "price_sum": price_sum["price__sum"],
-        })
-
-    return Response(data)
-
-
-@api_view(('GET',))
-def get_sales_podium(request):
-
-    #user = self.request.user
-
-    data = []
-    user_sum = SaleProduct.objects.filter(
-        sale__sender__username="73An220").aggregate(Sum('price'))
-
-    data.append(SaleProduct.objects.filter(
-        sale__sender__username='73An220').aggregate(Sum('price')))
-    data.append(SaleProduct.objects.filter(
-        sale__sender__username='73An220').count())
-
-    data.append({"user_sum": user_sum["price__sum"]})
-
-    # with open("/borgia-serv/Borgia/borgia/sales/test.text", "a") as o:
-    #    o.write(str(totalsale = Sale.objects.all().aggregate(total_sale=Count('shop'))))
-    return Response(data)
-
-
-@api_view(['GET'])
-def all_high_scores(request):
-    queryset = User.objects.order_by('-balance')
-    serializer = HighScoreSerializer(queryset, many=True)
-    return Response(serializer.data)
-
-
-class StatUserPurchase(viewsets.ViewSet):
-    def list(self, request):
-        queryset = User.objects.all()
-        serializer = HighScoreSerializer(queryset, many=True)
-        return Response(serializer.data)
