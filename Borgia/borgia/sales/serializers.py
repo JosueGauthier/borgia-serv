@@ -46,7 +46,7 @@ class SaleStatSerializer(serializers.ModelSerializer):
 
 
 
-class HighScoreSerializer(serializers.BaseSerializer):
+class StatPurchaseSerializer(serializers.BaseSerializer):
     def to_representation(self, instance):
         return {
             'id':instance.id,
@@ -66,4 +66,16 @@ class HighScoreSerializer(serializers.BaseSerializer):
 
             ],
 
+        }
+
+
+
+class RankSerializer(serializers.BaseSerializer):
+    def to_representation(self, instance):
+        return {
+            'id':instance.id,
+            'username':instance.username,            
+            'surname': instance.surname,
+            'montant_achats': SaleProduct.objects.filter(sale__sender__username=instance.username).aggregate(Sum('price')),
+            'qte_achats': SaleProduct.objects.filter(sale__sender__username=instance.username).count(),
         }

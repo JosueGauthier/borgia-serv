@@ -1,4 +1,5 @@
 import datetime
+from operator import itemgetter
 from django.db.models import Avg, Max, Min, Sum, Count, F
 from django.db.models import F
 from rest_framework.decorators import api_view
@@ -204,7 +205,7 @@ def get_sales_podium(request):
 @api_view(['GET'])
 def all_high_scores(request):
     queryset = User.objects.order_by('-balance')
-    serializer = HighScoreSerializer(queryset, many=True)
+    serializer = StatPurchaseSerializer(queryset, many=True)
     return Response(serializer.data)
 
 
@@ -214,6 +215,29 @@ class StatUserPurchase(viewsets.ViewSet):
         username = self.request.query_params.get('username')
         if username is not None:
             queryset = queryset.filter(username=username)
-        serializer = HighScoreSerializer(queryset, many=True)
+        serializer = StatPurchaseSerializer(queryset, many=True)
         return Response(serializer.data)
 
+
+class RankBestPurchaserViewset(viewsets.ViewSet):
+    def list(self, request):
+        queryset = User.objects.all()
+        serializer = RankSerializer(queryset, many=True)
+        user_rank_list =[]
+        #list serializerDataList = serializer.data
+
+
+        #newlist = sorted(serializer.data, key=lambda d: d['username']) 
+        newlist = sorted(serializer.data, key=itemgetter('qte_achats'), reverse=True)
+
+        with open("/borgia-serv/Borgia/borgia/sales/test.text", "a") as o:
+            o.write(str(newlist))
+        return Response(serializer.data)
+
+
+""" [
+    {'id': 1, 'username': 'AE_ENSAM', 'surname': None, 'montant_achats': {'price__sum': None}, 'qte_achats': 0}, 
+    {'id': 3, 'username': '73An220', 'surname': 'Khalvin', 'montant_achats': {'price__sum': Decimal('54.90')}, 'qte_achats': 18}, 
+    {'id': 4, 'username': '73Kin220', 'surname': 'gum', 'montant_achats': {'price__sum': None}, 'qte_achats': 0}
+    
+] """
