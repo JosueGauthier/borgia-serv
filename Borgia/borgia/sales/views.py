@@ -223,16 +223,8 @@ class RankBestPurchaserViewset(viewsets.ViewSet):
     def list(self, request):
         queryset = User.objects.all()
         serializer = RankSerializer(queryset, many=True)
-        user_rank_list =[]
-        #list serializerDataList = serializer.data
-
-
-        #newlist = sorted(serializer.data, key=lambda d: d['username']) 
-        newlist = sorted(serializer.data, key=itemgetter('qte_achats'), reverse=True)
-
-        with open("/borgia-serv/Borgia/borgia/sales/test.text", "a") as o:
-            o.write(str(newlist))
-        return Response(serializer.data)
+        sortedList = sorted(serializer.data, key=itemgetter('montant_achats'), reverse=True)[:10]
+        return Response(sortedList)
 
 
 """ [

@@ -76,6 +76,15 @@ class RankSerializer(serializers.BaseSerializer):
             'id':instance.id,
             'username':instance.username,            
             'surname': instance.surname,
-            'montant_achats': SaleProduct.objects.filter(sale__sender__username=instance.username).aggregate(Sum('price')),
+            'montant_achats': float(SaleProduct.objects.filter(sale__sender__username=instance.username).aggregate(Sum('price'))['price__sum'] or 0),
             'qte_achats': SaleProduct.objects.filter(sale__sender__username=instance.username).count(),
         }
+
+
+
+""" [
+    {'id': 1, 'username': 'AE_ENSAM', 'surname': None, 'montant_achats': {'price__sum': None}, 'qte_achats': 0}, 
+    {'id': 3, 'username': '73An220', 'surname': 'Khalvin', 'montant_achats': {'price__sum': Decimal('54.90')}, 'qte_achats': 18}, 
+    {'id': 4, 'username': '73Kin220', 'surname': 'gum', 'montant_achats': {'price__sum': None}, 'qte_achats': 0}
+    
+] """
