@@ -1,5 +1,5 @@
 from django.urls import include, path
-from sales.views import get_total_sale, SaleList, SaleRetrieve,SaleViewSet,get_history_sale,all_high_scores,StatUserPurchase, RankBestPurchaserViewset
+from sales.views import get_total_sale, SaleList, SaleRetrieve,SaleViewSet,get_history_sale,all_high_scores,StatUserPurchase, RankBestPurchaserViewset,RankUserShopPurchaseViewset
 from rest_framework import routers
 
 
@@ -7,6 +7,7 @@ router = routers.DefaultRouter()
 router.register(r'sale', SaleViewSet)
 router.register(r'stat-user', StatUserPurchase, basename='stat-user')
 router.register(r'rank-user', RankBestPurchaserViewset, basename='rank-user')
+router.register(r'rank-user-shop', RankUserShopPurchaseViewset, basename='rank-user-shop')
 
 sales_patterns = [
 

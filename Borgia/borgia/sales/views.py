@@ -222,14 +222,17 @@ class StatUserPurchase(viewsets.ViewSet):
 class RankBestPurchaserViewset(viewsets.ViewSet):
     def list(self, request):
         queryset = User.objects.all()
-        serializer = RankSerializer(queryset, many=True)
+        serializer = RankUserAllPurchaseSerializer(queryset, many=True)
         sortedList = sorted(serializer.data, key=itemgetter('montant_achats'), reverse=True)[:10]
         return Response(sortedList)
 
-
-""" [
-    {'id': 1, 'username': 'AE_ENSAM', 'surname': None, 'montant_achats': {'price__sum': None}, 'qte_achats': 0}, 
-    {'id': 3, 'username': '73An220', 'surname': 'Khalvin', 'montant_achats': {'price__sum': Decimal('54.90')}, 'qte_achats': 18}, 
-    {'id': 4, 'username': '73Kin220', 'surname': 'gum', 'montant_achats': {'price__sum': None}, 'qte_achats': 0}
-    
-] """
+class RankUserShopPurchaseViewset(viewsets.ViewSet):
+    def list(self, request):
+        queryset = Shop.objects.all()
+        #id = self.request.query_params.get('id')
+        #if id is not None:
+        #    queryset = queryset.filter(id=id)
+        serializer = ShopUserRankSerializer(queryset, many=True)
+        with open("/borgia-serv/Borgia/borgia/sales/test.text", "a") as o:
+            o.write(str(serializer.data) + "\n")
+        return Response(serializer.data)
