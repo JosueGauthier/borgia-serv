@@ -1,0 +1,20 @@
+{% extends 'base_sober.html' %}
+{% load bootstrap %}
+
+{% block content %}
+<div class="panel panel-danger">
+  <div class="panel-heading">
+    Suppression d'un événement :
+  </div>
+  <div class="panel-body">
+    <form action="" method="post">
+      {% csrf_token %}
+      <h3>Supprimer l'événement ""{{ event.description }}"" ?</h3>
+      <br>
+        {{ form|bootstrap }}
+        <br>
+        <button class="btn btn-danger" type="submit">Valider</button>
+    </form>
+  </div>
+</div>
+{% endblock %}
