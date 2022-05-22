@@ -28,7 +28,7 @@ class HistorySaleUserSerializer(serializers.BaseSerializer):
             'sender': instance.sender.id,       
             #'nb_type_de_prod': SaleProduct.objects.filter(sale__id=instance.id).count(),
             'tot_qty_per_sale': SaleProduct.objects.filter(sale__id=instance.id).aggregate(Sum('quantity'))['quantity__sum'],
-            'tot_amount_per_sale': SaleProduct.objects.filter(sale__id=instance.id).aggregate(Sum('price')),
+            'tot_amount_per_sale': SaleProduct.objects.filter(sale__id=instance.id).aggregate(Sum('price'))['price__sum'],
         }
 
 
