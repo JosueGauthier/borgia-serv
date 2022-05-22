@@ -229,10 +229,8 @@ class RankBestPurchaserViewset(viewsets.ViewSet):
 class RankUserShopPurchaseViewset(viewsets.ViewSet):
     def list(self, request):
         queryset = Shop.objects.all()
-        #id = self.request.query_params.get('id')
-        #if id is not None:
-        #    queryset = queryset.filter(id=id)
+        id = self.request.query_params.get('id')
+        if id is not None:
+            queryset = queryset.filter(id=id)
         serializer = ShopUserRankSerializer(queryset, many=True)
-        with open("/borgia-serv/Borgia/borgia/sales/test.text", "a") as o:
-            o.write(str(serializer.data) + "\n")
         return Response(serializer.data)

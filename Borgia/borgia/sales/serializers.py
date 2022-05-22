@@ -1,3 +1,4 @@
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from operator import itemgetter
 from rest_framework import viewsets
@@ -101,7 +102,6 @@ class UserRankByShopViewSet(viewsets.ViewSet):
             'montant_achats_par_shop'), reverse=True)[:10]
         return Response(sortedList)
 
-from rest_framework.decorators import api_view
 
 @api_view(['GET'])
 def all_high_scores(request):
@@ -109,17 +109,15 @@ def all_high_scores(request):
     serializer = StatPurchaseSerializer(queryset, many=True)
     return Response(serializer.data)
 
-#@api_view(['GET'])
 
 def toptenUserView(id):
-        queryset = User.objects.all()
-        serializer = UserRankByShopSerializer(
-            queryset, many=True, context={"shop_id": id})
-        sortedList = sorted(serializer.data, key=itemgetter(
-            'montant_achats_par_shop'), reverse=True)[:10]
-        #with open("/borgia-serv/Borgia/borgia/sales/test.text", "a") as o:
-        #    o.write(str(sortedList) + "\n")
-        return sortedList
+    queryset = User.objects.all()
+    serializer = UserRankByShopSerializer(
+        queryset, many=True, context={"shop_id": id})
+    sortedList = sorted(serializer.data, key=itemgetter(
+        'montant_achats_par_shop'), reverse=True)[:10]
+    return sortedList
+
 
 class ShopUserRankSerializer(serializers.BaseSerializer):
     def to_representation(self, instance):
@@ -130,34 +128,3 @@ class ShopUserRankSerializer(serializers.BaseSerializer):
             'user_top_ten': toptenUserView(instance.id)
             # userTopTen(instance.id)
         }
-
-
-""" def userTopTen(id):
-
-    allUsers = User.objects.all()
-    userserializer = UserSerializer
-    userTopTenList = []
-
-    queryset = User.objects.all()
-    serializer = userserial(queryset, many=True)
-    sortedList = sorted(serializer.data, key=itemgetter(
-        'montant_achats'), reverse=True)[:10]
-    return Response(sortedList)
-
-    #serializer = ShopUserRankSerializer(queryset, many=True)
-
-    [
-
-        {
-            'id': Shop.objects.filter(id=i).values('name'),
-            'username': Shop.objects.filter(id=i).values('name'),
-            'montant_achats': float(SaleProduct.objects.filter(sale__sender__username=instance.username).aggregate(Sum('price'))['price__sum'] or 0),
-            'qte_achats': SaleProduct.objects.filter(sale__sender__username=instance.username).count(),
-
-        } for i in range(1, Shop.objects.count())
-
-
-    ],
-
-    return(userTopTenList)
- """

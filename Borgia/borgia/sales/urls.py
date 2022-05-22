@@ -12,14 +12,12 @@ router.register(r'rank-user-shop', RankUserShopPurchaseViewset, basename='rank-u
 sales_patterns = [
 
     path('api-links/sale/', include(router.urls)),
-
     path('api-links/total/', get_total_sale),
     path('api-links/history/', get_history_sale),
     #path('api-links/users-sales-podium/', get_sales_podium),
     path('api-links/scores/', all_high_scores),
 
     
-
     path('shops/<int:shop_pk>/sales/', include([
         path('', SaleList.as_view(), name='url_sale_list'),
         path('<int:sale_pk>/', SaleRetrieve.as_view(),
