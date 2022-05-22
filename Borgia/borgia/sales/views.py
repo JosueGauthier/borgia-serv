@@ -1,3 +1,4 @@
+from rest_framework.response import Response
 import datetime
 from operator import itemgetter
 from django.db.models import Avg, Max, Min, Sum, Count, F
@@ -142,7 +143,6 @@ class SaleRetrieve(SaleMixin, BorgiaView):
 
 
 #! partie API
-from rest_framework.response import Response
 
 
 class SaleViewSet(viewsets.ModelViewSet):
@@ -152,12 +152,30 @@ class SaleViewSet(viewsets.ModelViewSet):
     filterset_fields = ['sender', 'datetime']
 
 
+""" class HistorySaleUserViewSet(viewsets.ModelViewSet):
+    queryset = Sale.objects.all()
+    serializer_class = HistorySaleUserSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['sender'] """
+
+class HistorySaleUserViewSet(viewsets.ViewSet):
+    def list(self, request):
+        queryset = Sale.objects.all()
+        sender = self.request.query_params.get('sender')
+        if sender is not None:
+            queryset = queryset.filter(sender=sender)
+        serializer = HistorySaleUserSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+
+
 @api_view(('GET',))
 def get_total_sale(request):
     data = []
     data.append(SaleProduct.objects.all().aggregate(Sum('price')))
     data.append(SaleProduct.objects.all().count())
     return Response(data)
+
 
 @api_view(('GET',))
 def get_history_sale(request):
@@ -172,7 +190,7 @@ def get_history_sale(request):
             "2022-01-01", "%Y-%m-%d") + datetime.timedelta(days=1+i)))
         price_sum = SaleProduct.objects.filter(
             sale__datetime__range=[start_day, end_day]).aggregate(Sum('price'))
-        
+
         data.append({
             "start_day": start_day,
             "price_sum": price_sum["price__sum"],
@@ -223,8 +241,10 @@ class RankBestPurchaserViewset(viewsets.ViewSet):
     def list(self, request):
         queryset = User.objects.all()
         serializer = RankUserAllPurchaseSerializer(queryset, many=True)
-        sortedList = sorted(serializer.data, key=itemgetter('montant_achats'), reverse=True)[:10]
+        sortedList = sorted(serializer.data, key=itemgetter(
+            'montant_achats'), reverse=True)[:10]
         return Response(sortedList)
+
 
 class RankUserShopPurchaseViewset(viewsets.ViewSet):
     def list(self, request):
