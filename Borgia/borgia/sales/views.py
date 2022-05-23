@@ -151,13 +151,6 @@ class SaleViewSet(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['sender', 'datetime']
 
-
-""" class HistorySaleUserViewSet(viewsets.ModelViewSet):
-    queryset = Sale.objects.all()
-    serializer_class = HistorySaleUserSerializer
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['sender'] """
-
 class HistorySaleUserViewSet(viewsets.ViewSet):
     def list(self, request):
         queryset = Sale.objects.all()

@@ -78,7 +78,9 @@ class StatPurchaseSerializer(serializers.BaseSerializer):
 
                 {
                     'shop_name': str(Shop.objects.filter(id=i).values('name')[0]['name']),
-                    'qte_user_achats': int(SaleProduct.objects.filter(sale__sender__username=instance.username, sale__shop=i).aggregate(Sum('price'))['price__sum'] or 0),
+                    'shop_image': str(Shop.objects.filter(id=i).values('image')[0]['image']),
+                    'qte_user_achats': SaleProduct.objects.filter(sale__sender__username=instance.username, sale__shop=i).count(),
+                    'montant_achats': float(SaleProduct.objects.filter(sale__sender__username=instance.username, sale__shop=i).aggregate(Sum('price'))['price__sum'] or 0),
 
                 } for i in range(1, Shop.objects.count())
 

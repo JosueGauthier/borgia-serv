@@ -44,7 +44,7 @@ class ShopStatSerializer(serializers.ModelSerializer):
 
     def get_total_sale_amount_of_shop(self, obj):
         totalsaleamountofshop = SaleProduct.objects.filter(
-            sale__shop__id=obj.id).aggregate(Sum('price'))
+            sale__shop__id=obj.id).aggregate(Sum('price'))['price__sum']
         return totalsaleamountofshop
 
     def get_total_sale_of_shop(self, obj):
