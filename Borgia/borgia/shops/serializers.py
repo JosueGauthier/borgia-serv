@@ -39,7 +39,7 @@ class ShopStatSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Shop
-        fields = ('id','image', 'name', 'total_sale_of_shop',
+        fields = ('id', 'image', 'name', 'total_sale_of_shop',
                   'total_sale_amount_of_shop')
 
     def get_total_sale_amount_of_shop(self, obj):

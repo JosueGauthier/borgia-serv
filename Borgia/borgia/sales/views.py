@@ -151,6 +151,7 @@ class SaleViewSet(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['sender', 'datetime']
 
+
 class HistorySaleUserViewSet(viewsets.ViewSet):
     def list(self, request):
         queryset = Sale.objects.all()
@@ -159,7 +160,6 @@ class HistorySaleUserViewSet(viewsets.ViewSet):
             queryset = queryset.filter(sender=sender)
         serializer = HistorySaleUserSerializer(queryset, many=True)
         return Response(serializer.data)
-
 
 
 @api_view(('GET',))
@@ -177,14 +177,26 @@ def get_history_sale(request):
     nombre_de_jour = day_of_year
 
     for i in range(0, nombre_de_jour):
-        start_day = strftime(str(datetime.datetime.strptime(
-            "2022-01-01", "%Y-%m-%d") + datetime.timedelta(days=i)))
-        end_day = strftime(str(datetime.datetime.strptime(
-            "2022-01-01", "%Y-%m-%d") + datetime.timedelta(days=1+i)))
+        start_day = strftime(str((datetime.datetime.strptime(
+            "2022-01-01", "%Y-%m-%d") + datetime.timedelta(days=i)).date()))
+        end_day = strftime(str((datetime.datetime.strptime(
+            "2022-01-01", "%Y-%m-%d") + datetime.timedelta(days=1+i)).date()))
         price_sum = SaleProduct.objects.filter(
             sale__datetime__range=[start_day, end_day]).aggregate(Sum('price'))
 
+
+        format_day = (datetime.datetime.strptime(
+            "2022-01-01", "%Y-%d-%m") + datetime.timedelta(days=i)).date()
+
+
+        a_day = datetime.datetime.strptime(str(format_day), '%Y-%m-%d').strftime('%d-%m')
+
+
+           
+
+
         data.append({
+            "format_day":a_day,
             "start_day": start_day,
             "price_sum": price_sum["price__sum"],
         })

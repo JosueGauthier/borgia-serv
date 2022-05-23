@@ -5,7 +5,8 @@ from rest_framework import routers
 
 router = routers.DefaultRouter()
 router.register(r'sale', SaleViewSet)
-router.register(r'user-history-allsale', HistorySaleUserViewSet,basename='user-history-allsale')
+router.register(r'user-history-allsale', HistorySaleUserViewSet,
+                basename='user-history-allsale')
 router.register(r'stat-user', StatUserPurchase, basename='stat-user')
 router.register(r'rank-user', RankBestPurchaserViewset, basename='rank-user')
 router.register(r'rank-user-shop', RankUserShopPurchaseViewset,

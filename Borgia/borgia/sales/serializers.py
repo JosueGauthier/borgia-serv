@@ -17,20 +17,18 @@ class SaleSerializer(serializers.ModelSerializer):
                   'operator', 'module_id', 'shop', 'products')
 
 
-
 class HistorySaleUserSerializer(serializers.BaseSerializer):
     def to_representation(self, instance):
         with open("/borgia-serv/Borgia/borgia/sales/test.text", "a") as o:
-                o.write(str(instance) + "\n")
+            o.write(str(instance) + "\n")
         return {
             'id': instance.id,
             'datetime': instance.datetime,
-            'sender': instance.sender.id,       
-            #'nb_type_de_prod': SaleProduct.objects.filter(sale__id=instance.id).count(),
+            'sender': instance.sender.id,
+            # 'nb_type_de_prod': SaleProduct.objects.filter(sale__id=instance.id).count(),
             'tot_qty_per_sale': SaleProduct.objects.filter(sale__id=instance.id).aggregate(Sum('quantity'))['quantity__sum'],
             'tot_amount_per_sale': SaleProduct.objects.filter(sale__id=instance.id).aggregate(Sum('price'))['price__sum'],
         }
-
 
 
 class SaleProductSerializer(serializers.ModelSerializer):
@@ -82,7 +80,7 @@ class StatPurchaseSerializer(serializers.BaseSerializer):
                     'qte_user_achats': SaleProduct.objects.filter(sale__sender__username=instance.username, sale__shop=i).count(),
                     'montant_achats': float(SaleProduct.objects.filter(sale__sender__username=instance.username, sale__shop=i).aggregate(Sum('price'))['price__sum'] or 0),
 
-                } for i in range(1, Shop.objects.count())
+                } for i in range(1, Shop.objects.count()+1)
 
 
             ],
