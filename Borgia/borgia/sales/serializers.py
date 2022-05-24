@@ -17,16 +17,63 @@ class SaleSerializer(serializers.ModelSerializer):
                   'operator', 'module_id', 'shop', 'products')
 
 
+import datetime
+
+from time import strftime
+
+
 class HistorySaleUserSerializer(serializers.BaseSerializer):
     def to_representation(self, instance):
-        with open("/borgia-serv/Borgia/borgia/sales/test.text", "a") as o:
-            o.write(str(instance) + "\n")
+
+        a =instance.datetime
+
+        '%Y-%d-%m %H:%M:%S'
+
+        # current dateTime
+        #now = datetime.now()
+
+        # convert to string
+        #!work
+        #date_time_str = a.strftime('%Y-%d-%m %H:%M:%S')
+
+        all_date_time_str = a.strftime('%d %b %y %H:%M')
+
+
+
+        #print('DateTime String:', date_time_str)
+
+
+        #initDateTimeFormat = datetime.datetime.strptime(instance.datetime, '%Y-%m-%dT%H:%M:%S.%f')
+        
+        #initDateTimeFormat = strftime(instance.datetime, '%Y-%m-%dT%H:%M:%S.%f')
+
+
+        #new_date = initDateTimeFormat.strftime('%Y-%m-%d %I:%M %p')
+
+
+
+        """ d = datetime.datetime.strptime('2011-06-09', '%Y-%m-%d')
+        d.strftime('%b %d,%Y')
+
+        a_datetime=instance.datetime,
+
+        a= datetime.datetime.strptime(a_datetime, '%d. %B %Y %H:%M')
+
+        start_day = strftime(str((datetime.datetime.strptime(
+            "2022-01-01", "%Y-%m-%d") + datetime.timedelta(days=i)).date()))
+
+        format_day = (datetime.datetime.strptime(
+            "2022-01-01", "%Y-%d-%m") + datetime.timedelta(days=i)).date()
+
+
+        a_day = datetime.datetime.strptime(str(format_day), '%Y-%m-%d').strftime('%d-%m') """
         return {
-            'id': instance.id,
-            'datetime': instance.datetime,
-            'sender': instance.sender.id,
+            #'id': instance.id,
+            'format_datetime': all_date_time_str,
+            #'datetime': instance.datetime,
+            #'sender': instance.sender.id,
             # 'nb_type_de_prod': SaleProduct.objects.filter(sale__id=instance.id).count(),
-            'tot_qty_per_sale': SaleProduct.objects.filter(sale__id=instance.id).aggregate(Sum('quantity'))['quantity__sum'],
+            #'tot_qty_per_sale': SaleProduct.objects.filter(sale__id=instance.id).aggregate(Sum('quantity'))['quantity__sum'],
             'tot_amount_per_sale': SaleProduct.objects.filter(sale__id=instance.id).aggregate(Sum('price'))['price__sum'],
         }
 

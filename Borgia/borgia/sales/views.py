@@ -157,8 +157,14 @@ class HistorySaleUserViewSet(viewsets.ViewSet):
         queryset = Sale.objects.all()
         sender = self.request.query_params.get('sender')
         if sender is not None:
-            queryset = queryset.filter(sender=sender)
-        serializer = HistorySaleUserSerializer(queryset, many=True)
+            queryset = queryset.filter(sender__username=sender)
+
+        #! To protect server from unwanted action
+        """ if sender is None:
+            queryset = queryset.filter(sender=0)"""
+        serializer = HistorySaleUserSerializer(queryset, many=True) 
+
+
         return Response(serializer.data)
 
 
