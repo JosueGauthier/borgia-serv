@@ -518,7 +518,13 @@ class ProductBaseViewSet(viewsets.ViewSet):
 
         shop = self.request.query_params.get('shop')
         if shop is not None:
-            queryset = queryset.search(shop=shop)
+            queryset = queryset.filter(shop=shop)
+
+        category = self.request.query_params.get('category')
+        if category is not None:
+            queryset = queryset.filter(category_where_product_is=category)
+            
+
 
         serializer = ProductBaseSerializer(queryset, many=True)
         return Response(serializer.data)

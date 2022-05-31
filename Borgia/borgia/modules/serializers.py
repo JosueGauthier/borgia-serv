@@ -1,5 +1,9 @@
 from asyncio.log import logger
+from unicodedata import category
 from rest_framework import serializers
+from shops.views import ProductBaseViewSet
+
+from shops.serializers import ProductBaseSerializer
 
 
 from .models import CategoryProduct, Category
@@ -35,10 +39,53 @@ class CategorySerializer(serializers.ModelSerializer):
                   'order', 'category_image', 'shop_id')
 
 
+class CatBaseSerializer(serializers.BaseSerializer):
+    def to_representation(self, instance):
+
+        listofProdId = CategoryProduct.objects.filter(
+            category=instance.id).values_list('product_id')
+        listOfProducts = []
+        listdesID = []
+
+        for i in range(len(listofProdId)):
+            listdesID.append(listofProdId[i][0])
+
+        for i in listdesID:
+            listOfProducts.append(
+                {
+                    'id': i,
+                    'name': Product.objects.filter(id=i).values_list('name')[0][0],
+                    'unit': Product.objects.filter(id=i).values_list('unit')[0][0],
+                    'shop': Product.objects.filter(id=i).values_list('shop')[0][0],
+                    'is_manual': Product.objects.filter(id=i).values_list('is_manual')[0][0],
+                    'manual_price': Product.objects.filter(id=i).values_list('manual_price')[0][0],
+                    'correcting_factor': Product.objects.filter(id=i).values_list('correcting_factor')[0][0],
+                    'is_active': Product.objects.filter(id=i).values_list('is_active')[0][0],
+                    'is_removed': Product.objects.filter(id=i).values_list('is_removed')[0][0],
+                    'product_image': Product.objects.filter(id=i).values_list('product_image')[0][0],
+                    'category_where_product_is': instance.id,
+                    'module_id_where_product_is': instance.module_id,
+                }
+            )
+
+        return {
+
+            'id': instance.id,
+            'name': instance.name,
+            'module_id': instance.module_id,
+            'category_image': instance.category_image,
+            'shop_id': instance.shop_id,
+            'products': listOfProducts,
+
+
+        }
+
+
 class CategoryProductSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = CategoryProduct
         fields = ('id', 'category', 'product', 'quantity')
+
 
 class ProductCatSerializer(serializers.ModelSerializer):
     class Meta:
@@ -101,8 +148,8 @@ class SelfSaleSerializer(serializers.Serializer):
         api_ordered_quantity = attrs.get('api_ordered_quantity')
         api_category_product_id = attrs.get('api_category_product_id')
 
-        #api_operator_pk,
+        # api_operator_pk,
 
-        attrs['sale'] = [ api_module_pk, api_shop_pk,
+        attrs['sale'] = [api_module_pk, api_shop_pk,
                          api_ordered_quantity, api_category_product_id]
         return attrs

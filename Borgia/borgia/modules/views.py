@@ -6,7 +6,7 @@ from rest_framework import status
 from rest_framework import permissions
 from rest_framework import generics
 from django.contrib.auth import login, logout
-from .serializers import CategorySerializer, CategoryProductSerializer, ProductCatSerializer
+from .serializers import CatBaseSerializer, CategorySerializer, CategoryProductSerializer, ProductCatSerializer
 from .models import Category, CategoryProduct
 from rest_framework import viewsets
 from django_filters.rest_framework import DjangoFilterBackend
@@ -435,10 +435,6 @@ def shift_category_orders(category, new_order):
 
 # partie API
 
-class CategoryViewSet(viewsets.ModelViewSet):
-    queryset = Category.objects.all().order_by('name')
-    serializer_class = CategorySerializer
-
 
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all().order_by('name')
@@ -532,3 +528,20 @@ class SelfSaleView(views.APIView):
 
         api_create_sale_view(saleMap, api_user)
         return Response(None, status=status.HTTP_202_ACCEPTED)
+
+
+class CatBaseViewset(viewsets.ViewSet):
+    def list(self, request):
+        queryset = Category.objects.all()
+
+        name = self.request.query_params.get('name')
+        if name is not None:
+            queryset = queryset.filter(name__icontains=name)
+
+        id = self.request.query_params.get('id')
+        if id is not None:
+            queryset = queryset.filter(id=id)
+
+
+        serializer = CatBaseSerializer(queryset, many=True)
+        return Response(serializer.data)

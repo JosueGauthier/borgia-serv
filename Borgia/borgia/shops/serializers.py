@@ -23,25 +23,6 @@ class CategoryProductSerializer(serializers.HyperlinkedModelSerializer):
         model = CategoryProduct
         fields = ('id', 'category', 'product', 'quantity')
 
-
-class ProductBaseSerializer(serializers.BaseSerializer):
-    def to_representation(self, instance):
-        return {
-            'id': instance.id,
-            'name': instance.name,
-            'unit': instance.unit,
-            'shop': instance.shop.id,
-            'is_manual': instance.is_manual,
-            'manual_price': instance.manual_price,
-            'correcting_factor': instance.correcting_factor,
-            'is_active': instance.is_active,
-            'is_removed': instance.is_removed,
-            'product_image': instance.product_image,
-            'category_where_product_is': CategoryProduct.objects.filter(product=instance.id).values_list('id')[0],
-            'module_id_where_product_is': Category.objects.filter(products=instance.id).values_list('id')[0],
-        }
-
-
 class ShopStatSerializer(serializers.ModelSerializer):
     total_sale_of_shop = serializers.SerializerMethodField()
     total_sale_amount_of_shop = serializers.SerializerMethodField()
@@ -60,3 +41,21 @@ class ShopStatSerializer(serializers.ModelSerializer):
         totalsaleofshop = SaleProduct.objects.filter(
             sale__shop__id=obj.id).count()
         return totalsaleofshop
+
+
+class ProductBaseSerializer(serializers.BaseSerializer):
+    def to_representation(self, instance):
+        return {
+            'id': instance.id,
+            'name': instance.name,
+            'unit': instance.unit,
+            'shop': instance.shop.id,
+            'is_manual': instance.is_manual,
+            'manual_price': instance.manual_price,
+            'correcting_factor': instance.correcting_factor,
+            'is_active': instance.is_active,
+            'is_removed': instance.is_removed,
+            'product_image': instance.product_image,
+            'category_where_product_is': CategoryProduct.objects.filter(product=instance.id).values_list('id')[0],
+            'module_id_where_product_is': Category.objects.filter(products=instance.id).values_list('id')[0],
+        }
