@@ -1,4 +1,5 @@
 from asyncio.log import logger
+from itertools import product
 from unicodedata import category
 from rest_framework import serializers
 from shops.views import ProductBaseViewSet
@@ -65,6 +66,7 @@ class CatBaseSerializer(serializers.BaseSerializer):
                     'product_image': Product.objects.filter(id=i).values_list('product_image')[0][0],
                     'category_where_product_is': instance.id,
                     'module_id_where_product_is': instance.module_id,
+                    'cat_prod_id': CategoryProduct.objects.filter(product=i).values_list('id')[0][0]
                 }
             )
 
