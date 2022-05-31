@@ -28,7 +28,7 @@ from shops.models import Product, Shop
 from users.models import User
 
 
-class CategorySerializer(serializers.HyperlinkedModelSerializer):
+class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = ('id', 'name', 'module_id', 'products',

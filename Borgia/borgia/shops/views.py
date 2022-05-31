@@ -1,7 +1,8 @@
+from rest_framework.response import Response
 from sales.models import Sale
 from shops.models import Shop
 from rest_framework import filters
-from .serializers import ProductSerializer, ShopSerializer, ShopStatSerializer
+from .serializers import ProductBaseSerializer, ProductSerializer, ShopSerializer, ShopStatSerializer
 from .models import Product, Shop
 from rest_framework import generics, viewsets
 from django_filters.rest_framework import DjangoFilterBackend
@@ -477,9 +478,6 @@ class ShopViewSet(viewsets.ModelViewSet):
     serializer_class = ShopSerializer
 
 
-#from rest_framework import filters
-
-
 class ProductFromShopViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all().order_by('name')
     serializer_class = ProductSerializer
@@ -504,3 +502,23 @@ class SearchShopView(generics.ListCreateAPIView):
 class StatShopViewSet(viewsets.ModelViewSet):
     queryset = Shop.objects.all()
     serializer_class = ShopStatSerializer
+
+
+class ProductBaseViewSet(viewsets.ViewSet):
+    def list(self, request):
+        queryset = Product.objects.all()
+
+        name = self.request.query_params.get('name')
+        if name is not None:
+            queryset = queryset.filter(name__icontains=name)
+
+        id = self.request.query_params.get('id')
+        if id is not None:
+            queryset = queryset.filter(id=id)
+
+        shop = self.request.query_params.get('shop')
+        if shop is not None:
+            queryset = queryset.search(shop=shop)
+
+        serializer = ProductBaseSerializer(queryset, many=True)
+        return Response(serializer.data)

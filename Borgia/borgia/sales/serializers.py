@@ -1,3 +1,5 @@
+from time import strftime
+import datetime
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from operator import itemgetter
@@ -17,15 +19,10 @@ class SaleSerializer(serializers.ModelSerializer):
                   'operator', 'module_id', 'shop', 'products')
 
 
-import datetime
-
-from time import strftime
-
-
 class HistorySaleUserSerializer(serializers.BaseSerializer):
     def to_representation(self, instance):
 
-        a =instance.datetime
+        a = instance.datetime
 
         '%Y-%d-%m %H:%M:%S'
 
@@ -38,19 +35,13 @@ class HistorySaleUserSerializer(serializers.BaseSerializer):
 
         all_date_time_str = a.strftime('%d %b %y %H:%M')
 
-
-
         #print('DateTime String:', date_time_str)
 
-
         #initDateTimeFormat = datetime.datetime.strptime(instance.datetime, '%Y-%m-%dT%H:%M:%S.%f')
-        
+
         #initDateTimeFormat = strftime(instance.datetime, '%Y-%m-%dT%H:%M:%S.%f')
 
-
         #new_date = initDateTimeFormat.strftime('%Y-%m-%d %I:%M %p')
-
-
 
         """ d = datetime.datetime.strptime('2011-06-09', '%Y-%m-%d')
         d.strftime('%b %d,%Y')
@@ -68,12 +59,12 @@ class HistorySaleUserSerializer(serializers.BaseSerializer):
 
         a_day = datetime.datetime.strptime(str(format_day), '%Y-%m-%d').strftime('%d-%m') """
         return {
-            #'id': instance.id,
+            # 'id': instance.id,
             'format_datetime': all_date_time_str,
-            #'datetime': instance.datetime,
-            #'sender': instance.sender.id,
+            # 'datetime': instance.datetime,
+            # 'sender': instance.sender.id,
             # 'nb_type_de_prod': SaleProduct.objects.filter(sale__id=instance.id).count(),
-            #'tot_qty_per_sale': SaleProduct.objects.filter(sale__id=instance.id).aggregate(Sum('quantity'))['quantity__sum'],
+            # 'tot_qty_per_sale': SaleProduct.objects.filter(sale__id=instance.id).aggregate(Sum('quantity'))['quantity__sum'],
             'tot_amount_per_sale': SaleProduct.objects.filter(sale__id=instance.id).aggregate(Sum('price'))['price__sum'],
         }
 
@@ -152,6 +143,9 @@ class UserRankByShopSerializer(serializers.BaseSerializer):
             'id': instance.id,
             'username': instance.username,
             'surname': instance.surname,
+            'family': instance.family,
+            'campus': instance.campus,
+            'promotion': instance.year,
             'montant_achats_par_shop': float(SaleProduct.objects.filter(sale__sender__username=instance.username, sale__shop=self.context.get("shop_id")).aggregate(Sum('price'))['price__sum'] or 0),
         }
 
@@ -189,5 +183,4 @@ class ShopUserRankSerializer(serializers.BaseSerializer):
             'name': instance.name,
             'image': instance.image,
             'user_top_ten': toptenUserView(instance.id)
-            # userTopTen(instance.id)
         }
