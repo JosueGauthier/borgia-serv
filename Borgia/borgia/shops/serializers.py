@@ -56,6 +56,7 @@ class ProductBaseSerializer(serializers.BaseSerializer):
             'is_active': instance.is_active,
             'is_removed': instance.is_removed,
             'product_image': instance.product_image,
-            'category_where_product_is': CategoryProduct.objects.filter(product=instance.id).values_list('id')[0],
-            'module_id_where_product_is': Category.objects.filter(products=instance.id).values_list('id')[0],
+            'category_where_product_is': Category.objects.filter(products=instance.id).values_list('id')[0][0],
+            'module_id_where_product_is':Category.objects.filter(products=instance.id).values_list('module_id')[0][0],
+            'cat_prod_id': CategoryProduct.objects.filter(product=instance.id).values_list('id')[0][0],
         }
