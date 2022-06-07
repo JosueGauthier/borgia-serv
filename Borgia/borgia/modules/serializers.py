@@ -64,9 +64,10 @@ class CatBaseSerializer(serializers.BaseSerializer):
                     'is_active': Product.objects.filter(id=i).values_list('is_active')[0][0],
                     'is_removed': Product.objects.filter(id=i).values_list('is_removed')[0][0],
                     'product_image': Product.objects.filter(id=i).values_list('product_image')[0][0],
-                    'category_where_product_is': instance.id,
-                    'module_id_where_product_is': instance.module_id,
-                    'cat_prod_id': CategoryProduct.objects.filter(product=i).values_list('id')[0][0]
+                    'id_parent_category': instance.id,
+                    'module_id_parent_category': instance.module_id,
+                    'id_categoryproduct_table': CategoryProduct.objects.filter(product=i).values_list('id')[0][0]
+
                 }
             )
 

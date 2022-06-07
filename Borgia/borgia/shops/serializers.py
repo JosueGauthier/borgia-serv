@@ -23,6 +23,7 @@ class CategoryProductSerializer(serializers.HyperlinkedModelSerializer):
         model = CategoryProduct
         fields = ('id', 'category', 'product', 'quantity')
 
+
 class ShopStatSerializer(serializers.ModelSerializer):
     total_sale_of_shop = serializers.SerializerMethodField()
     total_sale_amount_of_shop = serializers.SerializerMethodField()
@@ -56,7 +57,7 @@ class ProductBaseSerializer(serializers.BaseSerializer):
             'is_active': instance.is_active,
             'is_removed': instance.is_removed,
             'product_image': instance.product_image,
-            'category_where_product_is': Category.objects.filter(products=instance.id).values_list('id')[0][0],
-            'module_id_where_product_is':Category.objects.filter(products=instance.id).values_list('module_id')[0][0],
-            'cat_prod_id': CategoryProduct.objects.filter(product=instance.id).values_list('id')[0][0],
+            'id_parent_category': Category.objects.filter(products=instance.id).values_list('id')[0][0],
+            'module_id_parent_category': Category.objects.filter(products=instance.id).values_list('module_id')[0][0],
+            'id_categoryproduct_table': CategoryProduct.objects.filter(product=instance.id).values_list('id')[0][0],
         }
