@@ -189,8 +189,7 @@ class ShopUserRankSerializer(serializers.BaseSerializer):
         }
 
 
-#* Below Product top ten
-
+# * Below Product top ten by shop
 
 class UserRankByProductSerializer(serializers.BaseSerializer):
     def to_representation(self, instance):
@@ -204,6 +203,7 @@ class UserRankByProductSerializer(serializers.BaseSerializer):
             'montant_achats_par_produit': float(SaleProduct.objects.filter(sale__sender__username=instance.username, product=self.context.get("product_id")).aggregate(Sum('price'))['price__sum'] or 0),
         }
 
+
 def ProductToptenUserView(id):
     queryset = User.objects.all()
     serializer = UserRankByProductSerializer(
@@ -212,11 +212,28 @@ def ProductToptenUserView(id):
         'montant_achats_par_produit'), reverse=True)[:10]
     return sortedList
 
-class ProductUserRankSerializer(serializers.BaseSerializer):
+
+class listOfProdSerializer(serializers.BaseSerializer):
     def to_representation(self, instance):
         return {
             'id': instance.id,
             'name': instance.name,
             'image': instance.product_image,
             'user_top_ten': ProductToptenUserView(instance.id)
+        }
+
+
+def listOfProdView(id):
+    queryset = Product.objects.filter(shop=id)
+    serializer = listOfProdSerializer(queryset, many=True)
+    return serializer.data
+
+
+class ShopProductUserRankSerializer(serializers.BaseSerializer):
+    def to_representation(self, instance):
+        return {
+            'id': instance.id,
+            'name': instance.name,
+            'image': instance.image,
+            'list_of_prod': listOfProdView(instance.id)
         }

@@ -19,7 +19,6 @@ sales_patterns = [
     path('api-links/sale/', include(router.urls)),
     path('api-links/total/', get_total_sale),
     path('api-links/history/', get_history_sale),
-    #path('api-links/users-sales-podium/', get_sales_podium),
     path('api-links/scores/', all_high_scores),
 
 

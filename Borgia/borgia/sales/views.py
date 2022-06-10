@@ -266,12 +266,11 @@ class RankUserShopPurchaseViewset(viewsets.ViewSet):
         serializer = ShopUserRankSerializer(queryset, many=True)
         return Response(serializer.data)
 
-
 class RankUserProductPurchaseViewset(viewsets.ViewSet):
     def list(self, request):
-        queryset = Product.objects.all()
+        queryset = Shop.objects.all()
         id = self.request.query_params.get('id')
         if id is not None:
             queryset = queryset.filter(id=id)
-        serializer = ProductUserRankSerializer(queryset, many=True)
+        serializer = ShopProductUserRankSerializer(queryset, many=True)
         return Response(serializer.data)
