@@ -1,3 +1,4 @@
+from itertools import product
 from time import strftime
 import datetime
 from rest_framework.decorators import api_view
@@ -110,6 +111,8 @@ class StatPurchaseSerializer(serializers.BaseSerializer):
             'balance': instance.balance,
             'montant_achats': float(SaleProduct.objects.filter(sale__sender__username=instance.username).aggregate(Sum('price'))['price__sum'] or 0),
             'qte_achats': SaleProduct.objects.filter(sale__sender__username=instance.username).count(),
+            'nb_ref_achetee': SaleProduct.objects.filter(sale__sender__username=instance.username).values('product').distinct().count(),
+            'nb_ref_totale': Product.objects.filter(is_active=True).count(),
             'montant_magasins': [
 
                 {
@@ -167,7 +170,7 @@ def all_high_scores(request):
     return Response(serializer.data)
 
 
-def toptenUserView(id):
+def ShoptoptenUserView(id):
     queryset = User.objects.all()
     serializer = UserRankByShopSerializer(
         queryset, many=True, context={"shop_id": id})
@@ -182,5 +185,38 @@ class ShopUserRankSerializer(serializers.BaseSerializer):
             'id': instance.id,
             'name': instance.name,
             'image': instance.image,
-            'user_top_ten': toptenUserView(instance.id)
+            'user_top_ten': ShoptoptenUserView(instance.id)
+        }
+
+
+#* Below Product top ten
+
+
+class UserRankByProductSerializer(serializers.BaseSerializer):
+    def to_representation(self, instance):
+        return {
+            'id': instance.id,
+            'username': instance.username,
+            'surname': instance.surname,
+            'family': instance.family,
+            'campus': instance.campus,
+            'promotion': instance.year,
+            'montant_achats_par_produit': float(SaleProduct.objects.filter(sale__sender__username=instance.username, product=self.context.get("product_id")).aggregate(Sum('price'))['price__sum'] or 0),
+        }
+
+def ProductToptenUserView(id):
+    queryset = User.objects.all()
+    serializer = UserRankByProductSerializer(
+        queryset, many=True, context={"product_id": id})
+    sortedList = sorted(serializer.data, key=itemgetter(
+        'montant_achats_par_produit'), reverse=True)[:10]
+    return sortedList
+
+class ProductUserRankSerializer(serializers.BaseSerializer):
+    def to_representation(self, instance):
+        return {
+            'id': instance.id,
+            'name': instance.name,
+            'image': instance.product_image,
+            'user_top_ten': ProductToptenUserView(instance.id)
         }
