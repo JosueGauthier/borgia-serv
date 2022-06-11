@@ -162,8 +162,7 @@ class HistorySaleUserViewSet(viewsets.ViewSet):
         #! To protect server from unwanted action
         """ if sender is None:
             queryset = queryset.filter(sender=0)"""
-        serializer = HistorySaleUserSerializer(queryset, many=True) 
-
+        serializer = HistorySaleUserSerializer(queryset, many=True)
 
         return Response(serializer.data)
 
@@ -190,20 +189,47 @@ def get_history_sale(request):
         price_sum = SaleProduct.objects.filter(
             sale__datetime__range=[start_day, end_day]).aggregate(Sum('price'))
 
-
         format_day = (datetime.datetime.strptime(
             "2022-01-01", "%Y-%d-%m") + datetime.timedelta(days=i)).date()
 
-
-        a_day = datetime.datetime.strptime(str(format_day), '%Y-%m-%d').strftime('%d-%m')
-
-
-           
-
+        a_day = datetime.datetime.strptime(
+            str(format_day), '%Y-%m-%d').strftime('%d-%m')
 
         data.append({
-            "format_day":a_day,
+            "format_day": a_day,
             "start_day": start_day,
+            "price_sum": price_sum["price__sum"],
+        })
+
+    return Response(data)
+
+
+@api_view(('GET',))
+def get_live_2hours_history_sale(request):
+    data = []
+    temps_debut = datetime.datetime.now() - datetime.timedelta(hours=2)
+    time_step = 30
+
+    for i in range(0, 7200, time_step):
+        start_range = strftime(
+            str(temps_debut + datetime.timedelta(seconds=i)))
+        end_range = strftime(
+            str(temps_debut + datetime.timedelta(seconds=(i+time_step))))
+        price_sum = SaleProduct.objects.filter(
+            sale__datetime__range=[start_range, end_range]).aggregate(Sum('price'))
+
+        
+        a= temps_debut + datetime.timedelta(seconds=i)
+        
+        format_time = a.strftime("%H:%M")
+
+
+        #datetime.datetime.strptime(str(start_range), '%Y-%m-%d %H:%M:%S').strftime('%H:%M')
+
+        #"time": "2022-06-11 17:49:59.955133",
+
+        data.append({
+            "time": format_time,
             "price_sum": price_sum["price__sum"],
         })
 
@@ -265,6 +291,7 @@ class RankUserShopPurchaseViewset(viewsets.ViewSet):
             queryset = queryset.filter(id=id)
         serializer = ShopUserRankSerializer(queryset, many=True)
         return Response(serializer.data)
+
 
 class RankUserProductPurchaseViewset(viewsets.ViewSet):
     def list(self, request):
