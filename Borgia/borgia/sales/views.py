@@ -218,15 +218,9 @@ def get_live_2hours_history_sale(request):
         price_sum = SaleProduct.objects.filter(
             sale__datetime__range=[start_range, end_range]).aggregate(Sum('price'))
 
-        
-        a= temps_debut + datetime.timedelta(seconds=i)
-        
+        a = temps_debut + datetime.timedelta(seconds=i)
+
         format_time = a.strftime("%H:%M")
-
-
-        #datetime.datetime.strptime(str(start_range), '%Y-%m-%d %H:%M:%S').strftime('%H:%M')
-
-        #"time": "2022-06-11 17:49:59.955133",
 
         data.append({
             "time": format_time,
@@ -252,8 +246,6 @@ def get_sales_podium(request):
 
     data.append({"user_sum": user_sum["price__sum"]})
 
-    # with open("/borgia-serv/Borgia/borgia/sales/test.text", "a") as o:
-    #    o.write(str(totalsale = Sale.objects.all().aggregate(total_sale=Count('shop'))))
     return Response(data)
 
 
@@ -279,7 +271,9 @@ class RankBestPurchaserViewset(viewsets.ViewSet):
         queryset = User.objects.all()
         serializer = RankUserAllPurchaseSerializer(queryset, many=True)
         sortedList = sorted(serializer.data, key=itemgetter(
-            'montant_achats'), reverse=True)[:10]
+            'montant_achats'), reverse=True)
+        for index, sortedItem in enumerate(sortedList):
+            sortedList[index].update(index=index+1)
         return Response(sortedList)
 
 
