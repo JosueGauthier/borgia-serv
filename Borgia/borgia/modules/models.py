@@ -41,6 +41,12 @@ class Category(models.Model):
 
 
 class CategoryProduct(models.Model):
+    """
+    category
+    product 
+    quantity
+    
+    """
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField()

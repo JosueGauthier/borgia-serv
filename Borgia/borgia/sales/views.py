@@ -1,8 +1,9 @@
-from django.db.models import Avg, Max, Min, Sum, Count, F
+from rest_framework.response import Response
 import datetime
+from operator import itemgetter
+from django.db.models import Avg, Max, Min, Sum, Count, F
 from django.db.models import F
 from rest_framework.decorators import api_view
-from rest_framework.response import Response
 from .serializers import *
 from .models import Sale, SaleProduct
 from rest_framework import viewsets
@@ -11,7 +12,6 @@ from time import strftime
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Q
 from django.shortcuts import render
-from requests import Response
 
 from borgia.views import BorgiaFormView, BorgiaView
 from sales.forms import SaleListSearchDateForm
@@ -142,7 +142,7 @@ class SaleRetrieve(SaleMixin, BorgiaView):
         return render(request, self.template_name, context=context)
 
 
-# partie API
+#! partie API
 
 
 class SaleViewSet(viewsets.ModelViewSet):
@@ -152,34 +152,19 @@ class SaleViewSet(viewsets.ModelViewSet):
     filterset_fields = ['sender', 'datetime']
 
 
-""" def get_total_sale(request, *args, **kwargs):
+class HistorySaleUserViewSet(viewsets.ViewSet):
+    def list(self, request):
+        queryset = Sale.objects.all()
+        sender = self.request.query_params.get('sender')
+        if sender is not None:
+            queryset = queryset.filter(sender__username=sender)
 
-    data = []
+        #! To protect server from unwanted action
+        """ if sender is None:
+            queryset = queryset.filter(sender=0)"""
+        serializer = HistorySaleUserSerializer(queryset, many=True)
 
-    #Company.objects.filter(num_employees__gt=F('num_chairs') * 2)
-
-    #data.append(Sale.objects.all().aggregate(Avg('shop'),Min('shop'),Max('shop'),Sum('shop'),Count('shop')))
-    data.append(Sale.objects.all().count())
-    data.append(SaleProduct.objects.all().aggregate(Sum('price')))
- 
-
-    #Book.objects.filter(publisher__name='BaloneyPress').count()
-
-    
-
-    #Store.objects.aggregate(youngest_age=Min('books__authors__age'))
-
-    #! Jointure
-    #data.append(SaleProduct.objects.aggregate(a=Min('sale__shop_id')))
-
-    #Book.objects.filter(name__startswith="Django").annotate(num_authors=Count('authors'))
-
-    #! filtre + jointure
-    for i in range(1,Shop.objects.all().count()) :
-        data.append(SaleProduct.objects.filter(sale__shop__id=i).aggregate(Sum('price')))
-
-    return Response(data) """
-# return JsonResponse(data, safe=False)
+        return Response(serializer.data)
 
 
 @api_view(('GET',))
@@ -197,15 +182,48 @@ def get_history_sale(request):
     nombre_de_jour = day_of_year
 
     for i in range(0, nombre_de_jour):
-        start_day = strftime(str(datetime.datetime.strptime(
-            "2022-01-01", "%Y-%m-%d") + datetime.timedelta(days=i)))
-        end_day = strftime(str(datetime.datetime.strptime(
-            "2022-01-01", "%Y-%m-%d") + datetime.timedelta(days=1+i)))
+        start_day = strftime(str((datetime.datetime.strptime(
+            "2022-01-01", "%Y-%m-%d") + datetime.timedelta(days=i)).date()))
+        end_day = strftime(str((datetime.datetime.strptime(
+            "2022-01-01", "%Y-%m-%d") + datetime.timedelta(days=1+i)).date()))
         price_sum = SaleProduct.objects.filter(
             sale__datetime__range=[start_day, end_day]).aggregate(Sum('price'))
-        
+
+        format_day = (datetime.datetime.strptime(
+            "2022-01-01", "%Y-%d-%m") + datetime.timedelta(days=i)).date()
+
+        a_day = datetime.datetime.strptime(
+            str(format_day), '%Y-%m-%d').strftime('%d-%m')
+
         data.append({
+            "format_day": a_day,
             "start_day": start_day,
+            "price_sum": price_sum["price__sum"],
+        })
+
+    return Response(data)
+
+
+@api_view(('GET',))
+def get_live_2hours_history_sale(request):
+    data = []
+    temps_debut = datetime.datetime.now() - datetime.timedelta(hours=2)
+    time_step = 30
+
+    for i in range(0, 7200, time_step):
+        start_range = strftime(
+            str(temps_debut + datetime.timedelta(seconds=i)))
+        end_range = strftime(
+            str(temps_debut + datetime.timedelta(seconds=(i+time_step))))
+        price_sum = SaleProduct.objects.filter(
+            sale__datetime__range=[start_range, end_range]).aggregate(Sum('price'))
+
+        a = temps_debut + datetime.timedelta(seconds=i)
+
+        format_time = a.strftime("%H:%M")
+
+        data.append({
+            "time": format_time,
             "price_sum": price_sum["price__sum"],
         })
 
@@ -228,20 +246,52 @@ def get_sales_podium(request):
 
     data.append({"user_sum": user_sum["price__sum"]})
 
-    # with open("/borgia-serv/Borgia/borgia/sales/test.text", "a") as o:
-    #    o.write(str(totalsale = Sale.objects.all().aggregate(total_sale=Count('shop'))))
     return Response(data)
 
 
 @api_view(['GET'])
 def all_high_scores(request):
     queryset = User.objects.order_by('-balance')
-    serializer = HighScoreSerializer(queryset, many=True)
+    serializer = StatPurchaseSerializer(queryset, many=True)
     return Response(serializer.data)
 
 
 class StatUserPurchase(viewsets.ViewSet):
     def list(self, request):
         queryset = User.objects.all()
-        serializer = HighScoreSerializer(queryset, many=True)
+        username = self.request.query_params.get('username')
+        if username is not None:
+            queryset = queryset.filter(username=username)
+        serializer = StatPurchaseSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+
+class RankBestPurchaserViewset(viewsets.ViewSet):
+    def list(self, request):
+        queryset = User.objects.all()
+        serializer = RankUserAllPurchaseSerializer(queryset, many=True)
+        sortedList = sorted(serializer.data, key=itemgetter(
+            'montant_achats'), reverse=True)
+        for index, sortedItem in enumerate(sortedList):
+            sortedList[index].update(index=index+1)
+        return Response(sortedList)
+
+
+class RankUserShopPurchaseViewset(viewsets.ViewSet):
+    def list(self, request):
+        queryset = Shop.objects.all()
+        id = self.request.query_params.get('id')
+        if id is not None:
+            queryset = queryset.filter(id=id)
+        serializer = ShopUserRankSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+
+class RankUserProductPurchaseViewset(viewsets.ViewSet):
+    def list(self, request):
+        queryset = Shop.objects.all()
+        id = self.request.query_params.get('id')
+        if id is not None:
+            queryset = queryset.filter(id=id)
+        serializer = ShopProductUserRankSerializer(queryset, many=True)
         return Response(serializer.data)
