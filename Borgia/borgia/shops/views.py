@@ -319,6 +319,7 @@ class ProductCreate(ShopMixin, BorgiaFormView):
         if form.cleaned_data['on_quantity']:
             product = Product.objects.create(
                 name=form.cleaned_data['name'],
+                product_image=form.cleaned_data['product_image'],
                 shop=self.shop,
                 unit=form.cleaned_data['unit'],
                 correcting_factor=1
@@ -326,6 +327,7 @@ class ProductCreate(ShopMixin, BorgiaFormView):
         else:
             product = Product.objects.create(
                 name=form.cleaned_data['name'],
+                product_image=form.cleaned_data['product_image'],
                 shop=self.shop,
                 correcting_factor=1
             )
@@ -419,10 +421,12 @@ class ProductUpdate(ProductMixin, BorgiaFormView):
     def get_initial(self):
         initial = super().get_initial()
         initial['name'] = self.product.name
+        initial['product_image'] = self.product.product_image
         return initial
 
     def form_valid(self, form):
         self.product.name = form.cleaned_data['name']
+        self.product.product_image = form.cleaned_data['product_image']
         self.product.save()
         return super().form_valid(form)
 

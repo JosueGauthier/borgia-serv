@@ -1,3 +1,4 @@
+from rest_framework import filters
 from users.serializers import LoginSerializer as LoginSerializer
 from . import serializers
 from rest_framework.response import Response
@@ -344,7 +345,7 @@ class ShopModuleCategoryUpdateView(ShopModuleCategoryMixin, BorgiaView):
                          for category_product in self.category.categoryproduct_set.all()]
         context['cat_form'] = self.form_class(initial=cat_form_data)
         context['cat_name_form'] = ModuleCategoryCreateNameForm(
-            initial={'name': self.category.name, 'order': self.category.order})
+            initial={'name': self.category.name, 'order': self.category.order, 'category_image': self.category.category_image})
         return render(request, self.template_name, context=context)
 
     def post(self, request, *args, **kwargs):
@@ -449,26 +450,20 @@ class ProductFromCategoryViewSet(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['category', 'product']
 
+
 class CategoryFromProductViewSet(viewsets.ModelViewSet):
     queryset = CategoryProduct.objects.all()
     serializer_class = ProductCatSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['category', 'product']
-    
 
-
-
-
-from rest_framework import generics
-
-from rest_framework import filters
 
 class SearchCategoryView(generics.ListCreateAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
     filter_backends = [filters.SearchFilter]
     search_fields = ['name']
-    
+
 
 def api_create_sale_view(saleMap, api_user):
     """
@@ -524,7 +519,6 @@ class SelfSaleView(views.APIView):
         serializerSale.is_valid(raise_exception=True)
         saleMap = serializerSale.validated_data
         logger.error(saleMap)
-        
 
         api_create_sale_view(saleMap, api_user)
         return Response(None, status=status.HTTP_202_ACCEPTED)
@@ -541,7 +535,6 @@ class CatBaseViewset(viewsets.ViewSet):
         id = self.request.query_params.get('id')
         if id is not None:
             queryset = queryset.filter(id=id)
-
 
         serializer = CatBaseSerializer(queryset, many=True)
         return Response(serializer.data)
