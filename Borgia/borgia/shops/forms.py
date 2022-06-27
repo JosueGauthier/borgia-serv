@@ -50,7 +50,7 @@ class ProductCreateForm(forms.ModelForm):
 
     class Meta:
         model = Product
-        fields = ['name', 'unit']
+        fields = ['name', 'product_image', 'unit']
 
     def clean(self):
         cleaned_data = super().clean()
@@ -66,7 +66,7 @@ class ProductCreateForm(forms.ModelForm):
 class ProductUpdateForm(forms.ModelForm):
     class Meta:
         model = Product
-        fields = ['name']
+        fields = ['name', 'product_image']
 
 
 class ProductUpdatePriceForm(forms.Form):
