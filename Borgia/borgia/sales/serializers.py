@@ -132,11 +132,11 @@ class StatPurchaseSerializer(serializers.BaseSerializer):
 class RankUserAllPurchaseSerializer(serializers.BaseSerializer):
     def to_representation(self, instance):
         return {
-            'id': instance.id,
+            #'id': instance.id,
             'username': instance.username,
-            'surname': instance.surname,
+            #'surname': instance.surname,
             'montant_achats': float(SaleProduct.objects.filter(sale__sender__username=instance.username).aggregate(Sum('price'))['price__sum'] or 0),
-            'qte_achats': SaleProduct.objects.filter(sale__sender__username=instance.username).count(),
+            #'qte_achats': SaleProduct.objects.filter(sale__sender__username=instance.username).count(),
         }
 
 
