@@ -1,3 +1,15 @@
+from .serializers import UserSerializer
+from . import serializers
+from rest_framework.response import Response
+from rest_framework import views
+from rest_framework import status
+from rest_framework import permissions
+from django.contrib.auth import login, logout
+from rest_framework import filters
+from .models import User
+from rest_framework import viewsets
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import generics
 import datetime
 import json
 import random
@@ -16,6 +28,7 @@ from django.http import Http404, HttpResponseBadRequest
 from django.shortcuts import HttpResponse, redirect, render
 from django.urls import reverse
 from django.utils.encoding import force_str
+from django.utils.timezone import now
 
 from borgia.utils import (get_members_group, human_unused_permissions,
                           get_permission_name_group_managing)
@@ -193,12 +206,11 @@ class UserRetrieveView(UserMixin, BorgiaView):
     menu_type = "managers"
     template_name = 'users/user_retrieve.html'
 
-
     def get(self, request, *args, **kwargs):
         if self.user == self.request.user:
-           self.menu_type = "members"
+            self.menu_type = "members"
         elif self.user.has_perm('users.change_user'):
-           self.menu_type = "managers"   
+            self.menu_type = "managers"
         context = self.get_context_data(**kwargs)
         return render(request, self.template_name, context=context)
 
@@ -236,7 +248,7 @@ class UserUpdateView(UserMixin, BorgiaFormView):
         for k in UserUpdateForm(user=user, is_manager=self.is_manager, is_self_update=self.is_self_update).fields.keys():
             initial[k] = getattr(user, k)
         if self.is_self_update:
-           self.menu_type = "members"
+            self.menu_type = "members"
         return initial
 
     def form_valid(self, form):
@@ -254,7 +266,7 @@ class UserUpdateView(UserMixin, BorgiaFormView):
         return super().form_valid(form)
 
     def get_success_message(self, cleaned_data):
-        if self.modified :
+        if self.modified:
             return "Les informations ont bien été mises à jour"
         else:
             return "Pas de modification"
@@ -455,22 +467,24 @@ class UserUploadXlsxView(LoginRequiredMixin, PermissionRequiredMixin, BorgiaForm
         columns = form.cleaned_data['xlsx_columns']
         # Setting column numbers
         for col in range(min_col, max_col+1):
-            if sheet.cell(None, sheet.min_row, col).value == 'username':
+            if sheet.cell(sheet.min_row, col).value == 'username':
                 col_username = col - min_row
-            elif sheet.cell(None, sheet.min_row, col).value == 'first_name':
+            elif sheet.cell(sheet.min_row, col).value == 'first_name':
                 col_first_name = col - min_row
-            elif sheet.cell(None, sheet.min_row, col).value == 'last_name':
+            elif sheet.cell(sheet.min_row, col).value == 'last_name':
                 col_last_name = col - min_row
-            elif sheet.cell(None, sheet.min_row, col).value == 'email':
+            elif sheet.cell(sheet.min_row, col).value == 'email':
                 col_email = col - min_row
-            elif sheet.cell(None, sheet.min_row, col).value == 'surname':
+            elif sheet.cell(sheet.min_row, col).value == 'surname':
                 col_surname = col - min_row
-            elif sheet.cell(None, sheet.min_row, col).value == 'family':
+            elif sheet.cell(sheet.min_row, col).value == 'family':
                 col_family = col - min_row
-            elif sheet.cell(None, sheet.min_row, col).value == 'campus':
+            elif sheet.cell(sheet.min_row, col).value == 'campus':
                 col_campus = col - min_row
-            elif sheet.cell(None, sheet.min_row, col).value == 'year':
+            elif sheet.cell(sheet.min_row, col).value == 'year':
                 col_year = col - min_row
+            elif sheet.cell(sheet.min_row, col).value == 'balance':
+                col_balance = col - min_row
 
         for _ in range(min_row):
             next(rows)
@@ -543,6 +557,13 @@ class UserUploadXlsxView(LoginRequiredMixin, PermissionRequiredMixin, BorgiaForm
                     except:
                         errors_on_required_columns.append('year')
 
+                if 'balance' in columns:
+                    try:
+                        if row[col_balance].value:
+                            user_dict['balance'] = int(row[col_balance].value)
+                    except:
+                        errors_on_required_columns.append('balance')
+
                 if not skipped_row:
                     username = user_dict['username']
                     if User.objects.filter(username=username).count() > 0:
@@ -592,9 +613,9 @@ class UserAddByListXlsxDownload(LoginRequiredMixin, PermissionRequiredMixin, Bor
     def get(self, request, *args, **kwargs):
         columns = request.GET.getlist('xlsx_columns')
 
-        if columns:
+        if not columns:
             columns = ['first_name', 'last_name', 'email', 'surname',
-                       'family', 'campus', 'year']
+                       'family', 'campus', 'year', 'balance']
 
         columns.insert(0, 'username')
 
@@ -603,8 +624,12 @@ class UserAddByListXlsxDownload(LoginRequiredMixin, PermissionRequiredMixin, Bor
         ws = wb.active
         ws.title = "users"
         ws.append(columns)
-        for col in ['A','B','C','D','E']:
+        for col in ['A', 'B', 'C', 'D', 'E']:
             ws.column_dimensions[col].width = 30
+
+        users = User.objects.all().values_list(*columns)
+        for user in users:
+            ws.append(user)
 
         # Return the file
         response = HttpResponse(openpyxl.writer.excel.save_virtual_workbook(wb),
@@ -648,6 +673,57 @@ def username_from_username_part(request):
     return HttpResponse(json.dumps(data))
 
 
+class UserTransactionDownload(UserMixin, BorgiaView):
+    """
+    Download transaction from an user in a xlsx file
+
+    """
+    permission_required = 'users.view_user'
+    menu_type = "managers"
+    template_name = 'users/user_retrieve.html'
+
+    def post(self, request, *args, **kwargs):
+
+        wb = openpyxl.Workbook()
+        # grab the active worksheet
+        ws = wb.active
+        ws.title = "transactions"
+        columns = ['Date', 'Libellé',
+                   'Montant']
+        ws.append(columns)
+        ws.column_dimensions['A'].width = 23
+        ws.column_dimensions['B'].width = 70
+        ws.column_dimensions['C'].width = 10
+
+        transaction_list = self.user.list_transaction()
+        for t in transaction_list:
+            if t.__class__.__name__ in ['Recharging', 'Sale']:
+                if t.__class__.__name__ == 'Sale':
+                    amount = -t.amount()
+                else:
+                    amount = t.amount()
+            elif t.__class__.__name__ == 'Event':
+                amount = -t.amount
+            elif t.__class__.__name__ == 'ExceptionnalMovement':
+                if t.is_credit:
+                    amount = t.amount
+                else:
+                    amount = -t.amount
+            else:  # Transfert
+                if t.sender == self.user:
+                    amount = -t.amount
+                else:
+                    amount = t.amount
+            ws.append([t.datetime, t.__str__(), amount])
+
+        # Return the file
+        response = HttpResponse(openpyxl.writer.excel.save_virtual_workbook(wb),
+                                content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        response['Content-Disposition'] = 'attachment; filename=' + \
+            self.user.username + '-transactions-' + str(now().date()) + ".xlsx"
+        return response
+
+
 @login_required
 def balance_from_username(request):
     operator = request.user
@@ -665,15 +741,8 @@ def balance_from_username(request):
         raise PermissionDenied
 
 
-from rest_framework import generics
+# partie API
 
-#partie API 
-
-from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import viewsets
-
-from .models import User
-from .serializers import UserSerializer 
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
@@ -682,37 +751,21 @@ class UserViewSet(viewsets.ModelViewSet):
     filterset_fields = ['id', 'username']
 
 
-from rest_framework import generics
-
-from rest_framework import filters
-
 class SearchUserView(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     filter_backends = [filters.SearchFilter]
-    search_fields = ['username','id','last_name','first_name','surname','family']
-    
+    search_fields = ['username', 'id', 'last_name',
+                     'first_name', 'surname', 'family']
 
-
-
-
-
-from django.contrib.auth import login, logout
-
-from rest_framework import generics
-from rest_framework import permissions
-from rest_framework import status
-from rest_framework import views
-from rest_framework.response import Response
-
-from . import serializers
 
 class LoginView(views.APIView):
     # This view should be accessible also for unauthenticated users.
     permission_classes = (permissions.AllowAny,)
 
     def post(self, request, format=None):
-        serializer = serializers.LoginSerializer(data=self.request.data, context={ 'request': self.request })
+        serializer = serializers.LoginSerializer(
+            data=self.request.data, context={'request': self.request})
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
         login(request, user)
