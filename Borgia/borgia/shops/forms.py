@@ -6,7 +6,7 @@ from shops.models import Product, Shop
 class ShopCreateForm(forms.ModelForm):
     class Meta:
         model = Shop
-        fields = ['name', 'description', 'color','image']
+        fields = ['name', 'description','correcting_factor_activated', 'color','image']
 
     def clean(self):
         cleaned_data = super().clean()
@@ -17,7 +17,7 @@ class ShopCreateForm(forms.ModelForm):
 class ShopUpdateForm(forms.ModelForm):
     class Meta:
         model = Shop
-        fields = ['description', 'color','image']
+        fields = ['description', 'color','correcting_factor_activated','image']
 
 
 class ShopCheckupSearchForm(forms.Form):

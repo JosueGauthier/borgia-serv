@@ -44,7 +44,8 @@ class ShopCreate(LoginRequiredMixin, PermissionRequiredMixin, BorgiaFormView):
             name=form.cleaned_data['name'],
             description=form.cleaned_data['description'],
             color=form.cleaned_data['color'],
-            image=form.cleaned_data['image']
+            image=form.cleaned_data['image'],
+            correcting_factor_activated=form.cleaned_data['correcting_factor_activated']
         )
 
         self.shop = shop
@@ -82,12 +83,14 @@ class ShopUpdate(ShopMixin, BorgiaFormView):
         initial['description'] = self.shop.description
         initial['color'] = self.shop.color
         initial['image'] = self.shop.image
+        initial['correcting_factor_activated'] = self.shop.correcting_factor_activated
         return initial
 
     def form_valid(self, form):
         self.shop.description = form.cleaned_data['description']
         self.shop.color = form.cleaned_data['color']
         self.shop.image = form.cleaned_data['image']
+        self.shop.correcting_factor_activated = form.cleaned_data['correcting_factor_activated']
         self.shop.save()
         return super().form_valid(form)
 
