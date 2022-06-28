@@ -9,11 +9,14 @@
         <div class="panel-body">
           <form action="" method="post" class="form-horizontal">
             {% csrf_token %}
-            {{ form|bootstrap_horizontal }}
+            {{ form|bootstrap_horizontal}}  
             <div class="form-group">
               <div class="col-sm-10 col-sm-offset-2">
                 <button type="submit" class="btn btn-primary">Recherche</button>
                 <a class="btn btn-warning" href="">Remise à zéro</a>
+                <input type="submit" class="btn btn-success "
+                    formaction="{% url 'url_sales_download_xlsx' shop_pk=shop.pk %}"
+                    value="Télécharger le résultat">
               </div>
             </div>
           </form>
@@ -21,8 +24,8 @@
       </div>
       <div class="panel panel-default">
         <div class="panel-heading">
-          Résultats pour le magasin {{ shop }}
-        </div>
+            Résultats pour le magasin {{ shop }}
+         </div>
           <table class="table table-hover table-striped">
             <tr>
                 <th>Opérateur</th>

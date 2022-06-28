@@ -46,6 +46,8 @@ class LateralMenuMixin(ContextMixin):
             return members_lateral_menu(nav_tree, self.request.user)
         elif menu_type == 'managers':
             return managers_lateral_menu(nav_tree, self.request.user)
+        elif menu_type == 'operator':
+            return None
         elif menu_type == 'shops':
             if self.shop is None:
                 raise ImproperlyConfigured(

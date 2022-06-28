@@ -154,6 +154,9 @@ class SelfSaleModule(ShopModule):
 class OperatorSaleModule(ShopModule):
     """
     Define Permissions for OperatorSaleModule.
+    + add param != self sale module
+    :param ask_password: mdp required for buying in operator sales modules.
+    :type ask_password: Boolean.
     """
     class Meta:
         default_permissions = ()
@@ -162,6 +165,7 @@ class OperatorSaleModule(ShopModule):
             ('change_config_operatorsalemodule', 'Can change the config for operator sale module'),
             ('view_config_operatorsalemodule', 'Can view the config for operator sale module')
         )
+    ask_password = models.BooleanField('Demande du mot de passe',default=False)
 
     def __str__(self):
         return 'Module de vente par opérateur du magasin ' + self.shop.__str__()

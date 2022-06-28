@@ -1,5 +1,5 @@
 from django.urls import include, path
-from sales.views import RankUserProductPurchaseViewset, get_live_2hours_history_sale, get_total_sale, SaleList, SaleRetrieve, SaleViewSet, get_history_sale, all_high_scores, StatUserPurchase, HistorySaleUserViewSet, RankBestPurchaserViewset, RankUserShopPurchaseViewset
+from sales.views import Saledownload_xlsx, RankUserProductPurchaseViewset, get_live_2hours_history_sale, get_total_sale, SaleList, SaleRetrieve, SaleViewSet, get_history_sale, all_high_scores, StatUserPurchase, HistorySaleUserViewSet, RankBestPurchaserViewset, RankUserShopPurchaseViewset
 from rest_framework import routers
 
 
@@ -26,6 +26,8 @@ sales_patterns = [
     path('shops/<int:shop_pk>/sales/', include([
         path('', SaleList.as_view(), name='url_sale_list'),
         path('<int:sale_pk>/', SaleRetrieve.as_view(),
-             name='url_sale_retrieve')
+             name='url_sale_retrieve'),
+        path('xlsx/download/', Saledownload_xlsx.as_view(),
+             name='url_sales_download_xlsx')
     ]))
 ]

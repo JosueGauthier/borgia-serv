@@ -122,7 +122,7 @@ class ShopModuleSaleView(ShopModuleMixin, BorgiaFormView):
             shop=self.shop
         )
         for field in form.cleaned_data:
-            if field != 'client' and form.cleaned_data[field] != '':
+            if field != 'client' and form.cleaned_data[field] != '' and form.cleaned_data[field] is not None:
                 invoice = int(form.cleaned_data[field])
                 if invoice > 0:
                     try:
