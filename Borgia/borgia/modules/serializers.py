@@ -37,7 +37,7 @@ class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = ('id', 'name', 'module_id', 'products',
-                  'order', 'category_image', 'shop_id')
+                  'order', 'category_image', 'shop_id','content_type')
 
 
 class CatBaseSerializer(serializers.BaseSerializer):

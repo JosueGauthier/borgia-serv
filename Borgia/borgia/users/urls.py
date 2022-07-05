@@ -16,6 +16,8 @@ from users.views import (UserTransactionDownload, GroupUpdateView, UserAddByList
 # partie api
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
+router.register(r'groups', views.GroupViewSet)
+router.register(r'permission', views.PermissionViewSet)
 
 users_patterns = [
 
