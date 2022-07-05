@@ -1,4 +1,4 @@
-from .serializers import UserSerializer
+from .serializers import GroupSerializer, PermissionSerializer, UserSerializer
 from . import serializers
 from rest_framework.response import Response
 from rest_framework import views
@@ -741,14 +741,33 @@ def balance_from_username(request):
         raise PermissionDenied
 
 
-# partie API
+#! partie API
 
 
 class UserViewSet(viewsets.ModelViewSet):
+
     queryset = User.objects.all()
     serializer_class = UserSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['id', 'username']
+
+    def get_queryset(self):
+        user = self.request.user
+        return User.objects.filter(username=user.username)
+
+
+class GroupViewSet(viewsets.ModelViewSet):
+    queryset = Group.objects.all()
+    serializer_class = GroupSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['id', 'name']
+
+
+class PermissionViewSet(viewsets.ModelViewSet):
+    queryset = Permission.objects.all()
+    serializer_class = PermissionSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['id', 'name']
 
 
 class SearchUserView(generics.ListCreateAPIView):
