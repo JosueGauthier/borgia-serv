@@ -59,5 +59,6 @@ class ProductBaseSerializer(serializers.BaseSerializer):
             'product_image': instance.product_image,
             'id_parent_category': Category.objects.filter(products=instance.id).values_list('id')[0][0],
             'module_id_parent_category': Category.objects.filter(products=instance.id).values_list('module_id')[0][0],
+            'contentType_parent_category': Category.objects.filter(products=instance.id).values_list('content_type__model')[0][0],
             'id_categoryproduct_table': CategoryProduct.objects.filter(product=instance.id).values_list('id')[0][0],
         }

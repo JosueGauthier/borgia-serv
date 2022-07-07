@@ -1,5 +1,7 @@
 from asyncio.log import logger
+from dataclasses import field
 from itertools import product
+from pyexpat import model
 from unicodedata import category
 from rest_framework import serializers
 from shops.views import ProductBaseViewSet
@@ -33,11 +35,24 @@ from shops.models import Product, Shop
 from users.models import User
 
 
+from django.contrib.contenttypes.models import ContentType
+
+
+class ContentTypeSerializer(serializers.ModelSerializer):
+    class Meta: 
+        model = ContentType
+        fields = '__all__'
+
+
 class CategorySerializer(serializers.ModelSerializer):
+    content_type = ContentTypeSerializer(read_only=True)
+    
     class Meta:
         model = Category
         fields = ('id', 'name', 'module_id', 'products',
-                  'order', 'category_image', 'shop_id','content_type')
+                  'order', 'category_image', 'shop_id', 'content_type')
+
+
 
 
 class CatBaseSerializer(serializers.BaseSerializer):
@@ -78,7 +93,9 @@ class CatBaseSerializer(serializers.BaseSerializer):
             'module_id': instance.module_id,
             'category_image': instance.category_image,
             'shop_id': instance.shop_id,
+            'content_type': instance.content_type.model,
             'products': listOfProducts,
+            
 
 
         }
@@ -96,6 +113,7 @@ class ProductCatSerializer(serializers.ModelSerializer):
         fields = ('id', 'category', 'product', 'quantity')
 
 
+#! Self sale
 class SelfSaleSerializer(serializers.Serializer):
 
     """
@@ -154,5 +172,40 @@ class SelfSaleSerializer(serializers.Serializer):
         # api_operator_pk,
 
         attrs['sale'] = [api_module_pk, api_shop_pk,
+                         api_ordered_quantity, api_category_product_id]
+        return attrs
+
+
+#! Operator sale
+class OperatorSaleSerializer(serializers.Serializer):
+
+    api_buyer_pk = serializers.IntegerField(
+        write_only=True
+    )
+
+    api_module_pk = serializers.IntegerField(
+        write_only=True
+    )
+    api_shop_pk = serializers.IntegerField(
+        write_only=True
+    )
+
+    api_ordered_quantity = serializers.IntegerField(
+        write_only=True
+    )
+
+    api_category_product_id = serializers.IntegerField(
+        write_only=True
+    )
+
+    def validate(self, attrs):
+
+        api_buyer_pk = attrs.get('api_buyer_pk')
+        api_module_pk = attrs.get('api_module_pk')
+        api_shop_pk = attrs.get('api_shop_pk')
+        api_ordered_quantity = attrs.get('api_ordered_quantity')
+        api_category_product_id = attrs.get('api_category_product_id')
+
+        attrs['sale'] = [api_buyer_pk, api_module_pk, api_shop_pk,
                          api_ordered_quantity, api_category_product_id]
         return attrs

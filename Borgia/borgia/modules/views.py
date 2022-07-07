@@ -222,7 +222,7 @@ class ShopModuleConfigUpdateView(ShopModuleMixin, BorgiaFormView):
                        kwargs={'shop_pk': self.shop.pk, 'module_class': self.module_class})
 
 
-#!!!!!!!!!!!!!!!
+
 class ShopModuleCategoryCreateView(ShopModuleMixin, BorgiaView):
     """
     """
@@ -465,7 +465,25 @@ class SearchCategoryView(generics.ListCreateAPIView):
     search_fields = ['name']
 
 
-def api_create_sale_view(saleMap, api_user):
+
+class CatBaseViewset(viewsets.ViewSet):
+    def list(self, request):
+        queryset = Category.objects.all()
+
+        name = self.request.query_params.get('name')
+        if name is not None:
+            queryset = queryset.filter(name__icontains=name)
+
+        id = self.request.query_params.get('id')
+        if id is not None:
+            queryset = queryset.filter(id=id)
+
+        serializer = CatBaseSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+
+#! Self sale 
+def api_create_self_sale_view(saleMap, api_user):
     """
     API permettant d'acheter un produit
 
@@ -520,21 +538,74 @@ class SelfSaleView(views.APIView):
         saleMap = serializerSale.validated_data
         logger.error(saleMap)
 
-        api_create_sale_view(saleMap, api_user)
+        api_create_self_sale_view(saleMap, api_user)
         return Response(None, status=status.HTTP_202_ACCEPTED)
 
 
-class CatBaseViewset(viewsets.ViewSet):
-    def list(self, request):
-        queryset = Category.objects.all()
 
-        name = self.request.query_params.get('name')
-        if name is not None:
-            queryset = queryset.filter(name__icontains=name)
+#! Operator sale
+class OperatorSaleView(views.APIView):
 
-        id = self.request.query_params.get('id')
-        if id is not None:
-            queryset = queryset.filter(id=id)
+    # This view should be accessible also for unauthenticated users.
+    permission_classes = (permissions.AllowAny,)
 
-        serializer = CatBaseSerializer(queryset, many=True)
-        return Response(serializer.data)
+    def post(self, request, format=None):
+
+        serializerLogin = LoginSerializer(
+            data=self.request.data, context={'request': self.request})
+        
+        serializerLogin.is_valid(raise_exception=True)
+        
+        user = serializerLogin.validated_data['user']
+        
+        login(request, user)
+        
+        operator_user = self.request.user
+        
+        serializerSale = serializers.OperatorSaleSerializer(
+            data=self.request.data, context={'request': self.request})
+        
+        serializerSale.is_valid(raise_exception=True)
+        
+        saleMap = serializerSale.validated_data
+        logger.error(saleMap)
+
+        api_create_operator_sale_view(saleMap, operator_user)
+        return Response(None, status=status.HTTP_202_ACCEPTED)
+
+
+def api_create_operator_sale_view(saleMap, operator_user):
+    """
+    API permettant à un operateur de vendre un produit
+    
+    """
+
+    api_operator = operator_user
+    api_sender = User.objects.get(pk=saleMap['api_buyer_pk'])
+    api_recipient = User.objects.get(pk=1)
+    api_module = SelfSaleModule.objects.get(pk=saleMap['api_module_pk'])
+    api_shop = Shop.objects.get(pk=saleMap['api_shop_pk'])
+    api_ordered_quantity = saleMap['api_ordered_quantity']
+    api_category_product_id = saleMap['api_category_product_id']
+
+    sale = Sale.objects.create(
+        operator=api_operator,
+        sender=api_sender,
+        recipient=api_recipient,
+        module=api_module,
+        shop=api_shop
+    )
+
+    category_product = CategoryProduct.objects.get(
+        pk=api_category_product_id)
+
+    SaleProduct.objects.create(
+        sale=sale,
+        product=category_product.product,
+        #! category_product.quantity = volume ou poids par item |  ordered quantity
+        quantity=category_product.quantity * api_ordered_quantity,
+        price=category_product.get_price() * api_ordered_quantity
+    )
+    sale.pay()
+
+
