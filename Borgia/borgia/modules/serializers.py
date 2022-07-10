@@ -209,3 +209,27 @@ class OperatorSaleSerializer(serializers.Serializer):
         attrs['sale'] = [api_buyer_pk, api_module_pk, api_shop_pk,
                          api_ordered_quantity, api_category_product_id]
         return attrs
+
+
+#! Operator sale
+class CreateCategorySerializer(serializers.Serializer):
+    
+    api_name_category = serializers.CharField(
+        write_only=True
+    )
+
+    api_category_image = serializers.CharField(
+        write_only=True
+    )
+    api_shop_pk = serializers.IntegerField(
+        write_only=True
+    )
+    
+    def validate(self, attrs):
+
+        api_name_category = attrs.get('api_name_category')
+        api_category_image = attrs.get('api_category_image')
+        api_shop_pk = attrs.get('api_shop_pk')
+
+        attrs['category'] = [api_name_category, api_category_image, api_shop_pk]
+        return attrs

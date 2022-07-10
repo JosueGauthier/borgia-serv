@@ -17,7 +17,7 @@ from django.utils.timezone import now
 from openpyxl import Workbook
 from openpyxl.writer.excel import save_virtual_workbook
 from django.shortcuts import HttpResponse
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from borgia.views import BorgiaFormView, BorgiaView
 from sales.forms import SaleListSearchDateForm
@@ -262,21 +262,21 @@ def get_total_sale(request):
 @api_view(('GET',))
 def get_history_sale(request):
     data = []
-    day_of_year = datetime.datetime.now().timetuple().tm_yday
+    day_of_year = datetime.now().timetuple().tm_yday
     nombre_de_jour = day_of_year
 
     for i in range(0, nombre_de_jour):
-        start_day = strftime(str((datetime.datetime.strptime(
-            "2022-01-01", "%Y-%m-%d") + datetime.timedelta(days=i)).date()))
-        end_day = strftime(str((datetime.datetime.strptime(
-            "2022-01-01", "%Y-%m-%d") + datetime.timedelta(days=1+i)).date()))
+        start_day = strftime(str((datetime.strptime(
+            "2022-01-01", "%Y-%m-%d") + timedelta(days=i)).date()))
+        end_day = strftime(str((datetime.strptime(
+            "2022-01-01", "%Y-%m-%d") + timedelta(days=1+i)).date()))
         price_sum = SaleProduct.objects.filter(
             sale__datetime__range=[start_day, end_day]).aggregate(Sum('price'))
 
-        format_day = (datetime.datetime.strptime(
-            "2022-01-01", "%Y-%d-%m") + datetime.timedelta(days=i)).date()
+        format_day = (datetime.strptime(
+            "2022-01-01", "%Y-%d-%m") + timedelta(days=i)).date()
 
-        a_day = datetime.datetime.strptime(
+        a_day = datetime.strptime(
             str(format_day), '%Y-%m-%d').strftime('%d-%m')
 
         data.append({
@@ -291,18 +291,18 @@ def get_history_sale(request):
 @api_view(('GET',))
 def get_live_2hours_history_sale(request):
     data = []
-    temps_debut = datetime.datetime.now() - datetime.timedelta(hours=2)
+    temps_debut = datetime.now() - timedelta(hours=2)
     time_step = 30
 
     for i in range(0, 7200, time_step):
         start_range = strftime(
-            str(temps_debut + datetime.timedelta(seconds=i)))
+            str(temps_debut + timedelta(seconds=i)))
         end_range = strftime(
-            str(temps_debut + datetime.timedelta(seconds=(i+time_step))))
+            str(temps_debut + timedelta(seconds=(i+time_step))))
         price_sum = SaleProduct.objects.filter(
             sale__datetime__range=[start_range, end_range]).aggregate(Sum('price'))
 
-        a = temps_debut + datetime.timedelta(seconds=i)
+        a = temps_debut + timedelta(seconds=i)
 
         format_time = a.strftime("%H:%M")
 
