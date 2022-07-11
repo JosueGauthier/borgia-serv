@@ -31,6 +31,7 @@ modules_patterns = [
     path('api-links/create-category/', views.CreateCategoryView.as_view()),
     
     path('api-links/update-category/', views.UpdateCategoryView.as_view()),
+    path('api-links/delete-category/', views.DeleteCategoryView.as_view()),
 
     path('api-links/searchcategory/', views.SearchCategoryView.as_view()),
 

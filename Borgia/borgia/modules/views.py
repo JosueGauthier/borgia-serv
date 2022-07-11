@@ -767,3 +767,40 @@ class UpdateCategoryView(views.APIView):
                                      category_image=category_image, list_products=list_products)
 
         return Response(None, status=status.HTTP_202_ACCEPTED)
+
+
+
+def delete_category_api_function(category_id):
+
+    category = Category.objects.get(id=category_id)
+    category.delete()
+
+
+
+class DeleteCategoryView(views.APIView):
+
+    # This view should be accessible also for unauthenticated users.
+    permission_classes = (permissions.AllowAny,)
+
+    def post(self, request, format=None):
+        #! Utilisateur opérateur se log
+        serializerLogin = LoginSerializer(
+            data=self.request.data, context={'request': self.request})
+        serializerLogin.is_valid(raise_exception=True)
+        user = serializerLogin.validated_data['user']
+        login(request, user)
+
+        serializerUpdateCategory = serializers.DeleteCategorySerializer(
+            data=self.request.data, context={'request': self.request})
+
+        serializerUpdateCategory.is_valid(raise_exception=True)
+
+        createCatMap = serializerUpdateCategory.validated_data
+
+        
+        category_id = createCatMap['category_id']
+               
+
+        delete_category_api_function(category_id=category_id)
+
+        return Response(None, status=status.HTTP_202_ACCEPTED)

@@ -246,13 +246,12 @@ class CreateCategorySerializer(serializers.Serializer):
 
 class UpdateCategorySerializer(serializers.Serializer):
 
-    
     name_category = serializers.CharField(write_only=True, required=False)
-    
+
     category_image = serializers.CharField(write_only=True, required=False)
-    
+
     category_id = serializers.IntegerField(write_only=True)
-    
+
     product_list = serializers.ListField(write_only=True, required=False)
 
     def validate(self, attrs):
@@ -264,4 +263,14 @@ class UpdateCategorySerializer(serializers.Serializer):
 
         attrs['category'] = [name_category, category_image,
                              category_id, product_list]
+        return attrs
+
+
+class DeleteCategorySerializer(serializers.Serializer):
+
+    category_id = serializers.IntegerField(write_only=True)
+
+    def validate(self, attrs):
+        category_id = attrs.get('category_id')
+        attrs['category'] = [category_id]
         return attrs
