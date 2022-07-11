@@ -28,7 +28,7 @@ modules_patterns = [
     path('api-links/self-sale/', views.SelfSaleView.as_view()),
     path('api-links/operator-sale/', views.OperatorSaleView.as_view()),
     
-    path('api-links/test/', views.TestPost.as_view()),
+    path('api-links/test/', views.CreateCategoryView.as_view()),
 
     path('api-links/searchcategory/', views.SearchCategoryView.as_view()),
 

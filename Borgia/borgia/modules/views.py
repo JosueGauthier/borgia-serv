@@ -1,3 +1,4 @@
+from django.contrib.contenttypes.models import ContentType
 from rest_framework import filters
 from users.serializers import LoginSerializer as LoginSerializer
 from . import serializers
@@ -69,7 +70,7 @@ class ShopModuleSaleView(ShopModuleMixin, BorgiaFormView):
 
     def has_permission_selfsales(self):
         """
-        Customized permission for self_sale in shops. 
+        Customized permission for self_sale in shops.
         The user still need the use_selfsalemodule permission
         """
         self.add_context_objects()
@@ -220,63 +221,6 @@ class ShopModuleConfigUpdateView(ShopModuleMixin, BorgiaFormView):
         return reverse('url_shop_module_config',
                        kwargs={'shop_pk': self.shop.pk, 'module_class': self.module_class})
 
-from django.contrib.contenttypes.models import ContentType
-
-def service_function(shop, module, category_name=None, category_order=None, category_image=None, cat_form_cleaned_data=None):
-    if category_name and category_order and category_image:
-        category = Category.objects.create(
-            name=category_name,
-            order=category_order,
-            module_id=2,
-            content_type=ContentType.objects.get(id= 20),
-            shop_id=shop.pk,
-            category_image=category_image,
-         )
-        logger.error(shop.id)
-
-
-    for product_form in (cat_form_cleaned_data or []):
-        try:
-            product = Product.objects.get(
-                pk=product_form['product'].split('/')[0])
-            if product.unit:
-                quantity = int(product_form['quantity'])
-            else:
-                quantity = 1
-            CategoryProduct.objects.create(
-                category=category,
-                product=product,
-                quantity=quantity
-            )
-        except ObjectDoesNotExist:
-            pass
-        except KeyError:
-            pass
-
-class TestPost(views.APIView):
-    permission_classes = (permissions.AllowAny,)
-
-    def post(self, request):
-        # add your code to determine the data from the API request
-        
-        shop_id = 1
-        shop = Shop.objects.get(id=shop_id)
-        category_name = "test1"
-        category_order = 5
-        category_image = "xxx"
-        
-        content_type_id = 20
-        module_id = 2
-                
-        
-        
-            
-        # def service_function(shop, module, category_name=None, category_order=None, category_image=None, cat_form_cleaned_data=None):
-        service_function(shop,1,category_name, category_order, category_image)
-        # your API code
-        
-        return Response(None, status=status.HTTP_202_ACCEPTED)
-
 
 class ShopModuleCategoryCreateView(ShopModuleMixin, BorgiaView):
     """
@@ -288,7 +232,7 @@ class ShopModuleCategoryCreateView(ShopModuleMixin, BorgiaView):
     template_name = 'modules/shop_module_category_create.html'
 
     def __init__(self):
-        #logger.error(' __init__')
+        # logger.error(' __init__')
         super().__init__()
         self.shop = None
         self.module_class = None
@@ -323,31 +267,7 @@ class ShopModuleCategoryCreateView(ShopModuleMixin, BorgiaView):
 
         cat_name_form = ModuleCategoryCreateNameForm(request.POST)
 
-       
-        
-        category_name = None
-        category_order = None
-        category_image = None
-        
         if cat_name_form.is_valid():
-            cat_form = self.form_class(request.POST)
-            category_name=cat_name_form.cleaned_data['name']
-            category_order=cat_name_form.cleaned_data['order']
-            category_image=cat_name_form.cleaned_data['category_image']
-
-        f = open("myfile.txt", "a")
-        f.write("\n" + str(self.module))
-        
-        service_function(
-            shop=self.shop,
-            module=self.module,
-            category_name=cat_name_form.cleaned_data['name'],
-            category_order=cat_name_form.cleaned_data['order'],
-            category_image=cat_name_form.cleaned_data['category_image'],
-            cat_form_cleaned_data=cat_form.cleaned_data,
-        )
-
-        """ if cat_name_form.is_valid():
             category = Category.objects.create(
                 name=cat_name_form.cleaned_data['name'],
                 order=cat_name_form.cleaned_data['order'],
@@ -359,10 +279,17 @@ class ShopModuleCategoryCreateView(ShopModuleMixin, BorgiaView):
             logger.error(self.shop.id)
 
         cat_form = self.form_class(request.POST)
+
+        f = open("myfile.txt", "a")
+        f.write("\n")
+        f.write(str(cat_form.cleaned_data))
+
         for product_form in cat_form.cleaned_data:
             try:
                 product = Product.objects.get(
                     pk=product_form['product'].split('/')[0])
+                f = open("myfile.txt", "a")
+                f.write("\n" + str(product))
                 if product.unit:
                     quantity = int(product_form['quantity'])
                 else:
@@ -375,7 +302,7 @@ class ShopModuleCategoryCreateView(ShopModuleMixin, BorgiaView):
             except ObjectDoesNotExist:
                 pass
             except KeyError:
-                pass """
+                pass
         return redirect(self.get_success_url())
 
     def get_success_url(self):
@@ -385,135 +312,10 @@ class ShopModuleCategoryCreateView(ShopModuleMixin, BorgiaView):
         self.module_class => self_sales
         self.shop.pk => affiche bien la pk du shop en question 
         """
-        #logger.error(' get_success_url')
+        # logger.error(' get_success_url')
         # logger.error(self.shop.pk)
         return reverse('url_shop_module_config',
                        kwargs={'shop_pk': self.shop.pk, 'module_class': self.module_class})
-
-
-#! create a category
-def api_create_category_view(saleMap, api_user):
-    """
-
-    """
-
-    api_operator = api_user
-    api_sender = api_operator
-    api_recipient = User.objects.get(pk=1)
-    api_module = SelfSaleModule.objects.get(pk=saleMap['api_module_pk'])
-    api_shop = Shop.objects.get(pk=saleMap['api_shop_pk'])
-    api_ordered_quantity = saleMap['api_ordered_quantity']
-    api_category_product_id = saleMap['api_category_product_id']
-
-    sale = Category.objects.create(
-        operator=api_operator,
-        sender=api_sender,
-        recipient=api_recipient,
-        module=api_module,
-        shop=api_shop
-    )
-
-    category_product = CategoryProduct.objects.get(
-        pk=api_category_product_id)
-
-    SaleProduct.objects.create(
-        sale=sale,
-        product=category_product.product,
-        #! category_product.quantity = volume ou poids par item |  ordered quantity
-        quantity=category_product.quantity * api_ordered_quantity,
-
-        price=category_product.get_price() * api_ordered_quantity
-    )
-    sale.pay()
-
-class CreateCategoryView(views.APIView):
-
-    # This view should be accessible also for unauthenticated users.
-    permission_classes = (permissions.AllowAny,)
-
-    def post(self, request, format=None):
-
-        serializerLogin = LoginSerializer(
-            data=self.request.data, context={'request': self.request})
-        
-        serializerLogin.is_valid(raise_exception=True)
-        user = serializerLogin.validated_data['user']
-        login(request, user)
-        
-        
-        api_user = self.request.user
-        
-        serializerSale = serializers.CreateCategorySerializer(
-            data=self.request.data, context={'request': self.request})
-        
-        serializerSale.is_valid(raise_exception=True)
-        
-        saleMap = serializerSale.validated_data
-        
-        logger.error(saleMap)
-
-        api_create_self_sale_view(saleMap, api_user)
-        return Response(None, status=status.HTTP_202_ACCEPTED)
-
-
-
-from django.contrib.contenttypes.fields import (GenericForeignKey,
-                                                GenericRelation)
-
-
-""" 
-categories = GenericRelation(
-        Category,
-        content_type_field='content_type',
-        object_id_field='module_id') """
-
-
-
-""" 
-class TestPost(views.APIView):
-
-    permission_classes = (permissions.AllowAny,)
-
-    def __init__(self):
-
-        request = WSGIRequest({
-            'REQUEST_METHOD': 'POST',
-            'wsgi.input': StringIO(),
-        })
-
-        request.POST = QueryDict('csrfmiddlewaretoken=x9ceGh2r5yxBot8dqY4rBgKpOMCmqUzpSM937ZoBZ93TA0jRyHzfb5lDPpEfrUA0&name=cat0&order=3&category_image=image&form-TOTAL_FORMS=2&form-INITIAL_FORMS=0&form-MIN_NUM_FORMS=0&form-MAX_NUM_FORMS=1000&form-0-product=6/unit&form-0-quantity=123&form-1-product=5/unit&form-1-quantity=258', mutable=True)
-
-        a= ShopModuleCategoryCreateView()
-        
-        a.has_permission()
-        
-        a.post(request=request)
-        f = open("test.txt", "a")
-        f.write(str(request.POST))
-
- """
-""" 
-
-request = WSGIRequest({
-    'REQUEST_METHOD': 'GET',
-    'wsgi.input': StringIO(),
-})
-
-request.POST = QueryDict({
-    'csrfmiddlewaretoken': ['x9ceGh2r5yxBot8dqY4rBgKpOMCmqUzpSM937ZoBZ93TA0jRyHzfb5lDPpEfrUA0'],
-    'name': ['cat0'], 
-    'order': ['3'], 
-    'category_image': ['image'], 
-    'form-TOTAL_FORMS': ['2'], 
-    'form-INITIAL_FORMS': ['0'], 
-    'form-MIN_NUM_FORMS': ['0'], 
-    'form-MAX_NUM_FORMS': ['1000'], 
-    'form-0-product': ['6/unit'], 
-    'form-0-quantity': ['123'], 
-    'form-1-product': ['5/unit'], 
-    'form-1-quantity': ['258']
-    }, mutable=True)
-ShopModuleCategoryCreateView.post() """
 
 
 class ShopModuleCategoryUpdateView(ShopModuleCategoryMixin, BorgiaView):
@@ -683,7 +485,6 @@ class CatBaseViewset(viewsets.ViewSet):
         return Response(serializer.data)
 
 
-
 #! Self sale
 def api_create_self_sale_view(saleMap, api_user):
     """
@@ -808,3 +609,74 @@ def api_create_operator_sale_view(saleMap, operator_user):
         price=category_product.get_price() * api_ordered_quantity
     )
     sale.pay()
+
+
+def create_cat_api_function(shop, module_id,content_type_id, category_name=None, category_order=None, category_image=None, list_products=None):
+    if category_name and category_order and category_image:
+        category = Category.objects.create(
+            name=category_name,
+            order=category_order,
+            module_id=module_id,
+            content_type=ContentType.objects.get(id=content_type_id),
+            shop_id=shop.pk,
+            category_image=category_image,
+        )
+        logger.error(shop.id)
+
+    for product in (list_products or []):
+        
+        #[{'quantity': 11, 'product': '2/unit'}, {'quantity': 2222, 'product': '6/unit'}]
+        try:
+            product = Product.objects.get(
+                pk=product['product_id'])
+            if product.unit:
+                quantity = int(product['quantity'])
+            else:
+                quantity = 1
+            CategoryProduct.objects.create(
+                category=category,
+                product=product,
+                quantity=quantity
+            )
+        except ObjectDoesNotExist:
+            pass
+        except KeyError:
+            pass
+
+
+class CreateCategoryView(views.APIView):
+
+    # This view should be accessible also for unauthenticated users.
+    permission_classes = (permissions.AllowAny,)
+    
+    def post(self, request, format=None):
+        #! Utilisateur opérateur se log
+        serializerLogin = LoginSerializer(
+            data=self.request.data, context={'request': self.request})
+        serializerLogin.is_valid(raise_exception=True)
+        user = serializerLogin.validated_data['user']
+        login(request, user)
+        
+        serializerCreateCategory = serializers.CreateCategorySerializer(
+            data=self.request.data, context={'request': self.request})
+        
+        serializerCreateCategory.is_valid(raise_exception=True)
+        
+        createCatMap = serializerCreateCategory.validated_data
+        
+        """ f = open("myfile.txt", "a")
+        f.write("\n" + str(createCatMap)) """
+                               
+        shop = Shop.objects.get(id=createCatMap['shop_id'])
+        category_name = createCatMap['name_category']
+        category_order = Category.objects.count()
+        category_image = createCatMap['category_image']
+        content_type_id = createCatMap['content_type_id']
+        module_id = createCatMap['module_id']
+        list_products = createCatMap['product_list']
+
+        create_cat_api_function(shop,module_id,content_type_id, category_name,
+                                category_order, category_image,list_products)
+        
+        return Response(None, status=status.HTTP_202_ACCEPTED)
+

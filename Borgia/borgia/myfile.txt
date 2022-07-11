@@ -1,73 +1,29 @@
-<WSGIRequest: POST '/shops/1/modules/operator_sales/categories/create/'>
-<QueryDict: 
-    {'csrfmiddlewaretoken': ['Xj7XHkSwZNPRrUjGkaamYBxRGntfEDVAiW4M82eGTol9DruksTFayq85H0v8FDWb'],
-     'name': ['mmm'], 
-     'order': ['2'], 
-     'category_image': ['mm'], 
-     'form-TOTAL_FORMS': ['1'], 
-     'form-INITIAL_FORMS': ['0'], 
-     'form-MIN_NUM_FORMS': ['0'], 
-     'form-MAX_NUM_FORMS': ['1000'], 
-     'form-0-product': [''], 
-     'form-0-quantity': ['']
-     
-    }
->
+[{'quantity': 12, 'product': '6/unit'}, {'quantity': 25, 'product': '4/unit'}, {'quantity': 222, 'product': '2/unit'}]
+[{'quantity': 11, 'product': '2/unit'}, {'quantity': 2222, 'product': '6/unit'}]
+Cidre Kerisac
+Vitus
 
-
-<QueryDict: {
-    'csrfmiddlewaretoken': ['x9ceGh2r5yxBot8dqY4rBgKpOMCmqUzpSM937ZoBZ93TA0jRyHzfb5lDPpEfrUA0'],
-    'name': ['cat0'], 
-    'order': ['3'], 
-    'category_image': ['image'], 
-    'form-TOTAL_FORMS': ['2'], 
-    'form-INITIAL_FORMS': ['0'], 
-    'form-MIN_NUM_FORMS': ['0'], 
-    'form-MAX_NUM_FORMS': ['1000'], 
-    'form-0-product': ['6/unit'], 
-    'form-0-quantity': ['123'], 
-    'form-1-product': ['5/unit'], 
-    'form-1-quantity': ['258']
-    }
->
-
-
-<tr>
-    <th><label for="id_name">Nom :</label></th>
-    <td>
-      
-      <input type="text" name="name" value="tes11" maxlength="254" required id="id_name">
-      
-      
-    </td>
-  </tr>
-
-  <tr>
-    <th><label for="id_order">Ordre :</label></th>
-    <td>
-      
-      <input type="number" name="order" value="1" min="0" required id="id_order">
-      
-        <br>
-        <span class="helptext">L'ordre des catégories commence à partir de 0 !</span>
-      
-      
-    </td>
-  </tr>
-
-  <tr>
-    <th><label for="id_category_image">Image de la catégorie :</label></th>
-    <td>
-      
-      <input type="text" name="category_image" value="111" maxlength="10000" required id="id_category_image">
-      
-      
-        
-      
-    </td>
-  </tr>
-
-  <WSGIRequest: POST '/shops/1/modules/operator_sales/categories/create/'>
-  
-  <WSGIRequest: POST '/'><WSGIRequest: POST '/shops/1/modules/operator_sales/categories/create/'>
-Module de vente par opérateur du magasin Pi
+OrderedDict(
+    
+    [('name_category', 'test12'), 
+    ('category_image', 'hhhh'), 
+    ('shop_id', 1), 
+    ('content_type_id', 20), 
+    ('module_id', 2), 
+    ('product_list', 
+    [{'quantity': 11, 'product_id': 2}, {'quantity': 101, 'product_id': 6}]), 
+    ('category', ['test12', 'hhhh', 1, 20, 2, [{'quantity': 11, 'product_id': 2}, 
+    {'quantity': 101, 'product_id': 6}]])])
+OrderedDict([('name_category', 'test12'), ('category_image', 'hhhh'), ('shop_id', 1), ('content_type_id', 20), ('module_id', 2), ('product_list', [{'quantity': 11, 'product_id': 2}, {'quantity': 101, 'product_id': 6}]), ('category', ['test12', 'hhhh', 1, 20, 2, [{'quantity': 11, 'product_id': 2}, {'quantity': 101, 'product_id': 6}]])])
+OrderedDict([('name_category', 'test12'), ('category_image', 'hhhh'), ('shop_id', 1), ('content_type_id', 20), ('module_id', 2), ('product_list', [{'quantity': 11, 'product_id': 2}, {'quantity': 101, 'product_id': 6}]), ('category', ['test12', 'hhhh', 1, 20, 2, [{'quantity': 11, 'product_id': 2}, {'quantity': 101, 'product_id': 6}]])])
+[{'quantity': 11, 'product_id': 2}, {'quantity': 101, 'product_id': 6}]
+OrderedDict([('name_category', 'test12'), ('category_image', 'hhhh'), ('shop_id', 1), ('content_type_id', 20), ('module_id', 2), ('product_list', [{'quantity': 11, 'product_id': 2}, {'quantity': 101, 'product_id': 6}]), ('category', ['test12', 'hhhh', 1, 20, 2, [{'quantity': 11, 'product_id': 2}, {'quantity': 101, 'product_id': 6}]])])
+{'quantity': 11, 'product_id': 2}
+OrderedDict([('name_category', 'test12'), ('category_image', 'hhhh'), ('shop_id', 1), ('content_type_id', 20), ('module_id', 2), ('product_list', [{'quantity': 11, 'product_id': 2}, {'quantity': 101, 'product_id': 6}]), ('category', ['test12', 'hhhh', 1, 20, 2, [{'quantity': 11, 'product_id': 2}, {'quantity': 101, 'product_id': 6}]])])
+11
+OrderedDict([('name_category', 'test12'), ('category_image', 'hhhh'), ('shop_id', 1), ('content_type_id', 20), ('module_id', 2), ('product_list', [{'quantity': 11, 'product_id': 2}, {'quantity': 101, 'product_id': 6}]), ('category', ['test12', 'hhhh', 1, 20, 2, [{'quantity': 11, 'product_id': 2}, {'quantity': 101, 'product_id': 6}]])])
+11
+2
+OrderedDict([('name_category', 'test12'), ('category_image', 'hhhh'), ('shop_id', 1), ('content_type_id', 20), ('module_id', 2), ('product_list', [{'quantity': 11, 'product_id': 2}, {'quantity': 101, 'product_id': 6}]), ('category', ['test12', 'hhhh', 1, 20, 2, [{'quantity': 11, 'product_id': 2}, {'quantity': 101, 'product_id': 6}]])])
+11
+2

@@ -39,20 +39,18 @@ from django.contrib.contenttypes.models import ContentType
 
 
 class ContentTypeSerializer(serializers.ModelSerializer):
-    class Meta: 
+    class Meta:
         model = ContentType
         fields = '__all__'
 
 
 class CategorySerializer(serializers.ModelSerializer):
     content_type = ContentTypeSerializer(read_only=True)
-    
+
     class Meta:
         model = Category
         fields = ('id', 'name', 'module_id', 'products',
                   'order', 'category_image', 'shop_id', 'content_type')
-
-
 
 
 class CatBaseSerializer(serializers.BaseSerializer):
@@ -95,7 +93,7 @@ class CatBaseSerializer(serializers.BaseSerializer):
             'shop_id': instance.shop_id,
             'content_type': instance.content_type.model,
             'products': listOfProducts,
-            
+
 
 
         }
@@ -211,25 +209,36 @@ class OperatorSaleSerializer(serializers.Serializer):
         return attrs
 
 
-#! Operator sale
 class CreateCategorySerializer(serializers.Serializer):
-    
-    api_name_category = serializers.CharField(
+
+    name_category = serializers.CharField(
         write_only=True
     )
 
-    api_category_image = serializers.CharField(
+    category_image = serializers.CharField(
         write_only=True
     )
-    api_shop_pk = serializers.IntegerField(
+    shop_id = serializers.IntegerField(
         write_only=True
     )
-    
+    content_type_id = serializers.IntegerField(
+        write_only=True
+    )
+
+    module_id = serializers.IntegerField(
+        write_only=True
+    )
+    product_list = serializers.ListField(write_only=True)
+
     def validate(self, attrs):
 
-        api_name_category = attrs.get('api_name_category')
-        api_category_image = attrs.get('api_category_image')
-        api_shop_pk = attrs.get('api_shop_pk')
+        name_category = attrs.get('name_category')
+        category_image = attrs.get('category_image')
+        shop_id = attrs.get('shop_id')
+        content_type_id = attrs.get('content_type_id')
+        module_id = attrs.get('module_id')
+        product_list = attrs.get('product_list')
 
-        attrs['category'] = [api_name_category, api_category_image, api_shop_pk]
+        attrs['category'] = [name_category, category_image,
+                             shop_id, content_type_id, module_id, product_list]
         return attrs
