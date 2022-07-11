@@ -242,3 +242,26 @@ class CreateCategorySerializer(serializers.Serializer):
         attrs['category'] = [name_category, category_image,
                              shop_id, content_type_id, module_id, product_list]
         return attrs
+
+
+class UpdateCategorySerializer(serializers.Serializer):
+
+    
+    name_category = serializers.CharField(write_only=True, required=False)
+    
+    category_image = serializers.CharField(write_only=True, required=False)
+    
+    category_id = serializers.IntegerField(write_only=True)
+    
+    product_list = serializers.ListField(write_only=True, required=False)
+
+    def validate(self, attrs):
+
+        name_category = attrs.get('name_category')
+        category_image = attrs.get('category_image')
+        category_id = attrs.get('category_id')
+        product_list = attrs.get('product_list')
+
+        attrs['category'] = [name_category, category_image,
+                             category_id, product_list]
+        return attrs

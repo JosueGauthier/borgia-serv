@@ -12,6 +12,15 @@ from shops.models import Product, Shop
 
 class Category(models.Model):
     """
+    name /
+    content_type /
+    module_id /
+    module /
+    products /
+    order /
+    shop_id /
+    category_image /
+    
     :note:: Using generic foreign keys, filter api doesn't work. It doesn't
     work with ModelForm too.
     :note:: Should we use several category types here ? In order to use filter

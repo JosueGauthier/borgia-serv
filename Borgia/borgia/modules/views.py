@@ -611,7 +611,7 @@ def api_create_operator_sale_view(saleMap, operator_user):
     sale.pay()
 
 
-def create_cat_api_function(shop, module_id,content_type_id, category_name=None, category_order=None, category_image=None, list_products=None):
+def create_category_api_function(shop, module_id, content_type_id, category_name=None, category_order=None, category_image=None, list_products=None):
     if category_name and category_order and category_image:
         category = Category.objects.create(
             name=category_name,
@@ -624,7 +624,7 @@ def create_cat_api_function(shop, module_id,content_type_id, category_name=None,
         logger.error(shop.id)
 
     for product in (list_products or []):
-        
+
         #[{'quantity': 11, 'product': '2/unit'}, {'quantity': 2222, 'product': '6/unit'}]
         try:
             product = Product.objects.get(
@@ -648,7 +648,7 @@ class CreateCategoryView(views.APIView):
 
     # This view should be accessible also for unauthenticated users.
     permission_classes = (permissions.AllowAny,)
-    
+
     def post(self, request, format=None):
         #! Utilisateur opérateur se log
         serializerLogin = LoginSerializer(
@@ -656,27 +656,114 @@ class CreateCategoryView(views.APIView):
         serializerLogin.is_valid(raise_exception=True)
         user = serializerLogin.validated_data['user']
         login(request, user)
-        
+
+        """  f = open("myfile.txt", "a")
+        f.write("\n" + str(user)) """
+
         serializerCreateCategory = serializers.CreateCategorySerializer(
             data=self.request.data, context={'request': self.request})
-        
+
         serializerCreateCategory.is_valid(raise_exception=True)
-        
+
         createCatMap = serializerCreateCategory.validated_data
-        
-        """ f = open("myfile.txt", "a")
-        f.write("\n" + str(createCatMap)) """
-                               
+
         shop = Shop.objects.get(id=createCatMap['shop_id'])
+
         category_name = createCatMap['name_category']
+
         category_order = Category.objects.count()
+
         category_image = createCatMap['category_image']
+
         content_type_id = createCatMap['content_type_id']
+
         module_id = createCatMap['module_id']
+
         list_products = createCatMap['product_list']
 
-        create_cat_api_function(shop,module_id,content_type_id, category_name,
-                                category_order, category_image,list_products)
-        
+        create_category_api_function(shop, module_id, content_type_id, category_name,
+                                     category_order, category_image, list_products)
+
         return Response(None, status=status.HTTP_202_ACCEPTED)
 
+
+def update_category_api_function(category_id, category_name=None, category_order=None, category_image=None, list_products=None):
+
+    category = Category.objects.get(id=category_id)
+
+    if category_name :
+        category.name = category_name
+        category.save()
+
+    if category_image :
+        category.category_image = category_image
+        category.save()
+
+    if list_products :
+
+        categoryProducts = CategoryProduct.objects.filter(category=category)
+        categoryProducts.delete()
+
+        for product in (list_products or []):
+            try:
+                product = Product.objects.get(
+                    pk=product['product_id'])
+                if product.unit:
+                    quantity = int(product['quantity'])
+                else:
+                    quantity = 1
+                CategoryProduct.objects.create(
+                    category=category,
+                    product=product,
+                    quantity=quantity
+                )
+            except ObjectDoesNotExist:
+                pass
+            except KeyError:
+                pass
+
+
+class UpdateCategoryView(views.APIView):
+
+    # This view should be accessible also for unauthenticated users.
+    permission_classes = (permissions.AllowAny,)
+
+    def post(self, request, format=None):
+        #! Utilisateur opérateur se log
+        serializerLogin = LoginSerializer(
+            data=self.request.data, context={'request': self.request})
+        serializerLogin.is_valid(raise_exception=True)
+        user = serializerLogin.validated_data['user']
+        login(request, user)
+
+        serializerUpdateCategory = serializers.UpdateCategorySerializer(
+            data=self.request.data, context={'request': self.request})
+
+        serializerUpdateCategory.is_valid(raise_exception=True)
+
+        createCatMap = serializerUpdateCategory.validated_data
+
+        
+        category_id = createCatMap['category_id']
+        
+        if 'name_category' in createCatMap:
+            category_name = createCatMap['name_category']
+        else:
+            category_name = None
+        
+        #category_order = Category.objects.count()
+        if 'category_image' in createCatMap:
+            category_image = createCatMap['category_image']
+        else:
+            category_image = None
+        
+        if 'product_list' in createCatMap:
+            list_products = createCatMap['product_list']
+        else:
+            list_products = None   
+        
+
+        update_category_api_function(category_id=category_id, category_name=category_name,
+                                     category_image=category_image, list_products=list_products)
+
+        return Response(None, status=status.HTTP_202_ACCEPTED)
