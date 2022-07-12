@@ -2,31 +2,33 @@ from . import views
 from rest_framework import routers
 from django.urls import include, path
 
-from shops.views import (ProductCreate, ProductDeactivate, ProductList,
+from shops.views import (ProductBaseViewSet, ProductCreate, ProductDeactivate, ProductList,
                          ProductRemove, ProductRetrieve, ProductUpdate,
                          ProductUpdatePrice, ShopCheckup, ShopCreate, ShopList,
                          ShopUpdate, ShopWorkboard)
 
-# partie api
-# Wire up our API using automatic URL routing.
-# Additionally, we include login URLs for the browsable API.
 
 router = routers.DefaultRouter()
 router.register(r'shops', views.ShopViewSet)
 router.register(r'products', views.ProductFromShopViewSet)
 router.register(r'shop-stat', views.StatShopViewSet)
-#router.register(r'searchprod', views.SearchProductView)
-#router.register(r'prod', views.ProductFromShopViewSet)
+router.register(r'productsv2', ProductBaseViewSet,
+                basename='productsv2')
 
 shops_patterns = [
-    #API
+    # API
 
-    
+    #*Get method
     path('api-links/shops/', include(router.urls)),
-
     path('api-links/searchprod/', views.SearchProductView.as_view()),
-
     path('api-links/searchshop/', views.SearchShopView.as_view()),
+    
+    #*Post Method
+    path('api-links/create-shop/', views.CreateShopView.as_view()),
+    path('api-links/update-shop/', views.UpdateShopView.as_view()),
+    #path('api-links/delete-shop/', views.DeleteShopView.as_view()),
+    
+    path('api-links/create-product/', views.CreateProductView.as_view()),
 
     # SHOPS
     path(

@@ -1,0 +1,16 @@
+  
+<QueryDict: {
+    'csrfmiddlewaretoken': ['x9ceGh2r5yxBot8dqY4rBgKpOMCmqUzpSM937ZoBZ93TA0jRyHzfb5lDPpEfrUA0'],
+    'name': ['cat0'],
+    'order': ['3'],
+    'category_image': ['image'],
+    'form-TOTAL_FORMS': ['2'],
+    'form-INITIAL_FORMS': ['0'],
+    'form-MIN_NUM_FORMS': ['0'],
+    'form-MAX_NUM_FORMS': ['1000'], 
+    'form-0-product': ['6/unit'],
+    'form-0-quantity': ['123'],
+    'form-1-product': ['5/unit'],
+    'form-1-quantity': ['258']
+
+}>

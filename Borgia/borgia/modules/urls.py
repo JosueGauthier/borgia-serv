@@ -3,7 +3,7 @@ from django.urls import include, path
 from . import views
 from rest_framework import routers
 
-from modules.views import (ShopModuleSaleView,
+from modules.views import (CatBaseViewset, ShopModuleSaleView,
                            ShopModuleCategoryCreateView, 
                            ShopModuleCategoryDeleteView,
                            ShopModuleCategoryUpdateView, 
@@ -17,6 +17,8 @@ router = routers.DefaultRouter()
 router.register(r'category', views.CategoryViewSet)
 router.register(r'category-products', views.ProductFromCategoryViewSet)
 router.register(r'category-products-model', views.CategoryFromProductViewSet)
+router.register(r'categoryv2', CatBaseViewset,
+                basename='categoryv2')
 
 
 modules_patterns = [
@@ -24,6 +26,12 @@ modules_patterns = [
     #API
     path('api-links/category/', include(router.urls)),
     path('api-links/self-sale/', views.SelfSaleView.as_view()),
+    path('api-links/operator-sale/', views.OperatorSaleView.as_view()),
+    
+    path('api-links/create-category/', views.CreateCategoryView.as_view()),
+    
+    path('api-links/update-category/', views.UpdateCategoryView.as_view()),
+    path('api-links/delete-category/', views.DeleteCategoryView.as_view()),
 
     path('api-links/searchcategory/', views.SearchCategoryView.as_view()),
 

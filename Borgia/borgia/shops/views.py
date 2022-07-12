@@ -1,7 +1,15 @@
+from rest_framework import generics
+from rest_framework import status
+from django.contrib.auth import login, logout
+from users.models import User
+from users.serializers import LoginSerializer
+from rest_framework import permissions
+from rest_framework import views
+from rest_framework.response import Response
 from sales.models import Sale
 from shops.models import Shop
 from rest_framework import filters
-from .serializers import ProductSerializer, ShopSerializer, ShopStatSerializer
+from .serializers import *
 from .models import Product, Shop
 from rest_framework import generics, viewsets
 from django_filters.rest_framework import DjangoFilterBackend
@@ -43,7 +51,8 @@ class ShopCreate(LoginRequiredMixin, PermissionRequiredMixin, BorgiaFormView):
             name=form.cleaned_data['name'],
             description=form.cleaned_data['description'],
             color=form.cleaned_data['color'],
-            image=form.cleaned_data['image']
+            image=form.cleaned_data['image'],
+            correcting_factor_activated=form.cleaned_data['correcting_factor_activated']
         )
 
         self.shop = shop
@@ -81,12 +90,14 @@ class ShopUpdate(ShopMixin, BorgiaFormView):
         initial['description'] = self.shop.description
         initial['color'] = self.shop.color
         initial['image'] = self.shop.image
+        initial['correcting_factor_activated'] = self.shop.correcting_factor_activated
         return initial
 
     def form_valid(self, form):
         self.shop.description = form.cleaned_data['description']
         self.shop.color = form.cleaned_data['color']
         self.shop.image = form.cleaned_data['image']
+        self.shop.correcting_factor_activated = form.cleaned_data['correcting_factor_activated']
         self.shop.save()
         return super().form_valid(form)
 
@@ -318,6 +329,7 @@ class ProductCreate(ShopMixin, BorgiaFormView):
         if form.cleaned_data['on_quantity']:
             product = Product.objects.create(
                 name=form.cleaned_data['name'],
+                product_image=form.cleaned_data['product_image'],
                 shop=self.shop,
                 unit=form.cleaned_data['unit'],
                 correcting_factor=1
@@ -325,6 +337,7 @@ class ProductCreate(ShopMixin, BorgiaFormView):
         else:
             product = Product.objects.create(
                 name=form.cleaned_data['name'],
+                product_image=form.cleaned_data['product_image'],
                 shop=self.shop,
                 correcting_factor=1
             )
@@ -418,10 +431,12 @@ class ProductUpdate(ProductMixin, BorgiaFormView):
     def get_initial(self):
         initial = super().get_initial()
         initial['name'] = self.product.name
+        initial['product_image'] = self.product.product_image
         return initial
 
     def form_valid(self, form):
         self.product.name = form.cleaned_data['name']
+        self.product.product_image = form.cleaned_data['product_image']
         self.product.save()
         return super().form_valid(form)
 
@@ -477,9 +492,6 @@ class ShopViewSet(viewsets.ModelViewSet):
     serializer_class = ShopSerializer
 
 
-#from rest_framework import filters
-
-
 class ProductFromShopViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all().order_by('name')
     serializer_class = ProductSerializer
@@ -504,3 +516,245 @@ class SearchShopView(generics.ListCreateAPIView):
 class StatShopViewSet(viewsets.ModelViewSet):
     queryset = Shop.objects.all()
     serializer_class = ShopStatSerializer
+
+
+class ProductBaseViewSet(viewsets.ViewSet):
+    def list(self, request):
+        queryset = Product.objects.all()
+
+        name = self.request.query_params.get('name')
+        if name is not None:
+            queryset = queryset.filter(name__icontains=name)
+
+        id = self.request.query_params.get('id')
+        if id is not None:
+            queryset = queryset.filter(id=id)
+
+        shop = self.request.query_params.get('shop')
+        if shop is not None:
+            queryset = queryset.filter(shop=shop)
+
+        category = self.request.query_params.get('category')
+        if category is not None:
+            queryset = queryset.filter(id_parent_category=category)
+
+        serializer = ProductBaseSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+
+def create_shop_api_function(shop_name, shop_description, shop_image, correcting_factor_activated=True, shop_color="#F4FA58"):
+
+    if shop_name and shop_description and shop_color and shop_image and correcting_factor_activated:
+        Shop.objects.create(
+            name=shop_name,
+            description=shop_description,
+            color=shop_color,
+            image=shop_image,
+            correcting_factor_activated=correcting_factor_activated
+        )
+
+
+class CreateShopView(views.APIView):
+
+    permission_classes = (permissions.AllowAny,)
+    permission_required = 'shops.add_shop'
+
+    def post(self, request):
+        #! Utilisateur manager se log
+        serializerLogin = LoginSerializer(
+            data=self.request.data, context={'request': self.request})
+        serializerLogin.is_valid(raise_exception=True)
+        user = serializerLogin.validated_data['user']
+
+        if user.has_perm(self.permission_required) == False:
+            return Response({"Error": "User does not have permission to perform the requested action"}, status=status.HTTP_401_UNAUTHORIZED)
+
+        logout(request)
+        login(request, user)
+
+        """  f = open("myfile.txt", "a")
+        f.write("\n" + str(user)) """
+
+        serializerCreateShop = CreateShopSerializer(
+            data=self.request.data, context={'request': self.request})
+
+        serializerCreateShop.is_valid(raise_exception=True)
+
+        shopMap = serializerCreateShop.validated_data
+
+        create_shop_api_function(
+            shopMap['shop_name'], shopMap['shop_description'], shopMap['shop_image'])
+
+        return Response(None, status=status.HTTP_202_ACCEPTED)
+
+
+def update_shop_api_function(shop_id, shop_description=None, shop_image=None, correcting_factor_activated=True, shop_color="#F4FA58"):
+
+    shop = Shop.objects.get(id=shop_id)
+
+    f = open("myfile.txt", "a")
+    f.write("\n" + str(shop.get_managers()))
+
+    if shop_description:
+        shop.description = shop_description
+        shop.save()
+
+    if shop_image:
+        shop.image = shop_image
+        shop.save()
+
+
+class UpdateShopView(views.APIView):
+
+    permission_classes = (permissions.AllowAny,)
+    permission_required = 'shops.change_shop'
+
+    def post(self, request):
+        #! Utilisateur manager se log
+        serializerLogin = LoginSerializer(
+            data=self.request.data, context={'request': self.request})
+        serializerLogin.is_valid(raise_exception=True)
+        #user = User.models
+        user = serializerLogin.validated_data['user']
+
+        if user.has_perm(self.permission_required) == False:
+            return Response({"Error": "User does not have permission to perform the requested action"}, status=status.HTTP_401_UNAUTHORIZED)
+
+        logout(request)
+        login(request, user)
+
+        serializerUpdateShop = UpdateShopSerializer(
+            data=self.request.data, context={'request': self.request})
+
+        serializerUpdateShop.is_valid(raise_exception=True)
+
+        shopMap = serializerUpdateShop.validated_data
+
+        shop_id = shopMap['shop_id']
+
+        if 'shop_description' in shopMap:
+            shop_description = shopMap['shop_description']
+        else:
+            shop_description = None
+
+        if 'shop_image' in shopMap:
+            shop_image = shopMap['shop_image']
+        else:
+            shop_image = None
+
+        update_shop_api_function(
+            shop_id, shop_description, shop_image)
+
+        return Response(None, status=status.HTTP_202_ACCEPTED)
+
+#! Not used check db errrors before
+
+
+def delete_shop_api_function(shop_id):
+
+    shop = Shop.objects.get(id=shop_id)
+    shop.delete()
+
+#! Not used check db errrors before
+
+
+class DeleteShopView(views.APIView):
+
+    permission_classes = (permissions.AllowAny,)
+    permission_required = 'shops.delete_shop'
+
+    def post(self, request):
+        #! Utilisateur manager se log
+        serializerLogin = LoginSerializer(
+            data=self.request.data, context={'request': self.request})
+        serializerLogin.is_valid(raise_exception=True)
+        user = serializerLogin.validated_data['user']
+
+        if user.has_perm(self.permission_required) == False:
+            return Response({"Error": "User does not have permission to perform the requested action"}, status=status.HTTP_401_UNAUTHORIZED)
+
+        logout(request)
+        login(request, user)
+
+        serializerDeleteShop = DeleteShopSerializer(
+            data=self.request.data, context={'request': self.request})
+
+        serializerDeleteShop.is_valid(raise_exception=True)
+
+        shopMap = serializerDeleteShop.validated_data
+
+        shop_id = shopMap['shop_id']
+
+        delete_shop_api_function(shop_id)
+
+        return Response(None, status=status.HTTP_202_ACCEPTED)
+
+
+def create_product_api_function(product_name, price_is_manual, manual_price, shop_id, is_active, product_unit, correcting_factor, product_image):
+
+    if product_name and price_is_manual and shop_id and is_active and correcting_factor and product_image and manual_price:
+        
+        f = open("myfile.txt", "a")
+        f.write("\n" + str(product_name+str(price_is_manual)+ str(manual_price)+str(shop_id)+ str(is_active)+ str(product_unit)+ str(correcting_factor)+ str(product_image)))
+
+        if product_unit != None : 
+            Product.objects.create(
+                name=product_name,
+                product_image=product_image,
+                shop=Shop.objects.get(id=shop_id),
+                unit=product_unit, #! voir pk ne marche pas via API achat et cie
+                correcting_factor=correcting_factor,
+                is_active = is_active,
+                is_removed = not is_active,
+                is_manual = price_is_manual,
+                manual_price = manual_price
+            )
+        else :
+            Product.objects.create(
+                name=product_name,
+                product_image=product_image,
+                shop=Shop.objects.get(id=shop_id),
+                correcting_factor=correcting_factor,
+                is_active = is_active,
+                is_removed = not is_active,
+                is_manual = price_is_manual,
+                manual_price = manual_price
+            )
+            
+            
+
+class CreateProductView(views.APIView):
+
+    permission_classes = (permissions.AllowAny,)
+    permission_required = 'shops.add_product'
+
+    def post(self, request):
+        #! Utilisateur manager se log
+        serializerLogin = LoginSerializer(
+            data=self.request.data, context={'request': self.request})
+        serializerLogin.is_valid(raise_exception=True)
+        user = serializerLogin.validated_data['user']
+
+        if user.has_perm(self.permission_required) == False:
+            return Response({"Error": "User does not have permission to perform the requested action"}, status=status.HTTP_401_UNAUTHORIZED)
+
+        logout(request)
+        login(request, user)
+
+        serializerCreateProduct = CreateProductSerializer(
+            data=self.request.data, context={'request': self.request})
+
+        serializerCreateProduct.is_valid(raise_exception=True)
+
+        productMap = serializerCreateProduct.validated_data
+        
+        if 'product_unit' in productMap:
+            product_unit = productMap['product_unit']
+        else:
+            product_unit = None
+
+
+        create_product_api_function(productMap['product_name'], productMap['price_is_manual'], productMap['manual_price'], productMap['shop_id'],
+                                    productMap['is_active'], product_unit, productMap['correcting_factor'], productMap['product_image'])
+
+        return Response(None, status=status.HTTP_202_ACCEPTED)

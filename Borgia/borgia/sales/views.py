@@ -1,8 +1,9 @@
-from django.db.models import Avg, Max, Min, Sum, Count, F
+from rest_framework.response import Response
 import datetime
+from operator import itemgetter
+from django.db.models import Avg, Max, Min, Sum, Count, F
 from django.db.models import F
 from rest_framework.decorators import api_view
-from rest_framework.response import Response
 from .serializers import *
 from .models import Sale, SaleProduct
 from rest_framework import viewsets
@@ -11,7 +12,12 @@ from time import strftime
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Q
 from django.shortcuts import render
-from requests import Response
+
+from django.utils.timezone import now
+from openpyxl import Workbook
+from openpyxl.writer.excel import save_virtual_workbook
+from django.shortcuts import HttpResponse
+from datetime import datetime, timedelta
 
 from borgia.views import BorgiaFormView, BorgiaView
 from sales.forms import SaleListSearchDateForm
@@ -125,7 +131,8 @@ class SaleList(ShopMixin, BorgiaFormView):
         return self.get(self.request, self.args, self.kwargs)
 
 
-class SaleRetrieve(SaleMixin, BorgiaView):
+#! replace BorgiaView with BorgiaFormView
+class SaleRetrieve(SaleMixin, BorgiaFormView):
     """
     Retrieve a sale.
 
@@ -142,7 +149,84 @@ class SaleRetrieve(SaleMixin, BorgiaView):
         return render(request, self.template_name, context=context)
 
 
-# partie API
+
+class Saledownload_xlsx(ShopMixin, BorgiaView):
+    """
+    Download sales (Jquery with SaleListSearchDateForm) from a shop in a xlsx file
+    
+    """
+    permission_required = 'sales.view_sale'
+    menu_type = 'shops'
+    template_name = 'sales/sale_shop_list.html'
+    form_class = SaleListSearchDateForm
+
+    search = None
+    date_begin = None
+    date_end = None
+
+    def post(self, request, *args, **kwargs):
+        
+        if request.POST['search'] != '':
+            self.search = request.POST['search']
+
+        if request.POST['date_begin'] != '':
+            self.date_begin = datetime.strptime(request.POST['date_begin'], "%d/%m/%Y")
+
+        if request.POST['date_end'] != '':
+            self.date_end = datetime.strptime(request.POST['date_end'], "%d/%m/%Y")
+        
+        wb = Workbook()
+        # grab the active worksheet
+        ws = wb.active
+        ws.title = "sales"
+        columns = ['Opérateur', 'Acheteur',
+                   'Date', 'Produits', 'Prix']
+        ws.append(columns)
+        for col in ['A','B','C','D','E']:
+            ws.column_dimensions[col].width = 30
+
+        sales_list = Sale.objects.filter(shop=self.shop).order_by('-datetime')
+        sales_list = self.form_query(sales_list)
+        for s in sales_list:
+            operator = s.operator.last_name + ' ' + s.operator.first_name
+            sender = s.sender.last_name + ' ' + s.sender.first_name
+            ws.append([operator, sender,s.datetime.strftime('%c'), s.string_products(), s.amount()])
+
+        # Return the file
+        response = HttpResponse(save_virtual_workbook(wb),
+                   content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        response['Content-Disposition'] = 'attachment; filename=sales-'+ str(now().date()) +".xlsx"
+        return response
+
+    def form_query(self, query):
+        if self.search:
+            query = query.filter(
+                Q(operator__last_name__icontains=self.search)
+                | Q(operator__first_name__icontains=self.search)
+                | Q(operator__surname__icontains=self.search)
+                | Q(operator__username__icontains=self.search)
+                | Q(recipient__last_name__icontains=self.search)
+                | Q(recipient__first_name__icontains=self.search)
+                | Q(recipient__surname__icontains=self.search)
+                | Q(recipient__username__icontains=self.search)
+                | Q(sender__last_name__icontains=self.search)
+                | Q(sender__first_name__icontains=self.search)
+                | Q(sender__surname__icontains=self.search)
+                
+            )
+
+        if self.date_begin:
+            query = query.filter(
+                datetime__gte=self.date_begin)
+
+        if self.date_end:
+            query = query.filter(
+                datetime__lte=self.date_end)
+
+        return query
+
+
+#! partie API
 
 
 class SaleViewSet(viewsets.ModelViewSet):
@@ -152,34 +236,19 @@ class SaleViewSet(viewsets.ModelViewSet):
     filterset_fields = ['sender', 'datetime']
 
 
-""" def get_total_sale(request, *args, **kwargs):
+class HistorySaleUserViewSet(viewsets.ViewSet):
+    def list(self, request):
+        queryset = Sale.objects.all()
+        sender = self.request.query_params.get('sender')
+        if sender is not None:
+            queryset = queryset.filter(sender__username=sender)
 
-    data = []
+        #! To protect server from unwanted action
+        """ if sender is None:
+            queryset = queryset.filter(sender=0)"""
+        serializer = HistorySaleUserSerializer(queryset, many=True)
 
-    #Company.objects.filter(num_employees__gt=F('num_chairs') * 2)
-
-    #data.append(Sale.objects.all().aggregate(Avg('shop'),Min('shop'),Max('shop'),Sum('shop'),Count('shop')))
-    data.append(Sale.objects.all().count())
-    data.append(SaleProduct.objects.all().aggregate(Sum('price')))
- 
-
-    #Book.objects.filter(publisher__name='BaloneyPress').count()
-
-    
-
-    #Store.objects.aggregate(youngest_age=Min('books__authors__age'))
-
-    #! Jointure
-    #data.append(SaleProduct.objects.aggregate(a=Min('sale__shop_id')))
-
-    #Book.objects.filter(name__startswith="Django").annotate(num_authors=Count('authors'))
-
-    #! filtre + jointure
-    for i in range(1,Shop.objects.all().count()) :
-        data.append(SaleProduct.objects.filter(sale__shop__id=i).aggregate(Sum('price')))
-
-    return Response(data) """
-# return JsonResponse(data, safe=False)
+        return Response(serializer.data)
 
 
 @api_view(('GET',))
@@ -193,19 +262,52 @@ def get_total_sale(request):
 @api_view(('GET',))
 def get_history_sale(request):
     data = []
-    day_of_year = datetime.datetime.now().timetuple().tm_yday
+    day_of_year = datetime.now().timetuple().tm_yday
     nombre_de_jour = day_of_year
 
     for i in range(0, nombre_de_jour):
-        start_day = strftime(str(datetime.datetime.strptime(
-            "2022-01-01", "%Y-%m-%d") + datetime.timedelta(days=i)))
-        end_day = strftime(str(datetime.datetime.strptime(
-            "2022-01-01", "%Y-%m-%d") + datetime.timedelta(days=1+i)))
+        start_day = strftime(str((datetime.strptime(
+            "2022-01-01", "%Y-%m-%d") + timedelta(days=i)).date()))
+        end_day = strftime(str((datetime.strptime(
+            "2022-01-01", "%Y-%m-%d") + timedelta(days=1+i)).date()))
         price_sum = SaleProduct.objects.filter(
             sale__datetime__range=[start_day, end_day]).aggregate(Sum('price'))
-        
+
+        format_day = (datetime.strptime(
+            "2022-01-01", "%Y-%d-%m") + timedelta(days=i)).date()
+
+        a_day = datetime.strptime(
+            str(format_day), '%Y-%m-%d').strftime('%d-%m')
+
         data.append({
+            "format_day": a_day,
             "start_day": start_day,
+            "price_sum": price_sum["price__sum"],
+        })
+
+    return Response(data)
+
+
+@api_view(('GET',))
+def get_live_2hours_history_sale(request):
+    data = []
+    temps_debut = datetime.now() - timedelta(hours=2)
+    time_step = 30
+
+    for i in range(0, 7200, time_step):
+        start_range = strftime(
+            str(temps_debut + timedelta(seconds=i)))
+        end_range = strftime(
+            str(temps_debut + timedelta(seconds=(i+time_step))))
+        price_sum = SaleProduct.objects.filter(
+            sale__datetime__range=[start_range, end_range]).aggregate(Sum('price'))
+
+        a = temps_debut + timedelta(seconds=i)
+
+        format_time = a.strftime("%H:%M")
+
+        data.append({
+            "time": format_time,
             "price_sum": price_sum["price__sum"],
         })
 
@@ -228,20 +330,52 @@ def get_sales_podium(request):
 
     data.append({"user_sum": user_sum["price__sum"]})
 
-    # with open("/borgia-serv/Borgia/borgia/sales/test.text", "a") as o:
-    #    o.write(str(totalsale = Sale.objects.all().aggregate(total_sale=Count('shop'))))
     return Response(data)
 
 
 @api_view(['GET'])
 def all_high_scores(request):
     queryset = User.objects.order_by('-balance')
-    serializer = HighScoreSerializer(queryset, many=True)
+    serializer = StatPurchaseSerializer(queryset, many=True)
     return Response(serializer.data)
 
 
 class StatUserPurchase(viewsets.ViewSet):
     def list(self, request):
         queryset = User.objects.all()
-        serializer = HighScoreSerializer(queryset, many=True)
+        username = self.request.query_params.get('username')
+        if username is not None:
+            queryset = queryset.filter(username=username)
+        serializer = StatPurchaseSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+
+class RankBestPurchaserViewset(viewsets.ViewSet):
+    def list(self, request):
+        queryset = User.objects.all()
+        serializer = RankUserAllPurchaseSerializer(queryset, many=True)
+        sortedList = sorted(serializer.data, key=itemgetter(
+            'montant_achats'), reverse=True)
+        for index, sortedItem in enumerate(sortedList):
+            sortedList[index].update(index=index+1)
+        return Response(sortedList)
+
+
+class RankUserShopPurchaseViewset(viewsets.ViewSet):
+    def list(self, request):
+        queryset = Shop.objects.all()
+        id = self.request.query_params.get('id')
+        if id is not None:
+            queryset = queryset.filter(id=id)
+        serializer = ShopUserRankSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+
+class RankUserProductPurchaseViewset(viewsets.ViewSet):
+    def list(self, request):
+        queryset = Shop.objects.all()
+        id = self.request.query_params.get('id')
+        if id is not None:
+            queryset = queryset.filter(id=id)
+        serializer = ShopProductUserRankSerializer(queryset, many=True)
         return Response(serializer.data)
