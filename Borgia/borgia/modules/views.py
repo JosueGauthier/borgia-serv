@@ -1,5 +1,6 @@
+from django.contrib.contenttypes.models import ContentType
 from rest_framework import filters
-from users.serializers import LoginSerializer as LoginSerializer
+from users.serializers import LoginSerializer
 from . import serializers
 from rest_framework.response import Response
 from rest_framework import views
@@ -14,7 +15,6 @@ from django_filters.rest_framework import DjangoFilterBackend
 from functools import partial, wraps
 import logging
 
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.core.exceptions import ObjectDoesNotExist
 from django.forms.formsets import formset_factory
@@ -70,7 +70,7 @@ class ShopModuleSaleView(ShopModuleMixin, BorgiaFormView):
 
     def has_permission_selfsales(self):
         """
-        Customized permission for self_sale in shops. 
+        Customized permission for self_sale in shops.
         The user still need the use_selfsalemodule permission
         """
         self.add_context_objects()
@@ -122,7 +122,7 @@ class ShopModuleSaleView(ShopModuleMixin, BorgiaFormView):
             shop=self.shop
         )
         for field in form.cleaned_data:
-            if field != 'client' and form.cleaned_data[field] != '':
+            if field != 'client' and form.cleaned_data[field] != '' and form.cleaned_data[field] is not None:
                 invoice = int(form.cleaned_data[field])
                 if invoice > 0:
                     try:
@@ -222,7 +222,6 @@ class ShopModuleConfigUpdateView(ShopModuleMixin, BorgiaFormView):
                        kwargs={'shop_pk': self.shop.pk, 'module_class': self.module_class})
 
 
-#!!!!!!!!!!!!!!!
 class ShopModuleCategoryCreateView(ShopModuleMixin, BorgiaView):
     """
     """
@@ -233,7 +232,7 @@ class ShopModuleCategoryCreateView(ShopModuleMixin, BorgiaView):
     template_name = 'modules/shop_module_category_create.html'
 
     def __init__(self):
-        #logger.error(' __init__')
+        # logger.error(' __init__')
         super().__init__()
         self.shop = None
         self.module_class = None
@@ -252,7 +251,6 @@ class ShopModuleCategoryCreateView(ShopModuleMixin, BorgiaView):
         """
         permet d'afficher la page de vente
         """
-        logger.error('get')
         context = self.get_context_data(**kwargs)
         context['cat_form'] = self.form_class()
         context['cat_name_form'] = ModuleCategoryCreateNameForm(
@@ -261,12 +259,11 @@ class ShopModuleCategoryCreateView(ShopModuleMixin, BorgiaView):
 
     def post(self, request, *args, **kwargs):
         """
-        Permet de publier la creation d'une nouvele catgerorie
+        Permet de publier la creation d'une nouvelle categorie
 
-        cat_name_form => renvoie une objet from avec le nom et l'ordre entré
+        cat_name_form => renvoie une objet Form avec le nom et l'ordre entré
         self.module => Module de vente en libre service du magasin Pi
         """
-        logger.error(' post')
 
         cat_name_form = ModuleCategoryCreateNameForm(request.POST)
 
@@ -282,10 +279,17 @@ class ShopModuleCategoryCreateView(ShopModuleMixin, BorgiaView):
             logger.error(self.shop.id)
 
         cat_form = self.form_class(request.POST)
+
+        f = open("myfile.txt", "a")
+        f.write("\n")
+        f.write(str(cat_form.cleaned_data))
+
         for product_form in cat_form.cleaned_data:
             try:
                 product = Product.objects.get(
                     pk=product_form['product'].split('/')[0])
+                f = open("myfile.txt", "a")
+                f.write("\n" + str(product))
                 if product.unit:
                     quantity = int(product_form['quantity'])
                 else:
@@ -308,7 +312,7 @@ class ShopModuleCategoryCreateView(ShopModuleMixin, BorgiaView):
         self.module_class => self_sales
         self.shop.pk => affiche bien la pk du shop en question 
         """
-        #logger.error(' get_success_url')
+        # logger.error(' get_success_url')
         # logger.error(self.shop.pk)
         return reverse('url_shop_module_config',
                        kwargs={'shop_pk': self.shop.pk, 'module_class': self.module_class})
@@ -465,7 +469,24 @@ class SearchCategoryView(generics.ListCreateAPIView):
     search_fields = ['name']
 
 
-def api_create_sale_view(saleMap, api_user):
+class CatBaseViewset(viewsets.ViewSet):
+    def list(self, request):
+        queryset = Category.objects.all()
+
+        name = self.request.query_params.get('name')
+        if name is not None:
+            queryset = queryset.filter(name__icontains=name)
+
+        id = self.request.query_params.get('id')
+        if id is not None:
+            queryset = queryset.filter(id=id)
+
+        serializer = CatBaseSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+
+#! Self sale
+def api_create_self_sale_view(saleMap, api_user):
     """
     API permettant d'acheter un produit
 
@@ -520,21 +541,291 @@ class SelfSaleView(views.APIView):
         saleMap = serializerSale.validated_data
         logger.error(saleMap)
 
-        api_create_sale_view(saleMap, api_user)
+        api_create_self_sale_view(saleMap, api_user)
         return Response(None, status=status.HTTP_202_ACCEPTED)
 
 
-class CatBaseViewset(viewsets.ViewSet):
-    def list(self, request):
-        queryset = Category.objects.all()
+#! Operator sale
+class OperatorSaleView(views.APIView):
 
-        name = self.request.query_params.get('name')
-        if name is not None:
-            queryset = queryset.filter(name__icontains=name)
+    # This view should be accessible also for unauthenticated users.
+    permission_classes = (permissions.AllowAny,)
 
-        id = self.request.query_params.get('id')
-        if id is not None:
-            queryset = queryset.filter(id=id)
+    def post(self, request, format=None):
 
-        serializer = CatBaseSerializer(queryset, many=True)
-        return Response(serializer.data)
+        serializerLogin = LoginSerializer(
+            data=self.request.data, context={'request': self.request})
+
+        serializerLogin.is_valid(raise_exception=True)
+
+        user = serializerLogin.validated_data['user']
+
+        login(request, user)
+
+        operator_user = self.request.user
+
+        serializerSale = serializers.OperatorSaleSerializer(
+            data=self.request.data, context={'request': self.request})
+
+        serializerSale.is_valid(raise_exception=True)
+
+        saleMap = serializerSale.validated_data
+        logger.error(saleMap)
+
+        api_create_operator_sale_view(saleMap, operator_user)
+        return Response(None, status=status.HTTP_202_ACCEPTED)
+
+
+def api_create_operator_sale_view(saleMap, operator_user):
+    """
+    API permettant à un operateur de vendre un produit
+
+    """
+
+    api_operator = operator_user
+    api_sender = User.objects.get(pk=saleMap['api_buyer_pk'])
+    api_recipient = User.objects.get(pk=1)
+    api_module = SelfSaleModule.objects.get(pk=saleMap['api_module_pk'])
+    api_shop = Shop.objects.get(pk=saleMap['api_shop_pk'])
+    api_ordered_quantity = saleMap['api_ordered_quantity']
+    api_category_product_id = saleMap['api_category_product_id']
+
+    sale = Sale.objects.create(
+        operator=api_operator,
+        sender=api_sender,
+        recipient=api_recipient,
+        module=api_module,
+        shop=api_shop
+    )
+
+    category_product = CategoryProduct.objects.get(
+        pk=api_category_product_id)
+
+    SaleProduct.objects.create(
+        sale=sale,
+        product=category_product.product,
+        #! category_product.quantity = volume ou poids par item |  ordered quantity
+        quantity=category_product.quantity * api_ordered_quantity,
+        price=category_product.get_price() * api_ordered_quantity
+    )
+    sale.pay()
+
+
+def create_category_api_function(shop, module_id, content_type_id, category_name=None, category_order=None, category_image=None, list_products=None):
+    if category_name and category_order and category_image:
+        category = Category.objects.create(
+            name=category_name,
+            order=category_order,
+            module_id=module_id,
+            content_type=ContentType.objects.get(id=content_type_id),
+            shop_id=shop.pk,
+            category_image=category_image,
+        )
+        logger.error(shop.id)
+
+    for product in (list_products or []):
+
+        #[{'quantity': 11, 'product': '2/unit'}, {'quantity': 2222, 'product': '6/unit'}]
+        try:
+            product = Product.objects.get(
+                pk=product['product_id'])
+            if product.unit:
+                quantity = int(product['quantity'])
+            else:
+                quantity = 1
+            CategoryProduct.objects.create(
+                category=category,
+                product=product,
+                quantity=quantity
+            )
+        except ObjectDoesNotExist:
+            pass
+        except KeyError:
+            pass
+
+
+class CreateCategoryView(views.APIView):
+
+    # This view should be accessible also for unauthenticated users.
+    permission_classes = (permissions.AllowAny,)
+    permission_required_self = 'modules.change_config_selfsalemodule'
+    permission_required_operator = 'modules.change_config_operatorsalemodule'
+
+    def post(self, request, format=None):
+        #! Utilisateur opérateur se log
+        serializerLogin = LoginSerializer(
+            data=self.request.data, context={'request': self.request})
+        serializerLogin.is_valid(raise_exception=True)
+        user = serializerLogin.validated_data['user']
+        
+        if user.has_perm(self.permission_required_self) == False or user.has_perm(self.permission_required_operator) == False :
+            return Response({"Error": "User does not have permission to perform the requested action "}, status=status.HTTP_401_UNAUTHORIZED)
+        
+        
+        logout(request)
+        login(request, user)
+
+        """  f = open("myfile.txt", "a")
+        f.write("\n" + str(user)) """
+
+        serializerCreateCategory = serializers.CreateCategorySerializer(
+            data=self.request.data, context={'request': self.request})
+
+        serializerCreateCategory.is_valid(raise_exception=True)
+
+        createCatMap = serializerCreateCategory.validated_data
+
+        shop = Shop.objects.get(id=createCatMap['shop_id'])
+
+        category_name = createCatMap['name_category']
+
+        category_order = Category.objects.count()
+
+        category_image = createCatMap['category_image']
+
+        content_type_id = createCatMap['content_type_id']
+
+        module_id = createCatMap['module_id']
+
+        list_products = createCatMap['product_list']
+
+        create_category_api_function(shop, module_id, content_type_id, category_name,
+                                     category_order, category_image, list_products)
+
+        return Response(None, status=status.HTTP_202_ACCEPTED)
+
+
+def update_category_api_function(category_id, category_name=None, category_order=None, category_image=None, list_products=None):
+
+    category = Category.objects.get(id=category_id)
+
+    if category_name :
+        category.name = category_name
+        category.save()
+
+    if category_image :
+        category.category_image = category_image
+        category.save()
+
+    if list_products :
+
+        categoryProducts = CategoryProduct.objects.filter(category=category)
+        categoryProducts.delete()
+
+        for product in (list_products or []):
+            try:
+                product = Product.objects.get(
+                    pk=product['product_id'])
+                if product.unit:
+                    quantity = int(product['quantity'])
+                else:
+                    quantity = 1
+                CategoryProduct.objects.create(
+                    category=category,
+                    product=product,
+                    quantity=quantity
+                )
+            except ObjectDoesNotExist:
+                pass
+            except KeyError:
+                pass
+
+
+class UpdateCategoryView(views.APIView):
+
+    # This view should be accessible also for unauthenticated users.
+    permission_classes = (permissions.AllowAny,)
+    permission_required_self = 'modules.change_config_selfsalemodule'
+    permission_required_operator = 'modules.change_config_operatorsalemodule'
+
+    def post(self, request, format=None):
+        #! Utilisateur opérateur se log
+        serializerLogin = LoginSerializer(
+            data=self.request.data, context={'request': self.request})
+        serializerLogin.is_valid(raise_exception=True)
+        user = serializerLogin.validated_data['user']
+        
+        
+        if user.has_perm(self.permission_required_self) == False or user.has_perm(self.permission_required_operator) == False :
+            return Response({"Error": "User does not have permission to perform the requested action "}, status=status.HTTP_401_UNAUTHORIZED)
+        
+        logout(request)
+        login(request, user)
+
+        serializerUpdateCategory = serializers.UpdateCategorySerializer(
+            data=self.request.data, context={'request': self.request})
+
+        serializerUpdateCategory.is_valid(raise_exception=True)
+
+        createCatMap = serializerUpdateCategory.validated_data
+
+        
+        category_id = createCatMap['category_id']
+        
+        if 'name_category' in createCatMap:
+            category_name = createCatMap['name_category']
+        else:
+            category_name = None
+        
+        #category_order = Category.objects.count()
+        if 'category_image' in createCatMap:
+            category_image = createCatMap['category_image']
+        else:
+            category_image = None
+        
+        if 'product_list' in createCatMap:
+            list_products = createCatMap['product_list']
+        else:
+            list_products = None   
+        
+
+        update_category_api_function(category_id=category_id, category_name=category_name,
+                                     category_image=category_image, list_products=list_products)
+        
+        
+
+        return Response(None, status=status.HTTP_202_ACCEPTED)
+
+
+
+def delete_category_api_function(category_id):
+
+    category = Category.objects.get(id=category_id)
+    category.delete()
+
+
+
+class DeleteCategoryView(views.APIView):
+
+    # This view should be accessible also for unauthenticated users.
+    permission_classes = (permissions.AllowAny,)
+    permission_required_self = 'modules.change_config_selfsalemodule'
+    permission_required_operator = 'modules.change_config_operatorsalemodule'
+
+    def post(self, request, format=None):
+        #! Utilisateur opérateur se log
+        serializerLogin = LoginSerializer(
+            data=self.request.data, context={'request': self.request})
+        serializerLogin.is_valid(raise_exception=True)
+        user = serializerLogin.validated_data['user']
+        
+        if user.has_perm(self.permission_required_self) == False or user.has_perm(self.permission_required_operator) == False :
+            return Response({"Error": "User does not have permission to perform the requested action "}, status=status.HTTP_401_UNAUTHORIZED)
+        
+        logout(request)
+        login(request, user)
+
+        serializerUpdateCategory = serializers.DeleteCategorySerializer(
+            data=self.request.data, context={'request': self.request})
+
+        serializerUpdateCategory.is_valid(raise_exception=True)
+
+        createCatMap = serializerUpdateCategory.validated_data
+
+        
+        category_id = createCatMap['category_id']
+               
+
+        delete_category_api_function(category_id=category_id)
+        
+        return Response(None, status=status.HTTP_202_ACCEPTED)

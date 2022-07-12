@@ -5,7 +5,7 @@ from django.contrib import admin
 
 from rest_framework import routers
 
-from users.views import (GroupUpdateView, UserAddByListXlsxDownload,
+from users.views import (UserTransactionDownload, GroupUpdateView, UserAddByListXlsxDownload,
                          UserCreateView, UserDeactivateView, UserListView,
                          UserRetrieveView, UserUpdateView,
                          UserUploadXlsxView, balance_from_username,
@@ -16,13 +16,8 @@ from users.views import (GroupUpdateView, UserAddByListXlsxDownload,
 # partie api
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
-
-
-#http://localhost:8000/api-links/users/users/?username=josue
-
-
-
-
+router.register(r'groups', views.GroupViewSet)
+router.register(r'permission', views.PermissionViewSet)
 
 users_patterns = [
 
@@ -46,7 +41,9 @@ users_patterns = [
         path('<int:user_pk>/', include([
             path('', UserRetrieveView.as_view(), name='url_user_retrieve'),
             path('update/', UserUpdateView.as_view(), name='url_user_update'),
-            path('deactivate/', UserDeactivateView.as_view(), name='url_user_deactivate')
+            path('deactivate/', UserDeactivateView.as_view(), name='url_user_deactivate'),
+            path('xlsx/download/', UserTransactionDownload.as_view(), name='url_user_transaction_download_xlsx')
+            
         ])),
 
         path('add_by_list/xlsx/', UserUploadXlsxView.as_view(), name='url_add_by_list_xlsx'),

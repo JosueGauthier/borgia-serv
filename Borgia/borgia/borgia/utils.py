@@ -12,7 +12,7 @@ EXTERNALS_GROUP_NAME = 'externals'
 PRESIDENTS_GROUP_NAME = 'presidents'
 VICE_PRESIDENTS_GROUP_NAME = 'vice_presidents'
 TREASURERS_GROUP_NAME = 'treasurers'
-ACCEPTED_MENU_TYPES = ['members', 'managers', 'shops']
+ACCEPTED_MENU_TYPES = ['members', 'managers', 'shops','operator']
 
 
 def simple_lateral_link(label, fa_icon, id_link, url):

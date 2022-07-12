@@ -1,6 +1,8 @@
-from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from rest_framework import serializers
+
+from django.contrib.auth.models import Group,Permission
+
 
 from .models import User
 
@@ -53,23 +55,36 @@ class LoginSerializer(serializers.Serializer):
         return attrs
 
 
-class UserSerializer(serializers.ModelSerializer):
+class GroupSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = User
+        model = Group
         fields = [
             'id',
-            'username',
-            'last_name',
-            'first_name',
-            'password',
-            'email',
-            'surname',
-            'family',
-            'balance',
-            'year',
-            'campus',
-            'phone',
-            'avatar',
-            'theme',
+            'name',
+            'permissions',
         ]
+        depth = 1
+        
+class PermissionSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Permission
+        fields = [          
+            'id',
+            'name',
+            'content_type',
+            'codename'
+        ]
+        depth = 1
+
+from django.contrib.auth.backends import ModelBackend
+
+
+
+class UserSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = User
+        fields = '__all__'
+        depth = 2

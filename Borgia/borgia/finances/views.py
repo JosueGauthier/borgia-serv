@@ -21,7 +21,7 @@ from finances.forms import (ExceptionnalMovementForm,
                             TransfertCreateForm)
 from finances.models import (Cash, Cheque, ExceptionnalMovement, Lydia,
                              Recharging, Transfert)
-from finances.utils import (verify_token_lydia, 
+from finances.utils import (verify_token_lydia,
                             calculate_lydia_fee_from_total,
                             calculate_total_amount_lydia)
 from users.mixins import UserMixin

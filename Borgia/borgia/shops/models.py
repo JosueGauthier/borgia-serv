@@ -19,11 +19,13 @@ class Shop(models.Model):
     :param name: Display name, mandatory.
     :param description: Description, mandatory.
     :param image: Image, mandatory.
+    :param correcting_factor_activated: Activation du facteur de correction, mandatory
     :param color: Color, mandatory.
     :type name: string
     :type description: string
     :type color: string
     :type image: string
+    :type correcting_factor_activated: Boolean
 
     :note:: Initial Django Permission (add, change, delete, view) are added.
     """
@@ -44,6 +46,8 @@ class Shop(models.Model):
             RegexValidator(regex='^#[A-Za-z0-9]{6}',
                            message='Doit être dans le format #F4FA58')
         ])
+    correcting_factor_activated = models.BooleanField(
+        'Activation du facteur de correction', default=True)
     image = models.TextField('imagelink')
 
     def __str__(self):
@@ -301,16 +305,21 @@ class Product(models.Model):
         don't update the correcting factor (it should tend to infinity).
         It appends when ZeroDivisionError is raised.
         """
-        stock_base = self.last_inventoryproduct_value(1)
-        stock_input = sum(se.quantity
-                          for se in self.stockentries_since_last_inventory(1))
-        stock_output = sum(s.quantity
-                           for s in self.sales_since_last_inventory(1))
-
-        try:
-            self.correcting_factor = decimal.Decimal(
-                (stock_base + stock_input - next_stock) / stock_output)
+        if self.shop.correcting_factor_activated == False:
+            self.correcting_factor = 1
             self.save()
-        except (ZeroDivisionError, decimal.DivisionByZero,
-                decimal.DivisionUndefined, decimal.InvalidOperation):
-            pass
+
+        else:
+            stock_base = self.last_inventoryproduct_value(1)
+            stock_input = sum(
+                se.quantity for se in self.stockentries_since_last_inventory(1))
+            stock_output = sum(
+                s.quantity for s in self.sales_since_last_inventory(1))
+
+            try:
+                self.correcting_factor = decimal.Decimal(
+                    (stock_base + stock_input - next_stock) / stock_output
+                )
+                self.save()
+            except (ZeroDivisionError, decimal.DivisionByZero, decimal.DivisionUndefined, decimal.InvalidOperation):
+                pass
