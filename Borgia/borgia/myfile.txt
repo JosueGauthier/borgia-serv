@@ -1,13 +1,12 @@
 
-
-73An220
-<class 'users.models.User'>
+produit1
 True
+12.00
+1
 True
-True
-True
-change shopFalse
-je suis la 2 
-je suis la 2 
-change shopFalse
-je suis la 
+None
+1.0000
+https://ahrefs.com/blog/wp-content/uploads/2021/05/backlinks.png
+produit1True12.001TrueNone1.0000https://ahrefs.com/blog/wp-content/uploads/2021/05/backlinks.png
+je suiis aaaa
+produitAETrue12.001TrueNone1.0000https://ahrefs.com/blog/wp-content/uploads/2021/05/backlinks.png

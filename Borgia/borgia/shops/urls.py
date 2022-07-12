@@ -18,7 +18,6 @@ router.register(r'productsv2', ProductBaseViewSet,
 shops_patterns = [
     # API
 
-
     #*Get method
     path('api-links/shops/', include(router.urls)),
     path('api-links/searchprod/', views.SearchProductView.as_view()),
@@ -27,7 +26,9 @@ shops_patterns = [
     #*Post Method
     path('api-links/create-shop/', views.CreateShopView.as_view()),
     path('api-links/update-shop/', views.UpdateShopView.as_view()),
-    path('api-links/delete-shop/', views.DeleteShopView.as_view()),
+    #path('api-links/delete-shop/', views.DeleteShopView.as_view()),
+    
+    path('api-links/create-product/', views.CreateProductView.as_view()),
 
     # SHOPS
     path(

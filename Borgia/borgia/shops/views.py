@@ -9,7 +9,7 @@ from rest_framework.response import Response
 from sales.models import Sale
 from shops.models import Shop
 from rest_framework import filters
-from .serializers import CreateShopSerializer, DeleteShopSerializer, ProductBaseSerializer, ProductSerializer, ShopSerializer, ShopStatSerializer, UpdateShopSerializer
+from .serializers import *
 from .models import Product, Shop
 from rest_framework import generics, viewsets
 from django_filters.rest_framework import DjangoFilterBackend
@@ -588,13 +588,12 @@ class CreateShopView(views.APIView):
         return Response(None, status=status.HTTP_202_ACCEPTED)
 
 
-def update_shop_api_function(shop_id, shop_name=None, shop_description=None, shop_image=None, correcting_factor_activated=True, shop_color="#F4FA58"):
+def update_shop_api_function(shop_id, shop_description=None, shop_image=None, correcting_factor_activated=True, shop_color="#F4FA58"):
 
     shop = Shop.objects.get(id=shop_id)
 
-    if shop_name:
-        shop.name = shop_name
-        shop.save()
+    f = open("myfile.txt", "a")
+    f.write("\n" + str(shop.get_managers()))
 
     if shop_description:
         shop.description = shop_description
@@ -633,11 +632,6 @@ class UpdateShopView(views.APIView):
 
         shop_id = shopMap['shop_id']
 
-        if 'shop_name' in shopMap:
-            shop_name = shopMap['shop_name']
-        else:
-            shop_name = None
-
         if 'shop_description' in shopMap:
             shop_description = shopMap['shop_description']
         else:
@@ -649,15 +643,19 @@ class UpdateShopView(views.APIView):
             shop_image = None
 
         update_shop_api_function(
-            shop_id, shop_name, shop_description, shop_image)
+            shop_id, shop_description, shop_image)
 
         return Response(None, status=status.HTTP_202_ACCEPTED)
+
+#! Not used check db errrors before
 
 
 def delete_shop_api_function(shop_id):
 
     shop = Shop.objects.get(id=shop_id)
     shop.delete()
+
+#! Not used check db errrors before
 
 
 class DeleteShopView(views.APIView):
@@ -687,6 +685,76 @@ class DeleteShopView(views.APIView):
 
         shop_id = shopMap['shop_id']
 
-        update_shop_api_function(shop_id)
+        delete_shop_api_function(shop_id)
+
+        return Response(None, status=status.HTTP_202_ACCEPTED)
+
+
+def create_product_api_function(product_name, price_is_manual, manual_price, shop_id, is_active, product_unit, correcting_factor, product_image):
+
+    if product_name and price_is_manual and shop_id and is_active and correcting_factor and product_image and manual_price:
+        
+        f = open("myfile.txt", "a")
+        f.write("\n" + str(product_name+str(price_is_manual)+ str(manual_price)+str(shop_id)+ str(is_active)+ str(product_unit)+ str(correcting_factor)+ str(product_image)))
+
+        if product_unit != None : 
+            Product.objects.create(
+                name=product_name,
+                product_image=product_image,
+                shop=Shop.objects.get(id=shop_id),
+                unit=product_unit, #! voir pk ne marche pas via API achat et cie
+                correcting_factor=correcting_factor,
+                is_active = is_active,
+                is_removed = not is_active,
+                is_manual = price_is_manual,
+                manual_price = manual_price
+            )
+        else :
+            Product.objects.create(
+                name=product_name,
+                product_image=product_image,
+                shop=Shop.objects.get(id=shop_id),
+                correcting_factor=correcting_factor,
+                is_active = is_active,
+                is_removed = not is_active,
+                is_manual = price_is_manual,
+                manual_price = manual_price
+            )
+            
+            
+
+class CreateProductView(views.APIView):
+
+    permission_classes = (permissions.AllowAny,)
+    permission_required = 'shops.add_product'
+
+    def post(self, request):
+        #! Utilisateur manager se log
+        serializerLogin = LoginSerializer(
+            data=self.request.data, context={'request': self.request})
+        serializerLogin.is_valid(raise_exception=True)
+        user = serializerLogin.validated_data['user']
+
+        if user.has_perm(self.permission_required) == False:
+            return Response({"Error": "User does not have permission to perform the requested action"}, status=status.HTTP_401_UNAUTHORIZED)
+
+        logout(request)
+        login(request, user)
+
+        serializerCreateProduct = CreateProductSerializer(
+            data=self.request.data, context={'request': self.request})
+
+        serializerCreateProduct.is_valid(raise_exception=True)
+
+        productMap = serializerCreateProduct.validated_data
+        
+        if 'product_unit' in productMap:
+            product_unit = productMap['product_unit']
+        else:
+            product_unit = None
+
+
+        create_product_api_function(productMap['product_name'], productMap['price_is_manual'], productMap['manual_price'], productMap['shop_id'],
+                                    productMap['is_active'], product_unit, productMap['correcting_factor'], productMap['product_image'])
 
         return Response(None, status=status.HTTP_202_ACCEPTED)

@@ -1,0 +1,12 @@
+{
+    "username": "73An220",
+    "password": "",
+    "product_name":"produit1",
+    "price_is_manual": true,
+    "manual_price": 12,
+    "shop_id":1,
+    "is_active":true,
+    "correcting_factor":1,
+    "product_image":"https://ahrefs.com/blog/wp-content/uploads/2021/05/backlinks.png"
+
+}
