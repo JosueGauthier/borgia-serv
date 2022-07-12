@@ -1,0 +1,19 @@
+{
+    "username": "73An220",
+    "password": "josue",
+    "name_category": "test12",
+    "category_image": "hhhh",
+    "shop_id": 1,
+    "content_type_id": 20,
+    "module_id": 2,
+    "product_list": [
+        {
+            "quantity": 11,
+            "product_id": 2
+        },
+        {
+            "quantity": 101,
+            "product_id": 6
+        }
+    ]
+}
