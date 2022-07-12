@@ -1,13 +1,13 @@
 from django.contrib.contenttypes.models import ContentType
 from rest_framework import filters
-from users.serializers import LoginSerializer as LoginSerializer
+from users.serializers import LoginSerializer
 from . import serializers
 from rest_framework.response import Response
 from rest_framework import views
 from rest_framework import status
 from rest_framework import permissions
 from rest_framework import generics
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 from .serializers import CatBaseSerializer, CategorySerializer, CategoryProductSerializer, ProductCatSerializer
 from .models import Category, CategoryProduct
 from rest_framework import viewsets
@@ -648,6 +648,8 @@ class CreateCategoryView(views.APIView):
 
     # This view should be accessible also for unauthenticated users.
     permission_classes = (permissions.AllowAny,)
+    permission_required_self = 'modules.change_config_selfsalemodule'
+    permission_required_operator = 'modules.change_config_operatorsalemodule'
 
     def post(self, request, format=None):
         #! Utilisateur opérateur se log
@@ -655,6 +657,12 @@ class CreateCategoryView(views.APIView):
             data=self.request.data, context={'request': self.request})
         serializerLogin.is_valid(raise_exception=True)
         user = serializerLogin.validated_data['user']
+        
+        if user.has_perm(self.permission_required_self) == False or user.has_perm(self.permission_required_operator) == False :
+            return Response({"Error": "User does not have permission to perform the requested action "}, status=status.HTTP_401_UNAUTHORIZED)
+        
+        
+        logout(request)
         login(request, user)
 
         """  f = open("myfile.txt", "a")
@@ -727,6 +735,8 @@ class UpdateCategoryView(views.APIView):
 
     # This view should be accessible also for unauthenticated users.
     permission_classes = (permissions.AllowAny,)
+    permission_required_self = 'modules.change_config_selfsalemodule'
+    permission_required_operator = 'modules.change_config_operatorsalemodule'
 
     def post(self, request, format=None):
         #! Utilisateur opérateur se log
@@ -734,6 +744,12 @@ class UpdateCategoryView(views.APIView):
             data=self.request.data, context={'request': self.request})
         serializerLogin.is_valid(raise_exception=True)
         user = serializerLogin.validated_data['user']
+        
+        
+        if user.has_perm(self.permission_required_self) == False or user.has_perm(self.permission_required_operator) == False :
+            return Response({"Error": "User does not have permission to perform the requested action "}, status=status.HTTP_401_UNAUTHORIZED)
+        
+        logout(request)
         login(request, user)
 
         serializerUpdateCategory = serializers.UpdateCategorySerializer(
@@ -765,6 +781,8 @@ class UpdateCategoryView(views.APIView):
 
         update_category_api_function(category_id=category_id, category_name=category_name,
                                      category_image=category_image, list_products=list_products)
+        
+        
 
         return Response(None, status=status.HTTP_202_ACCEPTED)
 
@@ -781,6 +799,8 @@ class DeleteCategoryView(views.APIView):
 
     # This view should be accessible also for unauthenticated users.
     permission_classes = (permissions.AllowAny,)
+    permission_required_self = 'modules.change_config_selfsalemodule'
+    permission_required_operator = 'modules.change_config_operatorsalemodule'
 
     def post(self, request, format=None):
         #! Utilisateur opérateur se log
@@ -788,6 +808,11 @@ class DeleteCategoryView(views.APIView):
             data=self.request.data, context={'request': self.request})
         serializerLogin.is_valid(raise_exception=True)
         user = serializerLogin.validated_data['user']
+        
+        if user.has_perm(self.permission_required_self) == False or user.has_perm(self.permission_required_operator) == False :
+            return Response({"Error": "User does not have permission to perform the requested action "}, status=status.HTTP_401_UNAUTHORIZED)
+        
+        logout(request)
         login(request, user)
 
         serializerUpdateCategory = serializers.DeleteCategorySerializer(
@@ -802,5 +827,5 @@ class DeleteCategoryView(views.APIView):
                
 
         delete_category_api_function(category_id=category_id)
-
+        
         return Response(None, status=status.HTTP_202_ACCEPTED)

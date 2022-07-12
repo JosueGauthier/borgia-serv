@@ -1,29 +1,13 @@
-[{'quantity': 12, 'product': '6/unit'}, {'quantity': 25, 'product': '4/unit'}, {'quantity': 222, 'product': '2/unit'}]
-[{'quantity': 11, 'product': '2/unit'}, {'quantity': 2222, 'product': '6/unit'}]
-Cidre Kerisac
-Vitus
 
-OrderedDict(
-    
-    [('name_category', 'test12'), 
-    ('category_image', 'hhhh'), 
-    ('shop_id', 1), 
-    ('content_type_id', 20), 
-    ('module_id', 2), 
-    ('product_list', 
-    [{'quantity': 11, 'product_id': 2}, {'quantity': 101, 'product_id': 6}]), 
-    ('category', ['test12', 'hhhh', 1, 20, 2, [{'quantity': 11, 'product_id': 2}, 
-    {'quantity': 101, 'product_id': 6}]])])
-OrderedDict([('name_category', 'test12'), ('category_image', 'hhhh'), ('shop_id', 1), ('content_type_id', 20), ('module_id', 2), ('product_list', [{'quantity': 11, 'product_id': 2}, {'quantity': 101, 'product_id': 6}]), ('category', ['test12', 'hhhh', 1, 20, 2, [{'quantity': 11, 'product_id': 2}, {'quantity': 101, 'product_id': 6}]])])
-OrderedDict([('name_category', 'test12'), ('category_image', 'hhhh'), ('shop_id', 1), ('content_type_id', 20), ('module_id', 2), ('product_list', [{'quantity': 11, 'product_id': 2}, {'quantity': 101, 'product_id': 6}]), ('category', ['test12', 'hhhh', 1, 20, 2, [{'quantity': 11, 'product_id': 2}, {'quantity': 101, 'product_id': 6}]])])
-[{'quantity': 11, 'product_id': 2}, {'quantity': 101, 'product_id': 6}]
-OrderedDict([('name_category', 'test12'), ('category_image', 'hhhh'), ('shop_id', 1), ('content_type_id', 20), ('module_id', 2), ('product_list', [{'quantity': 11, 'product_id': 2}, {'quantity': 101, 'product_id': 6}]), ('category', ['test12', 'hhhh', 1, 20, 2, [{'quantity': 11, 'product_id': 2}, {'quantity': 101, 'product_id': 6}]])])
-{'quantity': 11, 'product_id': 2}
-OrderedDict([('name_category', 'test12'), ('category_image', 'hhhh'), ('shop_id', 1), ('content_type_id', 20), ('module_id', 2), ('product_list', [{'quantity': 11, 'product_id': 2}, {'quantity': 101, 'product_id': 6}]), ('category', ['test12', 'hhhh', 1, 20, 2, [{'quantity': 11, 'product_id': 2}, {'quantity': 101, 'product_id': 6}]])])
-11
-OrderedDict([('name_category', 'test12'), ('category_image', 'hhhh'), ('shop_id', 1), ('content_type_id', 20), ('module_id', 2), ('product_list', [{'quantity': 11, 'product_id': 2}, {'quantity': 101, 'product_id': 6}]), ('category', ['test12', 'hhhh', 1, 20, 2, [{'quantity': 11, 'product_id': 2}, {'quantity': 101, 'product_id': 6}]])])
-11
-2
-OrderedDict([('name_category', 'test12'), ('category_image', 'hhhh'), ('shop_id', 1), ('content_type_id', 20), ('module_id', 2), ('product_list', [{'quantity': 11, 'product_id': 2}, {'quantity': 101, 'product_id': 6}]), ('category', ['test12', 'hhhh', 1, 20, 2, [{'quantity': 11, 'product_id': 2}, {'quantity': 101, 'product_id': 6}]])])
-11
-2
+
+73An220
+<class 'users.models.User'>
+True
+True
+True
+True
+change shopFalse
+je suis la 2 
+je suis la 2 
+change shopFalse
+je suis la 
