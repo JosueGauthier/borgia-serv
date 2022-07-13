@@ -10,3 +10,7 @@ https://ahrefs.com/blog/wp-content/uploads/2021/05/backlinks.png
 produit1True12.001TrueNone1.0000https://ahrefs.com/blog/wp-content/uploads/2021/05/backlinks.png
 je suiis aaaa
 produitAETrue12.001TrueNone1.0000https://ahrefs.com/blog/wp-content/uploads/2021/05/backlinks.png
+OrderedDict([('product_id', '25'), ('price_is_manual', False), ('is_active', False), ('product', ['25', None, False, None, False, None, None, None])])
+OrderedDict([('product_id', '25'), ('price_is_manual', False), ('is_active', False), ('product', ['25', None, False, None, False, None, None, None])])
+False
+OrderedDict([('product_id', '25'), ('price_is_manual', False), ('is_active', False), ('product', ['25', None, False, None, False, None, None, None])])

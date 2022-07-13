@@ -693,35 +693,35 @@ class DeleteShopView(views.APIView):
 def create_product_api_function(product_name, price_is_manual, manual_price, shop_id, is_active, product_unit, correcting_factor, product_image):
 
     if product_name and price_is_manual and shop_id and is_active and correcting_factor and product_image and manual_price:
-        
-        f = open("myfile.txt", "a")
-        f.write("\n" + str(product_name+str(price_is_manual)+ str(manual_price)+str(shop_id)+ str(is_active)+ str(product_unit)+ str(correcting_factor)+ str(product_image)))
 
-        if product_unit != None : 
+        f = open("myfile.txt", "a")
+        f.write("\n" + str(product_name+str(price_is_manual) + str(manual_price)+str(shop_id) +
+                str(is_active) + str(product_unit) + str(correcting_factor) + str(product_image)))
+
+        if product_unit != None:
             Product.objects.create(
                 name=product_name,
                 product_image=product_image,
                 shop=Shop.objects.get(id=shop_id),
-                unit=product_unit, #! voir pk ne marche pas via API achat et cie
+                unit=product_unit,  # ! voir pk ne marche pas via API achat et cie
                 correcting_factor=correcting_factor,
-                is_active = is_active,
-                is_removed = not is_active,
-                is_manual = price_is_manual,
-                manual_price = manual_price
+                is_active=is_active,
+                is_removed=not is_active,
+                is_manual=price_is_manual,
+                manual_price=manual_price
             )
-        else :
+        else:
             Product.objects.create(
                 name=product_name,
                 product_image=product_image,
                 shop=Shop.objects.get(id=shop_id),
                 correcting_factor=correcting_factor,
-                is_active = is_active,
-                is_removed = not is_active,
-                is_manual = price_is_manual,
-                manual_price = manual_price
+                is_active=is_active,
+                is_removed=not is_active,
+                is_manual=price_is_manual,
+                manual_price=manual_price
             )
-            
-            
+
 
 class CreateProductView(views.APIView):
 
@@ -747,14 +747,149 @@ class CreateProductView(views.APIView):
         serializerCreateProduct.is_valid(raise_exception=True)
 
         productMap = serializerCreateProduct.validated_data
-        
+
         if 'product_unit' in productMap:
             product_unit = productMap['product_unit']
         else:
             product_unit = None
 
-
         create_product_api_function(productMap['product_name'], productMap['price_is_manual'], productMap['manual_price'], productMap['shop_id'],
                                     productMap['is_active'], product_unit, productMap['correcting_factor'], productMap['product_image'])
+
+        return Response(None, status=status.HTTP_202_ACCEPTED)
+
+
+def update_product_api_function(product_id, product_name=None, price_is_manual=None, manual_price=None, is_active=None, product_unit=None, correcting_factor=None, product_image=None):
+
+    if product_id:
+
+        product = Product.objects.get(id=product_id)
+
+        if product_name != None:
+            product.name = product_name
+
+        if price_is_manual != None:
+            product.is_manual = price_is_manual
+
+        if product_name != None:
+            product.manual_price = manual_price
+
+        if is_active != None:
+            product.is_active = is_active
+            product.is_removed = not is_active
+
+        if product_unit != None:
+            product.unit = product_unit
+
+        if correcting_factor != None:
+            product.correcting_factor = correcting_factor
+
+        if product_image != None:
+            product.product_image = product_image
+
+        product.save()
+
+
+class UpdateProductView(views.APIView):
+
+    permission_classes = (permissions.AllowAny,)
+    permission_required = 'shops.change_product'
+
+    def post(self, request):
+        #! Utilisateur manager se log
+        serializerLogin = LoginSerializer(
+            data=self.request.data, context={'request': self.request})
+        serializerLogin.is_valid(raise_exception=True)
+        user = serializerLogin.validated_data['user']
+
+        if user.has_perm(self.permission_required) == False:
+            return Response({"Error": "User does not have permission to perform the requested action"}, status=status.HTTP_401_UNAUTHORIZED)
+
+        logout(request)
+        login(request, user)
+
+        serializerUpdateProduct = UpdateProductSerializer(
+            data=self.request.data, context={'request': self.request})
+
+        serializerUpdateProduct.is_valid(raise_exception=True)
+
+        productMap = serializerUpdateProduct.validated_data
+
+        if 'product_name' in productMap:
+            product_name = productMap['product_name']
+        else:
+            product_name = None
+
+        if 'price_is_manual' in productMap:
+            price_is_manual = productMap['price_is_manual']
+        else:
+            price_is_manual = None
+
+        if 'manual_price' in productMap:
+            manual_price = productMap['manual_price']
+        else:
+            manual_price = None
+
+        if 'is_active' in productMap:
+            is_active = productMap['is_active']
+        else:
+            is_active = None
+
+        if 'product_unit' in productMap:
+            product_unit = productMap['product_unit']
+        else:
+            product_unit = None
+
+        if 'correcting_factor' in productMap:
+            correcting_factor = productMap['correcting_factor']
+        else:
+            correcting_factor = None
+
+        if 'product_image' in productMap:
+            product_image = productMap['product_image']
+        else:
+            product_image = None
+
+        update_product_api_function(productMap['product_id'], product_name, price_is_manual,
+                                    manual_price, is_active, product_unit, correcting_factor, product_image)
+
+        return Response(None, status=status.HTTP_202_ACCEPTED)
+
+
+
+def delete_product_api_function(product_id):
+
+    if product_id:
+
+        product = Product.objects.get(id=product_id)
+        product.delete()
+
+
+class DeleteProductView(views.APIView):
+
+    permission_classes = (permissions.AllowAny,)
+    permission_required = 'shops.change_product'
+
+    def post(self, request):
+        #! Utilisateur manager se log
+        serializerLogin = LoginSerializer(
+            data=self.request.data, context={'request': self.request})
+        serializerLogin.is_valid(raise_exception=True)
+        user = serializerLogin.validated_data['user']
+
+        if user.has_perm(self.permission_required) == False:
+            return Response({"Error": "User does not have permission to perform the requested action"}, status=status.HTTP_401_UNAUTHORIZED)
+
+        logout(request)
+        login(request, user)
+
+        serializerDeleteProduct = DeleteProductSerializer(
+            data=self.request.data, context={'request': self.request})
+
+        serializerDeleteProduct.is_valid(raise_exception=True)
+
+        productMap = serializerDeleteProduct.validated_data
+
+        delete_product_api_function(productMap['product_id'])
 
         return Response(None, status=status.HTTP_202_ACCEPTED)

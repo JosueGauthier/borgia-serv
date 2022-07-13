@@ -29,6 +29,8 @@ shops_patterns = [
     #path('api-links/delete-shop/', views.DeleteShopView.as_view()),
     
     path('api-links/create-product/', views.CreateProductView.as_view()),
+    path('api-links/update-product/', views.UpdateProductView.as_view()),
+    path('api-links/delete-product/', views.DeleteProductView.as_view()),
 
     # SHOPS
     path(

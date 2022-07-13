@@ -137,19 +137,8 @@ class DeleteShopSerializer(serializers.Serializer):
         attrs['shop'] = [shop_id]
         return attrs
 
-
 class CreateProductSerializer(serializers.Serializer):
     """
-    :param name: Display name, mandatory.
-    :param is_manual: is the price set manually.
-    :param manual_price: price if set manually.
-    :param shop: Related shop.
-    :param is_active: is the product used.
-    :param is_removed: is the product removed.
-    :param unit: unit of the product.
-    :param correcting_factor: for automatic price.
-    :param product_image : image of the product, currently via Cloudinary
-
     :type name: string
     :type is_manual: bool
     :type manual_price: decimal
@@ -159,7 +148,6 @@ class CreateProductSerializer(serializers.Serializer):
     :type unit: string
     :type correcting_factor: decimal
     :type product_image : string
-
     """
 
     product_name = serializers.CharField(
@@ -182,11 +170,11 @@ class CreateProductSerializer(serializers.Serializer):
     is_active = serializers.BooleanField(
         write_only=True
     )
-    
+
     product_unit = serializers.CharField(
         write_only=True,
-         required=False
-        
+        required=False
+
     )
 
     correcting_factor = serializers.DecimalField(
@@ -211,5 +199,91 @@ class CreateProductSerializer(serializers.Serializer):
         product_image = attrs.get('product_image')
 
         attrs['product'] = [product_name, price_is_manual,
-                         manual_price, shop_id, is_active, product_unit, correcting_factor, product_image]
+                            manual_price, shop_id, is_active, product_unit, correcting_factor, product_image]
         return attrs
+
+
+
+class UpdateProductSerializer(serializers.Serializer):
+    """
+    :type name: string
+    :type is_manual: bool
+    :type manual_price: decimal
+    :type is_active: bool
+    :type unit: string
+    :type correcting_factor: decimal
+    :type product_image : string
+    
+    """
+    
+    product_id = serializers.CharField(
+        write_only=True
+    )
+
+    product_name = serializers.CharField(
+        write_only=True, required=False
+        
+    )
+
+    price_is_manual = serializers.BooleanField(
+        write_only=True, required=False
+    )
+
+    manual_price = serializers.DecimalField(
+        write_only=True,
+        decimal_places=2,
+        max_digits=9,
+        required=False,
+    )
+    
+    is_active = serializers.BooleanField(
+        write_only=True
+    )
+
+    product_unit = serializers.CharField(
+        write_only=True,
+        required=False,
+    )
+
+    correcting_factor = serializers.DecimalField(
+        write_only=True,
+        decimal_places=4,
+        max_digits=9,
+        required=False
+    )
+
+    product_image = serializers.CharField(
+        write_only=True,
+        required=False
+    )
+
+    def validate(self, attrs):
+        
+        product_id = attrs.get('product_id')
+        product_name = attrs.get('product_name')
+        price_is_manual = attrs.get('price_is_manual')
+        manual_price = attrs.get('manual_price')
+        is_active = attrs.get('is_active')
+        product_unit = attrs.get('product_unit')
+        correcting_factor = attrs.get('correcting_factor')
+        product_image = attrs.get('product_image')
+        
+        attrs['product'] = [product_id,product_name, price_is_manual,
+                            manual_price, is_active, product_unit, correcting_factor, product_image]
+        return attrs
+
+
+class DeleteProductSerializer(serializers.Serializer):
+    """
+    """
+    
+    product_id = serializers.CharField(
+        write_only=True
+    )
+
+    def validate(self, attrs):
+        
+        product_id = attrs.get('product_id')
+        attrs['product'] = [product_id]
+        return attrs
+
