@@ -868,7 +868,7 @@ def delete_product_api_function(product_id):
 class DeleteProductView(views.APIView):
 
     permission_classes = (permissions.AllowAny,)
-    permission_required = 'shops.change_product'
+    permission_required = 'shops.delete_product'
 
     def post(self, request):
         #! Utilisateur manager se log
