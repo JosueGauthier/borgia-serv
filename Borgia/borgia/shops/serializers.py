@@ -12,11 +12,12 @@ class ShopSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class ProductSerializer(serializers.ModelSerializer):
+    manual_price = serializers.FloatField()
+    correcting_factor = serializers.FloatField()
     class Meta:
         model = Product
         fields = ('id', 'name', 'unit', 'shop', 'is_manual', 'manual_price',
                   'correcting_factor', 'is_active', 'is_removed', 'product_image')
-
 
 class CategoryProductSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:

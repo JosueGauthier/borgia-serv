@@ -14,3 +14,5 @@ OrderedDict([('product_id', '25'), ('price_is_manual', False), ('is_active', Fal
 OrderedDict([('product_id', '25'), ('price_is_manual', False), ('is_active', False), ('product', ['25', None, False, None, False, None, None, None])])
 False
 OrderedDict([('product_id', '25'), ('price_is_manual', False), ('is_active', False), ('product', ['25', None, False, None, False, None, None, None])])
+gumTrue12.001TrueNone1.0000https://res.cloudinary.com/dxsy9rszs/image/upload/v1657742260/ce8saq7y1kv6rtkbhqhp.jpg
+gueTrue12.001TrueNone1.0000https://res.cloudinary.com/dxsy9rszs/image/upload/v1657742260/ce8saq7y1kv6rtkbhqhp.jpg
