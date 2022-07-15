@@ -544,7 +544,7 @@ class ProductBaseViewSet(viewsets.ViewSet):
 
 def create_shop_api_function(shop_name, shop_description, shop_image, correcting_factor_activated=True, shop_color="#F4FA58"):
 
-    if shop_name and shop_description and shop_color and shop_image and correcting_factor_activated:
+    if shop_name and shop_description and shop_color and shop_image and (correcting_factor_activated !=None):
         Shop.objects.create(
             name=shop_name,
             description=shop_description,
@@ -592,8 +592,8 @@ def update_shop_api_function(shop_id, shop_description=None, shop_image=None, co
 
     shop = Shop.objects.get(id=shop_id)
 
-    f = open("myfile.txt", "a")
-    f.write("\n" + str(shop.get_managers()))
+    """  f = open("myfile.txt", "a")
+    f.write("\n" + str(shop.get_managers())) """
 
     if shop_description:
         shop.description = shop_description
@@ -692,11 +692,7 @@ class DeleteShopView(views.APIView):
 
 def create_product_api_function(product_name, price_is_manual, manual_price, shop_id, is_active, product_unit, correcting_factor, product_image):
 
-    if product_name and price_is_manual and shop_id and is_active and correcting_factor and product_image and manual_price:
-
-        f = open("myfile.txt", "a")
-        f.write("\n" + str(product_name+str(price_is_manual) + str(manual_price)+str(shop_id) +
-                str(is_active) + str(product_unit) + str(correcting_factor) + str(product_image)))
+    if product_name and (price_is_manual  != None) and shop_id and (is_active != None ) and correcting_factor and product_image and manual_price:
 
         if product_unit != None:
             Product.objects.create(
@@ -706,7 +702,7 @@ def create_product_api_function(product_name, price_is_manual, manual_price, sho
                 unit=product_unit,  # ! voir pk ne marche pas via API achat et cie
                 correcting_factor=correcting_factor,
                 is_active=is_active,
-                is_removed=not is_active,
+                is_removed=False,
                 is_manual=price_is_manual,
                 manual_price=manual_price
             )
@@ -717,7 +713,7 @@ def create_product_api_function(product_name, price_is_manual, manual_price, sho
                 shop=Shop.objects.get(id=shop_id),
                 correcting_factor=correcting_factor,
                 is_active=is_active,
-                is_removed=not is_active,
+                is_removed=False,
                 is_manual=price_is_manual,
                 manual_price=manual_price
             )
@@ -776,7 +772,6 @@ def update_product_api_function(product_id, product_name=None, price_is_manual=N
 
         if is_active != None:
             product.is_active = is_active
-            product.is_removed = not is_active
 
         if product_unit != None:
             product.unit = product_unit
@@ -862,7 +857,8 @@ def delete_product_api_function(product_id):
     if product_id:
 
         product = Product.objects.get(id=product_id)
-        product.delete()
+        product.is_removed = True
+        product.save()
 
 
 class DeleteProductView(views.APIView):
