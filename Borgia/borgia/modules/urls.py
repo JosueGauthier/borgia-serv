@@ -4,12 +4,11 @@ from . import views
 from rest_framework import routers
 
 from modules.views import (CatBaseViewset, ShopModuleSaleView,
-                           ShopModuleCategoryCreateView, 
+                           ShopModuleCategoryCreateView,
                            ShopModuleCategoryDeleteView,
-                           ShopModuleCategoryUpdateView, 
+                           ShopModuleCategoryUpdateView,
                            ShopModuleConfigUpdateView,
                            ShopModuleConfigView)
-
 
 
 # Partie API
@@ -23,13 +22,13 @@ router.register(r'categoryv2', CatBaseViewset,
 
 modules_patterns = [
 
-    #API
+    # API
     path('api-links/category/', include(router.urls)),
     path('api-links/self-sale/', views.SelfSaleView.as_view()),
     path('api-links/operator-sale/', views.OperatorSaleView.as_view()),
-    
+
     path('api-links/create-category/', views.CreateCategoryView.as_view()),
-    
+
     path('api-links/update-category/', views.UpdateCategoryView.as_view()),
     path('api-links/delete-category/', views.DeleteCategoryView.as_view()),
 

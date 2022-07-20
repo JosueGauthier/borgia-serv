@@ -9,7 +9,7 @@ from shops.views import ProductBaseViewSet
 from shops.serializers import ProductBaseSerializer
 
 
-from .models import CategoryProduct, Category
+from .models import CategoryProduct, Category, ShopModule
 
 
 from functools import partial, wraps
@@ -109,6 +109,8 @@ class ProductCatSerializer(serializers.ModelSerializer):
     class Meta:
         model = CategoryProduct
         fields = ('id', 'category', 'product', 'quantity')
+        
+        
 
 
 #! Self sale

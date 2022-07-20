@@ -23,7 +23,7 @@ from django.contrib.auth.mixins import (LoginRequiredMixin,
 
 from django.shortcuts import redirect, render
 from django.urls import reverse
-from modules.models import CategoryProduct
+from modules.models import CategoryProduct, OperatorSaleModule
 
 
 from shops.forms import (ProductCreateForm, ProductListForm, ProductUpdateForm,
@@ -491,6 +491,13 @@ class ShopViewSet(viewsets.ModelViewSet):
     queryset = Shop.objects.all().order_by('name')
     serializer_class = ShopSerializer
 
+class SelfSaleModuleViewSet(viewsets.ModelViewSet):
+    queryset = SelfSaleModule.objects.all()
+    serializer_class = SelfSaleModuleSerializer
+    
+class OperatorSaleModuleViewSet(viewsets.ModelViewSet):
+    queryset = OperatorSaleModule.objects.all()
+    serializer_class = OperatorSaleModuleSerializer
 
 class ProductFromShopViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all().order_by('name')

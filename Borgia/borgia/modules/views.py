@@ -8,7 +8,7 @@ from rest_framework import status
 from rest_framework import permissions
 from rest_framework import generics
 from django.contrib.auth import login, logout
-from .serializers import CatBaseSerializer, CategorySerializer, CategoryProductSerializer, ProductCatSerializer
+from .serializers import *
 from .models import Category, CategoryProduct
 from rest_framework import viewsets
 from django_filters.rest_framework import DjangoFilterBackend
@@ -280,9 +280,9 @@ class ShopModuleCategoryCreateView(ShopModuleMixin, BorgiaView):
 
         cat_form = self.form_class(request.POST)
 
-        f = open("myfile.txt", "a")
+        """ f = open("myfile.txt", "a")
         f.write("\n")
-        f.write(str(cat_form.cleaned_data))
+        f.write(str(cat_form.cleaned_data)) """
 
         for product_form in cat_form.cleaned_data:
             try:
@@ -467,6 +467,9 @@ class SearchCategoryView(generics.ListCreateAPIView):
     serializer_class = CategorySerializer
     filter_backends = [filters.SearchFilter]
     search_fields = ['name']
+    
+    
+
 
 
 class CatBaseViewset(viewsets.ViewSet):

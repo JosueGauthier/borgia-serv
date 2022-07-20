@@ -18,3 +18,7 @@ gumTrue12.001TrueNone1.0000https://res.cloudinary.com/dxsy9rszs/image/upload/v16
 gueTrue12.001TrueNone1.0000https://res.cloudinary.com/dxsy9rszs/image/upload/v1657742260/ce8saq7y1kv6rtkbhqhp.jpg
 testarossaTrue2.001TrueNone1.1000https://res.cloudinary.com/dxsy9rszs/image/upload/v1657832772/ncdkxwgk6iwanpdzvs01.jpg
 jjjTrue12.001TrueNone1.0000https://res.cloudinary.com/dxsy9rszs/image/upload/v1657894353/zqzg85a8wforkuiujq1h.jpg
+[{'quantity': 4444, 'product': '6/unit'}]
+Vitus
+[{'quantity': 555, 'product': '5/unit'}]
+Vedett IPA

@@ -1,6 +1,6 @@
 from django.db.models import Avg, Max, Min, Sum, Count, F
 from rest_framework import serializers
-from modules.models import Category, CategoryProduct
+from modules.models import Category, CategoryProduct, OperatorSaleModule, SelfSaleModule
 from sales.models import SaleProduct
 from .models import Shop, Product
 
@@ -10,6 +10,16 @@ class ShopSerializer(serializers.HyperlinkedModelSerializer):
         model = Shop
         fields = ('id', 'name', 'description', 'color', 'image')
 
+
+class SelfSaleModuleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SelfSaleModule
+        fields = '__all__'
+
+class OperatorSaleModuleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = OperatorSaleModule
+        fields = '__all__'
 
 class ProductSerializer(serializers.ModelSerializer):
     manual_price = serializers.FloatField()
