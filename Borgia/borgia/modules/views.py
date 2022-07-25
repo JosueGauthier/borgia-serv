@@ -1,7 +1,6 @@
 from django.contrib.contenttypes.models import ContentType
 from rest_framework import filters
 from users.serializers import LoginSerializer
-from . import serializers
 from rest_framework.response import Response
 from rest_framework import views
 from rest_framework import status
@@ -538,7 +537,7 @@ class SelfSaleView(views.APIView):
         user = serializerLogin.validated_data['user']
         login(request, user)
         api_user = self.request.user
-        serializerSale = serializers.SelfSaleSerializer(
+        serializerSale = SelfSaleSerializer(
             data=self.request.data, context={'request': self.request})
         serializerSale.is_valid(raise_exception=True)
         saleMap = serializerSale.validated_data
@@ -567,7 +566,7 @@ class OperatorSaleView(views.APIView):
 
         operator_user = self.request.user
 
-        serializerSale = serializers.OperatorSaleSerializer(
+        serializerSale = OperatorSaleSerializer(
             data=self.request.data, context={'request': self.request})
 
         serializerSale.is_valid(raise_exception=True)
@@ -671,7 +670,7 @@ class CreateCategoryView(views.APIView):
         """  f = open("myfile.txt", "a")
         f.write("\n" + str(user)) """
 
-        serializerCreateCategory = serializers.CreateCategorySerializer(
+        serializerCreateCategory = CreateCategorySerializer(
             data=self.request.data, context={'request': self.request})
 
         serializerCreateCategory.is_valid(raise_exception=True)
@@ -755,7 +754,7 @@ class UpdateCategoryView(views.APIView):
         logout(request)
         login(request, user)
 
-        serializerUpdateCategory = serializers.UpdateCategorySerializer(
+        serializerUpdateCategory = UpdateCategorySerializer(
             data=self.request.data, context={'request': self.request})
 
         serializerUpdateCategory.is_valid(raise_exception=True)
@@ -818,7 +817,7 @@ class DeleteCategoryView(views.APIView):
         logout(request)
         login(request, user)
 
-        serializerUpdateCategory = serializers.DeleteCategorySerializer(
+        serializerUpdateCategory = DeleteCategorySerializer(
             data=self.request.data, context={'request': self.request})
 
         serializerUpdateCategory.is_valid(raise_exception=True)
