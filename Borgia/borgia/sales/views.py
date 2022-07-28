@@ -252,7 +252,12 @@ class HistorySaleUserViewSet(viewsets.ViewSet):
 
         serializer = HistorySaleUserSerializer(queryset, many=True)
 
-        return Response((serializer.data)[0])
+        try:
+          return Response((serializer.data)[0])
+        except:
+          return Response([])
+        
+        
 
 
 @api_view(('GET',))
