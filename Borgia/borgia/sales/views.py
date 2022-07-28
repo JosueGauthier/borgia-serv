@@ -1,7 +1,7 @@
 from rest_framework.response import Response
 import datetime
 from operator import itemgetter
-from django.db.models import Avg, Max, Min, Sum, Count, F
+from django.db.models import Sum
 from django.db.models import F
 from rest_framework.decorators import api_view
 from .serializers import *
@@ -17,7 +17,6 @@ from django.utils.timezone import now
 from openpyxl import Workbook
 from openpyxl.writer.excel import save_virtual_workbook
 from django.shortcuts import HttpResponse
-from datetime import datetime, timedelta
 
 from borgia.views import BorgiaFormView, BorgiaView
 from sales.forms import SaleListSearchDateForm
@@ -149,11 +148,10 @@ class SaleRetrieve(SaleMixin, BorgiaFormView):
         return render(request, self.template_name, context=context)
 
 
-
 class Saledownload_xlsx(ShopMixin, BorgiaView):
     """
     Download sales (Jquery with SaleListSearchDateForm) from a shop in a xlsx file
-    
+
     """
     permission_required = 'sales.view_sale'
     menu_type = 'shops'
@@ -165,16 +163,18 @@ class Saledownload_xlsx(ShopMixin, BorgiaView):
     date_end = None
 
     def post(self, request, *args, **kwargs):
-        
+
         if request.POST['search'] != '':
             self.search = request.POST['search']
 
         if request.POST['date_begin'] != '':
-            self.date_begin = datetime.strptime(request.POST['date_begin'], "%d/%m/%Y")
+            self.date_begin = datetime.strptime(
+                request.POST['date_begin'], "%d/%m/%Y")
 
         if request.POST['date_end'] != '':
-            self.date_end = datetime.strptime(request.POST['date_end'], "%d/%m/%Y")
-        
+            self.date_end = datetime.strptime(
+                request.POST['date_end'], "%d/%m/%Y")
+
         wb = Workbook()
         # grab the active worksheet
         ws = wb.active
@@ -182,7 +182,7 @@ class Saledownload_xlsx(ShopMixin, BorgiaView):
         columns = ['Opérateur', 'Acheteur',
                    'Date', 'Produits', 'Prix']
         ws.append(columns)
-        for col in ['A','B','C','D','E']:
+        for col in ['A', 'B', 'C', 'D', 'E']:
             ws.column_dimensions[col].width = 30
 
         sales_list = Sale.objects.filter(shop=self.shop).order_by('-datetime')
@@ -190,12 +190,14 @@ class Saledownload_xlsx(ShopMixin, BorgiaView):
         for s in sales_list:
             operator = s.operator.last_name + ' ' + s.operator.first_name
             sender = s.sender.last_name + ' ' + s.sender.first_name
-            ws.append([operator, sender,s.datetime.strftime('%c'), s.string_products(), s.amount()])
+            ws.append([operator, sender, s.datetime.strftime(
+                '%c'), s.string_products(), s.amount()])
 
         # Return the file
         response = HttpResponse(save_virtual_workbook(wb),
-                   content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-        response['Content-Disposition'] = 'attachment; filename=sales-'+ str(now().date()) +".xlsx"
+                                content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        response['Content-Disposition'] = 'attachment; filename=sales-' + \
+            str(now().date()) + ".xlsx"
         return response
 
     def form_query(self, query):
@@ -212,7 +214,7 @@ class Saledownload_xlsx(ShopMixin, BorgiaView):
                 | Q(sender__last_name__icontains=self.search)
                 | Q(sender__first_name__icontains=self.search)
                 | Q(sender__surname__icontains=self.search)
-                
+
             )
 
         if self.date_begin:
@@ -238,17 +240,19 @@ class SaleViewSet(viewsets.ModelViewSet):
 
 class HistorySaleUserViewSet(viewsets.ViewSet):
     def list(self, request):
-        queryset = Sale.objects.all()
-        sender = self.request.query_params.get('sender')
-        if sender is not None:
-            queryset = queryset.filter(sender__username=sender)
+
+        queryset = User.objects.all()
+        username = self.request.query_params.get('username')
+        if username is not None:
+            queryset = queryset.filter(username=username)
 
         #! To protect server from unwanted action
-        """ if sender is None:
-            queryset = queryset.filter(sender=0)"""
+        if username is None:
+            queryset = queryset.filter(username=0)
+
         serializer = HistorySaleUserSerializer(queryset, many=True)
 
-        return Response(serializer.data)
+        return Response((serializer.data)[0])
 
 
 @api_view(('GET',))
@@ -256,27 +260,28 @@ def get_total_sale(request):
     data = []
     data.append(SaleProduct.objects.all().aggregate(Sum('price')))
     data.append(SaleProduct.objects.all().count())
+
     return Response(data)
 
 
 @api_view(('GET',))
 def get_history_sale(request):
     data = []
-    day_of_year = datetime.now().timetuple().tm_yday
+    day_of_year = datetime.datetime.now().timetuple().tm_yday
     nombre_de_jour = day_of_year
 
     for i in range(0, nombre_de_jour):
-        start_day = strftime(str((datetime.strptime(
-            "2022-01-01", "%Y-%m-%d") + timedelta(days=i)).date()))
-        end_day = strftime(str((datetime.strptime(
-            "2022-01-01", "%Y-%m-%d") + timedelta(days=1+i)).date()))
+        start_day = strftime(str((datetime.datetime.strptime(
+            "2022-01-01", "%Y-%m-%d") + datetime.timedelta(days=i)).date()))
+        end_day = strftime(str((datetime.datetime.strptime(
+            "2022-01-01", "%Y-%m-%d") + datetime.timedelta(days=1+i)).date()))
         price_sum = SaleProduct.objects.filter(
             sale__datetime__range=[start_day, end_day]).aggregate(Sum('price'))
 
-        format_day = (datetime.strptime(
-            "2022-01-01", "%Y-%d-%m") + timedelta(days=i)).date()
+        format_day = (datetime.datetime.strptime(
+            "2022-01-01", "%Y-%m-%d") + datetime.timedelta(days=i)).date()
 
-        a_day = datetime.strptime(
+        a_day = datetime.datetime.strptime(
             str(format_day), '%Y-%m-%d').strftime('%d-%m')
 
         data.append({
@@ -291,18 +296,18 @@ def get_history_sale(request):
 @api_view(('GET',))
 def get_live_2hours_history_sale(request):
     data = []
-    temps_debut = datetime.now() - timedelta(hours=2)
+    temps_debut = datetime.datetime.now() - datetime.timedelta(hours=2)
     time_step = 30
 
     for i in range(0, 7200, time_step):
         start_range = strftime(
-            str(temps_debut + timedelta(seconds=i)))
+            str(temps_debut + datetime.timedelta(seconds=i)))
         end_range = strftime(
-            str(temps_debut + timedelta(seconds=(i+time_step))))
+            str(temps_debut + datetime.timedelta(seconds=(i+time_step))))
         price_sum = SaleProduct.objects.filter(
             sale__datetime__range=[start_range, end_range]).aggregate(Sum('price'))
 
-        a = temps_debut + timedelta(seconds=i)
+        a = temps_debut + datetime.timedelta(seconds=i)
 
         format_time = a.strftime("%H:%M")
 
@@ -316,8 +321,6 @@ def get_live_2hours_history_sale(request):
 
 @api_view(('GET',))
 def get_sales_podium(request):
-
-    #user = self.request.user
 
     data = []
     user_sum = SaleProduct.objects.filter(
