@@ -1,4 +1,3 @@
-from itertools import product
 from time import strftime
 import datetime
 from rest_framework.decorators import api_view
@@ -7,8 +6,6 @@ from operator import itemgetter
 from rest_framework import viewsets
 from django.db.models import Sum
 from rest_framework import serializers
-
-from users.serializers import UserSerializer
 
 from .models import *
 
@@ -22,12 +19,32 @@ class SaleSerializer(serializers.ModelSerializer):
 
 class HistorySaleUserSerializer(serializers.BaseSerializer):
     def to_representation(self, instance):
-        a = instance.datetime
-        all_date_time_str = a.strftime('%d %b %y %H:%M')
-        return {
-            'format_datetime': all_date_time_str,
-            'tot_amount_per_sale': SaleProduct.objects.filter(sale__id=instance.id).aggregate(Sum('price'))['price__sum'],
-        }
+        data = []
+
+        startDay = Sale.objects.filter(sender=instance.id).values(
+            'datetime').first()["datetime"]
+        lastDay = Sale.objects.filter(sender=instance.id).values(
+            'datetime').last()["datetime"]
+
+        nombre_de_jour = (lastDay - startDay).days
+
+        for i in range(0, nombre_de_jour+1):
+
+            day = startDay + datetime.timedelta(days=i)
+            dayPlusOne = startDay + datetime.timedelta(days=1+i)
+            price_sum = SaleProduct.objects.filter(
+                sale__datetime__range=[day, dayPlusOne], sale__sender=instance.id).aggregate(Sum('price'))['price__sum']
+
+            formatted_day = datetime.datetime.strptime(
+                str(day.date()), '%Y-%m-%d').strftime('%d-%m-%Y')
+
+            data.append({
+                "start_day": str(day),
+                "price_sum": price_sum,
+                "format_day": formatted_day,
+            })
+
+        return data
 
 
 class SaleProductSerializer(serializers.ModelSerializer):
@@ -92,9 +109,7 @@ class StatPurchaseSerializer(serializers.BaseSerializer):
 class RankUserAllPurchaseSerializer(serializers.BaseSerializer):
     def to_representation(self, instance):
         return {
-            # 'id': instance.id,
             'username': instance.username,
-            # 'surname': instance.surname,
             'montant_achats': float(SaleProduct.objects.filter(sale__sender__username=instance.username).aggregate(Sum('price'))['price__sum'] or 0),
             # 'qte_achats': SaleProduct.objects.filter(sale__sender__username=instance.username).count(),
         }
