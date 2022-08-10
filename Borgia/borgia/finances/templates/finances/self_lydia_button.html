@@ -33,13 +33,16 @@
         $('#lydiaButton').payWithLYDIA({
             amount: {{ total_amount|unlocalize }},
             vendor_token: '{{ vendor_token }}',
-            recipient: '{{ tel_number }}', //cellphone or email of your client
+            recipient: '0711223344', //'{{ tel_number }}', //cellphone or email of your client
             message : '{{ message }}', //object of the payment
             render : '<img src="https://lydia-app.com/assets/img/paymentbutton.png" />', //button image
             // The client will be redirect to this URL after the payment
             browser_success_url : "{{ confirm_url }}",
             // This URL will be called by our server after the payment so you can update the order on your database
-            confirm_url : "{{ callback_url }}?user_pk={{ user.pk }}"
+            confirm_url : "{{ callback_url }}?user_pk={{ user.pk }}",
+            env: 'test'
+
+            
         });
     });
 </script>

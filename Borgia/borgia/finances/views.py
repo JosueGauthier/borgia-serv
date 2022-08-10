@@ -12,6 +12,7 @@ from django.shortcuts import HttpResponse, render
 from django.urls import reverse
 from django.utils.timezone import now
 from django.views.decorators.csrf import csrf_exempt
+from finances.serializers import SelfLydiaCreateAPISerializer
 
 from borgia.views import BorgiaFormView, BorgiaView
 from configurations.utils import configuration_get
@@ -26,6 +27,7 @@ from finances.utils import (verify_token_lydia,
                             calculate_total_amount_lydia)
 from users.mixins import UserMixin
 from users.models import User
+
 
 
 class RechargingList(LoginRequiredMixin, PermissionRequiredMixin, BorgiaFormView):
@@ -594,6 +596,10 @@ class RechargingCreate(UserMixin, BorgiaFormView):
         return reverse('url_user_retrieve', kwargs={'user_pk': self.user.pk})
 
 
+import requests
+import json
+
+
 class SelfLydiaCreate(LoginRequiredMixin, BorgiaFormView):
     """
     View to supply himself by Lydia.
@@ -610,6 +616,10 @@ class SelfLydiaCreate(LoginRequiredMixin, BorgiaFormView):
         self.base_fee_lydia = None
         self.ratio_fee_lydia = None
         self.tax_fee_lydia = None
+
+        f = open("myfile.txt", "a")
+        f.write("\n")
+        f.write(str("je suis __init__"))
 
     def add_lydia_context(self):
         if not configuration_get("ENABLE_SELF_LYDIA").get_value():
@@ -672,6 +682,10 @@ class SelfLydiaCreate(LoginRequiredMixin, BorgiaFormView):
         Save the current phone number as default phone number for the user.
         Render the Lydia button.
         """
+
+        f = open("myfile.txt", "a")
+        f.write("\n")
+        f.write(str("je suis form_valid "))
         user = self.request.user
         if user.phone is None:
             user.phone = form.cleaned_data['tel_number']
@@ -705,9 +719,47 @@ class SelfLydiaCreate(LoginRequiredMixin, BorgiaFormView):
         context['message'] = (
             "Borgia - AE ENSAM - Crédit de "
             + user.__str__())
+
+        payload = {
+            
+            "message":"Hello boyyyyyyyy",
+            "amount": total_amount,
+            "currency": "EUR",
+            "type": "phone",
+            "recipient": context['tel_number'],
+            "vendor_token": context['vendor_token'],
+
+        }
+
+        url = "https://homologation.lydia-app.com/api/request/do.json"
+
+        #r = HttpRequest.post(url, data=payload)
+        
+        response = requests.post(url, data=payload)
+        
+        response_dict = json.loads(response.text)
+        
+        
+        confirm_url = response_dict['mobile_url']
+
+        
+       
+        
+        
+        f = open("myfile.txt", "a")
+        f.write("\n")
+        f.write(str(confirm_url))
+        
+        
+
         return render(self.request,
                       'finances/self_lydia_button.html',
                       context=context)
+
+
+
+
+
 
 
 class SelfLydiaConfirm(LoginRequiredMixin, BorgiaView):
@@ -725,6 +777,7 @@ class SelfLydiaConfirm(LoginRequiredMixin, BorgiaView):
 
     # TODO: check if a Lydia object exist and if it's from the current day,
     # else raise Error
+
     def get(self, request, *args, **kwargs):
         context = super().get_context_data()
         context['transaction'] = self.request.GET.get('transaction')
@@ -769,6 +822,10 @@ def self_lydia_callback(request):
     :returns: 200 if all's good.
     :rtype: Http request
     """
+
+    f = open("myfile.txt", "a")
+    f.write("\n")
+    f.write(str("je suis self_lydia_callback"))
     params_dict = {
         "currency": request.POST.get("currency"),
         "request_id": request.POST.get("request_id"),
@@ -798,9 +855,12 @@ def self_lydia_callback(request):
             fee = 0
             recharging_amount = total_amount
         else:
-            base_fee = decimal.Decimal(configuration_get('BASE_FEE_LYDIA').get_value()).quantize(decimal.Decimal('.01'))
-            ratio_fee = decimal.Decimal(configuration_get('RATIO_FEE_LYDIA').get_value()).quantize(decimal.Decimal('.01'))
-            tax_fee = decimal.Decimal(configuration_get('TAX_FEE_LYDIA').get_value()).quantize(decimal.Decimal('.01'))
+            base_fee = decimal.Decimal(configuration_get(
+                'BASE_FEE_LYDIA').get_value()).quantize(decimal.Decimal('.01'))
+            ratio_fee = decimal.Decimal(configuration_get(
+                'RATIO_FEE_LYDIA').get_value()).quantize(decimal.Decimal('.01'))
+            tax_fee = decimal.Decimal(configuration_get(
+                'TAX_FEE_LYDIA').get_value()).quantize(decimal.Decimal('.01'))
 
             fee = calculate_lydia_fee_from_total(
                 total_amount, base_fee, ratio_fee, tax_fee)
@@ -820,3 +880,128 @@ def self_lydia_callback(request):
         recharging.pay()
 
         return HttpResponse('200')
+
+
+from rest_framework import views
+
+from django.contrib.auth import login, logout
+
+from users.serializers import LoginSerializer
+
+from rest_framework import status
+
+from rest_framework.response import Response
+
+
+
+def update_shop_api_function(amount, phone_number):
+
+    pass
+
+
+
+
+class SelfLydiaCreateAPI(views.APIView):
+
+    #permission_classes = (permissions.AllowAny,)
+    #permission_required = 'shops.add_product'
+
+    def post(self, request):
+        #! Utilisateur manager se log
+        serializerLogin = LoginSerializer(
+            data=self.request.data, context={'request': self.request})
+        serializerLogin.is_valid(raise_exception=True)
+        user = serializerLogin.validated_data['user']
+
+        #if user.has_perm(self.permission_required) == False:
+        #    return Response({"Error": "User does not have permission to perform the requested action"}, status=status.HTTP_401_UNAUTHORIZED)
+
+        logout(request)
+        login(request, user)
+        
+        
+        #! Partie fonction
+        
+        user = self.request.user
+        #if user.phone is None:
+        #    user.phone = form.cleaned_data['tel_number']
+        #    user.save()
+
+        context = {}
+        context['vendor_token'] = configuration_get(
+            "VENDOR_TOKEN_LYDIA").get_value()
+        
+        context['confirm_url'] = self.request.build_absolute_uri(
+            reverse('url_self_lydia_confirm'))
+        
+        context['callback_url'] = self.request.build_absolute_uri(
+            reverse('url_self_lydia_callback'))
+        
+        
+        
+
+        serializerSelfLydiaCreateAPI = SelfLydiaCreateAPISerializer(
+            data=self.request.data, context={'request': self.request})
+
+        serializerSelfLydiaCreateAPI.is_valid(raise_exception=True)
+
+        contentMap = serializerSelfLydiaCreateAPI.validated_data
+        
+        
+        amount= contentMap['amount']
+        
+        phone_number = contentMap['phone_number']
+        
+        
+        recharging_amount = amount
+        
+        total_amount =recharging_amount
+
+        """ if self.enable_fee_lydia:
+            if self.tax_fee_lydia and self.tax_fee_lydia != 0:
+                total_amount = calculate_total_amount_lydia(
+                    recharging_amount, self.base_fee_lydia, self.ratio_fee_lydia, self.tax_fee_lydia)
+            else:
+                total_amount = calculate_total_amount_lydia(
+                    recharging_amount, self.base_fee_lydia, self.ratio_fee_lydia)
+
+            fee_amount = total_amount - recharging_amount
+            context['fee_amount'] = fee_amount
+        else:
+            total_amount = recharging_amount """
+
+        context['total_amount'] = total_amount
+        context['recharging_amount'] = recharging_amount
+        context['tel_number'] = phone_number
+        context['message'] = (
+            "Borgia - AE ENSAM - Crédit de "
+            + user.__str__())
+
+        payload = {
+            
+            "message":context['message'],
+            "amount": context['total_amount'],
+            "currency": "EUR",
+            "type": "phone",
+            "recipient": context['tel_number'],
+            "vendor_token": context['vendor_token'],
+
+        }
+
+        url = "https://homologation.lydia-app.com/api/request/do.json"
+
+        
+        response = requests.post(url, data=payload)
+        
+        response_dict = json.loads(response.text)
+        
+        
+        confirm_url = response_dict['mobile_url']
+
+        f = open("myfile.txt", "a")
+        f.write("\n")
+        f.write(str(confirm_url))
+        
+
+        return Response(confirm_url, status=status.HTTP_202_ACCEPTED)
+

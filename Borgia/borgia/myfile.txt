@@ -1,24 +1,13 @@
 
-produit1
-True
-12.00
-1
-True
-None
-1.0000
-https://ahrefs.com/blog/wp-content/uploads/2021/05/backlinks.png
-produit1True12.001TrueNone1.0000https://ahrefs.com/blog/wp-content/uploads/2021/05/backlinks.png
-je suiis aaaa
-produitAETrue12.001TrueNone1.0000https://ahrefs.com/blog/wp-content/uploads/2021/05/backlinks.png
-OrderedDict([('product_id', '25'), ('price_is_manual', False), ('is_active', False), ('product', ['25', None, False, None, False, None, None, None])])
-OrderedDict([('product_id', '25'), ('price_is_manual', False), ('is_active', False), ('product', ['25', None, False, None, False, None, None, None])])
-False
-OrderedDict([('product_id', '25'), ('price_is_manual', False), ('is_active', False), ('product', ['25', None, False, None, False, None, None, None])])
-gumTrue12.001TrueNone1.0000https://res.cloudinary.com/dxsy9rszs/image/upload/v1657742260/ce8saq7y1kv6rtkbhqhp.jpg
-gueTrue12.001TrueNone1.0000https://res.cloudinary.com/dxsy9rszs/image/upload/v1657742260/ce8saq7y1kv6rtkbhqhp.jpg
-testarossaTrue2.001TrueNone1.1000https://res.cloudinary.com/dxsy9rszs/image/upload/v1657832772/ncdkxwgk6iwanpdzvs01.jpg
-jjjTrue12.001TrueNone1.0000https://res.cloudinary.com/dxsy9rszs/image/upload/v1657894353/zqzg85a8wforkuiujq1h.jpg
-[{'quantity': 4444, 'product': '6/unit'}]
-Vitus
-[{'quantity': 555, 'product': '5/unit'}]
-Vedett IPA
+je suis __init__
+je suis form_valid 
+https://homologation.lydia-app.com/collect/payment/9f0154c480c2ba726da6b1eb836580ce/auto
+je suis __init__
+je suis __init__
+je suis form_valid 
+https://homologation.lydia-app.com/collect/payment/437e707cb141c1c2c1fbc9e2d42b6740/auto
+https://homologation.lydia-app.com/collect/payment/5afcaf6dba81236d283b23f2cca5bc3c/auto
+https://homologation.lydia-app.com/collect/payment/4bce21c9e876e4f6e4741f6478d902ee/auto
+https://homologation.lydia-app.com/collect/payment/7fe9272806af9504bd456fcf0f2c2469/auto
+https://homologation.lydia-app.com/collect/payment/3f33672ee69369e9202d48900696c5b4/auto
+https://homologation.lydia-app.com/collect/payment/1d479e6527ec5db4136a68d2e003b5a1/auto
