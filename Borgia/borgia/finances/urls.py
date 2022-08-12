@@ -6,12 +6,14 @@ from finances.views import (ExceptionnalMovementList,
                             SelfLydiaConfirm, SelfLydiaCreate,
                             SelfTransactionList, TransfertCreate,
                             TransfertList, TransfertRetrieve,
-                            UserExceptionnalMovementCreate,SelfLydiaCreateAPI,
+                            UserExceptionnalMovementCreate,SelfLydiaCreateAPI,LydiaStateAPI,
                             self_lydia_callback)
 
 finances_patterns = [
 
     path('api-links/lydia/', SelfLydiaCreateAPI.as_view()),
+    
+    path('api-links/lydia-state-request/', LydiaStateAPI.as_view()),
 
 
 

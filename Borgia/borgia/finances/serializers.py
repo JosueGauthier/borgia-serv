@@ -21,3 +21,20 @@ class SelfLydiaCreateAPISerializer(serializers.Serializer):
 
         attrs['product'] = [amount, phone_number]
         return attrs
+
+
+class LydiaStateAPISerializer(serializers.Serializer):
+    """
+
+    """
+
+    request_uuid = serializers.CharField(
+        write_only=True,
+    )
+
+    def validate(self, attrs):
+
+        request_uuid = attrs.get('request_uuid')
+
+        attrs['request_uuid'] = [request_uuid]
+        return attrs

@@ -1,3 +1,10 @@
+from rest_framework.response import Response
+from rest_framework import status
+from users.serializers import LoginSerializer
+from django.contrib.auth import login, logout
+from rest_framework import views
+import json
+import requests
 import datetime
 import decimal
 
@@ -12,7 +19,7 @@ from django.shortcuts import HttpResponse, render
 from django.urls import reverse
 from django.utils.timezone import now
 from django.views.decorators.csrf import csrf_exempt
-from finances.serializers import SelfLydiaCreateAPISerializer
+from finances.serializers import *
 
 from borgia.views import BorgiaFormView, BorgiaView
 from configurations.utils import configuration_get
@@ -27,7 +34,6 @@ from finances.utils import (verify_token_lydia,
                             calculate_total_amount_lydia)
 from users.mixins import UserMixin
 from users.models import User
-
 
 
 class RechargingList(LoginRequiredMixin, PermissionRequiredMixin, BorgiaFormView):
@@ -596,10 +602,6 @@ class RechargingCreate(UserMixin, BorgiaFormView):
         return reverse('url_user_retrieve', kwargs={'user_pk': self.user.pk})
 
 
-import requests
-import json
-
-
 class SelfLydiaCreate(LoginRequiredMixin, BorgiaFormView):
     """
     View to supply himself by Lydia.
@@ -721,8 +723,8 @@ class SelfLydiaCreate(LoginRequiredMixin, BorgiaFormView):
             + user.__str__())
 
         payload = {
-            
-            "message":"Hello boyyyyyyyy",
+
+            "message": "Hello boyyyyyyyy",
             "amount": total_amount,
             "currency": "EUR",
             "type": "phone",
@@ -734,32 +736,20 @@ class SelfLydiaCreate(LoginRequiredMixin, BorgiaFormView):
         url = "https://homologation.lydia-app.com/api/request/do.json"
 
         #r = HttpRequest.post(url, data=payload)
-        
+
         response = requests.post(url, data=payload)
-        
+
         response_dict = json.loads(response.text)
-        
-        
+
         confirm_url = response_dict['mobile_url']
 
-        
-       
-        
-        
         f = open("myfile.txt", "a")
         f.write("\n")
         f.write(str(confirm_url))
-        
-        
 
         return render(self.request,
                       'finances/self_lydia_button.html',
                       context=context)
-
-
-
-
-
 
 
 class SelfLydiaConfirm(LoginRequiredMixin, BorgiaView):
@@ -882,23 +872,9 @@ def self_lydia_callback(request):
         return HttpResponse('200')
 
 
-from rest_framework import views
-
-from django.contrib.auth import login, logout
-
-from users.serializers import LoginSerializer
-
-from rest_framework import status
-
-from rest_framework.response import Response
-
-
-
 def update_shop_api_function(amount, phone_number):
 
     pass
-
-
 
 
 class SelfLydiaCreateAPI(views.APIView):
@@ -913,32 +889,28 @@ class SelfLydiaCreateAPI(views.APIView):
         serializerLogin.is_valid(raise_exception=True)
         user = serializerLogin.validated_data['user']
 
-        #if user.has_perm(self.permission_required) == False:
+        # if user.has_perm(self.permission_required) == False:
         #    return Response({"Error": "User does not have permission to perform the requested action"}, status=status.HTTP_401_UNAUTHORIZED)
 
         logout(request)
         login(request, user)
-        
-        
+
         #! Partie fonction
-        
+
         user = self.request.user
-        #if user.phone is None:
+        # if user.phone is None:
         #    user.phone = form.cleaned_data['tel_number']
         #    user.save()
 
         context = {}
         context['vendor_token'] = configuration_get(
             "VENDOR_TOKEN_LYDIA").get_value()
-        
+
         context['confirm_url'] = self.request.build_absolute_uri(
             reverse('url_self_lydia_confirm'))
-        
+
         context['callback_url'] = self.request.build_absolute_uri(
             reverse('url_self_lydia_callback'))
-        
-        
-        
 
         serializerSelfLydiaCreateAPI = SelfLydiaCreateAPISerializer(
             data=self.request.data, context={'request': self.request})
@@ -946,16 +918,14 @@ class SelfLydiaCreateAPI(views.APIView):
         serializerSelfLydiaCreateAPI.is_valid(raise_exception=True)
 
         contentMap = serializerSelfLydiaCreateAPI.validated_data
-        
-        
-        amount= contentMap['amount']
-        
+
+        amount = contentMap['amount']
+
         phone_number = contentMap['phone_number']
-        
-        
+
         recharging_amount = amount
-        
-        total_amount =recharging_amount
+
+        total_amount = recharging_amount
 
         """ if self.enable_fee_lydia:
             if self.tax_fee_lydia and self.tax_fee_lydia != 0:
@@ -978,8 +948,8 @@ class SelfLydiaCreateAPI(views.APIView):
             + user.__str__())
 
         payload = {
-            
-            "message":context['message'],
+
+            "message": context['message'],
             "amount": context['total_amount'],
             "currency": "EUR",
             "type": "phone",
@@ -990,18 +960,86 @@ class SelfLydiaCreateAPI(views.APIView):
 
         url = "https://homologation.lydia-app.com/api/request/do.json"
 
-        
         response = requests.post(url, data=payload)
-        
+
         response_dict = json.loads(response.text)
-        
-        
+
         confirm_url = response_dict['mobile_url']
+        request_uuid = response_dict['request_uuid']
 
         f = open("myfile.txt", "a")
         f.write("\n")
         f.write(str(confirm_url))
+
+        f = open("myfile.txt", "a")
+        f.write("\n")
+        f.write(str(response_dict))
+
+        return Response([confirm_url, request_uuid], status=status.HTTP_202_ACCEPTED)
+
+
+class LydiaStateAPI(views.APIView):
+
+    def post(self, request):
+        #! Utilisateur manager se log
+        serializerLogin = LoginSerializer(
+            data=self.request.data, context={'request': self.request})
+        serializerLogin.is_valid(raise_exception=True)
+        user = serializerLogin.validated_data['user']
+
+        # if user.has_perm(self.permission_required) == False:
+        #    return Response({"Error": "User does not have permission to perform the requested action"}, status=status.HTTP_401_UNAUTHORIZED)
+
+        logout(request)
+        login(request, user)
+
+        #! Partie fonction
+
+        user = self.request.user
+        # if user.phone is None:
+        #    user.phone = form.cleaned_data['tel_number']
+        #    user.save()
+
+        context = {}
+        context['vendor_token'] = configuration_get(
+            "VENDOR_TOKEN_LYDIA").get_value()
+
+        context['confirm_url'] = self.request.build_absolute_uri(
+            reverse('url_self_lydia_confirm'))
+
+        context['callback_url'] = self.request.build_absolute_uri(
+            reverse('url_self_lydia_callback'))
+
+        serializerSelfLydiaCreateAPI = LydiaStateAPISerializer(
+            data=self.request.data, context={'request': self.request})
+
+        serializerSelfLydiaCreateAPI.is_valid(raise_exception=True)
+
+        contentMap = serializerSelfLydiaCreateAPI.validated_data
+
+        request_uuid = contentMap['request_uuid']
+
+        payload = {
+
+            "request_uuid": request_uuid,
+            "vendor_token": context['vendor_token'],
+
+        }
+
+        url = "https://homologation.lydia-app.com/api/request/state.json"
+
+        response = requests.post(url, data=payload)
+
+        response_dict = json.loads(response.text)
+
+        #confirm_url = response_dict['mobile_url']
+
+
+        f = open("myfile.txt", "a")
+        f.write("\n")
+        f.write(str(response_dict))
         
+        
+        state = response_dict["state"]
 
-        return Response(confirm_url, status=status.HTTP_202_ACCEPTED)
-
+        return Response(state, status=status.HTTP_202_ACCEPTED)
