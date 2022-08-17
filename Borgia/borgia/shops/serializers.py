@@ -8,7 +8,7 @@ from .models import Shop, Product
 class ShopSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Shop
-        fields = ('id', 'name', 'description', 'color', 'image')
+        fields = ('id', 'name', 'description', 'color', 'image', 'correcting_factor_activated')
 
 
 class SelfSaleModuleSerializer(serializers.ModelSerializer):
@@ -157,15 +157,20 @@ class UpdateShopSerializer(serializers.Serializer):
         write_only=True,
         required=False
     )
+    
+    correcting_factor_activated = serializers.BooleanField(
+        write_only=True
+    )
 
     def validate(self, attrs):
 
         shop_id = attrs.get('shop_id')
         shop_description = attrs.get('shop_description')
         shop_image = attrs.get('shop_image')
+        correcting_factor_activated = attrs.get('correcting_factor_activated')
 
         attrs['shop'] = [shop_id, shop_description,
-                         shop_image]
+                         shop_image, correcting_factor_activated]
         return attrs
 
 

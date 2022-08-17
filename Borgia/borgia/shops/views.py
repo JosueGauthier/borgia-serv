@@ -491,13 +491,16 @@ class ShopViewSet(viewsets.ModelViewSet):
     queryset = Shop.objects.all().order_by('name')
     serializer_class = ShopSerializer
 
+
 class SelfSaleModuleViewSet(viewsets.ModelViewSet):
     queryset = SelfSaleModule.objects.all()
     serializer_class = SelfSaleModuleSerializer
-    
+
+
 class OperatorSaleModuleViewSet(viewsets.ModelViewSet):
     queryset = OperatorSaleModule.objects.all()
     serializer_class = OperatorSaleModuleSerializer
+
 
 class ProductFromShopViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all().order_by('name')
@@ -551,7 +554,7 @@ class ProductBaseViewSet(viewsets.ViewSet):
 
 def create_shop_api_function(shop_name, shop_description, shop_image, correcting_factor_activated=True, shop_color="#F4FA58"):
 
-    if shop_name and shop_description and shop_color and shop_image and (correcting_factor_activated !=None):
+    if shop_name and shop_description and shop_color and shop_image and (correcting_factor_activated != None):
         Shop.objects.create(
             name=shop_name,
             description=shop_description,
@@ -595,12 +598,9 @@ class CreateShopView(views.APIView):
         return Response(None, status=status.HTTP_202_ACCEPTED)
 
 
-def update_shop_api_function(shop_id, shop_description=None, shop_image=None, correcting_factor_activated=True, shop_color="#F4FA58"):
+def update_shop_api_function(shop_id, shop_description=None, shop_image=None, correcting_factor_activated=None, shop_color="#F4FA58"):
 
     shop = Shop.objects.get(id=shop_id)
-
-    """  f = open("myfile.txt", "a")
-    f.write("\n" + str(shop.get_managers())) """
 
     if shop_description:
         shop.description = shop_description
@@ -609,6 +609,15 @@ def update_shop_api_function(shop_id, shop_description=None, shop_image=None, co
     if shop_image:
         shop.image = shop_image
         shop.save()
+
+    if correcting_factor_activated !=None:
+        f = open("myfile.txt", "a")
+        f.write("\n\n" + str(correcting_factor_activated))
+        shop.correcting_factor_activated = correcting_factor_activated
+        shop.save()
+        
+        f = open("myfile.txt", "a")
+        f.write("\n\n::" + str(shop.correcting_factor_activated))
 
 
 class UpdateShopView(views.APIView):
@@ -649,8 +658,15 @@ class UpdateShopView(views.APIView):
         else:
             shop_image = None
 
+        if 'correcting_factor_activated' in shopMap:
+            correcting_factor_activated = shopMap['correcting_factor_activated']
+            f = open("myfile.txt", "a")
+            f.write("\n\n" + str(correcting_factor_activated))
+        else:
+            correcting_factor_activated = None
+
         update_shop_api_function(
-            shop_id, shop_description, shop_image)
+            shop_id, shop_description, shop_image, correcting_factor_activated)
 
         return Response(None, status=status.HTTP_202_ACCEPTED)
 
@@ -699,7 +715,7 @@ class DeleteShopView(views.APIView):
 
 def create_product_api_function(product_name, price_is_manual, manual_price, shop_id, is_active, product_unit, correcting_factor, product_image):
 
-    if product_name and (price_is_manual  != None) and shop_id and (is_active != None ) and correcting_factor and product_image and manual_price:
+    if product_name and (price_is_manual != None) and shop_id and (is_active != None) and correcting_factor and product_image and manual_price:
 
         if product_unit != None:
             Product.objects.create(
@@ -856,7 +872,6 @@ class UpdateProductView(views.APIView):
                                     manual_price, is_active, product_unit, correcting_factor, product_image)
 
         return Response(None, status=status.HTTP_202_ACCEPTED)
-
 
 
 def delete_product_api_function(product_id):
