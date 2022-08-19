@@ -199,7 +199,7 @@ class listOfProdSerializer(serializers.BaseSerializer):
 
 
 def listOfProdView(id):
-    queryset = Product.objects.filter(shop=id)
+    queryset = Product.objects.filter(shop=id, is_removed = False)
     serializer = listOfProdSerializer(queryset, many=True)
     return serializer.data
 
