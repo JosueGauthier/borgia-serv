@@ -1,5 +1,5 @@
 .gitignore
 .history
 .history/*
-.borgia/borgia/settings.py
-.package-lock.json
+borgia/borgia/settings.py
+package-lock.json
