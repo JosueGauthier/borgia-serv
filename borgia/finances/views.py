@@ -1,3 +1,4 @@
+import base64
 from rest_framework.response import Response
 from rest_framework import status
 from users.serializers import LoginSerializer
@@ -10,12 +11,11 @@ import decimal
 
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import (LoginRequiredMixin,
-                                        PermissionRequiredMixin)
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.core.exceptions import ObjectDoesNotExist, PermissionDenied
 from django.db.models import Q
-from django.http import Http404
-from django.shortcuts import HttpResponse, render
+from django.http import Http404, HttpResponseRedirect
+from django.shortcuts import HttpResponse, redirect, render
 from django.urls import reverse
 from django.utils.timezone import now
 from django.views.decorators.csrf import csrf_exempt
@@ -23,15 +23,27 @@ from finances.serializers import *
 
 from borgia.views import BorgiaFormView, BorgiaView
 from configurations.utils import configuration_get
-from finances.forms import (ExceptionnalMovementForm,
-                            GenericListSearchDateForm, RechargingCreateForm,
-                            RechargingListForm, SelfLydiaCreateForm,
-                            TransfertCreateForm)
-from finances.models import (Cash, Cheque, ExceptionnalMovement, Lydia,
-                             Recharging, Transfert)
-from finances.utils import (verify_token_lydia,
-                            calculate_lydia_fee_from_total,
-                            calculate_total_amount_lydia)
+from finances.forms import (
+    ExceptionnalMovementForm,
+    GenericListSearchDateForm,
+    RechargingCreateForm,
+    RechargingListForm,
+    SelfLydiaCreateForm,
+    TransfertCreateForm,
+)
+from finances.models import (
+    Cash,
+    Cheque,
+    ExceptionnalMovement,
+    Lydia,
+    Recharging,
+    Transfert,
+)
+from finances.utils import (
+    verify_token_lydia,
+    calculate_lydia_fee_from_total,
+    calculate_total_amount_lydia,
+)
 from users.mixins import UserMixin
 from users.models import User
 
@@ -45,11 +57,12 @@ class RechargingList(LoginRequiredMixin, PermissionRequiredMixin, BorgiaFormView
     transactions, please refer to other classes (SaleList, TransfertList and
     ExceptionnalMovementList).
     """
-    permission_required = 'finances.view_recharging'
-    menu_type = 'managers'
-    template_name = 'finances/recharging_list.html'
+
+    permission_required = "finances.view_recharging"
+    menu_type = "managers"
+    template_name = "finances/recharging_list.html"
     form_class = RechargingListForm
-    lm_active = 'lm_recharging_list'
+    lm_active = "lm_recharging_list"
 
     search = None
     date_end = now() + datetime.timedelta(days=1)
@@ -59,69 +72,50 @@ class RechargingList(LoginRequiredMixin, PermissionRequiredMixin, BorgiaFormView
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        context['recharging_list'] = self.form_query(
-            Recharging.objects.all().order_by(
-                '-datetime'))[:1000]
+        context["recharging_list"] = self.form_query(
+            Recharging.objects.all().order_by("-datetime")
+        )[:1000]
 
-        context['info'] = self.info(context['recharging_list'])
+        context["info"] = self.info(context["recharging_list"])
         return context
 
     def get_initial(self):
         initial = super().get_initial()
-        initial['date_begin'] = self.date_begin
-        initial['date_end'] = self.date_end
+        initial["date_begin"] = self.date_begin
+        initial["date_end"] = self.date_end
         return initial
 
     def info(self, query):
         info = {
-            'cash': {
-                'total': 0,
-                'nb': 0,
-                'ids': []
-            },
-            'cheque': {
-                'total': 0,
-                'nb': 0,
-                'ids': []
-            },
-            'lydia_face2face': {
-                'total': 0,
-                'nb': 0,
-                'ids': []
-            },
-            'lydia_online': {
-                'total': 0,
-                'nb': 0,
-                'ids': []
-            },
-            'total': {
-                'total': 0,
-                'nb': 0
-            }
+            "cash": {"total": 0, "nb": 0, "ids": []},
+            "cheque": {"total": 0, "nb": 0, "ids": []},
+            "lydia_face2face": {"total": 0, "nb": 0, "ids": []},
+            "lydia_online": {"total": 0, "nb": 0, "ids": []},
+            "total": {"total": 0, "nb": 0},
         }
 
         for recharging in query:
-            if recharging.content_solution.__class__.__name__ == 'Cash':
-                info['cash']['total'] += recharging.content_solution.amount
-                info['cash']['nb'] += 1
-                info['cash']['ids'].append(recharging.content_solution)
-            elif recharging.content_solution.__class__.__name__ == 'Cheque':
-                info['cheque']['total'] += recharging.content_solution.amount
-                info['cheque']['nb'] += 1
-                info['cheque']['ids'].append(recharging.content_solution)
-            elif recharging.content_solution.__class__.__name__ == 'Lydia':
+            if recharging.content_solution.__class__.__name__ == "Cash":
+                info["cash"]["total"] += recharging.content_solution.amount
+                info["cash"]["nb"] += 1
+                info["cash"]["ids"].append(recharging.content_solution)
+            elif recharging.content_solution.__class__.__name__ == "Cheque":
+                info["cheque"]["total"] += recharging.content_solution.amount
+                info["cheque"]["nb"] += 1
+                info["cheque"]["ids"].append(recharging.content_solution)
+            elif recharging.content_solution.__class__.__name__ == "Lydia":
                 if recharging.content_solution.is_online is False:
-                    info['lydia_face2face']['total'] += recharging.content_solution.amount
-                    info['lydia_face2face']['nb'] += 1
-                    info['lydia_face2face']['ids'].append(
-                        recharging.content_solution)
+                    info["lydia_face2face"][
+                        "total"
+                    ] += recharging.content_solution.amount
+                    info["lydia_face2face"]["nb"] += 1
+                    info["lydia_face2face"]["ids"].append(recharging.content_solution)
                 else:
-                    info['lydia_online']['total'] += recharging.content_solution.amount
-                    info['lydia_online']['nb'] += 1
-                    info['lydia_online']['ids'].append(
-                        recharging.content_solution)
-            info['total']['total'] += recharging.content_solution.amount
-            info['total']['nb'] += 1
+                    info["lydia_online"]["total"] += recharging.content_solution.amount
+                    info["lydia_online"]["nb"] += 1
+                    info["lydia_online"]["ids"].append(recharging.content_solution)
+            info["total"]["total"] += recharging.content_solution.amount
+            info["total"]["nb"] += 1
         return info
 
     def form_query(self, query):
@@ -136,12 +130,10 @@ class RechargingList(LoginRequiredMixin, PermissionRequiredMixin, BorgiaFormView
             )
 
         if self.date_begin:
-            query = query.filter(
-                datetime__gte=self.date_begin)
+            query = query.filter(datetime__gte=self.date_begin)
 
         if self.date_end:
-            query = query.filter(
-                datetime__lte=self.date_end)
+            query = query.filter(datetime__lte=self.date_end)
 
         if self.operators:
             query = query.filter(operator__in=self.operators)
@@ -149,17 +141,17 @@ class RechargingList(LoginRequiredMixin, PermissionRequiredMixin, BorgiaFormView
         return query
 
     def form_valid(self, form):
-        if form.cleaned_data['search'] != '':
-            self.search = form.cleaned_data['search']
+        if form.cleaned_data["search"] != "":
+            self.search = form.cleaned_data["search"]
 
-        if form.cleaned_data['date_begin'] != '':
-            self.date_begin = form.cleaned_data['date_begin']
+        if form.cleaned_data["date_begin"] != "":
+            self.date_begin = form.cleaned_data["date_begin"]
 
-        if form.cleaned_data['date_end'] != '':
-            self.date_end = form.cleaned_data['date_end']
+        if form.cleaned_data["date_end"] != "":
+            self.date_end = form.cleaned_data["date_end"]
 
-        if form.cleaned_data['operators']:
-            self.operators = form.cleaned_data['operators']
+        if form.cleaned_data["operators"]:
+            self.operators = form.cleaned_data["operators"]
 
         return self.get(self.request, self.args, self.kwargs)
 
@@ -171,9 +163,10 @@ class RechargingRetrieve(LoginRequiredMixin, PermissionRequiredMixin, BorgiaView
     For other type of transaction, please refer to other classes (SaleRetrieve,
     TransfertRetrieve, ExceptionnalMovementRetrieve).
     """
-    permission_required = 'finances.view_recharging'
-    menu_type = 'managers'
-    template_name = 'finances/recharging_retrieve.html'
+
+    permission_required = "finances.view_recharging"
+    menu_type = "managers"
+    template_name = "finances/recharging_retrieve.html"
 
     def __init__(self):
         super().__init__()
@@ -185,8 +178,7 @@ class RechargingRetrieve(LoginRequiredMixin, PermissionRequiredMixin, BorgiaView
         Raise Http404 is shop doesn't exist.
         """
         try:
-            self.recharging = Recharging.objects.get(
-                pk=self.kwargs['recharging_pk'])
+            self.recharging = Recharging.objects.get(pk=self.kwargs["recharging_pk"])
         except ObjectDoesNotExist:
             raise Http404
 
@@ -200,7 +192,7 @@ class RechargingRetrieve(LoginRequiredMixin, PermissionRequiredMixin, BorgiaView
 
     def get(self, request, *args, **kwargs):
         context = self.get_context_data(**kwargs)
-        context['recharging'] = self.recharging
+        context["recharging"] = self.recharging
         return render(request, self.template_name, context=context)
 
 
@@ -213,11 +205,12 @@ class TransfertList(LoginRequiredMixin, PermissionRequiredMixin, BorgiaFormView)
     transactions, please refer to other classes (SaleList, RechargingList and
     ExceptionnalMovementList).
     """
-    permission_required = 'finances.view_transfert'
-    menu_type = 'managers'
-    template_name = 'finances/transfert_list.html'
+
+    permission_required = "finances.view_transfert"
+    menu_type = "managers"
+    template_name = "finances/transfert_list.html"
     form_class = GenericListSearchDateForm
-    lm_active = 'lm_transfert_list'
+    lm_active = "lm_transfert_list"
 
     search = None
     date_begin = None
@@ -226,8 +219,8 @@ class TransfertList(LoginRequiredMixin, PermissionRequiredMixin, BorgiaFormView)
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        context['transfert_list'] = self.form_query(
-            Transfert.objects.all().order_by('-datetime')
+        context["transfert_list"] = self.form_query(
+            Transfert.objects.all().order_by("-datetime")
         )[:100]
 
         return context
@@ -244,24 +237,22 @@ class TransfertList(LoginRequiredMixin, PermissionRequiredMixin, BorgiaFormView)
             )
 
         if self.date_begin:
-            query = query.filter(
-                datetime__gte=self.date_begin)
+            query = query.filter(datetime__gte=self.date_begin)
 
         if self.date_end:
-            query = query.filter(
-                datetime__lte=self.date_end)
+            query = query.filter(datetime__lte=self.date_end)
 
         return query
 
     def form_valid(self, form):
-        if form.cleaned_data['search'] != '':
-            self.search = form.cleaned_data['search']
+        if form.cleaned_data["search"] != "":
+            self.search = form.cleaned_data["search"]
 
-        if form.cleaned_data['date_begin'] != '':
-            self.date_begin = form.cleaned_data['date_begin']
+        if form.cleaned_data["date_begin"] != "":
+            self.date_begin = form.cleaned_data["date_begin"]
 
-        if form.cleaned_data['date_end'] != '':
-            self.date_end = form.cleaned_data['date_end']
+        if form.cleaned_data["date_end"] != "":
+            self.date_end = form.cleaned_data["date_end"]
 
         return self.get(self.request, self.args, self.kwargs)
 
@@ -274,9 +265,10 @@ class TransfertRetrieve(LoginRequiredMixin, PermissionRequiredMixin, BorgiaView)
     RechargingRetrieve, ExceptionnalMovementRetrieve).
 
     """
-    permission_required = 'finances.view_transfert'
-    menu_type = 'managers'
-    template_name = 'finances/transfert_retrieve.html'
+
+    permission_required = "finances.view_transfert"
+    menu_type = "managers"
+    template_name = "finances/transfert_retrieve.html"
 
     def __init__(self):
         super().__init__()
@@ -288,8 +280,7 @@ class TransfertRetrieve(LoginRequiredMixin, PermissionRequiredMixin, BorgiaView)
         Raise Http404 is shop doesn't exist.
         """
         try:
-            self.transfert = Transfert.objects.get(
-                pk=self.kwargs['transfert_pk'])
+            self.transfert = Transfert.objects.get(pk=self.kwargs["transfert_pk"])
         except ObjectDoesNotExist:
             raise Http404
 
@@ -303,47 +294,48 @@ class TransfertRetrieve(LoginRequiredMixin, PermissionRequiredMixin, BorgiaView)
 
     def get(self, request, *args, **kwargs):
         context = self.get_context_data(**kwargs)
-        context['transfert'] = self.transfert
+        context["transfert"] = self.transfert
         return render(request, self.template_name, context=context)
 
 
 class TransfertCreate(LoginRequiredMixin, PermissionRequiredMixin, BorgiaFormView):
-    permission_required = 'finances.add_transfert'
-    menu_type = 'members'
+    permission_required = "finances.add_transfert"
+    menu_type = "members"
     success_message = "Le montant de %(amount)s€ a bien été transféré à %(recipient)s."
-    template_name = 'finances/self_transfert_create.html'
+    template_name = "finances/self_transfert_create.html"
     form_class = TransfertCreateForm
-    lm_active = 'lm_transfert_create'
+    lm_active = "lm_transfert_create"
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
-        kwargs['sender'] = self.request.user
+        kwargs["sender"] = self.request.user
         return kwargs
 
     def form_valid(self, form):
         # Get user or ValidationError
-        recipient = form.cleaned_data['recipient']
+        recipient = form.cleaned_data["recipient"]
 
         transfert = Transfert.objects.create(
             sender=self.request.user,
             recipient=recipient,
-            amount=form.cleaned_data['amount'],
-            justification=form.cleaned_data['justification']
+            amount=form.cleaned_data["amount"],
+            justification=form.cleaned_data["justification"],
         )
         transfert.pay()
         return super(TransfertCreate, self).form_valid(form)
 
     def get_success_message(self, cleaned_data):
         return self.success_message % dict(
-            amount=cleaned_data['amount'],
-            recipient=cleaned_data['recipient']
+            amount=cleaned_data["amount"], recipient=cleaned_data["recipient"]
         )
 
     def get_success_url(self):
-        return reverse('url_members_workboard')
+        return reverse("url_members_workboard")
 
 
-class ExceptionnalMovementList(LoginRequiredMixin, PermissionRequiredMixin, BorgiaFormView):
+class ExceptionnalMovementList(
+    LoginRequiredMixin, PermissionRequiredMixin, BorgiaFormView
+):
     """
     View to list exceptionnal movement sales.
 
@@ -354,11 +346,12 @@ class ExceptionnalMovementList(LoginRequiredMixin, PermissionRequiredMixin, Borg
     SaleList).
 
     """
-    permission_required = 'finances.view_exceptionnalmovement'
-    menu_type = 'managers'
-    template_name = 'finances/exceptionnalmovement_list.html'
+
+    permission_required = "finances.view_exceptionnalmovement"
+    menu_type = "managers"
+    template_name = "finances/exceptionnalmovement_list.html"
     form_class = GenericListSearchDateForm
-    lm_active = 'lm_exceptionnalmovement_list'
+    lm_active = "lm_exceptionnalmovement_list"
 
     search = None
     date_begin = None
@@ -366,8 +359,8 @@ class ExceptionnalMovementList(LoginRequiredMixin, PermissionRequiredMixin, Borg
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['exceptionnalmovement_list'] = self.form_query(
-            ExceptionnalMovement.objects.all().order_by('-datetime')
+        context["exceptionnalmovement_list"] = self.form_query(
+            ExceptionnalMovement.objects.all().order_by("-datetime")
         )[:100]
         return context
 
@@ -383,38 +376,39 @@ class ExceptionnalMovementList(LoginRequiredMixin, PermissionRequiredMixin, Borg
             )
 
         if self.date_begin:
-            query = query.filter(
-                datetime__gte=self.date_begin)
+            query = query.filter(datetime__gte=self.date_begin)
 
         if self.date_end:
-            query = query.filter(
-                datetime__lte=self.date_end)
+            query = query.filter(datetime__lte=self.date_end)
 
         return query
 
     def form_valid(self, form):
-        if form.cleaned_data['search'] != '':
-            self.search = form.cleaned_data['search']
+        if form.cleaned_data["search"] != "":
+            self.search = form.cleaned_data["search"]
 
-        if form.cleaned_data['date_begin'] != '':
-            self.date_begin = form.cleaned_data['date_begin']
+        if form.cleaned_data["date_begin"] != "":
+            self.date_begin = form.cleaned_data["date_begin"]
 
-        if form.cleaned_data['date_end'] != '':
-            self.date_end = form.cleaned_data['date_end']
+        if form.cleaned_data["date_end"] != "":
+            self.date_end = form.cleaned_data["date_end"]
 
         return self.get(self.request, self.args, self.kwargs)
 
 
-class ExceptionnalMovementRetrieve(LoginRequiredMixin, PermissionRequiredMixin, BorgiaView):
+class ExceptionnalMovementRetrieve(
+    LoginRequiredMixin, PermissionRequiredMixin, BorgiaView
+):
     """
     Retrieve an exceptionnal movement sale.
 
     For other type of transaction, please refer to other classes (SaleRetrieve,
     TransfertRetrieve, RechargingRetrieve).
     """
-    permission_required = 'finances.view_exceptionnalmovement'
-    menu_type = 'managers'
-    template_name = 'finances/exceptionnalmovement_retrieve.html'
+
+    permission_required = "finances.view_exceptionnalmovement"
+    menu_type = "managers"
+    template_name = "finances/exceptionnalmovement_retrieve.html"
 
     def __init__(self):
         super().__init__()
@@ -427,7 +421,8 @@ class ExceptionnalMovementRetrieve(LoginRequiredMixin, PermissionRequiredMixin, 
         """
         try:
             self.exceptionnalmovement = ExceptionnalMovement.objects.get(
-                pk=self.kwargs['exceptionnalmovement_pk'])
+                pk=self.kwargs["exceptionnalmovement_pk"]
+            )
         except ObjectDoesNotExist:
             raise Http404
 
@@ -441,7 +436,7 @@ class ExceptionnalMovementRetrieve(LoginRequiredMixin, PermissionRequiredMixin, 
 
     def get(self, request, *args, **kwargs):
         context = self.get_context_data(**kwargs)
-        context['exceptionnalmovement'] = self.exceptionnalmovement
+        context["exceptionnalmovement"] = self.exceptionnalmovement
         return render(request, self.template_name, context=context)
 
 
@@ -449,10 +444,11 @@ class SelfTransactionList(LoginRequiredMixin, BorgiaFormView):
     """
     View to list transactions of the logged user.
     """
-    menu_type = 'members'
-    template_name = 'finances/self_transaction_list.html'
+
+    menu_type = "members"
+    template_name = "finances/self_transaction_list.html"
     form_class = GenericListSearchDateForm
-    lm_active = 'lm_self_transaction_list'
+    lm_active = "lm_self_transaction_list"
 
     search = None
     date_begin = None
@@ -464,8 +460,9 @@ class SelfTransactionList(LoginRequiredMixin, BorgiaFormView):
 
     def get_context_data(self, **kwargs):
         context = super(SelfTransactionList, self).get_context_data(**kwargs)
-        context['transaction_list'] = self.form_query(
-            self.request.user.list_transaction())[:100]
+        context["transaction_list"] = self.form_query(
+            self.request.user.list_transaction()
+        )[:100]
         return context
 
     # TODO: form to be used
@@ -473,16 +470,16 @@ class SelfTransactionList(LoginRequiredMixin, BorgiaFormView):
         return query
 
     def form_valid(self, form):
-        if form.cleaned_data['search']:
-            self.search = form.cleaned_data['search']
-        if form.cleaned_data['date_begin']:
-            self.date_begin = form.cleaned_data['date_begin']
+        if form.cleaned_data["search"]:
+            self.search = form.cleaned_data["search"]
+        if form.cleaned_data["date_begin"]:
+            self.date_begin = form.cleaned_data["date_begin"]
 
-        if form.cleaned_data['date_end']:
-            self.date_end = form.cleaned_data['date_end']
+        if form.cleaned_data["date_end"]:
+            self.date_end = form.cleaned_data["date_end"]
         try:
-            if form.cleaned_data['shop']:
-                self.query_shop = form.cleaned_data['shop']
+            if form.cleaned_data["shop"]:
+                self.query_shop = form.cleaned_data["shop"]
         except KeyError:
             pass
         return self.get(self.request, self.args, self.kwargs)
@@ -493,9 +490,10 @@ class UserExceptionnalMovementCreate(UserMixin, BorgiaFormView):
     View to create an exceptionnal movement (debit or credit) for a specific
     user.
     """
-    permission_required = 'finances.add_exceptionnalmovement'
-    menu_type = 'managers'
-    template_name = 'finances/user_exceptionnalmovement_create.html'
+
+    permission_required = "finances.add_exceptionnalmovement"
+    menu_type = "managers"
+    template_name = "finances/user_exceptionnalmovement_create.html"
     form_class = ExceptionnalMovementForm
     lm_active = None
 
@@ -505,20 +503,21 @@ class UserExceptionnalMovementCreate(UserMixin, BorgiaFormView):
         for the operator is right.
         """
         operator_transaction = authenticate(
-            username=form.cleaned_data['operator_username'],
-            password=form.cleaned_data['operator_password'])
-        amount = form.cleaned_data['amount']
+            username=form.cleaned_data["operator_username"],
+            password=form.cleaned_data["operator_password"],
+        )
+        amount = form.cleaned_data["amount"]
         is_credit = False
 
-        if form.cleaned_data['type_movement'] == 'credit':
+        if form.cleaned_data["type_movement"] == "credit":
             is_credit = True
 
         exceptionnal_movement = ExceptionnalMovement.objects.create(
-            justification=form.cleaned_data['justification'],
+            justification=form.cleaned_data["justification"],
             operator=operator_transaction,
             recipient=self.user,
             is_credit=is_credit,
-            amount=amount
+            amount=amount,
         )
         exceptionnal_movement.pay()
 
@@ -530,23 +529,23 @@ class UserExceptionnalMovementCreate(UserMixin, BorgiaFormView):
         username of course).
         """
         initial = super().get_initial()
-        initial['operator_username'] = self.request.user.username
+        initial["operator_username"] = self.request.user.username
         return initial
 
     def get_success_url(self):
-        return reverse('url_user_retrieve', kwargs={'user_pk': self.user.pk})
+        return reverse("url_user_retrieve", kwargs={"user_pk": self.user.pk})
 
 
 class RechargingCreate(UserMixin, BorgiaFormView):
-    permission_required = 'finances.add_recharging'
-    menu_type = 'managers'
-    template_name = 'finances/user_supplymoney.html'
+    permission_required = "finances.add_recharging"
+    menu_type = "managers"
+    template_name = "finances/user_supplymoney.html"
     form_class = RechargingCreateForm
     lm_active = None
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
-        kwargs['user'] = self.user
+        kwargs["user"] = self.user
         return kwargs
 
     def form_valid(self, form):
@@ -555,34 +554,37 @@ class RechargingCreate(UserMixin, BorgiaFormView):
         for the operator is right.
         """
         operator_transaction = authenticate(
-            username=form.cleaned_data['operator_username'],
-            password=form.cleaned_data['operator_password'])
+            username=form.cleaned_data["operator_username"],
+            password=form.cleaned_data["operator_password"],
+        )
         sender = self.user
 
-        if form.cleaned_data['type'] == 'cheque':
+        if form.cleaned_data["type"] == "cheque":
             recharging_solution = Cheque.objects.create(
-                amount=form.cleaned_data['amount'],
-                signature_date=form.cleaned_data['signature_date'],
-                cheque_number=form.cleaned_data['unique_number'],
-                sender=sender)
-
-        elif form.cleaned_data['type'] == 'cash':
-            recharging_solution = Cash.objects.create(
+                amount=form.cleaned_data["amount"],
+                signature_date=form.cleaned_data["signature_date"],
+                cheque_number=form.cleaned_data["unique_number"],
                 sender=sender,
-                amount=form.cleaned_data['amount'])
+            )
 
-        elif form.cleaned_data['type'] == 'lydia':
+        elif form.cleaned_data["type"] == "cash":
+            recharging_solution = Cash.objects.create(
+                sender=sender, amount=form.cleaned_data["amount"]
+            )
+
+        elif form.cleaned_data["type"] == "lydia":
             recharging_solution = Lydia.objects.create(
                 sender=sender,
-                amount=form.cleaned_data['amount'],
-                date_operation=form.cleaned_data['signature_date'],
-                id_from_lydia=form.cleaned_data['unique_number'],
-                is_online=False)
+                amount=form.cleaned_data["amount"],
+                date_operation=form.cleaned_data["signature_date"],
+                id_from_lydia=form.cleaned_data["unique_number"],
+                is_online=False,
+            )
 
         recharging = Recharging.objects.create(
             sender=sender,
             operator=operator_transaction,
-            content_solution=recharging_solution
+            content_solution=recharging_solution,
         )
         recharging.pay()
 
@@ -594,22 +596,175 @@ class RechargingCreate(UserMixin, BorgiaFormView):
         username of course).
         """
         initial = super().get_initial()
-        initial['signature_date'] = now
-        initial['operator_username'] = self.request.user.username
+        initial["signature_date"] = now
+        initial["operator_username"] = self.request.user.username
         return initial
 
     def get_success_url(self):
-        return reverse('url_user_retrieve', kwargs={'user_pk': self.user.pk})
+        return reverse("url_user_retrieve", kwargs={"user_pk": self.user.pk})
+
+
+# : Viva Wallet integration try
+
+# : OAuth2 authentication
+
+
+def get_viva_wallet_access_token():
+    client_id = "cgm307gy1r3uwpvrilir2osbd5j8vdu416wasah2e9su3.apps.vivapayments.com"
+    client_secret = "OT1hz4F799aa6wwXgGAqLYXKcTpZjS"
+    token_url = "https://demo-accounts.vivapayments.com/connect/token"
+
+    # Encode the client_id and client_secret in base64
+    credentials = f"{client_id}:{client_secret}"
+    encoded_credentials = base64.b64encode(credentials.encode()).decode()
+
+    headers = {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Authorization": f"Basic {encoded_credentials}",
+    }
+
+    data = {"grant_type": "client_credentials"}
+
+    response = requests.post(token_url, headers=headers, data=data)
+
+    if response.status_code == 200:
+        token_data = response.json()
+        access_token = token_data.get("access_token")
+
+        return access_token
+    else:
+        # Handle error response
+        return None
+
+
+""" curl '[Environment URL]'
+-H 'Authorization: Bearer [access token]'
+-H 'Content-Type: application/json'
+-d '{
+    "amount": 1000,
+    "customerTrns": "Short description of purchased items/services to display to your customer",
+    "customer":
+    {
+        "email": "johdoe@vivawallet.com",
+        "fullName": "John Doe",
+        "phone": "+30999999999",
+        "countryCode": "GB",
+        "requestLang": "en-GB"
+    },
+    "paymentTimeout": 300,
+    "preauth": false,
+    "allowRecurring": false,
+    "maxInstallments": 12,
+    "paymentNotification": true,
+    "tipAmount": 100,
+    "disableExactAmount": false,
+    "disableCash": true,
+    "disableWallet": true,
+    "sourceCode": "1234",
+    "merchantTrns": "Short description of items/services purchased by customer",
+    "tags":
+    [
+        "tags for grouping and filtering the transactions",
+        "this tag can be searched on VivaWallet sales dashboard",
+        "Sample tag 1",
+        "Sample tag 2",
+        "Another string"
+    ],
+    "cardTokens":
+    [
+        "ct_5d0a4e3a7e04469f82da228ca98fd661"
+    ]
+}'
+ """
+
+
+def create_viva_wallet_payment_order(access_token):
+    """Create a payment order from Viva Wallet API
+
+    Args:
+        access_token (string): access token is provided by the 0Auth2 function get_viva_wallet_access_token( )
+
+    Returns:
+        string: return the payment order number access that can be used by the customer to use Smart Checkout of Viva Wallet
+    """
+    order_url = "https://demo-api.vivapayments.com/checkout/v2/orders"
+
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {access_token}",
+    }
+
+    data = {
+        "amount": 1000,
+        "customerTrns": "Short description of purchased items/services to display to your customer",
+        "customer": {
+            "email": "johndoe@vivawallet.com",
+            "fullName": "John Doe",
+            "phone": "+30999999999",
+            "countryCode": "GB",
+            "requestLang": "en-GB",
+        },
+        "paymentTimeout": 300,
+        "preauth": False,
+        "allowRecurring": False,
+        "maxInstallments": 12,
+        "paymentNotification": True,
+        "tipAmount": 100,
+        "disableExactAmount": False,
+        "disableCash": True,
+        "disableWallet": True,
+        "sourceCode": "7316",
+        "merchantTrns": "Short description of items/services purchased by customer",
+        "tags": [
+            "tags for grouping and filtering the transactions",
+            "this tag can be searched on VivaWallet sales dashboard",
+            "Sample tag 1",
+            "Sample tag 2",
+            "Another string",
+        ],
+    }
+
+    response = requests.post(order_url, headers=headers, json=data)
+
+    if response.status_code == 200:
+        payment_order = response.json()
+        order_code = payment_order.get("orderCode")
+        return order_code
+    else:
+        # Handle error response
+        return None
+
+
+def get_viva_wallet_transaction(access_token, transaction_id):
+    transaction_url = (
+        "https://demo-api.vivapayments.com/checkout/v2/transactions/"
+        + str(transaction_id)
+    )
+
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {access_token}",
+    }
+
+    response = requests.get(transaction_url, headers=headers)
+
+    if response.status_code == 200:
+        transaction_data = response.json()
+        return transaction_data
+    else:
+        # Handle error response
+        return None
 
 
 class SelfLydiaCreate(LoginRequiredMixin, BorgiaFormView):
     """
     View to supply himself by Lydia.
     """
-    menu_type = 'members'
-    template_name = 'finances/self_lydia_create.html'
+
+    menu_type = "members"
+    template_name = "finances/self_lydia_create.html"
     form_class = SelfLydiaCreateForm
-    lm_active = 'lm_self_lydia_create'
+    lm_active = "lm_self_lydia_create"
 
     def __init__(self):
         super().__init__()
@@ -626,57 +781,58 @@ class SelfLydiaCreate(LoginRequiredMixin, BorgiaFormView):
     def add_lydia_context(self):
         if not configuration_get("ENABLE_SELF_LYDIA").get_value():
             self.state = "disabled"
-        elif configuration_get("API_TOKEN_LYDIA").get_value() in ['', 'Undefined']:
+        elif configuration_get("API_TOKEN_LYDIA").get_value() in ["", "Undefined"]:
             self.state = "undefined"
         else:
             self.state = "enabled"
 
             self.enable_fee_lydia = configuration_get(
-                name='ENABLE_FEE_LYDIA').get_value()
+                name="ENABLE_FEE_LYDIA"
+            ).get_value()
 
             if self.enable_fee_lydia:
-                base_fee_lydia = configuration_get(
-                    name='BASE_FEE_LYDIA').get_value()
-                self.base_fee_lydia = decimal.Decimal(
-                    base_fee_lydia).quantize(decimal.Decimal('.01'))
-                ratio_fee_lydia = configuration_get(
-                    name='RATIO_FEE_LYDIA').get_value()
-                self.ratio_fee_lydia = decimal.Decimal(
-                    ratio_fee_lydia).quantize(decimal.Decimal('.01'))
-                tax_fee_lydia = configuration_get(
-                    name='TAX_FEE_LYDIA').get_value()
-                self.tax_fee_lydia = decimal.Decimal(
-                    tax_fee_lydia).quantize(decimal.Decimal('.01'))
+                base_fee_lydia = configuration_get(name="BASE_FEE_LYDIA").get_value()
+                self.base_fee_lydia = decimal.Decimal(base_fee_lydia).quantize(
+                    decimal.Decimal(".01")
+                )
+                ratio_fee_lydia = configuration_get(name="RATIO_FEE_LYDIA").get_value()
+                self.ratio_fee_lydia = decimal.Decimal(ratio_fee_lydia).quantize(
+                    decimal.Decimal(".01")
+                )
+                tax_fee_lydia = configuration_get(name="TAX_FEE_LYDIA").get_value()
+                self.tax_fee_lydia = decimal.Decimal(tax_fee_lydia).quantize(
+                    decimal.Decimal(".01")
+                )
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         self.add_lydia_context()
-        context['state'] = self.state
-        if self.state == 'enabled':
-            context['enable_fee_lydia'] = self.enable_fee_lydia
+        context["state"] = self.state
+        if self.state == "enabled":
+            context["enable_fee_lydia"] = self.enable_fee_lydia
             if self.enable_fee_lydia:
-                context['base_fee_lydia'] = self.base_fee_lydia
-                context['ratio_fee_lydia'] = self.ratio_fee_lydia
-                context['tax_fee_lydia'] = self.tax_fee_lydia
+                context["base_fee_lydia"] = self.base_fee_lydia
+                context["ratio_fee_lydia"] = self.ratio_fee_lydia
+                context["tax_fee_lydia"] = self.tax_fee_lydia
         return context
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
 
-        min_value = configuration_get(name='MIN_PRICE_LYDIA').get_value()
-        kwargs['min_value'] = decimal.Decimal(min_value)
+        min_value = configuration_get(name="MIN_PRICE_LYDIA").get_value()
+        kwargs["min_value"] = decimal.Decimal(min_value)
 
-        max_value = configuration_get(name='MAX_PRICE_LYDIA').get_value()
+        max_value = configuration_get(name="MAX_PRICE_LYDIA").get_value()
         if max_value == 0:
-            kwargs['max_value'] = None
+            kwargs["max_value"] = None
         else:
-            kwargs['max_value'] = decimal.Decimal(max_value)
+            kwargs["max_value"] = decimal.Decimal(max_value)
 
         return kwargs
 
     def get_initial(self):
         initial = super().get_initial()
-        initial['tel_number'] = self.request.user.phone
+        initial["tel_number"] = self.request.user.phone
         return initial
 
     def form_valid(self, form):
@@ -687,64 +843,53 @@ class SelfLydiaCreate(LoginRequiredMixin, BorgiaFormView):
 
         user = self.request.user
         if user.phone is None:
-            user.phone = form.cleaned_data['tel_number']
+            user.phone = form.cleaned_data["tel_number"]
             user.save()
 
         context = self.get_context_data()
-        context['vendor_token'] = configuration_get(
-            "VENDOR_TOKEN_LYDIA").get_value()
-        context['confirm_url'] = self.request.build_absolute_uri(
-            reverse('url_self_lydia_confirm'))
-        context['callback_url'] = self.request.build_absolute_uri(
-            reverse('url_self_lydia_callback'))
-        recharging_amount = form.cleaned_data['recharging_amount']
+        context["vendor_token"] = configuration_get("VENDOR_TOKEN_LYDIA").get_value()
+        context["confirm_url"] = self.request.build_absolute_uri(
+            reverse("url_self_lydia_confirm")
+        )
+        context["callback_url"] = self.request.build_absolute_uri(
+            reverse("url_self_lydia_callback")
+        )
+        recharging_amount = form.cleaned_data["recharging_amount"]
 
         if self.enable_fee_lydia:
             if self.tax_fee_lydia and self.tax_fee_lydia != 0:
                 total_amount = calculate_total_amount_lydia(
-                    recharging_amount, self.base_fee_lydia, self.ratio_fee_lydia, self.tax_fee_lydia)
+                    recharging_amount,
+                    self.base_fee_lydia,
+                    self.ratio_fee_lydia,
+                    self.tax_fee_lydia,
+                )
             else:
                 total_amount = calculate_total_amount_lydia(
-                    recharging_amount, self.base_fee_lydia, self.ratio_fee_lydia)
+                    recharging_amount, self.base_fee_lydia, self.ratio_fee_lydia
+                )
 
             fee_amount = total_amount - recharging_amount
-            context['fee_amount'] = fee_amount
+            context["fee_amount"] = fee_amount
         else:
             total_amount = recharging_amount
 
-        context['total_amount'] = total_amount
-        context['recharging_amount'] = recharging_amount
-        context['tel_number'] = form.cleaned_data['tel_number']
-        context['message'] = (
-            "Borgia - AE ENSAM - Crédit de "
-            + user.__str__())
+        context["total_amount"] = total_amount
+        context["recharging_amount"] = recharging_amount
+        context["tel_number"] = form.cleaned_data["tel_number"]
+        context["message"] = "Borgia - AE ENSAM - Crédit de " + user.__str__()
 
-        payload = {
+        # return render(self.request,
+        #               'finances/self_lydia_button.html',
+        #               context=context)
 
-            "message": "Hello boyyyyyyyy",
-            "amount": total_amount,
-            "currency": "EUR",
-            "type": "phone",
-            "recipient": context['tel_number'],
-            "vendor_token": context['vendor_token'],
+        access_token = get_viva_wallet_access_token()
 
-        }
+        orderCode = create_viva_wallet_payment_order(access_token)
 
-        url = "https://homologation.lydia-app.com/api/request/do.json"
-
-        response = requests.post(url, data=payload)
-
-        response_dict = json.loads(response.text)
-
-        confirm_url = response_dict['mobile_url']
-
-        # f = open("myfile.txt", "a")
-        # f.write("\n")
-        # f.write(str(confirm_url))
-
-        return render(self.request,
-                      'finances/self_lydia_button.html',
-                      context=context)
+        return redirect(
+            "https://demo.vivapayments.com/web/checkout?ref=" + str(orderCode)
+        )
 
 
 class SelfLydiaConfirm(LoginRequiredMixin, BorgiaView):
@@ -757,17 +902,78 @@ class SelfLydiaConfirm(LoginRequiredMixin, BorgiaView):
     :note:: transaction and order parameters are given by Lydia but aren't
     used here.
     """
-    menu_type = 'members'
-    template_name = 'finances/self_lydia_confirm.html'
+
+    menu_type = "members"
+    template_name = "finances/self_lydia_confirm.html"
 
     # TODO: check if a Lydia object exist and if it's from the current day,
     # else raise Error
 
     def get(self, request, *args, **kwargs):
+        user_pk = self.request.user.pk
+
         context = super().get_context_data()
-        context['transaction'] = self.request.GET.get('transaction')
-        context['order'] = self.request.GET.get('order_ref')
+
+        # Récupérer la valeur de 't' depuis les paramètres de la requête
+        transaction_id = request.GET.get("t")
+
+        access_token = get_viva_wallet_access_token()
+        transaction_data = get_viva_wallet_transaction(access_token, transaction_id)
+
+        transaction_amount = transaction_data.get("amount")
+
+        viva_wallet_borgia_balance_refill(transaction_data, transaction_id, user_pk)
+
+        context["transaction"] = transaction_amount
+        context["order"] = self.request.GET.get("order_ref")
+
         return render(request, self.template_name, context=context)
+
+
+def viva_wallet_borgia_balance_refill(transaction_data, transaction_id, user_pk):
+    params_dict = {
+        "currency": "EUR",
+        "request_id": transaction_data.get("orderCode"),
+        "amount": transaction_data.get("amount"),
+        "signed": True,
+        "transaction_identifier": str(transaction_id),
+        "vendor_token": configuration_get("VENDOR_TOKEN_LYDIA").get_value(),
+        "sig": "UNDEFINED",
+    }
+
+    try:
+        user = User.objects.get(pk=user_pk)
+    except ObjectDoesNotExist:
+        raise Http404
+
+    total_amount = decimal.Decimal(params_dict["amount"])
+    if not configuration_get("ENABLE_FEE_LYDIA").get_value():
+        fee = 0
+        recharging_amount = total_amount
+    else:
+        base_fee = decimal.Decimal(
+            configuration_get("BASE_FEE_LYDIA").get_value()
+        ).quantize(decimal.Decimal(".01"))
+        ratio_fee = decimal.Decimal(
+            configuration_get("RATIO_FEE_LYDIA").get_value()
+        ).quantize(decimal.Decimal(".01"))
+        tax_fee = decimal.Decimal(
+            configuration_get("TAX_FEE_LYDIA").get_value()
+        ).quantize(decimal.Decimal(".01"))
+
+        fee = calculate_lydia_fee_from_total(total_amount, base_fee, ratio_fee, tax_fee)
+        recharging_amount = total_amount - fee
+
+    lydia = Lydia.objects.create(
+        sender=user,
+        amount=recharging_amount,
+        id_from_lydia=params_dict["transaction_identifier"],
+        fee=fee,
+    )
+    recharging = Recharging.objects.create(
+        sender=user, operator=user, content_solution=lydia
+    )
+    recharging.pay()
 
 
 @csrf_exempt
@@ -815,7 +1021,7 @@ def self_lydia_callback(request):
         "signed": request.POST.get("signed"),
         "transaction_identifier": request.POST.get("transaction_identifier"),
         "vendor_token": request.POST.get("vendor_token"),
-        "sig": request.POST.get("sig")
+        "sig": request.POST.get("sig"),
     }
     lydia_token = configuration_get("API_TOKEN_LYDIA").get_value()
 
@@ -823,7 +1029,7 @@ def self_lydia_callback(request):
         raise PermissionDenied
     else:
         try:
-            user_pk = request.GET.get('user_pk')
+            user_pk = request.GET.get("user_pk")
         except KeyError:
             return PermissionDenied
 
@@ -832,49 +1038,54 @@ def self_lydia_callback(request):
         except ObjectDoesNotExist:
             raise Http404
 
-        total_amount = decimal.Decimal(params_dict['amount'])
-        if not configuration_get('ENABLE_FEE_LYDIA').get_value():
+        total_amount = decimal.Decimal(params_dict["amount"])
+        if not configuration_get("ENABLE_FEE_LYDIA").get_value():
             fee = 0
             recharging_amount = total_amount
         else:
-            base_fee = decimal.Decimal(configuration_get(
-                'BASE_FEE_LYDIA').get_value()).quantize(decimal.Decimal('.01'))
-            ratio_fee = decimal.Decimal(configuration_get(
-                'RATIO_FEE_LYDIA').get_value()).quantize(decimal.Decimal('.01'))
-            tax_fee = decimal.Decimal(configuration_get(
-                'TAX_FEE_LYDIA').get_value()).quantize(decimal.Decimal('.01'))
+            base_fee = decimal.Decimal(
+                configuration_get("BASE_FEE_LYDIA").get_value()
+            ).quantize(decimal.Decimal(".01"))
+            ratio_fee = decimal.Decimal(
+                configuration_get("RATIO_FEE_LYDIA").get_value()
+            ).quantize(decimal.Decimal(".01"))
+            tax_fee = decimal.Decimal(
+                configuration_get("TAX_FEE_LYDIA").get_value()
+            ).quantize(decimal.Decimal(".01"))
 
             fee = calculate_lydia_fee_from_total(
-                total_amount, base_fee, ratio_fee, tax_fee)
+                total_amount, base_fee, ratio_fee, tax_fee
+            )
             recharging_amount = total_amount - fee
 
         lydia = Lydia.objects.create(
             sender=user,
             amount=recharging_amount,
-            id_from_lydia=params_dict['transaction_identifier'],
-            fee=fee
+            id_from_lydia=params_dict["transaction_identifier"],
+            fee=fee,
         )
         recharging = Recharging.objects.create(
-            sender=user,
-            operator=user,
-            content_solution=lydia
+            sender=user, operator=user, content_solution=lydia
         )
         recharging.pay()
 
-        return HttpResponse('200')
+        return HttpResponse("200")
+
+
+#: Partie API
 
 
 class SelfLydiaCreateAPI(views.APIView):
-
-    #permission_classes = (permissions.AllowAny,)
-    #permission_required = 'shops.add_product'
+    # permission_classes = (permissions.AllowAny,)
+    # permission_required = 'shops.add_product'
 
     def post(self, request):
         #! Utilisateur manager se log
         serializerLogin = LoginSerializer(
-            data=self.request.data, context={'request': self.request})
+            data=self.request.data, context={"request": self.request}
+        )
         serializerLogin.is_valid(raise_exception=True)
-        user = serializerLogin.validated_data['user']
+        user = serializerLogin.validated_data["user"]
 
         # if user.has_perm(self.permission_required) == False:
         #    return Response({"Error": "User does not have permission to perform the requested action"}, status=status.HTTP_401_UNAUTHORIZED)
@@ -887,25 +1098,27 @@ class SelfLydiaCreateAPI(views.APIView):
         user = self.request.user
 
         context = {}
-        context['vendor_token'] = configuration_get(
-            "VENDOR_TOKEN_LYDIA").get_value()
+        context["vendor_token"] = configuration_get("VENDOR_TOKEN_LYDIA").get_value()
 
-        context['confirm_url'] = self.request.build_absolute_uri(
-            reverse('url_self_lydia_confirm'))
+        context["confirm_url"] = self.request.build_absolute_uri(
+            reverse("url_self_lydia_confirm")
+        )
 
-        context['callback_url'] = self.request.build_absolute_uri(
-            reverse('url_self_lydia_callback'))
+        context["callback_url"] = self.request.build_absolute_uri(
+            reverse("url_self_lydia_callback")
+        )
 
         serializerSelfLydiaCreateAPI = SelfLydiaCreateAPISerializer(
-            data=self.request.data, context={'request': self.request})
+            data=self.request.data, context={"request": self.request}
+        )
 
         serializerSelfLydiaCreateAPI.is_valid(raise_exception=True)
 
         contentMap = serializerSelfLydiaCreateAPI.validated_data
 
-        amount = contentMap['amount']
+        amount = contentMap["amount"]
 
-        phone_number = contentMap['phone_number']
+        phone_number = contentMap["phone_number"]
 
         if user.phone is None:
             user.phone = phone_number
@@ -913,46 +1126,46 @@ class SelfLydiaCreateAPI(views.APIView):
 
         recharging_amount = amount
 
-        #total_amount = recharging_amount
+        # total_amount = recharging_amount
 
-        enable_fee_lydia = configuration_get(
-            name='ENABLE_FEE_LYDIA').get_value()
+        enable_fee_lydia = configuration_get(name="ENABLE_FEE_LYDIA").get_value()
 
-        tax_fee = decimal.Decimal(configuration_get(
-            'TAX_FEE_LYDIA').get_value()).quantize(decimal.Decimal('.01'))
+        tax_fee = decimal.Decimal(
+            configuration_get("TAX_FEE_LYDIA").get_value()
+        ).quantize(decimal.Decimal(".01"))
 
-        base_fee = decimal.Decimal(configuration_get(
-            'BASE_FEE_LYDIA').get_value()).quantize(decimal.Decimal('.01'))
-        ratio_fee = decimal.Decimal(configuration_get(
-            'RATIO_FEE_LYDIA').get_value()).quantize(decimal.Decimal('.01'))
+        base_fee = decimal.Decimal(
+            configuration_get("BASE_FEE_LYDIA").get_value()
+        ).quantize(decimal.Decimal(".01"))
+        ratio_fee = decimal.Decimal(
+            configuration_get("RATIO_FEE_LYDIA").get_value()
+        ).quantize(decimal.Decimal(".01"))
 
         # todo check if fee works fine
 
         if enable_fee_lydia:
             if tax_fee and tax_fee != 0:
                 total_amount = calculate_total_amount_lydia(
-                    recharging_amount, base_fee, ratio_fee, tax_fee)
+                    recharging_amount, base_fee, ratio_fee, tax_fee
+                )
             else:
                 total_amount = calculate_total_amount_lydia(
-                    recharging_amount, base_fee, ratio_fee)
+                    recharging_amount, base_fee, ratio_fee
+                )
 
             fee_amount = total_amount - recharging_amount
-            context['fee_amount'] = fee_amount
+            context["fee_amount"] = fee_amount
         else:
             total_amount = recharging_amount
 
         payload = {
-
-            "message": (
-                "Borgia - AE ENSAM - Crédit de "
-                + user.__str__()),
+            "message": ("Borgia - AE ENSAM - Crédit de " + user.__str__()),
             "amount": total_amount,
             "currency": "EUR",
             "type": "phone",
             "recipient": phone_number,
-            "vendor_token": context['vendor_token'],
-            "confirm_url": context['callback_url']+"?user_pk="+str(user.pk)
-
+            "vendor_token": context["vendor_token"],
+            "confirm_url": context["callback_url"] + "?user_pk=" + str(user.pk),
         }
 
         url = "https://homologation.lydia-app.com/api/request/do.json"
@@ -961,20 +1174,20 @@ class SelfLydiaCreateAPI(views.APIView):
 
         response_dict = json.loads(response.text)
 
-        confirm_url = response_dict['mobile_url']
-        request_uuid = response_dict['request_uuid']
+        confirm_url = response_dict["mobile_url"]
+        request_uuid = response_dict["request_uuid"]
 
         return Response([confirm_url, request_uuid], status=status.HTTP_202_ACCEPTED)
 
 
 class LydiaStateAPI(views.APIView):
-
     def post(self, request):
         #! Utilisateur se log
         serializerLogin = LoginSerializer(
-            data=self.request.data, context={'request': self.request})
+            data=self.request.data, context={"request": self.request}
+        )
         serializerLogin.is_valid(raise_exception=True)
-        user = serializerLogin.validated_data['user']
+        user = serializerLogin.validated_data["user"]
 
         logout(request)
         login(request, user)
@@ -984,23 +1197,21 @@ class LydiaStateAPI(views.APIView):
         user = self.request.user
 
         context = {}
-        context['vendor_token'] = configuration_get(
-            "VENDOR_TOKEN_LYDIA").get_value()
+        context["vendor_token"] = configuration_get("VENDOR_TOKEN_LYDIA").get_value()
 
         serializerSelfLydiaCreateAPI = LydiaStateAPISerializer(
-            data=self.request.data, context={'request': self.request})
+            data=self.request.data, context={"request": self.request}
+        )
 
         serializerSelfLydiaCreateAPI.is_valid(raise_exception=True)
 
         contentMap = serializerSelfLydiaCreateAPI.validated_data
 
-        contentMap_list = contentMap['state_data']
+        contentMap_list = contentMap["state_data"]
 
         payload = {
-
             "request_uuid": contentMap_list[0],
-            "vendor_token": context['vendor_token'],
-
+            "vendor_token": context["vendor_token"],
         }
 
         url = "https://homologation.lydia-app.com/api/request/state.json"

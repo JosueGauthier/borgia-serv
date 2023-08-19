@@ -1,0 +1,24 @@
+{
+    'email': 'johndoe@vivawallet.com',
+     'amount': 10.0, 
+     'orderCode': 2405951153843888, 
+     'statusId': 'F',
+      'fullName':'John Doe',
+       'insDate': '2023-08-19T16: 32: 07.4+03: 00',
+        'cardNumber': '414746XXXXXX0133',
+         'currencyCode': '978',
+          'customerTrns': 'Short descript
+          ion of purchased items/service
+          s to display to your customer',
+           'merchantTrns': 'Short description of items/servic
+           es purchased by customer',
+            'transactionTypeId': 5,
+             'recurringSupport': False,
+              'totalInstallments': 0,
+               'cardCountryCode': 'SG',
+                'cardIssuingBank': 'Citibank Singapore Ltd.',
+                'currentInstallment': 0,
+                 'cardUniqueReference': '2BFCB1FD4F000DB41CB5BA76CAFB68D76AB87752',
+                  'cardTypeId': 0,
+                  'digitalWalletId': None
+}
