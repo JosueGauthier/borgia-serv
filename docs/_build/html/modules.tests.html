@@ -1,0 +1,795 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>modules.tests package &#8212; borgia 2 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'modules.tests';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">borgia 2 documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="modules.html">
+                        Borgia
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="finance.html">
+                        Documentation de Finances
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="modules.html">
+                        Borgia
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="finance.html">
+                        Documentation de Finances
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">modules.tests package</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="modules-tests-package">
+<h1>modules.tests package<a class="headerlink" href="#modules-tests-package" title="Permalink to this headline">#</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="module-modules.tests.tests_urls">
+<span id="modules-tests-tests-urls-module"></span><h2>modules.tests.tests_urls module<a class="headerlink" href="#module-modules.tests.tests_urls" title="Permalink to this headline">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="modules.tests.tests_urls.ModulesNamedURLTests">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.tests.tests_urls.</span></span><span class="sig-name descname"><span class="pre">ModulesNamedURLTests</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_urls.ModulesNamedURLTests" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.test.testcases.TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.tests.tests_urls.ModulesNamedURLTests.test_named_urls">
+<span class="sig-name descname"><span class="pre">test_named_urls</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_urls.ModulesNamedURLTests.test_named_urls" title="Permalink to this definition">#</a></dt>
+<dd><p>Named modules URLs should be reversible</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-modules.tests.tests_views">
+<span id="modules-tests-tests-views-module"></span><h2>modules.tests.tests_views module<a class="headerlink" href="#module-modules.tests.tests_views" title="Permalink to this headline">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="modules.tests.tests_views.BaseFocusShopModuleCategoryViewsTest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.tests.tests_views.</span></span><span class="sig-name descname"><span class="pre">BaseFocusShopModuleCategoryViewsTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.BaseFocusShopModuleCategoryViewsTest" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#modules.tests.tests_views.BaseShopModuleCategoryViewsTest" title="modules.tests.tests_views.BaseShopModuleCategoryViewsTest"><code class="xref py py-class docutils literal notranslate"><span class="pre">modules.tests.tests_views.BaseShopModuleCategoryViewsTest</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.tests.tests_views.BaseFocusShopModuleCategoryViewsTest.category_not_in_module">
+<span class="sig-name descname"><span class="pre">category_not_in_module</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.BaseFocusShopModuleCategoryViewsTest.category_not_in_module" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.tests.tests_views.BaseFocusShopModuleCategoryViewsTest.category_not_in_shop">
+<span class="sig-name descname"><span class="pre">category_not_in_shop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.BaseFocusShopModuleCategoryViewsTest.category_not_in_shop" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.tests.tests_views.BaseFocusShopModuleCategoryViewsTest.chief_get">
+<span class="sig-name descname"><span class="pre">chief_get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.BaseFocusShopModuleCategoryViewsTest.chief_get" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.tests.tests_views.BaseFocusShopModuleCategoryViewsTest.get_url">
+<span class="sig-name descname"><span class="pre">get_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shop_pk</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category_pk</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.BaseFocusShopModuleCategoryViewsTest.get_url" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.tests.tests_views.BaseFocusShopModuleCategoryViewsTest.not_allowed_user_get">
+<span class="sig-name descname"><span class="pre">not_allowed_user_get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.BaseFocusShopModuleCategoryViewsTest.not_allowed_user_get" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.tests.tests_views.BaseFocusShopModuleCategoryViewsTest.not_existing_category_get">
+<span class="sig-name descname"><span class="pre">not_existing_category_get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.BaseFocusShopModuleCategoryViewsTest.not_existing_category_get" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.tests.tests_views.BaseFocusShopModuleCategoryViewsTest.not_existing_module_get">
+<span class="sig-name descname"><span class="pre">not_existing_module_get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.BaseFocusShopModuleCategoryViewsTest.not_existing_module_get" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.tests.tests_views.BaseFocusShopModuleCategoryViewsTest.not_existing_shop_get">
+<span class="sig-name descname"><span class="pre">not_existing_shop_get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.BaseFocusShopModuleCategoryViewsTest.not_existing_shop_get" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.tests.tests_views.BaseFocusShopModuleCategoryViewsTest.offline_user_redirection">
+<span class="sig-name descname"><span class="pre">offline_user_redirection</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.BaseFocusShopModuleCategoryViewsTest.offline_user_redirection" title="Permalink to this definition">#</a></dt>
+<dd><p>Test offline user redirection to login page</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modules.tests.tests_views.BaseFocusShopModuleCategoryViewsTest.url_view">
+<span class="sig-name descname"><span class="pre">url_view</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#modules.tests.tests_views.BaseFocusShopModuleCategoryViewsTest.url_view" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="modules.tests.tests_views.BaseGeneralShopModuleViewsTest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.tests.tests_views.</span></span><span class="sig-name descname"><span class="pre">BaseGeneralShopModuleViewsTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.BaseGeneralShopModuleViewsTest" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#modules.tests.tests_views.BaseShopModuleViewsTest" title="modules.tests.tests_views.BaseShopModuleViewsTest"><code class="xref py py-class docutils literal notranslate"><span class="pre">modules.tests.tests_views.BaseShopModuleViewsTest</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.tests.tests_views.BaseGeneralShopModuleViewsTest.chief_get">
+<span class="sig-name descname"><span class="pre">chief_get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.BaseGeneralShopModuleViewsTest.chief_get" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.tests.tests_views.BaseGeneralShopModuleViewsTest.get_url">
+<span class="sig-name descname"><span class="pre">get_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shop_pk</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module_class</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.BaseGeneralShopModuleViewsTest.get_url" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.tests.tests_views.BaseGeneralShopModuleViewsTest.not_allowed_user_get">
+<span class="sig-name descname"><span class="pre">not_allowed_user_get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.BaseGeneralShopModuleViewsTest.not_allowed_user_get" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.tests.tests_views.BaseGeneralShopModuleViewsTest.not_existing_module_get">
+<span class="sig-name descname"><span class="pre">not_existing_module_get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.BaseGeneralShopModuleViewsTest.not_existing_module_get" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.tests.tests_views.BaseGeneralShopModuleViewsTest.not_existing_shop_get">
+<span class="sig-name descname"><span class="pre">not_existing_shop_get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.BaseGeneralShopModuleViewsTest.not_existing_shop_get" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.tests.tests_views.BaseGeneralShopModuleViewsTest.offline_user_redirection">
+<span class="sig-name descname"><span class="pre">offline_user_redirection</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.BaseGeneralShopModuleViewsTest.offline_user_redirection" title="Permalink to this definition">#</a></dt>
+<dd><p>Test offline user redirection to login page</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modules.tests.tests_views.BaseGeneralShopModuleViewsTest.url_view">
+<span class="sig-name descname"><span class="pre">url_view</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#modules.tests.tests_views.BaseGeneralShopModuleViewsTest.url_view" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="modules.tests.tests_views.BaseShopModuleCategoryViewsTest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.tests.tests_views.</span></span><span class="sig-name descname"><span class="pre">BaseShopModuleCategoryViewsTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.BaseShopModuleCategoryViewsTest" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#modules.tests.tests_views.BaseShopModuleViewsTest" title="modules.tests.tests_views.BaseShopModuleViewsTest"><code class="xref py py-class docutils literal notranslate"><span class="pre">modules.tests.tests_views.BaseShopModuleViewsTest</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.tests.tests_views.BaseShopModuleCategoryViewsTest.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.BaseShopModuleCategoryViewsTest.setUp" title="Permalink to this definition">#</a></dt>
+<dd><p>Hook method for setting up the test fixture before exercising it.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="modules.tests.tests_views.BaseShopModuleViewsTest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.tests.tests_views.</span></span><span class="sig-name descname"><span class="pre">BaseShopModuleViewsTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.BaseShopModuleViewsTest" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="shops.tests.html#shops.tests.tests_views.BaseShopsViewsTest" title="shops.tests.tests_views.BaseShopsViewsTest"><code class="xref py py-class docutils literal notranslate"><span class="pre">shops.tests.tests_views.BaseShopsViewsTest</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.tests.tests_views.BaseShopModuleViewsTest.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.BaseShopModuleViewsTest.setUp" title="Permalink to this definition">#</a></dt>
+<dd><p>Hook method for setting up the test fixture before exercising it.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="modules.tests.tests_views.ShopModuleCategoryCreateViewTests">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.tests.tests_views.</span></span><span class="sig-name descname"><span class="pre">ShopModuleCategoryCreateViewTests</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.ShopModuleCategoryCreateViewTests" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#modules.tests.tests_views.BaseGeneralShopModuleViewsTest" title="modules.tests.tests_views.BaseGeneralShopModuleViewsTest"><code class="xref py py-class docutils literal notranslate"><span class="pre">modules.tests.tests_views.BaseGeneralShopModuleViewsTest</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.tests.tests_views.ShopModuleCategoryCreateViewTests.test_chief_get">
+<span class="sig-name descname"><span class="pre">test_chief_get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.ShopModuleCategoryCreateViewTests.test_chief_get" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.tests.tests_views.ShopModuleCategoryCreateViewTests.test_not_allowed_user_get">
+<span class="sig-name descname"><span class="pre">test_not_allowed_user_get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.ShopModuleCategoryCreateViewTests.test_not_allowed_user_get" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.tests.tests_views.ShopModuleCategoryCreateViewTests.test_not_existing_module_get">
+<span class="sig-name descname"><span class="pre">test_not_existing_module_get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.ShopModuleCategoryCreateViewTests.test_not_existing_module_get" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.tests.tests_views.ShopModuleCategoryCreateViewTests.test_not_existing_shop_get">
+<span class="sig-name descname"><span class="pre">test_not_existing_shop_get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.ShopModuleCategoryCreateViewTests.test_not_existing_shop_get" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.tests.tests_views.ShopModuleCategoryCreateViewTests.test_offline_user_redirection">
+<span class="sig-name descname"><span class="pre">test_offline_user_redirection</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.ShopModuleCategoryCreateViewTests.test_offline_user_redirection" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modules.tests.tests_views.ShopModuleCategoryCreateViewTests.url_view">
+<span class="sig-name descname"><span class="pre">url_view</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'url_shop_module_category_create'</span></em><a class="headerlink" href="#modules.tests.tests_views.ShopModuleCategoryCreateViewTests.url_view" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="modules.tests.tests_views.ShopModuleCategoryDeleteViewTests">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.tests.tests_views.</span></span><span class="sig-name descname"><span class="pre">ShopModuleCategoryDeleteViewTests</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.ShopModuleCategoryDeleteViewTests" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#modules.tests.tests_views.BaseFocusShopModuleCategoryViewsTest" title="modules.tests.tests_views.BaseFocusShopModuleCategoryViewsTest"><code class="xref py py-class docutils literal notranslate"><span class="pre">modules.tests.tests_views.BaseFocusShopModuleCategoryViewsTest</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.tests.tests_views.ShopModuleCategoryDeleteViewTests.test_category_not_in_module">
+<span class="sig-name descname"><span class="pre">test_category_not_in_module</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.ShopModuleCategoryDeleteViewTests.test_category_not_in_module" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.tests.tests_views.ShopModuleCategoryDeleteViewTests.test_category_not_in_shop">
+<span class="sig-name descname"><span class="pre">test_category_not_in_shop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.ShopModuleCategoryDeleteViewTests.test_category_not_in_shop" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.tests.tests_views.ShopModuleCategoryDeleteViewTests.test_chief_get">
+<span class="sig-name descname"><span class="pre">test_chief_get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.ShopModuleCategoryDeleteViewTests.test_chief_get" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.tests.tests_views.ShopModuleCategoryDeleteViewTests.test_not_allowed_user_get">
+<span class="sig-name descname"><span class="pre">test_not_allowed_user_get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.ShopModuleCategoryDeleteViewTests.test_not_allowed_user_get" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.tests.tests_views.ShopModuleCategoryDeleteViewTests.test_not_existing_category_get">
+<span class="sig-name descname"><span class="pre">test_not_existing_category_get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.ShopModuleCategoryDeleteViewTests.test_not_existing_category_get" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.tests.tests_views.ShopModuleCategoryDeleteViewTests.test_not_existing_module_get">
+<span class="sig-name descname"><span class="pre">test_not_existing_module_get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.ShopModuleCategoryDeleteViewTests.test_not_existing_module_get" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.tests.tests_views.ShopModuleCategoryDeleteViewTests.test_not_existing_shop_get">
+<span class="sig-name descname"><span class="pre">test_not_existing_shop_get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.ShopModuleCategoryDeleteViewTests.test_not_existing_shop_get" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.tests.tests_views.ShopModuleCategoryDeleteViewTests.test_offline_user_redirection">
+<span class="sig-name descname"><span class="pre">test_offline_user_redirection</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.ShopModuleCategoryDeleteViewTests.test_offline_user_redirection" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modules.tests.tests_views.ShopModuleCategoryDeleteViewTests.url_view">
+<span class="sig-name descname"><span class="pre">url_view</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'url_shop_module_category_delete'</span></em><a class="headerlink" href="#modules.tests.tests_views.ShopModuleCategoryDeleteViewTests.url_view" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="modules.tests.tests_views.ShopModuleCategoryUpdateViewTests">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.tests.tests_views.</span></span><span class="sig-name descname"><span class="pre">ShopModuleCategoryUpdateViewTests</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.ShopModuleCategoryUpdateViewTests" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#modules.tests.tests_views.BaseFocusShopModuleCategoryViewsTest" title="modules.tests.tests_views.BaseFocusShopModuleCategoryViewsTest"><code class="xref py py-class docutils literal notranslate"><span class="pre">modules.tests.tests_views.BaseFocusShopModuleCategoryViewsTest</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.tests.tests_views.ShopModuleCategoryUpdateViewTests.test_category_not_in_module">
+<span class="sig-name descname"><span class="pre">test_category_not_in_module</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.ShopModuleCategoryUpdateViewTests.test_category_not_in_module" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.tests.tests_views.ShopModuleCategoryUpdateViewTests.test_category_not_in_shop">
+<span class="sig-name descname"><span class="pre">test_category_not_in_shop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.ShopModuleCategoryUpdateViewTests.test_category_not_in_shop" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.tests.tests_views.ShopModuleCategoryUpdateViewTests.test_chief_get">
+<span class="sig-name descname"><span class="pre">test_chief_get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.ShopModuleCategoryUpdateViewTests.test_chief_get" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.tests.tests_views.ShopModuleCategoryUpdateViewTests.test_not_allowed_user_get">
+<span class="sig-name descname"><span class="pre">test_not_allowed_user_get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.ShopModuleCategoryUpdateViewTests.test_not_allowed_user_get" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.tests.tests_views.ShopModuleCategoryUpdateViewTests.test_not_existing_category_get">
+<span class="sig-name descname"><span class="pre">test_not_existing_category_get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.ShopModuleCategoryUpdateViewTests.test_not_existing_category_get" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.tests.tests_views.ShopModuleCategoryUpdateViewTests.test_not_existing_module_get">
+<span class="sig-name descname"><span class="pre">test_not_existing_module_get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.ShopModuleCategoryUpdateViewTests.test_not_existing_module_get" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.tests.tests_views.ShopModuleCategoryUpdateViewTests.test_not_existing_shop_get">
+<span class="sig-name descname"><span class="pre">test_not_existing_shop_get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.ShopModuleCategoryUpdateViewTests.test_not_existing_shop_get" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.tests.tests_views.ShopModuleCategoryUpdateViewTests.test_offline_user_redirection">
+<span class="sig-name descname"><span class="pre">test_offline_user_redirection</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.ShopModuleCategoryUpdateViewTests.test_offline_user_redirection" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modules.tests.tests_views.ShopModuleCategoryUpdateViewTests.url_view">
+<span class="sig-name descname"><span class="pre">url_view</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'url_shop_module_category_update'</span></em><a class="headerlink" href="#modules.tests.tests_views.ShopModuleCategoryUpdateViewTests.url_view" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="modules.tests.tests_views.ShopModuleConfigUpdateViewTests">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.tests.tests_views.</span></span><span class="sig-name descname"><span class="pre">ShopModuleConfigUpdateViewTests</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.ShopModuleConfigUpdateViewTests" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#modules.tests.tests_views.BaseGeneralShopModuleViewsTest" title="modules.tests.tests_views.BaseGeneralShopModuleViewsTest"><code class="xref py py-class docutils literal notranslate"><span class="pre">modules.tests.tests_views.BaseGeneralShopModuleViewsTest</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.tests.tests_views.ShopModuleConfigUpdateViewTests.test_chief_get">
+<span class="sig-name descname"><span class="pre">test_chief_get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.ShopModuleConfigUpdateViewTests.test_chief_get" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.tests.tests_views.ShopModuleConfigUpdateViewTests.test_not_allowed_user_get">
+<span class="sig-name descname"><span class="pre">test_not_allowed_user_get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.ShopModuleConfigUpdateViewTests.test_not_allowed_user_get" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.tests.tests_views.ShopModuleConfigUpdateViewTests.test_not_existing_module_get">
+<span class="sig-name descname"><span class="pre">test_not_existing_module_get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.ShopModuleConfigUpdateViewTests.test_not_existing_module_get" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.tests.tests_views.ShopModuleConfigUpdateViewTests.test_not_existing_shop_get">
+<span class="sig-name descname"><span class="pre">test_not_existing_shop_get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.ShopModuleConfigUpdateViewTests.test_not_existing_shop_get" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.tests.tests_views.ShopModuleConfigUpdateViewTests.test_offline_user_redirection">
+<span class="sig-name descname"><span class="pre">test_offline_user_redirection</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.ShopModuleConfigUpdateViewTests.test_offline_user_redirection" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modules.tests.tests_views.ShopModuleConfigUpdateViewTests.url_view">
+<span class="sig-name descname"><span class="pre">url_view</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'url_shop_module_config_update'</span></em><a class="headerlink" href="#modules.tests.tests_views.ShopModuleConfigUpdateViewTests.url_view" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="modules.tests.tests_views.ShopModuleConfigViewTests">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.tests.tests_views.</span></span><span class="sig-name descname"><span class="pre">ShopModuleConfigViewTests</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.ShopModuleConfigViewTests" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#modules.tests.tests_views.BaseGeneralShopModuleViewsTest" title="modules.tests.tests_views.BaseGeneralShopModuleViewsTest"><code class="xref py py-class docutils literal notranslate"><span class="pre">modules.tests.tests_views.BaseGeneralShopModuleViewsTest</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.tests.tests_views.ShopModuleConfigViewTests.test_chief_get">
+<span class="sig-name descname"><span class="pre">test_chief_get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.ShopModuleConfigViewTests.test_chief_get" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.tests.tests_views.ShopModuleConfigViewTests.test_not_allowed_user_get">
+<span class="sig-name descname"><span class="pre">test_not_allowed_user_get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.ShopModuleConfigViewTests.test_not_allowed_user_get" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.tests.tests_views.ShopModuleConfigViewTests.test_not_existing_module_get">
+<span class="sig-name descname"><span class="pre">test_not_existing_module_get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.ShopModuleConfigViewTests.test_not_existing_module_get" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.tests.tests_views.ShopModuleConfigViewTests.test_not_existing_shop_get">
+<span class="sig-name descname"><span class="pre">test_not_existing_shop_get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.ShopModuleConfigViewTests.test_not_existing_shop_get" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.tests.tests_views.ShopModuleConfigViewTests.test_offline_user_redirection">
+<span class="sig-name descname"><span class="pre">test_offline_user_redirection</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.ShopModuleConfigViewTests.test_offline_user_redirection" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modules.tests.tests_views.ShopModuleConfigViewTests.url_view">
+<span class="sig-name descname"><span class="pre">url_view</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'url_shop_module_config'</span></em><a class="headerlink" href="#modules.tests.tests_views.ShopModuleConfigViewTests.url_view" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="modules.tests.tests_views.ShopModuleSaleViewTests">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.tests.tests_views.</span></span><span class="sig-name descname"><span class="pre">ShopModuleSaleViewTests</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.ShopModuleSaleViewTests" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#modules.tests.tests_views.BaseGeneralShopModuleViewsTest" title="modules.tests.tests_views.BaseGeneralShopModuleViewsTest"><code class="xref py py-class docutils literal notranslate"><span class="pre">modules.tests.tests_views.BaseGeneralShopModuleViewsTest</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.tests.tests_views.ShopModuleSaleViewTests.test_chief_get">
+<span class="sig-name descname"><span class="pre">test_chief_get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.ShopModuleSaleViewTests.test_chief_get" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.tests.tests_views.ShopModuleSaleViewTests.test_not_allowed_user_get">
+<span class="sig-name descname"><span class="pre">test_not_allowed_user_get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.ShopModuleSaleViewTests.test_not_allowed_user_get" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.tests.tests_views.ShopModuleSaleViewTests.test_not_existing_module_get">
+<span class="sig-name descname"><span class="pre">test_not_existing_module_get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.ShopModuleSaleViewTests.test_not_existing_module_get" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.tests.tests_views.ShopModuleSaleViewTests.test_not_existing_shop_get">
+<span class="sig-name descname"><span class="pre">test_not_existing_shop_get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.ShopModuleSaleViewTests.test_not_existing_shop_get" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.tests.tests_views.ShopModuleSaleViewTests.test_offline_user_redirection">
+<span class="sig-name descname"><span class="pre">test_offline_user_redirection</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.tests.tests_views.ShopModuleSaleViewTests.test_offline_user_redirection" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modules.tests.tests_views.ShopModuleSaleViewTests.url_view">
+<span class="sig-name descname"><span class="pre">url_view</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'url_shop_module_sale'</span></em><a class="headerlink" href="#modules.tests.tests_views.ShopModuleSaleViewTests.url_view" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-modules.tests">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-modules.tests" title="Permalink to this headline">#</a></h2>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submodules">Submodules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-modules.tests.tests_urls">modules.tests.tests_urls module</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-modules.tests.tests_views">modules.tests.tests_views module</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-modules.tests">Module contents</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="_sources/modules.tests.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, Josue Gauthier.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

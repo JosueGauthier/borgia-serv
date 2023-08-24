@@ -18,14 +18,17 @@ class Recharging(models.Model):
     """
     Allow an operator to recharge (supply money) the balance of a sender
     """
-    datetime = models.DateTimeField('Date', default=now)
-    sender = models.ForeignKey(User, related_name='sender_recharging',
-                               on_delete=models.CASCADE)
-    operator = models.ForeignKey(User, related_name='operator_recharging',
-                                 on_delete=models.CASCADE)
+
+    datetime = models.DateTimeField("Date", default=now)
+    sender = models.ForeignKey(
+        User, related_name="sender_recharging", on_delete=models.CASCADE
+    )
+    operator = models.ForeignKey(
+        User, related_name="operator_recharging", on_delete=models.CASCADE
+    )
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     solution_id = models.PositiveIntegerField()
-    content_solution = GenericForeignKey('content_type', 'solution_id')
+    content_solution = GenericForeignKey("content_type", "solution_id")
 
     class Meta:
         """
@@ -33,10 +36,14 @@ class Recharging(models.Model):
 
         :note:: Initial Django Permission (add, view) are added.
         """
-        default_permissions = ('add', 'view',)
+
+        default_permissions = (
+            "add",
+            "view",
+        )
 
     def __str__(self):
-        return 'Rechargement de ' + str(self.amount()) + '€.'
+        return "Rechargement de " + str(self.amount()) + "€."
 
     def amount(self):
         return self.content_solution.amount
@@ -46,15 +53,21 @@ class Recharging(models.Model):
 
 
 class Transfert(models.Model):
-    datetime = models.DateTimeField('Date', default=now)
-    justification = models.TextField('Justification', null=True, blank=True)
-    sender = models.ForeignKey(User, related_name='sender_transfert',
-                               on_delete=models.CASCADE)
-    recipient = models.ForeignKey(User, related_name='recipient_transfert',
-                                  on_delete=models.CASCADE)
-    amount = models.DecimalField('Montant', default=0, decimal_places=2,
-                                 max_digits=9,
-                                 validators=[MinValueValidator(decimal.Decimal(0))])
+    datetime = models.DateTimeField("Date", default=now)
+    justification = models.TextField("Justification", null=True, blank=True)
+    sender = models.ForeignKey(
+        User, related_name="sender_transfert", on_delete=models.CASCADE
+    )
+    recipient = models.ForeignKey(
+        User, related_name="recipient_transfert", on_delete=models.CASCADE
+    )
+    amount = models.DecimalField(
+        "Montant",
+        default=0,
+        decimal_places=2,
+        max_digits=9,
+        validators=[MinValueValidator(decimal.Decimal(0))],
+    )
 
     class Meta:
         """
@@ -62,10 +75,21 @@ class Transfert(models.Model):
 
         :note:: Initial Django Permission (add, view) are added.
         """
-        default_permissions = ('add', 'view',)
+
+        default_permissions = (
+            "add",
+            "view",
+        )
 
     def __str__(self):
-        return 'Transfert de ' + self.sender.__str__() + ' à ' + self.recipient.__str__() +', ' + self.justification
+        return (
+            "Transfert de "
+            + self.sender.__str__()
+            + " à "
+            + self.recipient.__str__()
+            + ", "
+            + self.justification
+        )
 
     def pay(self):
         if self.sender.debit != self.recipient.credit:
@@ -74,15 +98,21 @@ class Transfert(models.Model):
 
 
 class ExceptionnalMovement(models.Model):
-    datetime = models.DateTimeField('Date', default=now)
-    justification = models.TextField('Justification', null=True, blank=True)
-    operator = models.ForeignKey(User, related_name='sender_exceptionnal_movement',
-                                 on_delete=models.CASCADE)
-    recipient = models.ForeignKey(User, related_name='recipient_exceptionnal_movement',
-                                  on_delete=models.CASCADE)
-    amount = models.DecimalField('Montant', default=0, decimal_places=2,
-                                 max_digits=9,
-                                 validators=[MinValueValidator(decimal.Decimal(0))])
+    datetime = models.DateTimeField("Date", default=now)
+    justification = models.TextField("Justification", null=True, blank=True)
+    operator = models.ForeignKey(
+        User, related_name="sender_exceptionnal_movement", on_delete=models.CASCADE
+    )
+    recipient = models.ForeignKey(
+        User, related_name="recipient_exceptionnal_movement", on_delete=models.CASCADE
+    )
+    amount = models.DecimalField(
+        "Montant",
+        default=0,
+        decimal_places=2,
+        max_digits=9,
+        validators=[MinValueValidator(decimal.Decimal(0))],
+    )
     is_credit = models.BooleanField(default=False)
 
     class Meta:
@@ -91,15 +121,21 @@ class ExceptionnalMovement(models.Model):
 
         :note:: Initial Django Permission (add, view) are added.
         """
-        default_permissions = ('add', 'view',)
+
+        default_permissions = (
+            "add",
+            "view",
+        )
 
     def __str__(self):
-        return 'Mouvement exceptionnel de ' + str(self.amount) + '€, ' + self.justification
+        return (
+            "Mouvement exceptionnel de " + str(self.amount) + "€, " + self.justification
+        )
 
     def pay(self):
-        '''
+        """
         Add/Remove money from recipient
-        '''
+        """
         if self.is_credit:
             self.recipient.credit(self.amount)
         else:
@@ -110,15 +146,21 @@ class BaseRechargingSolution(models.Model):
     """
     Base model for recharging solutions.
     """
+
     sender = models.ForeignKey(User, on_delete=models.CASCADE)
-    amount = models.DecimalField('Montant', default=0, decimal_places=2,
-                                 max_digits=9,
-                                 validators=[MinValueValidator(decimal.Decimal(0))])
+    amount = models.DecimalField(
+        "Montant",
+        default=0,
+        decimal_places=2,
+        max_digits=9,
+        validators=[MinValueValidator(decimal.Decimal(0))],
+    )
 
     class Meta:
         """
         Remove default permissions for base and children.
         """
+
         abstract = True
         default_permissions = ()
 
@@ -138,16 +180,23 @@ class Cheque(BaseRechargingSolution):
     :type signature_date: date string, default now
     :type cheque_number: string, must match ^[0-9]{7}$
     """
-    is_cashed = models.BooleanField('Est encaissé', default=False)
-    signature_date = models.DateField('Date de signature', default=now)
-    cheque_number = models.CharField('Numéro de chèque', max_length=7,
-                                     validators=[
-                                         RegexValidator('^[0-9]{7}$',
-                                                        '''Numéro de chèque
-                                                        invalide''')])
+
+    is_cashed = models.BooleanField("Est encaissé", default=False)
+    signature_date = models.DateField("Date de signature", default=now)
+    cheque_number = models.CharField(
+        "Numéro de chèque",
+        max_length=7,
+        validators=[
+            RegexValidator(
+                "^[0-9]{7}$",
+                """Numéro de chèque
+                                                        invalide""",
+            )
+        ],
+    )
 
     def __str__(self):
-        return 'Cheque de ' + str(self.amount) + '€, n°' + self.cheque_number
+        return "Cheque de " + str(self.amount) + "€, n°" + self.cheque_number
 
 
 class Cash(BaseRechargingSolution):
@@ -158,7 +207,7 @@ class Cash(BaseRechargingSolution):
     """
 
     def __str__(self):
-        return 'Cash de ' + str(self.amount) + '€'
+        return "Cash de " + str(self.amount) + "€"
 
 
 class Lydia(BaseRechargingSolution):
@@ -177,12 +226,17 @@ class Lydia(BaseRechargingSolution):
     :type banked: boolean, default False
     :type date_banked: fate string
     """
-    date_operation = models.DateField('Date', default=now)
-    id_from_lydia = models.CharField('Numéro unique', max_length=255)
-    is_online = models.BooleanField('Paiement en ligne', default=True)
-    fee = models.DecimalField('Frais lydia', default=0, decimal_places=2,
-                              max_digits=9,
-                              validators=[MinValueValidator(decimal.Decimal(0))])
+
+    date_operation = models.DateField("Date", default=now)
+    id_from_lydia = models.CharField("Numéro unique", max_length=255)
+    is_online = models.BooleanField("Paiement en ligne", default=True)
+    fee = models.DecimalField(
+        "Frais lydia",
+        default=0,
+        decimal_places=2,
+        max_digits=9,
+        validators=[MinValueValidator(decimal.Decimal(0))],
+    )
 
     def __str__(self):
-        return 'Lydia de ' + str(self.amount) + '€, n°' + self.id_from_lydia
+        return "Lydia de " + str(self.amount) + "€, n°" + self.id_from_lydia

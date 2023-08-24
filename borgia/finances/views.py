@@ -637,48 +637,7 @@ def get_viva_wallet_access_token():
         return None
 
 
-""" curl '[Environment URL]'
--H 'Authorization: Bearer [access token]'
--H 'Content-Type: application/json'
--d '{
-    "amount": 1000,
-    "customerTrns": "Short description of purchased items/services to display to your customer",
-    "customer":
-    {
-        "email": "johdoe@vivawallet.com",
-        "fullName": "John Doe",
-        "phone": "+30999999999",
-        "countryCode": "GB",
-        "requestLang": "en-GB"
-    },
-    "paymentTimeout": 300,
-    "preauth": false,
-    "allowRecurring": false,
-    "maxInstallments": 12,
-    "paymentNotification": true,
-    "tipAmount": 100,
-    "disableExactAmount": false,
-    "disableCash": true,
-    "disableWallet": true,
-    "sourceCode": "1234",
-    "merchantTrns": "Short description of items/services purchased by customer",
-    "tags":
-    [
-        "tags for grouping and filtering the transactions",
-        "this tag can be searched on VivaWallet sales dashboard",
-        "Sample tag 1",
-        "Sample tag 2",
-        "Another string"
-    ],
-    "cardTokens":
-    [
-        "ct_5d0a4e3a7e04469f82da228ca98fd661"
-    ]
-}'
- """
-
-
-def create_viva_wallet_payment_order(access_token):
+def create_viva_wallet_payment_order(access_token, context):
     """Create a payment order from Viva Wallet API
 
     Args:
@@ -695,33 +654,33 @@ def create_viva_wallet_payment_order(access_token):
     }
 
     data = {
-        "amount": 1000,
-        "customerTrns": "Short description of purchased items/services to display to your customer",
-        "customer": {
-            "email": "johndoe@vivawallet.com",
-            "fullName": "John Doe",
-            "phone": "+30999999999",
-            "countryCode": "GB",
-            "requestLang": "en-GB",
-        },
+        "amount": float(context["total_amount"]) * 100,
+        "customerTrns": context["message"],
+        # "customer": {
+        #     "email": "johndoe@vivawallet.com",
+        #     "fullName": "John Doe",
+        #     "phone": "+30999999999",
+        #     "countryCode": "GB",
+        #     "requestLang": "en-GB",
+        # },
         "paymentTimeout": 300,
         "preauth": False,
         "allowRecurring": False,
         "maxInstallments": 12,
         "paymentNotification": True,
-        "tipAmount": 100,
+        "tipAmount": 0,
         "disableExactAmount": False,
         "disableCash": True,
         "disableWallet": True,
         "sourceCode": "7316",
-        "merchantTrns": "Short description of items/services purchased by customer",
-        "tags": [
-            "tags for grouping and filtering the transactions",
-            "this tag can be searched on VivaWallet sales dashboard",
-            "Sample tag 1",
-            "Sample tag 2",
-            "Another string",
-        ],
+        "merchantTrns": context["message"],
+        # "tags": [
+        #     "tags for grouping and filtering the transactions",
+        #     "this tag can be searched on VivaWallet sales dashboard",
+        #     "Sample tag 1",
+        #     "Sample tag 2",
+        #     "Another string",
+        # ],
     }
 
     response = requests.post(order_url, headers=headers, json=data)
@@ -885,7 +844,11 @@ class SelfLydiaCreate(LoginRequiredMixin, BorgiaFormView):
 
         access_token = get_viva_wallet_access_token()
 
-        orderCode = create_viva_wallet_payment_order(access_token)
+        # f = open("myfile.txt", "a")
+        # f.write("\n")
+        # f.write(str(total_amount))
+
+        orderCode = create_viva_wallet_payment_order(access_token, context)
 
         return redirect(
             "https://demo.vivapayments.com/web/checkout?ref=" + str(orderCode)
@@ -922,15 +885,41 @@ class SelfLydiaConfirm(LoginRequiredMixin, BorgiaView):
 
         transaction_amount = transaction_data.get("amount")
 
-        viva_wallet_borgia_balance_refill(transaction_data, transaction_id, user_pk)
+        """
+        For the currency only euros is accepted, if anotehr currency is set an error will be rise
+        Currency code are according to the ISO 4712 norm.
+        Euro symbol : EUR
+        currency code : 978
+        """
 
-        context["transaction"] = transaction_amount
-        context["order"] = self.request.GET.get("order_ref")
+        currencyCode = transaction_data.get("currencyCode")
+        if currencyCode != "978":
+            return redirect("error_currency")
 
-        return render(request, self.template_name, context=context)
+        else:
+            viva_wallet_borgia_balance_refill(
+                request, transaction_data, transaction_id, user_pk
+            )
+
+            context["transaction"] = transaction_amount
+            context["order"] = self.request.GET.get("order_ref")
+
+            return render(request, self.template_name, context=context)
 
 
-def viva_wallet_borgia_balance_refill(transaction_data, transaction_id, user_pk):
+def viva_wallet_borgia_balance_refill(
+    request, transaction_data, transaction_id, user_pk
+):
+    """balance refill function used by Viva wallet API
+    Args:
+        transaction_data (_type_): _description_
+        transaction_id (_type_): _description_
+        user_pk (_type_): _description_
+
+    Raises:
+        Http404: _description_
+    """
+
     params_dict = {
         "currency": "EUR",
         "request_id": transaction_data.get("orderCode"),
@@ -976,6 +965,14 @@ def viva_wallet_borgia_balance_refill(transaction_data, transaction_id, user_pk)
     recharging.pay()
 
 
+class SelfLydiaErrorCurrency(LoginRequiredMixin, BorgiaView):
+    menu_type = "members"
+    template_name = "finances/self_lydia_error.html"
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name)
+
+
 @csrf_exempt
 def self_lydia_callback(request):
     """
@@ -986,7 +983,7 @@ def self_lydia_callback(request):
 
     :param GET['user_pk']: pk of the client, mandatory.
     :param POST['currency']: icon of the currency, for instance EUR, mandatory.
-    :param POST['request_id']: request id from lydia, mandatory.
+    :param POST['request_id']: id from lydia, mandatory.
     :param POST['amount']: amount of the transaction, in 'currency', mandatory.
     :param POST['signed']: internal to Lydia ?
     :param POST['transaction_identifier']: transaction id from Lydia,

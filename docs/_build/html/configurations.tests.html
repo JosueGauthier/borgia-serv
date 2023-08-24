@@ -1,0 +1,635 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>configurations.tests package &#8212; borgia 2 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'configurations.tests';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">borgia 2 documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="modules.html">
+                        Borgia
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="finance.html">
+                        Documentation de Finances
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="modules.html">
+                        Borgia
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="finance.html">
+                        Documentation de Finances
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">configurations.tests package</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="configurations-tests-package">
+<h1>configurations.tests package<a class="headerlink" href="#configurations-tests-package" title="Permalink to this headline">#</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="module-configurations.tests.tests_models">
+<span id="configurations-tests-tests-models-module"></span><h2>configurations.tests.tests_models module<a class="headerlink" href="#module-configurations.tests.tests_models" title="Permalink to this headline">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="configurations.tests.tests_models.ConfigurationTestCase">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">configurations.tests.tests_models.</span></span><span class="sig-name descname"><span class="pre">ConfigurationTestCase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#configurations.tests.tests_models.ConfigurationTestCase" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.test.testcases.TestCase</span></code></p>
+<p>Tests for the Configuration model.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="configurations.tests.tests_models.ConfigurationTestCase.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#configurations.tests.tests_models.ConfigurationTestCase.setUp" title="Permalink to this definition">#</a></dt>
+<dd><p>Hook method for setting up the test fixture before exercising it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="configurations.tests.tests_models.ConfigurationTestCase.test_get_value_boolean">
+<span class="sig-name descname"><span class="pre">test_get_value_boolean</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#configurations.tests.tests_models.ConfigurationTestCase.test_get_value_boolean" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="configurations.tests.tests_models.ConfigurationTestCase.test_get_value_float">
+<span class="sig-name descname"><span class="pre">test_get_value_float</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#configurations.tests.tests_models.ConfigurationTestCase.test_get_value_float" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="configurations.tests.tests_models.ConfigurationTestCase.test_get_value_integer">
+<span class="sig-name descname"><span class="pre">test_get_value_integer</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#configurations.tests.tests_models.ConfigurationTestCase.test_get_value_integer" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="configurations.tests.tests_models.ConfigurationTestCase.test_get_value_string">
+<span class="sig-name descname"><span class="pre">test_get_value_string</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#configurations.tests.tests_models.ConfigurationTestCase.test_get_value_string" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="configurations.tests.tests_models.ConfigurationTestCase.test_str">
+<span class="sig-name descname"><span class="pre">test_str</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#configurations.tests.tests_models.ConfigurationTestCase.test_str" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="configurations.tests.tests_models.create_configurations">
+<span class="sig-prename descclassname"><span class="pre">configurations.tests.tests_models.</span></span><span class="sig-name descname"><span class="pre">create_configurations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">configurations_list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#configurations.tests.tests_models.create_configurations" title="Permalink to this definition">#</a></dt>
+<dd><p>Helper for creating configurations in a list.</p>
+</dd></dl>
+
+</section>
+<section id="module-configurations.tests.tests_urls">
+<span id="configurations-tests-tests-urls-module"></span><h2>configurations.tests.tests_urls module<a class="headerlink" href="#module-configurations.tests.tests_urls" title="Permalink to this headline">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="configurations.tests.tests_urls.ConfigurationsNamedURLTests">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">configurations.tests.tests_urls.</span></span><span class="sig-name descname"><span class="pre">ConfigurationsNamedURLTests</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#configurations.tests.tests_urls.ConfigurationsNamedURLTests" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.test.testcases.TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="configurations.tests.tests_urls.ConfigurationsNamedURLTests.test_named_urls">
+<span class="sig-name descname"><span class="pre">test_named_urls</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#configurations.tests.tests_urls.ConfigurationsNamedURLTests.test_named_urls" title="Permalink to this definition">#</a></dt>
+<dd><p>Named configurations URLs should be reversible</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-configurations.tests.tests_views">
+<span id="configurations-tests-tests-views-module"></span><h2>configurations.tests.tests_views module<a class="headerlink" href="#module-configurations.tests.tests_views" title="Permalink to this headline">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="configurations.tests.tests_views.BalanceConfigTest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">configurations.tests.tests_views.</span></span><span class="sig-name descname"><span class="pre">BalanceConfigTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#configurations.tests.tests_views.BalanceConfigTest" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#configurations.tests.tests_views.BaseConfigurationsViewsTest" title="configurations.tests.tests_views.BaseConfigurationsViewsTest"><code class="xref py py-class docutils literal notranslate"><span class="pre">configurations.tests.tests_views.BaseConfigurationsViewsTest</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="configurations.tests.tests_views.BalanceConfigTest.test_allowed_user_get">
+<span class="sig-name descname"><span class="pre">test_allowed_user_get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#configurations.tests.tests_views.BalanceConfigTest.test_allowed_user_get" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="configurations.tests.tests_views.BalanceConfigTest.test_not_allowed_user_get">
+<span class="sig-name descname"><span class="pre">test_not_allowed_user_get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#configurations.tests.tests_views.BalanceConfigTest.test_not_allowed_user_get" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="configurations.tests.tests_views.BalanceConfigTest.test_offline_user_redirection">
+<span class="sig-name descname"><span class="pre">test_offline_user_redirection</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#configurations.tests.tests_views.BalanceConfigTest.test_offline_user_redirection" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="configurations.tests.tests_views.BalanceConfigTest.url_view">
+<span class="sig-name descname"><span class="pre">url_view</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'url_balance_config'</span></em><a class="headerlink" href="#configurations.tests.tests_views.BalanceConfigTest.url_view" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="configurations.tests.tests_views.BaseConfigurationsViewsTest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">configurations.tests.tests_views.</span></span><span class="sig-name descname"><span class="pre">BaseConfigurationsViewsTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#configurations.tests.tests_views.BaseConfigurationsViewsTest" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="borgia.tests.html#borgia.tests.tests_views.BaseBorgiaViewsTestCase" title="borgia.tests.tests_views.BaseBorgiaViewsTestCase"><code class="xref py py-class docutils literal notranslate"><span class="pre">borgia.tests.tests_views.BaseBorgiaViewsTestCase</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="configurations.tests.tests_views.BaseConfigurationsViewsTest.allowed_user_get">
+<span class="sig-name descname"><span class="pre">allowed_user_get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#configurations.tests.tests_views.BaseConfigurationsViewsTest.allowed_user_get" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="configurations.tests.tests_views.BaseConfigurationsViewsTest.get_url">
+<span class="sig-name descname"><span class="pre">get_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#configurations.tests.tests_views.BaseConfigurationsViewsTest.get_url" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="configurations.tests.tests_views.BaseConfigurationsViewsTest.not_allowed_user_get">
+<span class="sig-name descname"><span class="pre">not_allowed_user_get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#configurations.tests.tests_views.BaseConfigurationsViewsTest.not_allowed_user_get" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="configurations.tests.tests_views.BaseConfigurationsViewsTest.offline_user_redirection">
+<span class="sig-name descname"><span class="pre">offline_user_redirection</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#configurations.tests.tests_views.BaseConfigurationsViewsTest.offline_user_redirection" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="configurations.tests.tests_views.BaseConfigurationsViewsTest.url_view">
+<span class="sig-name descname"><span class="pre">url_view</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#configurations.tests.tests_views.BaseConfigurationsViewsTest.url_view" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="configurations.tests.tests_views.CenterConfigTest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">configurations.tests.tests_views.</span></span><span class="sig-name descname"><span class="pre">CenterConfigTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#configurations.tests.tests_views.CenterConfigTest" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#configurations.tests.tests_views.BaseConfigurationsViewsTest" title="configurations.tests.tests_views.BaseConfigurationsViewsTest"><code class="xref py py-class docutils literal notranslate"><span class="pre">configurations.tests.tests_views.BaseConfigurationsViewsTest</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="configurations.tests.tests_views.CenterConfigTest.test_allowed_user_get">
+<span class="sig-name descname"><span class="pre">test_allowed_user_get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#configurations.tests.tests_views.CenterConfigTest.test_allowed_user_get" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="configurations.tests.tests_views.CenterConfigTest.test_not_allowed_user_get">
+<span class="sig-name descname"><span class="pre">test_not_allowed_user_get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#configurations.tests.tests_views.CenterConfigTest.test_not_allowed_user_get" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="configurations.tests.tests_views.CenterConfigTest.test_offline_user_redirection">
+<span class="sig-name descname"><span class="pre">test_offline_user_redirection</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#configurations.tests.tests_views.CenterConfigTest.test_offline_user_redirection" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="configurations.tests.tests_views.CenterConfigTest.url_view">
+<span class="sig-name descname"><span class="pre">url_view</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'url_center_config'</span></em><a class="headerlink" href="#configurations.tests.tests_views.CenterConfigTest.url_view" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="configurations.tests.tests_views.GlobalConfigTest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">configurations.tests.tests_views.</span></span><span class="sig-name descname"><span class="pre">GlobalConfigTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#configurations.tests.tests_views.GlobalConfigTest" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#configurations.tests.tests_views.BaseConfigurationsViewsTest" title="configurations.tests.tests_views.BaseConfigurationsViewsTest"><code class="xref py py-class docutils literal notranslate"><span class="pre">configurations.tests.tests_views.BaseConfigurationsViewsTest</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="configurations.tests.tests_views.GlobalConfigTest.test_allowed_user_get">
+<span class="sig-name descname"><span class="pre">test_allowed_user_get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#configurations.tests.tests_views.GlobalConfigTest.test_allowed_user_get" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="configurations.tests.tests_views.GlobalConfigTest.test_not_allowed_user_get">
+<span class="sig-name descname"><span class="pre">test_not_allowed_user_get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#configurations.tests.tests_views.GlobalConfigTest.test_not_allowed_user_get" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="configurations.tests.tests_views.GlobalConfigTest.test_offline_user_redirection">
+<span class="sig-name descname"><span class="pre">test_offline_user_redirection</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#configurations.tests.tests_views.GlobalConfigTest.test_offline_user_redirection" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="configurations.tests.tests_views.GlobalConfigTest.url_view">
+<span class="sig-name descname"><span class="pre">url_view</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'url_index_config'</span></em><a class="headerlink" href="#configurations.tests.tests_views.GlobalConfigTest.url_view" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="configurations.tests.tests_views.LydiaConfigTest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">configurations.tests.tests_views.</span></span><span class="sig-name descname"><span class="pre">LydiaConfigTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#configurations.tests.tests_views.LydiaConfigTest" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#configurations.tests.tests_views.BaseConfigurationsViewsTest" title="configurations.tests.tests_views.BaseConfigurationsViewsTest"><code class="xref py py-class docutils literal notranslate"><span class="pre">configurations.tests.tests_views.BaseConfigurationsViewsTest</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="configurations.tests.tests_views.LydiaConfigTest.test_allowed_user_get">
+<span class="sig-name descname"><span class="pre">test_allowed_user_get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#configurations.tests.tests_views.LydiaConfigTest.test_allowed_user_get" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="configurations.tests.tests_views.LydiaConfigTest.test_not_allowed_user_get">
+<span class="sig-name descname"><span class="pre">test_not_allowed_user_get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#configurations.tests.tests_views.LydiaConfigTest.test_not_allowed_user_get" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="configurations.tests.tests_views.LydiaConfigTest.test_offline_user_redirection">
+<span class="sig-name descname"><span class="pre">test_offline_user_redirection</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#configurations.tests.tests_views.LydiaConfigTest.test_offline_user_redirection" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="configurations.tests.tests_views.LydiaConfigTest.url_view">
+<span class="sig-name descname"><span class="pre">url_view</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'url_lydia_config'</span></em><a class="headerlink" href="#configurations.tests.tests_views.LydiaConfigTest.url_view" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="configurations.tests.tests_views.PriceConfigTest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">configurations.tests.tests_views.</span></span><span class="sig-name descname"><span class="pre">PriceConfigTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#configurations.tests.tests_views.PriceConfigTest" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#configurations.tests.tests_views.BaseConfigurationsViewsTest" title="configurations.tests.tests_views.BaseConfigurationsViewsTest"><code class="xref py py-class docutils literal notranslate"><span class="pre">configurations.tests.tests_views.BaseConfigurationsViewsTest</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="configurations.tests.tests_views.PriceConfigTest.test_allowed_user_get">
+<span class="sig-name descname"><span class="pre">test_allowed_user_get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#configurations.tests.tests_views.PriceConfigTest.test_allowed_user_get" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="configurations.tests.tests_views.PriceConfigTest.test_not_allowed_user_get">
+<span class="sig-name descname"><span class="pre">test_not_allowed_user_get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#configurations.tests.tests_views.PriceConfigTest.test_not_allowed_user_get" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="configurations.tests.tests_views.PriceConfigTest.test_offline_user_redirection">
+<span class="sig-name descname"><span class="pre">test_offline_user_redirection</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#configurations.tests.tests_views.PriceConfigTest.test_offline_user_redirection" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="configurations.tests.tests_views.PriceConfigTest.url_view">
+<span class="sig-name descname"><span class="pre">url_view</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'url_price_config'</span></em><a class="headerlink" href="#configurations.tests.tests_views.PriceConfigTest.url_view" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-configurations.tests">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-configurations.tests" title="Permalink to this headline">#</a></h2>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submodules">Submodules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-configurations.tests.tests_models">configurations.tests.tests_models module</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-configurations.tests.tests_urls">configurations.tests.tests_urls module</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-configurations.tests.tests_views">configurations.tests.tests_views module</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-configurations.tests">Module contents</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="_sources/configurations.tests.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, Josue Gauthier.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

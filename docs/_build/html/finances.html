@@ -1,0 +1,2206 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>finances package &#8212; borgia 2 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'finances';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">borgia 2 documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="modules.html">
+                        Borgia
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="finance.html">
+                        Documentation de Finances
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="modules.html">
+                        Borgia
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="finance.html">
+                        Documentation de Finances
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">finances package</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="finances-package">
+<h1>finances package<a class="headerlink" href="#finances-package" title="Permalink to this headline">#</a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="finances.migrations.html">finances.migrations package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="finances.migrations.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="finances.migrations.html#module-finances.migrations.0001_initial">finances.migrations.0001_initial module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="finances.migrations.html#module-finances.migrations">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="finances.templatetags.html">finances.templatetags package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="finances.templatetags.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="finances.templatetags.html#module-finances.templatetags.finances_extra">finances.templatetags.finances_extra module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="finances.templatetags.html#module-finances.templatetags">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="finances.tests.html">finances.tests package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="finances.tests.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="finances.tests.html#module-finances.tests.tests_models">finances.tests.tests_models module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="finances.tests.html#module-finances.tests.tests_urls">finances.tests.tests_urls module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="finances.tests.html#module-finances.tests.tests_utils">finances.tests.tests_utils module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="finances.tests.html#module-finances.tests.tests_views">finances.tests.tests_views module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="finances.tests.html#module-finances.tests">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="finances-old-views-copy-module">
+<h2>finances.OLD views copy module<a class="headerlink" href="#finances-old-views-copy-module" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="module-finances.apps">
+<span id="finances-apps-module"></span><h2>finances.apps module<a class="headerlink" href="#module-finances.apps" title="Permalink to this headline">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="finances.apps.FinancesConfig">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">finances.apps.</span></span><span class="sig-name descname"><span class="pre">FinancesConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_module</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.apps.FinancesConfig" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.apps.config.AppConfig</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.apps.FinancesConfig.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'finances'</span></em><a class="headerlink" href="#finances.apps.FinancesConfig.name" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-finances.forms">
+<span id="finances-forms-module"></span><h2>finances.forms module<a class="headerlink" href="#module-finances.forms" title="Permalink to this headline">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="finances.forms.ExceptionnalMovementForm">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">finances.forms.</span></span><span class="sig-name descname"><span class="pre">ExceptionnalMovementForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_id='id_%s'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_class=&lt;class</span> <span class="pre">'django.forms.utils.ErrorList'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_suffix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">empty_permitted=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_order=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_required_attribute=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">renderer=None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.forms.ExceptionnalMovementForm" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.forms.forms.Form</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.forms.ExceptionnalMovementForm.base_fields">
+<span class="sig-name descname"><span class="pre">base_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'amount':</span> <span class="pre">&lt;django.forms.fields.DecimalField</span> <span class="pre">object&gt;,</span> <span class="pre">'justification':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'operator_password':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'operator_username':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'type_movement':</span> <span class="pre">&lt;django.forms.fields.ChoiceField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#finances.forms.ExceptionnalMovementForm.base_fields" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.forms.ExceptionnalMovementForm.clean">
+<span class="sig-name descname"><span class="pre">clean</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#finances.forms.ExceptionnalMovementForm.clean" title="Permalink to this definition">#</a></dt>
+<dd><p>Hook for doing any extra form-wide cleaning after Field.clean() has been
+called on every field. Any ValidationError raised by this method will
+not be associated with a particular field; it will have a special-case
+association with the field named ‘__all__’.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.forms.ExceptionnalMovementForm.declared_fields">
+<span class="sig-name descname"><span class="pre">declared_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'amount':</span> <span class="pre">&lt;django.forms.fields.DecimalField</span> <span class="pre">object&gt;,</span> <span class="pre">'justification':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'operator_password':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'operator_username':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'type_movement':</span> <span class="pre">&lt;django.forms.fields.ChoiceField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#finances.forms.ExceptionnalMovementForm.declared_fields" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="finances.forms.ExceptionnalMovementForm.media">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#finances.forms.ExceptionnalMovementForm.media" title="Permalink to this definition">#</a></dt>
+<dd><p>Return all media required to render the widgets on this form.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="finances.forms.GenericListSearchDateForm">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">finances.forms.</span></span><span class="sig-name descname"><span class="pre">GenericListSearchDateForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_id='id_%s'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_class=&lt;class</span> <span class="pre">'django.forms.utils.ErrorList'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_suffix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">empty_permitted=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_order=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_required_attribute=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">renderer=None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.forms.GenericListSearchDateForm" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.forms.forms.Form</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.forms.GenericListSearchDateForm.base_fields">
+<span class="sig-name descname"><span class="pre">base_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'date_begin':</span> <span class="pre">&lt;django.forms.fields.DateField</span> <span class="pre">object&gt;,</span> <span class="pre">'date_end':</span> <span class="pre">&lt;django.forms.fields.DateField</span> <span class="pre">object&gt;,</span> <span class="pre">'search':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#finances.forms.GenericListSearchDateForm.base_fields" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.forms.GenericListSearchDateForm.declared_fields">
+<span class="sig-name descname"><span class="pre">declared_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'date_begin':</span> <span class="pre">&lt;django.forms.fields.DateField</span> <span class="pre">object&gt;,</span> <span class="pre">'date_end':</span> <span class="pre">&lt;django.forms.fields.DateField</span> <span class="pre">object&gt;,</span> <span class="pre">'search':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#finances.forms.GenericListSearchDateForm.declared_fields" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="finances.forms.GenericListSearchDateForm.media">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#finances.forms.GenericListSearchDateForm.media" title="Permalink to this definition">#</a></dt>
+<dd><p>Return all media required to render the widgets on this form.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="finances.forms.RechargingCreateForm">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">finances.forms.</span></span><span class="sig-name descname"><span class="pre">RechargingCreateForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.forms.RechargingCreateForm" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.forms.forms.Form</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.forms.RechargingCreateForm.base_fields">
+<span class="sig-name descname"><span class="pre">base_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'amount':</span> <span class="pre">&lt;django.forms.fields.DecimalField</span> <span class="pre">object&gt;,</span> <span class="pre">'operator_password':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'operator_username':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'signature_date':</span> <span class="pre">&lt;django.forms.fields.DateField</span> <span class="pre">object&gt;,</span> <span class="pre">'type':</span> <span class="pre">&lt;django.forms.fields.ChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'unique_number':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#finances.forms.RechargingCreateForm.base_fields" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.forms.RechargingCreateForm.clean">
+<span class="sig-name descname"><span class="pre">clean</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#finances.forms.RechargingCreateForm.clean" title="Permalink to this definition">#</a></dt>
+<dd><p>Hook for doing any extra form-wide cleaning after Field.clean() has been
+called on every field. Any ValidationError raised by this method will
+not be associated with a particular field; it will have a special-case
+association with the field named ‘__all__’.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.forms.RechargingCreateForm.clean_signature_date">
+<span class="sig-name descname"><span class="pre">clean_signature_date</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#finances.forms.RechargingCreateForm.clean_signature_date" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.forms.RechargingCreateForm.clean_unique_number">
+<span class="sig-name descname"><span class="pre">clean_unique_number</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#finances.forms.RechargingCreateForm.clean_unique_number" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.forms.RechargingCreateForm.declared_fields">
+<span class="sig-name descname"><span class="pre">declared_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'amount':</span> <span class="pre">&lt;django.forms.fields.DecimalField</span> <span class="pre">object&gt;,</span> <span class="pre">'operator_password':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'operator_username':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'signature_date':</span> <span class="pre">&lt;django.forms.fields.DateField</span> <span class="pre">object&gt;,</span> <span class="pre">'type':</span> <span class="pre">&lt;django.forms.fields.ChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'unique_number':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#finances.forms.RechargingCreateForm.declared_fields" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="finances.forms.RechargingCreateForm.media">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#finances.forms.RechargingCreateForm.media" title="Permalink to this definition">#</a></dt>
+<dd><p>Return all media required to render the widgets on this form.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="finances.forms.RechargingListForm">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">finances.forms.</span></span><span class="sig-name descname"><span class="pre">RechargingListForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.forms.RechargingListForm" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#finances.forms.GenericListSearchDateForm" title="finances.forms.GenericListSearchDateForm"><code class="xref py py-class docutils literal notranslate"><span class="pre">finances.forms.GenericListSearchDateForm</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.forms.RechargingListForm.base_fields">
+<span class="sig-name descname"><span class="pre">base_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'date_begin':</span> <span class="pre">&lt;django.forms.fields.DateField</span> <span class="pre">object&gt;,</span> <span class="pre">'date_end':</span> <span class="pre">&lt;django.forms.fields.DateField</span> <span class="pre">object&gt;,</span> <span class="pre">'search':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#finances.forms.RechargingListForm.base_fields" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.forms.RechargingListForm.declared_fields">
+<span class="sig-name descname"><span class="pre">declared_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'date_begin':</span> <span class="pre">&lt;django.forms.fields.DateField</span> <span class="pre">object&gt;,</span> <span class="pre">'date_end':</span> <span class="pre">&lt;django.forms.fields.DateField</span> <span class="pre">object&gt;,</span> <span class="pre">'search':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#finances.forms.RechargingListForm.declared_fields" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="finances.forms.RechargingListForm.media">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#finances.forms.RechargingListForm.media" title="Permalink to this definition">#</a></dt>
+<dd><p>Return all media required to render the widgets on this form.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="finances.forms.SelfLydiaCreateForm">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">finances.forms.</span></span><span class="sig-name descname"><span class="pre">SelfLydiaCreateForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.forms.SelfLydiaCreateForm" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.forms.forms.Form</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.forms.SelfLydiaCreateForm.base_fields">
+<span class="sig-name descname"><span class="pre">base_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#finances.forms.SelfLydiaCreateForm.base_fields" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.forms.SelfLydiaCreateForm.declared_fields">
+<span class="sig-name descname"><span class="pre">declared_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#finances.forms.SelfLydiaCreateForm.declared_fields" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="finances.forms.SelfLydiaCreateForm.media">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#finances.forms.SelfLydiaCreateForm.media" title="Permalink to this definition">#</a></dt>
+<dd><p>Return all media required to render the widgets on this form.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="finances.forms.SetPriceProductBaseForm">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">finances.forms.</span></span><span class="sig-name descname"><span class="pre">SetPriceProductBaseForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_id='id_%s'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_class=&lt;class</span> <span class="pre">'django.forms.utils.ErrorList'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_suffix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">empty_permitted=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_order=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_required_attribute=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">renderer=None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.forms.SetPriceProductBaseForm" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.forms.forms.Form</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.forms.SetPriceProductBaseForm.base_fields">
+<span class="sig-name descname"><span class="pre">base_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'is_manual':</span> <span class="pre">&lt;django.forms.fields.BooleanField</span> <span class="pre">object&gt;,</span> <span class="pre">'manual_price':</span> <span class="pre">&lt;django.forms.fields.DecimalField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#finances.forms.SetPriceProductBaseForm.base_fields" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.forms.SetPriceProductBaseForm.declared_fields">
+<span class="sig-name descname"><span class="pre">declared_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'is_manual':</span> <span class="pre">&lt;django.forms.fields.BooleanField</span> <span class="pre">object&gt;,</span> <span class="pre">'manual_price':</span> <span class="pre">&lt;django.forms.fields.DecimalField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#finances.forms.SetPriceProductBaseForm.declared_fields" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="finances.forms.SetPriceProductBaseForm.media">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#finances.forms.SetPriceProductBaseForm.media" title="Permalink to this definition">#</a></dt>
+<dd><p>Return all media required to render the widgets on this form.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="finances.forms.TransfertCreateForm">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">finances.forms.</span></span><span class="sig-name descname"><span class="pre">TransfertCreateForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.forms.TransfertCreateForm" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.forms.forms.Form</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.forms.TransfertCreateForm.base_fields">
+<span class="sig-name descname"><span class="pre">base_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#finances.forms.TransfertCreateForm.base_fields" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.forms.TransfertCreateForm.clean_recipient">
+<span class="sig-name descname"><span class="pre">clean_recipient</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#finances.forms.TransfertCreateForm.clean_recipient" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.forms.TransfertCreateForm.declared_fields">
+<span class="sig-name descname"><span class="pre">declared_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#finances.forms.TransfertCreateForm.declared_fields" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="finances.forms.TransfertCreateForm.media">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#finances.forms.TransfertCreateForm.media" title="Permalink to this definition">#</a></dt>
+<dd><p>Return all media required to render the widgets on this form.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-finances.models">
+<span id="finances-models-module"></span><h2>finances.models module<a class="headerlink" href="#module-finances.models" title="Permalink to this headline">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="finances.models.BaseRechargingSolution">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">finances.models.</span></span><span class="sig-name descname"><span class="pre">BaseRechargingSolution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.models.BaseRechargingSolution" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.db.models.base.Model</span></code></p>
+<p>Base model for recharging solutions.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="finances.models.BaseRechargingSolution.Meta">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="headerlink" href="#finances.models.BaseRechargingSolution.Meta" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Remove default permissions for base and children.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.models.BaseRechargingSolution.Meta.abstract">
+<span class="sig-name descname"><span class="pre">abstract</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#finances.models.BaseRechargingSolution.Meta.abstract" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.models.BaseRechargingSolution.Meta.default_permissions">
+<span class="sig-name descname"><span class="pre">default_permissions</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></em><a class="headerlink" href="#finances.models.BaseRechargingSolution.Meta.default_permissions" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.models.BaseRechargingSolution.amount">
+<span class="sig-name descname"><span class="pre">amount</span></span><a class="headerlink" href="#finances.models.BaseRechargingSolution.amount" title="Permalink to this definition">#</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.models.BaseRechargingSolution.sender">
+<span class="sig-name descname"><span class="pre">sender</span></span><a class="headerlink" href="#finances.models.BaseRechargingSolution.sender" title="Permalink to this definition">#</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.models.BaseRechargingSolution.sender_id">
+<span class="sig-name descname"><span class="pre">sender_id</span></span><a class="headerlink" href="#finances.models.BaseRechargingSolution.sender_id" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="finances.models.Cash">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">finances.models.</span></span><span class="sig-name descname"><span class="pre">Cash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.models.Cash" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#finances.models.BaseRechargingSolution" title="finances.models.BaseRechargingSolution"><code class="xref py py-class docutils literal notranslate"><span class="pre">finances.models.BaseRechargingSolution</span></code></a></p>
+<p>Define a type of payment made by a phycial money (cash).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Note:</dt>
+<dd class="field-odd"><p>Related to a unique User.</p>
+</dd>
+</dl>
+<dl class="py exception">
+<dt class="sig sig-object py" id="finances.models.Cash.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#finances.models.Cash.DoesNotExist" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.core.exceptions.ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="finances.models.Cash.MultipleObjectsReturned">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#finances.models.Cash.MultipleObjectsReturned" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.core.exceptions.MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.models.Cash.amount">
+<span class="sig-name descname"><span class="pre">amount</span></span><a class="headerlink" href="#finances.models.Cash.amount" title="Permalink to this definition">#</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.models.Cash.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#finances.models.Cash.id" title="Permalink to this definition">#</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.models.Cash.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.manager.Manager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#finances.models.Cash.objects" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.models.Cash.sender">
+<span class="sig-name descname"><span class="pre">sender</span></span><a class="headerlink" href="#finances.models.Cash.sender" title="Permalink to this definition">#</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.models.Cash.sender_id">
+<span class="sig-name descname"><span class="pre">sender_id</span></span><a class="headerlink" href="#finances.models.Cash.sender_id" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="finances.models.Cheque">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">finances.models.</span></span><span class="sig-name descname"><span class="pre">Cheque</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.models.Cheque" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#finances.models.BaseRechargingSolution" title="finances.models.BaseRechargingSolution"><code class="xref py py-class docutils literal notranslate"><span class="pre">finances.models.BaseRechargingSolution</span></code></a></p>
+<p>Define a type of recharging made by a bank cheque.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Note:</dt>
+<dd class="field-odd"><p>Related to a unique User.</p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>is_cashed</strong> – true if the cheque is cashed by treasurers, mandatory.</p></li>
+<li><p><strong>signature_date</strong> – signature date of the cheque (written on the paper),</p></li>
+</ul>
+</dd>
+</dl>
+<p>mandatory.
+:param cheque_number: number of the cheque (written on the paper),
+mandatory.
+:type is_cashed: boolean, default False
+:type signature_date: date string, default now
+:type cheque_number: string, must match ^[0-9]{7}$</p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="finances.models.Cheque.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#finances.models.Cheque.DoesNotExist" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.core.exceptions.ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="finances.models.Cheque.MultipleObjectsReturned">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#finances.models.Cheque.MultipleObjectsReturned" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.core.exceptions.MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.models.Cheque.amount">
+<span class="sig-name descname"><span class="pre">amount</span></span><a class="headerlink" href="#finances.models.Cheque.amount" title="Permalink to this definition">#</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.models.Cheque.cheque_number">
+<span class="sig-name descname"><span class="pre">cheque_number</span></span><a class="headerlink" href="#finances.models.Cheque.cheque_number" title="Permalink to this definition">#</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.models.Cheque.get_next_by_signature_date">
+<span class="sig-name descname"><span class="pre">get_next_by_signature_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateField:</span> <span class="pre">signature_date&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.models.Cheque.get_next_by_signature_date" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.models.Cheque.get_previous_by_signature_date">
+<span class="sig-name descname"><span class="pre">get_previous_by_signature_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateField:</span> <span class="pre">signature_date&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.models.Cheque.get_previous_by_signature_date" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.models.Cheque.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#finances.models.Cheque.id" title="Permalink to this definition">#</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.models.Cheque.is_cashed">
+<span class="sig-name descname"><span class="pre">is_cashed</span></span><a class="headerlink" href="#finances.models.Cheque.is_cashed" title="Permalink to this definition">#</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.models.Cheque.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.manager.Manager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#finances.models.Cheque.objects" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.models.Cheque.sender">
+<span class="sig-name descname"><span class="pre">sender</span></span><a class="headerlink" href="#finances.models.Cheque.sender" title="Permalink to this definition">#</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.models.Cheque.sender_id">
+<span class="sig-name descname"><span class="pre">sender_id</span></span><a class="headerlink" href="#finances.models.Cheque.sender_id" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.models.Cheque.signature_date">
+<span class="sig-name descname"><span class="pre">signature_date</span></span><a class="headerlink" href="#finances.models.Cheque.signature_date" title="Permalink to this definition">#</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="finances.models.ExceptionnalMovement">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">finances.models.</span></span><span class="sig-name descname"><span class="pre">ExceptionnalMovement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datetime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">justification</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">operator</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recipient</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amount</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_credit</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.models.ExceptionnalMovement" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.db.models.base.Model</span></code></p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="finances.models.ExceptionnalMovement.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#finances.models.ExceptionnalMovement.DoesNotExist" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.core.exceptions.ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="finances.models.ExceptionnalMovement.MultipleObjectsReturned">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#finances.models.ExceptionnalMovement.MultipleObjectsReturned" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.core.exceptions.MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.models.ExceptionnalMovement.amount">
+<span class="sig-name descname"><span class="pre">amount</span></span><a class="headerlink" href="#finances.models.ExceptionnalMovement.amount" title="Permalink to this definition">#</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.models.ExceptionnalMovement.datetime">
+<span class="sig-name descname"><span class="pre">datetime</span></span><a class="headerlink" href="#finances.models.ExceptionnalMovement.datetime" title="Permalink to this definition">#</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.models.ExceptionnalMovement.get_next_by_datetime">
+<span class="sig-name descname"><span class="pre">get_next_by_datetime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">datetime&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.models.ExceptionnalMovement.get_next_by_datetime" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.models.ExceptionnalMovement.get_previous_by_datetime">
+<span class="sig-name descname"><span class="pre">get_previous_by_datetime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">datetime&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.models.ExceptionnalMovement.get_previous_by_datetime" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.models.ExceptionnalMovement.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#finances.models.ExceptionnalMovement.id" title="Permalink to this definition">#</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.models.ExceptionnalMovement.is_credit">
+<span class="sig-name descname"><span class="pre">is_credit</span></span><a class="headerlink" href="#finances.models.ExceptionnalMovement.is_credit" title="Permalink to this definition">#</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.models.ExceptionnalMovement.justification">
+<span class="sig-name descname"><span class="pre">justification</span></span><a class="headerlink" href="#finances.models.ExceptionnalMovement.justification" title="Permalink to this definition">#</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.models.ExceptionnalMovement.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.manager.Manager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#finances.models.ExceptionnalMovement.objects" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.models.ExceptionnalMovement.operator">
+<span class="sig-name descname"><span class="pre">operator</span></span><a class="headerlink" href="#finances.models.ExceptionnalMovement.operator" title="Permalink to this definition">#</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.models.ExceptionnalMovement.operator_id">
+<span class="sig-name descname"><span class="pre">operator_id</span></span><a class="headerlink" href="#finances.models.ExceptionnalMovement.operator_id" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.models.ExceptionnalMovement.pay">
+<span class="sig-name descname"><span class="pre">pay</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#finances.models.ExceptionnalMovement.pay" title="Permalink to this definition">#</a></dt>
+<dd><p>Add/Remove money from recipient</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.models.ExceptionnalMovement.recipient">
+<span class="sig-name descname"><span class="pre">recipient</span></span><a class="headerlink" href="#finances.models.ExceptionnalMovement.recipient" title="Permalink to this definition">#</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.models.ExceptionnalMovement.recipient_id">
+<span class="sig-name descname"><span class="pre">recipient_id</span></span><a class="headerlink" href="#finances.models.ExceptionnalMovement.recipient_id" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="finances.models.Lydia">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">finances.models.</span></span><span class="sig-name descname"><span class="pre">Lydia</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.models.Lydia" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#finances.models.BaseRechargingSolution" title="finances.models.BaseRechargingSolution"><code class="xref py py-class docutils literal notranslate"><span class="pre">finances.models.BaseRechargingSolution</span></code></a></p>
+<p>Define a transaction by the provider Lydia.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Note:</dt>
+<dd class="field-odd"><p>Related to an unique User.</p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>date_operation</strong> – date of transaction, mandatory.</p></li>
+<li><p><strong>id_from_lydia</strong> – unique number given by the provider for each</p></li>
+</ul>
+</dd>
+</dl>
+<p>transaction, mandatory. Must be unique.
+:param banked: true if the money was banked by treasurer, mandatory.
+:param date_banked: only if banked is true.
+:type date_operation: date string, default now
+:type id_from_lydia: string
+:type banked: boolean, default False
+:type date_banked: fate string</p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="finances.models.Lydia.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#finances.models.Lydia.DoesNotExist" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.core.exceptions.ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="finances.models.Lydia.MultipleObjectsReturned">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#finances.models.Lydia.MultipleObjectsReturned" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.core.exceptions.MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.models.Lydia.amount">
+<span class="sig-name descname"><span class="pre">amount</span></span><a class="headerlink" href="#finances.models.Lydia.amount" title="Permalink to this definition">#</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.models.Lydia.date_operation">
+<span class="sig-name descname"><span class="pre">date_operation</span></span><a class="headerlink" href="#finances.models.Lydia.date_operation" title="Permalink to this definition">#</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.models.Lydia.fee">
+<span class="sig-name descname"><span class="pre">fee</span></span><a class="headerlink" href="#finances.models.Lydia.fee" title="Permalink to this definition">#</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.models.Lydia.get_next_by_date_operation">
+<span class="sig-name descname"><span class="pre">get_next_by_date_operation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateField:</span> <span class="pre">date_operation&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.models.Lydia.get_next_by_date_operation" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.models.Lydia.get_previous_by_date_operation">
+<span class="sig-name descname"><span class="pre">get_previous_by_date_operation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateField:</span> <span class="pre">date_operation&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.models.Lydia.get_previous_by_date_operation" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.models.Lydia.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#finances.models.Lydia.id" title="Permalink to this definition">#</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.models.Lydia.id_from_lydia">
+<span class="sig-name descname"><span class="pre">id_from_lydia</span></span><a class="headerlink" href="#finances.models.Lydia.id_from_lydia" title="Permalink to this definition">#</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.models.Lydia.is_online">
+<span class="sig-name descname"><span class="pre">is_online</span></span><a class="headerlink" href="#finances.models.Lydia.is_online" title="Permalink to this definition">#</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.models.Lydia.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.manager.Manager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#finances.models.Lydia.objects" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.models.Lydia.sender">
+<span class="sig-name descname"><span class="pre">sender</span></span><a class="headerlink" href="#finances.models.Lydia.sender" title="Permalink to this definition">#</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.models.Lydia.sender_id">
+<span class="sig-name descname"><span class="pre">sender_id</span></span><a class="headerlink" href="#finances.models.Lydia.sender_id" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="finances.models.Recharging">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">finances.models.</span></span><span class="sig-name descname"><span class="pre">Recharging</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.models.Recharging" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.db.models.base.Model</span></code></p>
+<p>Allow an operator to recharge (supply money) the balance of a sender</p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="finances.models.Recharging.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#finances.models.Recharging.DoesNotExist" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.core.exceptions.ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="finances.models.Recharging.MultipleObjectsReturned">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#finances.models.Recharging.MultipleObjectsReturned" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.core.exceptions.MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.models.Recharging.amount">
+<span class="sig-name descname"><span class="pre">amount</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#finances.models.Recharging.amount" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.models.Recharging.content_solution">
+<span class="sig-name descname"><span class="pre">content_solution</span></span><a class="headerlink" href="#finances.models.Recharging.content_solution" title="Permalink to this definition">#</a></dt>
+<dd><p>Provide a generic many-to-one relation through the <code class="docutils literal notranslate"><span class="pre">content_type</span></code> and
+<code class="docutils literal notranslate"><span class="pre">object_id</span></code> fields.</p>
+<p>This class also doubles as an accessor to the related object (similar to
+ForwardManyToOneDescriptor) by adding itself as a model attribute.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.models.Recharging.content_type">
+<span class="sig-name descname"><span class="pre">content_type</span></span><a class="headerlink" href="#finances.models.Recharging.content_type" title="Permalink to this definition">#</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.models.Recharging.content_type_id">
+<span class="sig-name descname"><span class="pre">content_type_id</span></span><a class="headerlink" href="#finances.models.Recharging.content_type_id" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.models.Recharging.datetime">
+<span class="sig-name descname"><span class="pre">datetime</span></span><a class="headerlink" href="#finances.models.Recharging.datetime" title="Permalink to this definition">#</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.models.Recharging.get_next_by_datetime">
+<span class="sig-name descname"><span class="pre">get_next_by_datetime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">datetime&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.models.Recharging.get_next_by_datetime" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.models.Recharging.get_previous_by_datetime">
+<span class="sig-name descname"><span class="pre">get_previous_by_datetime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">datetime&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.models.Recharging.get_previous_by_datetime" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.models.Recharging.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#finances.models.Recharging.id" title="Permalink to this definition">#</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.models.Recharging.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.manager.Manager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#finances.models.Recharging.objects" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.models.Recharging.operator">
+<span class="sig-name descname"><span class="pre">operator</span></span><a class="headerlink" href="#finances.models.Recharging.operator" title="Permalink to this definition">#</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.models.Recharging.operator_id">
+<span class="sig-name descname"><span class="pre">operator_id</span></span><a class="headerlink" href="#finances.models.Recharging.operator_id" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.models.Recharging.pay">
+<span class="sig-name descname"><span class="pre">pay</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#finances.models.Recharging.pay" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.models.Recharging.sender">
+<span class="sig-name descname"><span class="pre">sender</span></span><a class="headerlink" href="#finances.models.Recharging.sender" title="Permalink to this definition">#</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.models.Recharging.sender_id">
+<span class="sig-name descname"><span class="pre">sender_id</span></span><a class="headerlink" href="#finances.models.Recharging.sender_id" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.models.Recharging.solution_id">
+<span class="sig-name descname"><span class="pre">solution_id</span></span><a class="headerlink" href="#finances.models.Recharging.solution_id" title="Permalink to this definition">#</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="finances.models.Transfert">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">finances.models.</span></span><span class="sig-name descname"><span class="pre">Transfert</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datetime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">justification</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sender</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recipient</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amount</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.models.Transfert" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.db.models.base.Model</span></code></p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="finances.models.Transfert.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#finances.models.Transfert.DoesNotExist" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.core.exceptions.ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="finances.models.Transfert.MultipleObjectsReturned">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#finances.models.Transfert.MultipleObjectsReturned" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.core.exceptions.MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.models.Transfert.amount">
+<span class="sig-name descname"><span class="pre">amount</span></span><a class="headerlink" href="#finances.models.Transfert.amount" title="Permalink to this definition">#</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.models.Transfert.datetime">
+<span class="sig-name descname"><span class="pre">datetime</span></span><a class="headerlink" href="#finances.models.Transfert.datetime" title="Permalink to this definition">#</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.models.Transfert.get_next_by_datetime">
+<span class="sig-name descname"><span class="pre">get_next_by_datetime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">datetime&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.models.Transfert.get_next_by_datetime" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.models.Transfert.get_previous_by_datetime">
+<span class="sig-name descname"><span class="pre">get_previous_by_datetime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">datetime&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.models.Transfert.get_previous_by_datetime" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.models.Transfert.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#finances.models.Transfert.id" title="Permalink to this definition">#</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.models.Transfert.justification">
+<span class="sig-name descname"><span class="pre">justification</span></span><a class="headerlink" href="#finances.models.Transfert.justification" title="Permalink to this definition">#</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.models.Transfert.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.manager.Manager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#finances.models.Transfert.objects" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.models.Transfert.pay">
+<span class="sig-name descname"><span class="pre">pay</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#finances.models.Transfert.pay" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.models.Transfert.recipient">
+<span class="sig-name descname"><span class="pre">recipient</span></span><a class="headerlink" href="#finances.models.Transfert.recipient" title="Permalink to this definition">#</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.models.Transfert.recipient_id">
+<span class="sig-name descname"><span class="pre">recipient_id</span></span><a class="headerlink" href="#finances.models.Transfert.recipient_id" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.models.Transfert.sender">
+<span class="sig-name descname"><span class="pre">sender</span></span><a class="headerlink" href="#finances.models.Transfert.sender" title="Permalink to this definition">#</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.models.Transfert.sender_id">
+<span class="sig-name descname"><span class="pre">sender_id</span></span><a class="headerlink" href="#finances.models.Transfert.sender_id" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-finances.serializers">
+<span id="finances-serializers-module"></span><h2>finances.serializers module<a class="headerlink" href="#module-finances.serializers" title="Permalink to this headline">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="finances.serializers.LydiaStateAPISerializer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">finances.serializers.</span></span><span class="sig-name descname"><span class="pre">LydiaStateAPISerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.serializers.LydiaStateAPISerializer" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.serializers.Serializer</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.serializers.LydiaStateAPISerializer.validate">
+<span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">attrs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.serializers.LydiaStateAPISerializer.validate" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="finances.serializers.SelfLydiaCreateAPISerializer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">finances.serializers.</span></span><span class="sig-name descname"><span class="pre">SelfLydiaCreateAPISerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.serializers.SelfLydiaCreateAPISerializer" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.serializers.Serializer</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.serializers.SelfLydiaCreateAPISerializer.validate">
+<span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">attrs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.serializers.SelfLydiaCreateAPISerializer.validate" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-finances.urls">
+<span id="finances-urls-module"></span><h2>finances.urls module<a class="headerlink" href="#module-finances.urls" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="module-finances.utils">
+<span id="finances-utils-module"></span><h2>finances.utils module<a class="headerlink" href="#module-finances.utils" title="Permalink to this headline">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="finances.utils.calculate_lydia_fee_from_total">
+<span class="sig-prename descclassname"><span class="pre">finances.utils.</span></span><span class="sig-name descname"><span class="pre">calculate_lydia_fee_from_total</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">total_amount</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_fee</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ratio_fee</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tax_fee</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.utils.calculate_lydia_fee_from_total" title="Permalink to this definition">#</a></dt>
+<dd><p>Calculate the recharging amount through lydia</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="finances.utils.calculate_total_amount_lydia">
+<span class="sig-prename descclassname"><span class="pre">finances.utils.</span></span><span class="sig-name descname"><span class="pre">calculate_total_amount_lydia</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">recharging</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_fee</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ratio_fee</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tax_fee</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.utils.calculate_total_amount_lydia" title="Permalink to this definition">#</a></dt>
+<dd><p>Calculate the total amount to pay through lydia</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="finances.utils.verify_token_lydia">
+<span class="sig-prename descclassname"><span class="pre">finances.utils.</span></span><span class="sig-name descname"><span class="pre">verify_token_lydia</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">token</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.utils.verify_token_lydia" title="Permalink to this definition">#</a></dt>
+<dd><p>Verify request parameters according to Lydia’s algorithm.</p>
+<p>If parameters are valid, the request is authenticated to be from Lydia and
+can be safely used.
+:note:: sig must be contained in the parameters dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Warning:</dt>
+<dd class="field-odd"><p>token is private and must never be revealed.</p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>params</strong> (<em>python dictionary</em>) – all parameters, including sig, mandatory.</p></li>
+<li><p><strong>token</strong> (<em>string</em>) – token to be compared, mandatory.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if parameters are valid, False else.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Boolean</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-finances.views">
+<span id="finances-views-module"></span><h2>finances.views module<a class="headerlink" href="#module-finances.views" title="Permalink to this headline">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="finances.views.ExceptionnalMovementList">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">finances.views.</span></span><span class="sig-name descname"><span class="pre">ExceptionnalMovementList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.views.ExceptionnalMovementList" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.contrib.auth.mixins.LoginRequiredMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">django.contrib.auth.mixins.PermissionRequiredMixin</span></code>, <a class="reference internal" href="borgia.html#borgia.views.BorgiaFormView" title="borgia.views.BorgiaFormView"><code class="xref py py-class docutils literal notranslate"><span class="pre">borgia.views.BorgiaFormView</span></code></a></p>
+<p>View to list exceptionnal movement sales.</p>
+<p>The view handle request of the form to filter recharging exceptionnal
+movement.
+:note:: only exceptionnal movement sales are listed here. For other types
+of transactions, please refer to other classes (SaleList, TransfertList and
+SaleList).</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.ExceptionnalMovementList.date_begin">
+<span class="sig-name descname"><span class="pre">date_begin</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#finances.views.ExceptionnalMovementList.date_begin" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.ExceptionnalMovementList.date_end">
+<span class="sig-name descname"><span class="pre">date_end</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#finances.views.ExceptionnalMovementList.date_end" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.ExceptionnalMovementList.form_class">
+<span class="sig-name descname"><span class="pre">form_class</span></span><a class="headerlink" href="#finances.views.ExceptionnalMovementList.form_class" title="Permalink to this definition">#</a></dt>
+<dd><p>alias of <a class="reference internal" href="#finances.forms.GenericListSearchDateForm" title="finances.forms.GenericListSearchDateForm"><code class="xref py py-class docutils literal notranslate"><span class="pre">finances.forms.GenericListSearchDateForm</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.views.ExceptionnalMovementList.form_query">
+<span class="sig-name descname"><span class="pre">form_query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.views.ExceptionnalMovementList.form_query" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.views.ExceptionnalMovementList.form_valid">
+<span class="sig-name descname"><span class="pre">form_valid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">form</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.views.ExceptionnalMovementList.form_valid" title="Permalink to this definition">#</a></dt>
+<dd><p>If the form is valid, redirect to the supplied URL.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.views.ExceptionnalMovementList.get_context_data">
+<span class="sig-name descname"><span class="pre">get_context_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.views.ExceptionnalMovementList.get_context_data" title="Permalink to this definition">#</a></dt>
+<dd><p>Insert the form into the context dict.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.ExceptionnalMovementList.lm_active">
+<span class="sig-name descname"><span class="pre">lm_active</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'lm_exceptionnalmovement_list'</span></em><a class="headerlink" href="#finances.views.ExceptionnalMovementList.lm_active" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.ExceptionnalMovementList.menu_type">
+<span class="sig-name descname"><span class="pre">menu_type</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'managers'</span></em><a class="headerlink" href="#finances.views.ExceptionnalMovementList.menu_type" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.ExceptionnalMovementList.permission_required">
+<span class="sig-name descname"><span class="pre">permission_required</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'finances.view_exceptionnalmovement'</span></em><a class="headerlink" href="#finances.views.ExceptionnalMovementList.permission_required" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.ExceptionnalMovementList.search">
+<span class="sig-name descname"><span class="pre">search</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#finances.views.ExceptionnalMovementList.search" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.ExceptionnalMovementList.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'finances/exceptionnalmovement_list.html'</span></em><a class="headerlink" href="#finances.views.ExceptionnalMovementList.template_name" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="finances.views.ExceptionnalMovementRetrieve">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">finances.views.</span></span><span class="sig-name descname"><span class="pre">ExceptionnalMovementRetrieve</span></span><a class="headerlink" href="#finances.views.ExceptionnalMovementRetrieve" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.contrib.auth.mixins.LoginRequiredMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">django.contrib.auth.mixins.PermissionRequiredMixin</span></code>, <a class="reference internal" href="borgia.html#borgia.views.BorgiaView" title="borgia.views.BorgiaView"><code class="xref py py-class docutils literal notranslate"><span class="pre">borgia.views.BorgiaView</span></code></a></p>
+<p>Retrieve an exceptionnal movement sale.</p>
+<p>For other type of transaction, please refer to other classes (SaleRetrieve,
+TransfertRetrieve, RechargingRetrieve).</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.views.ExceptionnalMovementRetrieve.add_exceptionnalmovement_object">
+<span class="sig-name descname"><span class="pre">add_exceptionnalmovement_object</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#finances.views.ExceptionnalMovementRetrieve.add_exceptionnalmovement_object" title="Permalink to this definition">#</a></dt>
+<dd><p>Define shop object.
+Raise Http404 is shop doesn’t exist.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.views.ExceptionnalMovementRetrieve.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.views.ExceptionnalMovementRetrieve.get" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.views.ExceptionnalMovementRetrieve.has_permission">
+<span class="sig-name descname"><span class="pre">has_permission</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#finances.views.ExceptionnalMovementRetrieve.has_permission" title="Permalink to this definition">#</a></dt>
+<dd><p>Override this method to customize the way permissions are checked.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.ExceptionnalMovementRetrieve.menu_type">
+<span class="sig-name descname"><span class="pre">menu_type</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'managers'</span></em><a class="headerlink" href="#finances.views.ExceptionnalMovementRetrieve.menu_type" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.ExceptionnalMovementRetrieve.permission_required">
+<span class="sig-name descname"><span class="pre">permission_required</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'finances.view_exceptionnalmovement'</span></em><a class="headerlink" href="#finances.views.ExceptionnalMovementRetrieve.permission_required" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.ExceptionnalMovementRetrieve.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'finances/exceptionnalmovement_retrieve.html'</span></em><a class="headerlink" href="#finances.views.ExceptionnalMovementRetrieve.template_name" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="finances.views.LydiaStateAPI">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">finances.views.</span></span><span class="sig-name descname"><span class="pre">LydiaStateAPI</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.views.LydiaStateAPI" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.views.APIView</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.views.LydiaStateAPI.post">
+<span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.views.LydiaStateAPI.post" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="finances.views.RechargingCreate">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">finances.views.</span></span><span class="sig-name descname"><span class="pre">RechargingCreate</span></span><a class="headerlink" href="#finances.views.RechargingCreate" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="users.html#users.mixins.UserMixin" title="users.mixins.UserMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">users.mixins.UserMixin</span></code></a>, <a class="reference internal" href="borgia.html#borgia.views.BorgiaFormView" title="borgia.views.BorgiaFormView"><code class="xref py py-class docutils literal notranslate"><span class="pre">borgia.views.BorgiaFormView</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.RechargingCreate.form_class">
+<span class="sig-name descname"><span class="pre">form_class</span></span><a class="headerlink" href="#finances.views.RechargingCreate.form_class" title="Permalink to this definition">#</a></dt>
+<dd><p>alias of <a class="reference internal" href="#finances.forms.RechargingCreateForm" title="finances.forms.RechargingCreateForm"><code class="xref py py-class docutils literal notranslate"><span class="pre">finances.forms.RechargingCreateForm</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.views.RechargingCreate.form_valid">
+<span class="sig-name descname"><span class="pre">form_valid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">form</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.views.RechargingCreate.form_valid" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Note:</dt>
+<dd class="field-odd"><p>The form is assumed clean, then the couple username/password</p>
+</dd>
+</dl>
+<p>for the operator is right.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.views.RechargingCreate.get_form_kwargs">
+<span class="sig-name descname"><span class="pre">get_form_kwargs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#finances.views.RechargingCreate.get_form_kwargs" title="Permalink to this definition">#</a></dt>
+<dd><p>Return the keyword arguments for instantiating the form.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.views.RechargingCreate.get_initial">
+<span class="sig-name descname"><span class="pre">get_initial</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#finances.views.RechargingCreate.get_initial" title="Permalink to this definition">#</a></dt>
+<dd><p>Populate the form with the current login user for the operator (only
+username of course).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.views.RechargingCreate.get_success_url">
+<span class="sig-name descname"><span class="pre">get_success_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#finances.views.RechargingCreate.get_success_url" title="Permalink to this definition">#</a></dt>
+<dd><p>Return the URL to redirect to after processing a valid form.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.RechargingCreate.lm_active">
+<span class="sig-name descname"><span class="pre">lm_active</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#finances.views.RechargingCreate.lm_active" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.RechargingCreate.menu_type">
+<span class="sig-name descname"><span class="pre">menu_type</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'managers'</span></em><a class="headerlink" href="#finances.views.RechargingCreate.menu_type" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.RechargingCreate.permission_required">
+<span class="sig-name descname"><span class="pre">permission_required</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'finances.add_recharging'</span></em><a class="headerlink" href="#finances.views.RechargingCreate.permission_required" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.RechargingCreate.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'finances/user_supplymoney.html'</span></em><a class="headerlink" href="#finances.views.RechargingCreate.template_name" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="finances.views.RechargingList">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">finances.views.</span></span><span class="sig-name descname"><span class="pre">RechargingList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.views.RechargingList" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.contrib.auth.mixins.LoginRequiredMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">django.contrib.auth.mixins.PermissionRequiredMixin</span></code>, <a class="reference internal" href="borgia.html#borgia.views.BorgiaFormView" title="borgia.views.BorgiaFormView"><code class="xref py py-class docutils literal notranslate"><span class="pre">borgia.views.BorgiaFormView</span></code></a></p>
+<p>View to list recharging sales.</p>
+<p>The view handle request of the form to filter recharging sales.
+:note:: only recharging sales are listed here. For other types of
+transactions, please refer to other classes (SaleList, TransfertList and
+ExceptionnalMovementList).</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.RechargingList.date_begin">
+<span class="sig-name descname"><span class="pre">date_begin</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">datetime.datetime(2023,</span> <span class="pre">8,</span> <span class="pre">16,</span> <span class="pre">17,</span> <span class="pre">36,</span> <span class="pre">17,</span> <span class="pre">735919,</span> <span class="pre">tzinfo=datetime.timezone.utc)</span></em><a class="headerlink" href="#finances.views.RechargingList.date_begin" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.RechargingList.date_end">
+<span class="sig-name descname"><span class="pre">date_end</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">datetime.datetime(2023,</span> <span class="pre">8,</span> <span class="pre">24,</span> <span class="pre">17,</span> <span class="pre">36,</span> <span class="pre">17,</span> <span class="pre">735895,</span> <span class="pre">tzinfo=datetime.timezone.utc)</span></em><a class="headerlink" href="#finances.views.RechargingList.date_end" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.RechargingList.form_class">
+<span class="sig-name descname"><span class="pre">form_class</span></span><a class="headerlink" href="#finances.views.RechargingList.form_class" title="Permalink to this definition">#</a></dt>
+<dd><p>alias of <a class="reference internal" href="#finances.forms.RechargingListForm" title="finances.forms.RechargingListForm"><code class="xref py py-class docutils literal notranslate"><span class="pre">finances.forms.RechargingListForm</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.views.RechargingList.form_query">
+<span class="sig-name descname"><span class="pre">form_query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.views.RechargingList.form_query" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.views.RechargingList.form_valid">
+<span class="sig-name descname"><span class="pre">form_valid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">form</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.views.RechargingList.form_valid" title="Permalink to this definition">#</a></dt>
+<dd><p>If the form is valid, redirect to the supplied URL.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.views.RechargingList.get_context_data">
+<span class="sig-name descname"><span class="pre">get_context_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.views.RechargingList.get_context_data" title="Permalink to this definition">#</a></dt>
+<dd><p>Insert the form into the context dict.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.views.RechargingList.get_initial">
+<span class="sig-name descname"><span class="pre">get_initial</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#finances.views.RechargingList.get_initial" title="Permalink to this definition">#</a></dt>
+<dd><p>Return the initial data to use for forms on this view.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.views.RechargingList.info">
+<span class="sig-name descname"><span class="pre">info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.views.RechargingList.info" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.RechargingList.lm_active">
+<span class="sig-name descname"><span class="pre">lm_active</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'lm_recharging_list'</span></em><a class="headerlink" href="#finances.views.RechargingList.lm_active" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.RechargingList.menu_type">
+<span class="sig-name descname"><span class="pre">menu_type</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'managers'</span></em><a class="headerlink" href="#finances.views.RechargingList.menu_type" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.RechargingList.operators">
+<span class="sig-name descname"><span class="pre">operators</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#finances.views.RechargingList.operators" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.RechargingList.permission_required">
+<span class="sig-name descname"><span class="pre">permission_required</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'finances.view_recharging'</span></em><a class="headerlink" href="#finances.views.RechargingList.permission_required" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.RechargingList.search">
+<span class="sig-name descname"><span class="pre">search</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#finances.views.RechargingList.search" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.RechargingList.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'finances/recharging_list.html'</span></em><a class="headerlink" href="#finances.views.RechargingList.template_name" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="finances.views.RechargingRetrieve">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">finances.views.</span></span><span class="sig-name descname"><span class="pre">RechargingRetrieve</span></span><a class="headerlink" href="#finances.views.RechargingRetrieve" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.contrib.auth.mixins.LoginRequiredMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">django.contrib.auth.mixins.PermissionRequiredMixin</span></code>, <a class="reference internal" href="borgia.html#borgia.views.BorgiaView" title="borgia.views.BorgiaView"><code class="xref py py-class docutils literal notranslate"><span class="pre">borgia.views.BorgiaView</span></code></a></p>
+<p>Retrieve a recharging sale.</p>
+<p>For other type of transaction, please refer to other classes (SaleRetrieve,
+TransfertRetrieve, ExceptionnalMovementRetrieve).</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.views.RechargingRetrieve.add_recharging_object">
+<span class="sig-name descname"><span class="pre">add_recharging_object</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#finances.views.RechargingRetrieve.add_recharging_object" title="Permalink to this definition">#</a></dt>
+<dd><p>Define shop object.
+Raise Http404 is shop doesn’t exist.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.views.RechargingRetrieve.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.views.RechargingRetrieve.get" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.views.RechargingRetrieve.has_permission">
+<span class="sig-name descname"><span class="pre">has_permission</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#finances.views.RechargingRetrieve.has_permission" title="Permalink to this definition">#</a></dt>
+<dd><p>Override this method to customize the way permissions are checked.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.RechargingRetrieve.menu_type">
+<span class="sig-name descname"><span class="pre">menu_type</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'managers'</span></em><a class="headerlink" href="#finances.views.RechargingRetrieve.menu_type" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.RechargingRetrieve.permission_required">
+<span class="sig-name descname"><span class="pre">permission_required</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'finances.view_recharging'</span></em><a class="headerlink" href="#finances.views.RechargingRetrieve.permission_required" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.RechargingRetrieve.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'finances/recharging_retrieve.html'</span></em><a class="headerlink" href="#finances.views.RechargingRetrieve.template_name" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="finances.views.SelfLydiaConfirm">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">finances.views.</span></span><span class="sig-name descname"><span class="pre">SelfLydiaConfirm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.views.SelfLydiaConfirm" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.contrib.auth.mixins.LoginRequiredMixin</span></code>, <a class="reference internal" href="borgia.html#borgia.views.BorgiaView" title="borgia.views.BorgiaView"><code class="xref py py-class docutils literal notranslate"><span class="pre">borgia.views.BorgiaView</span></code></a></p>
+<p>View to confirm supply by Lydia.</p>
+<p>This view is only here to have some indications for the user. It does
+nothing more and can be “generated” with GET irelevant GET parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Note:</dt>
+<dd class="field-odd"><p>transaction and order parameters are given by Lydia but aren’t</p>
+</dd>
+</dl>
+<p>used here.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.views.SelfLydiaConfirm.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.views.SelfLydiaConfirm.get" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.SelfLydiaConfirm.menu_type">
+<span class="sig-name descname"><span class="pre">menu_type</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'members'</span></em><a class="headerlink" href="#finances.views.SelfLydiaConfirm.menu_type" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.SelfLydiaConfirm.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'finances/self_lydia_confirm.html'</span></em><a class="headerlink" href="#finances.views.SelfLydiaConfirm.template_name" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="finances.views.SelfLydiaCreate">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">finances.views.</span></span><span class="sig-name descname"><span class="pre">SelfLydiaCreate</span></span><a class="headerlink" href="#finances.views.SelfLydiaCreate" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.contrib.auth.mixins.LoginRequiredMixin</span></code>, <a class="reference internal" href="borgia.html#borgia.views.BorgiaFormView" title="borgia.views.BorgiaFormView"><code class="xref py py-class docutils literal notranslate"><span class="pre">borgia.views.BorgiaFormView</span></code></a></p>
+<p>View to supply himself by Lydia.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.views.SelfLydiaCreate.add_lydia_context">
+<span class="sig-name descname"><span class="pre">add_lydia_context</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#finances.views.SelfLydiaCreate.add_lydia_context" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.SelfLydiaCreate.form_class">
+<span class="sig-name descname"><span class="pre">form_class</span></span><a class="headerlink" href="#finances.views.SelfLydiaCreate.form_class" title="Permalink to this definition">#</a></dt>
+<dd><p>alias of <a class="reference internal" href="#finances.forms.SelfLydiaCreateForm" title="finances.forms.SelfLydiaCreateForm"><code class="xref py py-class docutils literal notranslate"><span class="pre">finances.forms.SelfLydiaCreateForm</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.views.SelfLydiaCreate.form_valid">
+<span class="sig-name descname"><span class="pre">form_valid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">form</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.views.SelfLydiaCreate.form_valid" title="Permalink to this definition">#</a></dt>
+<dd><p>Save the current phone number as default phone number for the user.
+Render the Lydia button.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.views.SelfLydiaCreate.get_context_data">
+<span class="sig-name descname"><span class="pre">get_context_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.views.SelfLydiaCreate.get_context_data" title="Permalink to this definition">#</a></dt>
+<dd><p>Insert the form into the context dict.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.views.SelfLydiaCreate.get_form_kwargs">
+<span class="sig-name descname"><span class="pre">get_form_kwargs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#finances.views.SelfLydiaCreate.get_form_kwargs" title="Permalink to this definition">#</a></dt>
+<dd><p>Return the keyword arguments for instantiating the form.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.views.SelfLydiaCreate.get_initial">
+<span class="sig-name descname"><span class="pre">get_initial</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#finances.views.SelfLydiaCreate.get_initial" title="Permalink to this definition">#</a></dt>
+<dd><p>Return the initial data to use for forms on this view.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.SelfLydiaCreate.lm_active">
+<span class="sig-name descname"><span class="pre">lm_active</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'lm_self_lydia_create'</span></em><a class="headerlink" href="#finances.views.SelfLydiaCreate.lm_active" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.SelfLydiaCreate.menu_type">
+<span class="sig-name descname"><span class="pre">menu_type</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'members'</span></em><a class="headerlink" href="#finances.views.SelfLydiaCreate.menu_type" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.SelfLydiaCreate.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'finances/self_lydia_create.html'</span></em><a class="headerlink" href="#finances.views.SelfLydiaCreate.template_name" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="finances.views.SelfLydiaCreateAPI">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">finances.views.</span></span><span class="sig-name descname"><span class="pre">SelfLydiaCreateAPI</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.views.SelfLydiaCreateAPI" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.views.APIView</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.views.SelfLydiaCreateAPI.post">
+<span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.views.SelfLydiaCreateAPI.post" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="finances.views.SelfLydiaErrorCurrency">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">finances.views.</span></span><span class="sig-name descname"><span class="pre">SelfLydiaErrorCurrency</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.views.SelfLydiaErrorCurrency" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.contrib.auth.mixins.LoginRequiredMixin</span></code>, <a class="reference internal" href="borgia.html#borgia.views.BorgiaView" title="borgia.views.BorgiaView"><code class="xref py py-class docutils literal notranslate"><span class="pre">borgia.views.BorgiaView</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.views.SelfLydiaErrorCurrency.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.views.SelfLydiaErrorCurrency.get" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.SelfLydiaErrorCurrency.menu_type">
+<span class="sig-name descname"><span class="pre">menu_type</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'members'</span></em><a class="headerlink" href="#finances.views.SelfLydiaErrorCurrency.menu_type" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.SelfLydiaErrorCurrency.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'finances/self_lydia_error.html'</span></em><a class="headerlink" href="#finances.views.SelfLydiaErrorCurrency.template_name" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="finances.views.SelfTransactionList">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">finances.views.</span></span><span class="sig-name descname"><span class="pre">SelfTransactionList</span></span><a class="headerlink" href="#finances.views.SelfTransactionList" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.contrib.auth.mixins.LoginRequiredMixin</span></code>, <a class="reference internal" href="borgia.html#borgia.views.BorgiaFormView" title="borgia.views.BorgiaFormView"><code class="xref py py-class docutils literal notranslate"><span class="pre">borgia.views.BorgiaFormView</span></code></a></p>
+<p>View to list transactions of the logged user.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.SelfTransactionList.date_begin">
+<span class="sig-name descname"><span class="pre">date_begin</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#finances.views.SelfTransactionList.date_begin" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.SelfTransactionList.date_end">
+<span class="sig-name descname"><span class="pre">date_end</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#finances.views.SelfTransactionList.date_end" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.SelfTransactionList.form_class">
+<span class="sig-name descname"><span class="pre">form_class</span></span><a class="headerlink" href="#finances.views.SelfTransactionList.form_class" title="Permalink to this definition">#</a></dt>
+<dd><p>alias of <a class="reference internal" href="#finances.forms.GenericListSearchDateForm" title="finances.forms.GenericListSearchDateForm"><code class="xref py py-class docutils literal notranslate"><span class="pre">finances.forms.GenericListSearchDateForm</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.views.SelfTransactionList.form_query">
+<span class="sig-name descname"><span class="pre">form_query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.views.SelfTransactionList.form_query" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.views.SelfTransactionList.form_valid">
+<span class="sig-name descname"><span class="pre">form_valid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">form</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.views.SelfTransactionList.form_valid" title="Permalink to this definition">#</a></dt>
+<dd><p>If the form is valid, redirect to the supplied URL.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.views.SelfTransactionList.get_context_data">
+<span class="sig-name descname"><span class="pre">get_context_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.views.SelfTransactionList.get_context_data" title="Permalink to this definition">#</a></dt>
+<dd><p>Insert the form into the context dict.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.SelfTransactionList.lm_active">
+<span class="sig-name descname"><span class="pre">lm_active</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'lm_self_transaction_list'</span></em><a class="headerlink" href="#finances.views.SelfTransactionList.lm_active" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.SelfTransactionList.menu_type">
+<span class="sig-name descname"><span class="pre">menu_type</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'members'</span></em><a class="headerlink" href="#finances.views.SelfTransactionList.menu_type" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.SelfTransactionList.search">
+<span class="sig-name descname"><span class="pre">search</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#finances.views.SelfTransactionList.search" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.SelfTransactionList.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'finances/self_transaction_list.html'</span></em><a class="headerlink" href="#finances.views.SelfTransactionList.template_name" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="finances.views.TransfertCreate">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">finances.views.</span></span><span class="sig-name descname"><span class="pre">TransfertCreate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.views.TransfertCreate" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.contrib.auth.mixins.LoginRequiredMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">django.contrib.auth.mixins.PermissionRequiredMixin</span></code>, <a class="reference internal" href="borgia.html#borgia.views.BorgiaFormView" title="borgia.views.BorgiaFormView"><code class="xref py py-class docutils literal notranslate"><span class="pre">borgia.views.BorgiaFormView</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.TransfertCreate.form_class">
+<span class="sig-name descname"><span class="pre">form_class</span></span><a class="headerlink" href="#finances.views.TransfertCreate.form_class" title="Permalink to this definition">#</a></dt>
+<dd><p>alias of <a class="reference internal" href="#finances.forms.TransfertCreateForm" title="finances.forms.TransfertCreateForm"><code class="xref py py-class docutils literal notranslate"><span class="pre">finances.forms.TransfertCreateForm</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.views.TransfertCreate.form_valid">
+<span class="sig-name descname"><span class="pre">form_valid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">form</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.views.TransfertCreate.form_valid" title="Permalink to this definition">#</a></dt>
+<dd><p>If the form is valid, redirect to the supplied URL.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.views.TransfertCreate.get_form_kwargs">
+<span class="sig-name descname"><span class="pre">get_form_kwargs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#finances.views.TransfertCreate.get_form_kwargs" title="Permalink to this definition">#</a></dt>
+<dd><p>Return the keyword arguments for instantiating the form.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.views.TransfertCreate.get_success_message">
+<span class="sig-name descname"><span class="pre">get_success_message</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cleaned_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.views.TransfertCreate.get_success_message" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.views.TransfertCreate.get_success_url">
+<span class="sig-name descname"><span class="pre">get_success_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#finances.views.TransfertCreate.get_success_url" title="Permalink to this definition">#</a></dt>
+<dd><p>Return the URL to redirect to after processing a valid form.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.TransfertCreate.lm_active">
+<span class="sig-name descname"><span class="pre">lm_active</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'lm_transfert_create'</span></em><a class="headerlink" href="#finances.views.TransfertCreate.lm_active" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.TransfertCreate.menu_type">
+<span class="sig-name descname"><span class="pre">menu_type</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'members'</span></em><a class="headerlink" href="#finances.views.TransfertCreate.menu_type" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.TransfertCreate.permission_required">
+<span class="sig-name descname"><span class="pre">permission_required</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'finances.add_transfert'</span></em><a class="headerlink" href="#finances.views.TransfertCreate.permission_required" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.TransfertCreate.success_message">
+<span class="sig-name descname"><span class="pre">success_message</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Le</span> <span class="pre">montant</span> <span class="pre">de</span> <span class="pre">%(amount)s€</span> <span class="pre">a</span> <span class="pre">bien</span> <span class="pre">été</span> <span class="pre">transféré</span> <span class="pre">à</span> <span class="pre">%(recipient)s.'</span></em><a class="headerlink" href="#finances.views.TransfertCreate.success_message" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.TransfertCreate.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'finances/self_transfert_create.html'</span></em><a class="headerlink" href="#finances.views.TransfertCreate.template_name" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="finances.views.TransfertList">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">finances.views.</span></span><span class="sig-name descname"><span class="pre">TransfertList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.views.TransfertList" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.contrib.auth.mixins.LoginRequiredMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">django.contrib.auth.mixins.PermissionRequiredMixin</span></code>, <a class="reference internal" href="borgia.html#borgia.views.BorgiaFormView" title="borgia.views.BorgiaFormView"><code class="xref py py-class docutils literal notranslate"><span class="pre">borgia.views.BorgiaFormView</span></code></a></p>
+<p>View to list transfert sales.</p>
+<p>The view handle request of the form to filter transfert sales.
+:note:: only transfert sales are listed here. For other types of
+transactions, please refer to other classes (SaleList, RechargingList and
+ExceptionnalMovementList).</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.TransfertList.date_begin">
+<span class="sig-name descname"><span class="pre">date_begin</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#finances.views.TransfertList.date_begin" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.TransfertList.date_end">
+<span class="sig-name descname"><span class="pre">date_end</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#finances.views.TransfertList.date_end" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.TransfertList.form_class">
+<span class="sig-name descname"><span class="pre">form_class</span></span><a class="headerlink" href="#finances.views.TransfertList.form_class" title="Permalink to this definition">#</a></dt>
+<dd><p>alias of <a class="reference internal" href="#finances.forms.GenericListSearchDateForm" title="finances.forms.GenericListSearchDateForm"><code class="xref py py-class docutils literal notranslate"><span class="pre">finances.forms.GenericListSearchDateForm</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.views.TransfertList.form_query">
+<span class="sig-name descname"><span class="pre">form_query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.views.TransfertList.form_query" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.views.TransfertList.form_valid">
+<span class="sig-name descname"><span class="pre">form_valid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">form</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.views.TransfertList.form_valid" title="Permalink to this definition">#</a></dt>
+<dd><p>If the form is valid, redirect to the supplied URL.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.views.TransfertList.get_context_data">
+<span class="sig-name descname"><span class="pre">get_context_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.views.TransfertList.get_context_data" title="Permalink to this definition">#</a></dt>
+<dd><p>Insert the form into the context dict.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.TransfertList.lm_active">
+<span class="sig-name descname"><span class="pre">lm_active</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'lm_transfert_list'</span></em><a class="headerlink" href="#finances.views.TransfertList.lm_active" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.TransfertList.menu_type">
+<span class="sig-name descname"><span class="pre">menu_type</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'managers'</span></em><a class="headerlink" href="#finances.views.TransfertList.menu_type" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.TransfertList.permission_required">
+<span class="sig-name descname"><span class="pre">permission_required</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'finances.view_transfert'</span></em><a class="headerlink" href="#finances.views.TransfertList.permission_required" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.TransfertList.search">
+<span class="sig-name descname"><span class="pre">search</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#finances.views.TransfertList.search" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.TransfertList.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'finances/transfert_list.html'</span></em><a class="headerlink" href="#finances.views.TransfertList.template_name" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="finances.views.TransfertRetrieve">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">finances.views.</span></span><span class="sig-name descname"><span class="pre">TransfertRetrieve</span></span><a class="headerlink" href="#finances.views.TransfertRetrieve" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.contrib.auth.mixins.LoginRequiredMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">django.contrib.auth.mixins.PermissionRequiredMixin</span></code>, <a class="reference internal" href="borgia.html#borgia.views.BorgiaView" title="borgia.views.BorgiaView"><code class="xref py py-class docutils literal notranslate"><span class="pre">borgia.views.BorgiaView</span></code></a></p>
+<p>Retrieve a transfert sale.</p>
+<p>For other type of transaction, please refer to other classes (SaleRetrieve,
+RechargingRetrieve, ExceptionnalMovementRetrieve).</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.views.TransfertRetrieve.add_transfert_object">
+<span class="sig-name descname"><span class="pre">add_transfert_object</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#finances.views.TransfertRetrieve.add_transfert_object" title="Permalink to this definition">#</a></dt>
+<dd><p>Define shop object.
+Raise Http404 is shop doesn’t exist.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.views.TransfertRetrieve.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.views.TransfertRetrieve.get" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.views.TransfertRetrieve.has_permission">
+<span class="sig-name descname"><span class="pre">has_permission</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#finances.views.TransfertRetrieve.has_permission" title="Permalink to this definition">#</a></dt>
+<dd><p>Override this method to customize the way permissions are checked.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.TransfertRetrieve.menu_type">
+<span class="sig-name descname"><span class="pre">menu_type</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'managers'</span></em><a class="headerlink" href="#finances.views.TransfertRetrieve.menu_type" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.TransfertRetrieve.permission_required">
+<span class="sig-name descname"><span class="pre">permission_required</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'finances.view_transfert'</span></em><a class="headerlink" href="#finances.views.TransfertRetrieve.permission_required" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.TransfertRetrieve.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'finances/transfert_retrieve.html'</span></em><a class="headerlink" href="#finances.views.TransfertRetrieve.template_name" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="finances.views.UserExceptionnalMovementCreate">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">finances.views.</span></span><span class="sig-name descname"><span class="pre">UserExceptionnalMovementCreate</span></span><a class="headerlink" href="#finances.views.UserExceptionnalMovementCreate" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="users.html#users.mixins.UserMixin" title="users.mixins.UserMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">users.mixins.UserMixin</span></code></a>, <a class="reference internal" href="borgia.html#borgia.views.BorgiaFormView" title="borgia.views.BorgiaFormView"><code class="xref py py-class docutils literal notranslate"><span class="pre">borgia.views.BorgiaFormView</span></code></a></p>
+<p>View to create an exceptionnal movement (debit or credit) for a specific
+user.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.UserExceptionnalMovementCreate.form_class">
+<span class="sig-name descname"><span class="pre">form_class</span></span><a class="headerlink" href="#finances.views.UserExceptionnalMovementCreate.form_class" title="Permalink to this definition">#</a></dt>
+<dd><p>alias of <a class="reference internal" href="#finances.forms.ExceptionnalMovementForm" title="finances.forms.ExceptionnalMovementForm"><code class="xref py py-class docutils literal notranslate"><span class="pre">finances.forms.ExceptionnalMovementForm</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.views.UserExceptionnalMovementCreate.form_valid">
+<span class="sig-name descname"><span class="pre">form_valid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">form</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.views.UserExceptionnalMovementCreate.form_valid" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Note:</dt>
+<dd class="field-odd"><p>The form is assumed clean, then the couple username/password</p>
+</dd>
+</dl>
+<p>for the operator is right.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.views.UserExceptionnalMovementCreate.get_initial">
+<span class="sig-name descname"><span class="pre">get_initial</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#finances.views.UserExceptionnalMovementCreate.get_initial" title="Permalink to this definition">#</a></dt>
+<dd><p>Populate the form with the current login user for the operator (only
+username of course).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finances.views.UserExceptionnalMovementCreate.get_success_url">
+<span class="sig-name descname"><span class="pre">get_success_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#finances.views.UserExceptionnalMovementCreate.get_success_url" title="Permalink to this definition">#</a></dt>
+<dd><p>Return the URL to redirect to after processing a valid form.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.UserExceptionnalMovementCreate.lm_active">
+<span class="sig-name descname"><span class="pre">lm_active</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#finances.views.UserExceptionnalMovementCreate.lm_active" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.UserExceptionnalMovementCreate.menu_type">
+<span class="sig-name descname"><span class="pre">menu_type</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'managers'</span></em><a class="headerlink" href="#finances.views.UserExceptionnalMovementCreate.menu_type" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.UserExceptionnalMovementCreate.permission_required">
+<span class="sig-name descname"><span class="pre">permission_required</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'finances.add_exceptionnalmovement'</span></em><a class="headerlink" href="#finances.views.UserExceptionnalMovementCreate.permission_required" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finances.views.UserExceptionnalMovementCreate.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'finances/user_exceptionnalmovement_create.html'</span></em><a class="headerlink" href="#finances.views.UserExceptionnalMovementCreate.template_name" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="finances.views.create_viva_wallet_payment_order">
+<span class="sig-prename descclassname"><span class="pre">finances.views.</span></span><span class="sig-name descname"><span class="pre">create_viva_wallet_payment_order</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">access_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.views.create_viva_wallet_payment_order" title="Permalink to this definition">#</a></dt>
+<dd><p>Create a payment order from Viva Wallet API</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>access_token (string): access token is provided by the 0Auth2 function get_viva_wallet_access_token( )</p>
+</dd>
+<dt>Returns:</dt><dd><p>string: return the payment order number access that can be used by the customer to use Smart Checkout of Viva Wallet</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="finances.views.get_viva_wallet_access_token">
+<span class="sig-prename descclassname"><span class="pre">finances.views.</span></span><span class="sig-name descname"><span class="pre">get_viva_wallet_access_token</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#finances.views.get_viva_wallet_access_token" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="finances.views.get_viva_wallet_transaction">
+<span class="sig-prename descclassname"><span class="pre">finances.views.</span></span><span class="sig-name descname"><span class="pre">get_viva_wallet_transaction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">access_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transaction_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.views.get_viva_wallet_transaction" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="finances.views.self_lydia_callback">
+<span class="sig-prename descclassname"><span class="pre">finances.views.</span></span><span class="sig-name descname"><span class="pre">self_lydia_callback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.views.self_lydia_callback" title="Permalink to this definition">#</a></dt>
+<dd><p>Function to catch the callback from Lydia after a payment.</p>
+<p>Create all objects needed to have a proper sale in the database, and credit
+the client.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>GET</strong><strong>[</strong><strong>'user_pk'</strong><strong>]</strong> – pk of the client, mandatory.</p></li>
+<li><p><strong>POST</strong><strong>[</strong><strong>'currency'</strong><strong>]</strong> – icon of the currency, for instance EUR, mandatory.</p></li>
+<li><p><strong>POST</strong><strong>[</strong><strong>'request_id'</strong><strong>]</strong> – id from lydia, mandatory.</p></li>
+<li><p><strong>POST</strong><strong>[</strong><strong>'amount'</strong><strong>]</strong> – amount of the transaction, in ‘currency’, mandatory.</p></li>
+<li><p><strong>POST</strong><strong>[</strong><strong>'signed'</strong><strong>]</strong> – internal to Lydia ?</p></li>
+<li><p><strong>POST</strong><strong>[</strong><strong>'transaction_identifier'</strong><strong>]</strong> – transaction id from Lydia,</p></li>
+</ul>
+</dd>
+</dl>
+<p>mandatory.
+:param POST[‘vendor_token’]: public key of the association, mandatory.
+:param POST[‘sig’]: signatory generated by Lydia to identify the
+transaction, mandator.
+:type GET[‘user_pk’]: positiv integer
+:type POST[‘currency’]: string
+:type POST[‘request_id: string
+:type POST[‘amount’]: float (decimal)
+:type POST[‘signed’]: boolean
+:type POST[‘transaction_identifier’]: string
+:type POST[‘vendor_token’]: string
+:type POST[‘sig’]: string</p>
+<dl class="field-list simple">
+<dt class="field-odd">Note:</dt>
+<dd class="field-odd"><p>Even if some parameters tend to be useless (signed, request_id),</p>
+</dd>
+</dl>
+<p>they are mandatory because used to generated the signatory and verify the
+transaction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p>PermissionDenied if signatory generated is not sig.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>300 if the user_pk doesn’t match an user.</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>300 if a parameter is missing.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>200 if all’s good.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Http request</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="finances.views.viva_wallet_borgia_balance_refill">
+<span class="sig-prename descclassname"><span class="pre">finances.views.</span></span><span class="sig-name descname"><span class="pre">viva_wallet_borgia_balance_refill</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transaction_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transaction_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_pk</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finances.views.viva_wallet_borgia_balance_refill" title="Permalink to this definition">#</a></dt>
+<dd><p>balance refill function used by Viva wallet API
+Args:</p>
+<blockquote>
+<div><p>transaction_data (_type_): _description_
+transaction_id (_type_): _description_
+user_pk (_type_): _description_</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Raises:</dt><dd><p>Http404: _description_</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-finances">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-finances" title="Permalink to this headline">#</a></h2>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#subpackages">Subpackages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submodules">Submodules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finances-old-views-copy-module">finances.OLD views copy module</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-finances.apps">finances.apps module</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-finances.forms">finances.forms module</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-finances.models">finances.models module</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-finances.serializers">finances.serializers module</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-finances.urls">finances.urls module</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-finances.utils">finances.utils module</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-finances.views">finances.views module</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-finances">Module contents</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="_sources/finances.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, Josue Gauthier.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

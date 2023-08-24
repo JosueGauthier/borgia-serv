@@ -1,0 +1,1358 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>sales package &#8212; borgia 2 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'sales';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">borgia 2 documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="modules.html">
+                        Borgia
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="finance.html">
+                        Documentation de Finances
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="modules.html">
+                        Borgia
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="finance.html">
+                        Documentation de Finances
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">sales package</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="sales-package">
+<h1>sales package<a class="headerlink" href="#sales-package" title="Permalink to this headline">#</a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="sales.migrations.html">sales.migrations package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sales.migrations.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sales.migrations.html#module-sales.migrations.0001_initial">sales.migrations.0001_initial module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sales.migrations.html#module-sales.migrations">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sales.tests.html">sales.tests package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sales.tests.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sales.tests.html#module-sales.tests.tests_urls">sales.tests.tests_urls module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sales.tests.html#module-sales.tests.tests_views">sales.tests.tests_views module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sales.tests.html#module-sales.tests">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="module-sales.apps">
+<span id="sales-apps-module"></span><h2>sales.apps module<a class="headerlink" href="#module-sales.apps" title="Permalink to this headline">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="sales.apps.SalesConfig">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sales.apps.</span></span><span class="sig-name descname"><span class="pre">SalesConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_module</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sales.apps.SalesConfig" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.apps.config.AppConfig</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.apps.SalesConfig.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'sales'</span></em><a class="headerlink" href="#sales.apps.SalesConfig.name" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-sales.forms">
+<span id="sales-forms-module"></span><h2>sales.forms module<a class="headerlink" href="#module-sales.forms" title="Permalink to this headline">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="sales.forms.SaleListSearchDateForm">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sales.forms.</span></span><span class="sig-name descname"><span class="pre">SaleListSearchDateForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_id='id_%s'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_class=&lt;class</span> <span class="pre">'django.forms.utils.ErrorList'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_suffix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">empty_permitted=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_order=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_required_attribute=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">renderer=None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sales.forms.SaleListSearchDateForm" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.forms.forms.Form</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.forms.SaleListSearchDateForm.base_fields">
+<span class="sig-name descname"><span class="pre">base_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'date_begin':</span> <span class="pre">&lt;django.forms.fields.DateField</span> <span class="pre">object&gt;,</span> <span class="pre">'date_end':</span> <span class="pre">&lt;django.forms.fields.DateField</span> <span class="pre">object&gt;,</span> <span class="pre">'search':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#sales.forms.SaleListSearchDateForm.base_fields" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.forms.SaleListSearchDateForm.declared_fields">
+<span class="sig-name descname"><span class="pre">declared_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'date_begin':</span> <span class="pre">&lt;django.forms.fields.DateField</span> <span class="pre">object&gt;,</span> <span class="pre">'date_end':</span> <span class="pre">&lt;django.forms.fields.DateField</span> <span class="pre">object&gt;,</span> <span class="pre">'search':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#sales.forms.SaleListSearchDateForm.declared_fields" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="sales.forms.SaleListSearchDateForm.media">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#sales.forms.SaleListSearchDateForm.media" title="Permalink to this definition">#</a></dt>
+<dd><p>Return all media required to render the widgets on this form.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-sales.mixins">
+<span id="sales-mixins-module"></span><h2>sales.mixins module<a class="headerlink" href="#module-sales.mixins" title="Permalink to this headline">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="sales.mixins.SaleMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sales.mixins.</span></span><span class="sig-name descname"><span class="pre">SaleMixin</span></span><a class="headerlink" href="#sales.mixins.SaleMixin" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="shops.html#shops.mixins.ShopMixin" title="shops.mixins.ShopMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">shops.mixins.ShopMixin</span></code></a></p>
+<p>Mixin that check permission and give context for sales</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sales.mixins.SaleMixin.add_context_objects">
+<span class="sig-name descname"><span class="pre">add_context_objects</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sales.mixins.SaleMixin.add_context_objects" title="Permalink to this definition">#</a></dt>
+<dd><p>Override to add more context objects for the view.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sales.mixins.SaleMixin.add_sale_object">
+<span class="sig-name descname"><span class="pre">add_sale_object</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sales.mixins.SaleMixin.add_sale_object" title="Permalink to this definition">#</a></dt>
+<dd><p>Define Sale object.
+Raise Http404 is sale doesn’t exist.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sales.mixins.SaleMixin.get_context_data">
+<span class="sig-name descname"><span class="pre">get_context_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sales.mixins.SaleMixin.get_context_data" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-sales.models">
+<span id="sales-models-module"></span><h2>sales.models module<a class="headerlink" href="#module-sales.models" title="Permalink to this headline">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="sales.models.Sale">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sales.models.</span></span><span class="sig-name descname"><span class="pre">Sale</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sales.models.Sale" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.db.models.base.Model</span></code></p>
+<p>Define a Sale between two users.</p>
+<p>The transaction is managed by an operator (which can the the sender
+directly if the sell is direct). Most of sale are between an User and the
+association (represented by the special User with username ‘AE ENSAM’).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>datetime</strong> – date of sell, mandatory.</p></li>
+<li><p><strong>sender</strong> – sender of the sale, mandatory.</p></li>
+<li><p><strong>recipient</strong> – recipient of the sale, mandatory.</p></li>
+<li><p><strong>operator</strong> – operator of the sale, mandatory.</p></li>
+</ul>
+</dd>
+</dl>
+<p>NEW IMPLMENTATION
+:param content_type:
+:param module_id:
+:param module:
+:param shop:
+:param products:</p>
+<dl class="field-list simple">
+</dl>
+<p>NEW IMPLMENTATION
+:type content_type:
+:type module_id:
+:type module:
+:type shop: Shop object
+:type products: Product object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Note:</dt>
+<dd class="field-odd"><p>Initial Django Permission (add, change, delete, view) are added.</p>
+</dd>
+</dl>
+<dl class="py exception">
+<dt class="sig sig-object py" id="sales.models.Sale.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#sales.models.Sale.DoesNotExist" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.core.exceptions.ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="sales.models.Sale.MultipleObjectsReturned">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#sales.models.Sale.MultipleObjectsReturned" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.core.exceptions.MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sales.models.Sale.amount">
+<span class="sig-name descname"><span class="pre">amount</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sales.models.Sale.amount" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.models.Sale.content_type">
+<span class="sig-name descname"><span class="pre">content_type</span></span><a class="headerlink" href="#sales.models.Sale.content_type" title="Permalink to this definition">#</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.models.Sale.content_type_id">
+<span class="sig-name descname"><span class="pre">content_type_id</span></span><a class="headerlink" href="#sales.models.Sale.content_type_id" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.models.Sale.datetime">
+<span class="sig-name descname"><span class="pre">datetime</span></span><a class="headerlink" href="#sales.models.Sale.datetime" title="Permalink to this definition">#</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sales.models.Sale.from_shop">
+<span class="sig-name descname"><span class="pre">from_shop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sales.models.Sale.from_shop" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sales.models.Sale.get_next_by_datetime">
+<span class="sig-name descname"><span class="pre">get_next_by_datetime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">datetime&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sales.models.Sale.get_next_by_datetime" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sales.models.Sale.get_previous_by_datetime">
+<span class="sig-name descname"><span class="pre">get_previous_by_datetime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">datetime&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sales.models.Sale.get_previous_by_datetime" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.models.Sale.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#sales.models.Sale.id" title="Permalink to this definition">#</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.models.Sale.module">
+<span class="sig-name descname"><span class="pre">module</span></span><a class="headerlink" href="#sales.models.Sale.module" title="Permalink to this definition">#</a></dt>
+<dd><p>Provide a generic many-to-one relation through the <code class="docutils literal notranslate"><span class="pre">content_type</span></code> and
+<code class="docutils literal notranslate"><span class="pre">object_id</span></code> fields.</p>
+<p>This class also doubles as an accessor to the related object (similar to
+ForwardManyToOneDescriptor) by adding itself as a model attribute.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.models.Sale.module_id">
+<span class="sig-name descname"><span class="pre">module_id</span></span><a class="headerlink" href="#sales.models.Sale.module_id" title="Permalink to this definition">#</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.models.Sale.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.manager.Manager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#sales.models.Sale.objects" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.models.Sale.operator">
+<span class="sig-name descname"><span class="pre">operator</span></span><a class="headerlink" href="#sales.models.Sale.operator" title="Permalink to this definition">#</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.models.Sale.operator_id">
+<span class="sig-name descname"><span class="pre">operator_id</span></span><a class="headerlink" href="#sales.models.Sale.operator_id" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sales.models.Sale.pay">
+<span class="sig-name descname"><span class="pre">pay</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sales.models.Sale.pay" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.models.Sale.products">
+<span class="sig-name descname"><span class="pre">products</span></span><a class="headerlink" href="#sales.models.Sale.products" title="Permalink to this definition">#</a></dt>
+<dd><p>Accessor to the related objects manager on the forward and reverse sides of
+a many-to-many relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Pizza</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">toppings</span> <span class="o">=</span> <span class="n">ManyToManyField</span><span class="p">(</span><span class="n">Topping</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;pizzas&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Pizza.toppings</span></code> and <code class="docutils literal notranslate"><span class="pre">Topping.pizzas</span></code> are <code class="docutils literal notranslate"><span class="pre">ManyToManyDescriptor</span></code>
+instances.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.models.Sale.recipient">
+<span class="sig-name descname"><span class="pre">recipient</span></span><a class="headerlink" href="#sales.models.Sale.recipient" title="Permalink to this definition">#</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.models.Sale.recipient_id">
+<span class="sig-name descname"><span class="pre">recipient_id</span></span><a class="headerlink" href="#sales.models.Sale.recipient_id" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.models.Sale.saleproduct_set">
+<span class="sig-name descname"><span class="pre">saleproduct_set</span></span><a class="headerlink" href="#sales.models.Sale.saleproduct_set" title="Permalink to this definition">#</a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Parent.children</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.models.Sale.sender">
+<span class="sig-name descname"><span class="pre">sender</span></span><a class="headerlink" href="#sales.models.Sale.sender" title="Permalink to this definition">#</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.models.Sale.sender_id">
+<span class="sig-name descname"><span class="pre">sender_id</span></span><a class="headerlink" href="#sales.models.Sale.sender_id" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.models.Sale.shop">
+<span class="sig-name descname"><span class="pre">shop</span></span><a class="headerlink" href="#sales.models.Sale.shop" title="Permalink to this definition">#</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.models.Sale.shop_id">
+<span class="sig-name descname"><span class="pre">shop_id</span></span><a class="headerlink" href="#sales.models.Sale.shop_id" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sales.models.Sale.string_products">
+<span class="sig-name descname"><span class="pre">string_products</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sales.models.Sale.string_products" title="Permalink to this definition">#</a></dt>
+<dd><p>Return a formated string concerning all products in this Sale.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>each __str__ of products, separated by a comma.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>string</p>
+</dd>
+<dt class="field-odd">Note:</dt>
+<dd class="field-odd"><p>Why do Events are excluded ?</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sales.models.SaleProduct">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sales.models.</span></span><span class="sig-name descname"><span class="pre">SaleProduct</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sales.models.SaleProduct" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.db.models.base.Model</span></code></p>
+<p>”
+sale 
+product 
+quantity 
+price</p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="sales.models.SaleProduct.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#sales.models.SaleProduct.DoesNotExist" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.core.exceptions.ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="sales.models.SaleProduct.MultipleObjectsReturned">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#sales.models.SaleProduct.MultipleObjectsReturned" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.core.exceptions.MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.models.SaleProduct.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#sales.models.SaleProduct.id" title="Permalink to this definition">#</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.models.SaleProduct.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.manager.Manager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#sales.models.SaleProduct.objects" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.models.SaleProduct.price">
+<span class="sig-name descname"><span class="pre">price</span></span><a class="headerlink" href="#sales.models.SaleProduct.price" title="Permalink to this definition">#</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.models.SaleProduct.product">
+<span class="sig-name descname"><span class="pre">product</span></span><a class="headerlink" href="#sales.models.SaleProduct.product" title="Permalink to this definition">#</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.models.SaleProduct.product_id">
+<span class="sig-name descname"><span class="pre">product_id</span></span><a class="headerlink" href="#sales.models.SaleProduct.product_id" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.models.SaleProduct.quantity">
+<span class="sig-name descname"><span class="pre">quantity</span></span><a class="headerlink" href="#sales.models.SaleProduct.quantity" title="Permalink to this definition">#</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.models.SaleProduct.sale">
+<span class="sig-name descname"><span class="pre">sale</span></span><a class="headerlink" href="#sales.models.SaleProduct.sale" title="Permalink to this definition">#</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.models.SaleProduct.sale_id">
+<span class="sig-name descname"><span class="pre">sale_id</span></span><a class="headerlink" href="#sales.models.SaleProduct.sale_id" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-sales.serializers">
+<span id="sales-serializers-module"></span><h2>sales.serializers module<a class="headerlink" href="#module-sales.serializers" title="Permalink to this headline">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="sales.serializers.HistorySaleUserSerializer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sales.serializers.</span></span><span class="sig-name descname"><span class="pre">HistorySaleUserSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sales.serializers.HistorySaleUserSerializer" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.serializers.BaseSerializer</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sales.serializers.HistorySaleUserSerializer.to_representation">
+<span class="sig-name descname"><span class="pre">to_representation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instance</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sales.serializers.HistorySaleUserSerializer.to_representation" title="Permalink to this definition">#</a></dt>
+<dd><p>Transform the <em>outgoing</em> native value into primitive data.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sales.serializers.ProductToptenUserView">
+<span class="sig-prename descclassname"><span class="pre">sales.serializers.</span></span><span class="sig-name descname"><span class="pre">ProductToptenUserView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sales.serializers.ProductToptenUserView" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sales.serializers.RankUserAllPurchaseSerializer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sales.serializers.</span></span><span class="sig-name descname"><span class="pre">RankUserAllPurchaseSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sales.serializers.RankUserAllPurchaseSerializer" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.serializers.BaseSerializer</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sales.serializers.RankUserAllPurchaseSerializer.to_representation">
+<span class="sig-name descname"><span class="pre">to_representation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instance</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sales.serializers.RankUserAllPurchaseSerializer.to_representation" title="Permalink to this definition">#</a></dt>
+<dd><p>Transform the <em>outgoing</em> native value into primitive data.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sales.serializers.SaleProductSerializer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sales.serializers.</span></span><span class="sig-name descname"><span class="pre">SaleProductSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sales.serializers.SaleProductSerializer" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.serializers.ModelSerializer</span></code></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="sales.serializers.SaleProductSerializer.Meta">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="headerlink" href="#sales.serializers.SaleProductSerializer.Meta" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.serializers.SaleProductSerializer.Meta.depth">
+<span class="sig-name descname"><span class="pre">depth</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#sales.serializers.SaleProductSerializer.Meta.depth" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.serializers.SaleProductSerializer.Meta.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('id',</span> <span class="pre">'sale',</span> <span class="pre">'product',</span> <span class="pre">'quantity',</span> <span class="pre">'price')</span></em><a class="headerlink" href="#sales.serializers.SaleProductSerializer.Meta.fields" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.serializers.SaleProductSerializer.Meta.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#sales.serializers.SaleProductSerializer.Meta.model" title="Permalink to this definition">#</a></dt>
+<dd><p>alias of <a class="reference internal" href="#sales.models.SaleProduct" title="sales.models.SaleProduct"><code class="xref py py-class docutils literal notranslate"><span class="pre">sales.models.SaleProduct</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sales.serializers.SaleSerializer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sales.serializers.</span></span><span class="sig-name descname"><span class="pre">SaleSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sales.serializers.SaleSerializer" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.serializers.ModelSerializer</span></code></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="sales.serializers.SaleSerializer.Meta">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="headerlink" href="#sales.serializers.SaleSerializer.Meta" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.serializers.SaleSerializer.Meta.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('id',</span> <span class="pre">'datetime',</span> <span class="pre">'sender',</span> <span class="pre">'recipient',</span> <span class="pre">'operator',</span> <span class="pre">'module_id',</span> <span class="pre">'shop',</span> <span class="pre">'products')</span></em><a class="headerlink" href="#sales.serializers.SaleSerializer.Meta.fields" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.serializers.SaleSerializer.Meta.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#sales.serializers.SaleSerializer.Meta.model" title="Permalink to this definition">#</a></dt>
+<dd><p>alias of <a class="reference internal" href="#sales.models.Sale" title="sales.models.Sale"><code class="xref py py-class docutils literal notranslate"><span class="pre">sales.models.Sale</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sales.serializers.SaleStatSerializer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sales.serializers.</span></span><span class="sig-name descname"><span class="pre">SaleStatSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sales.serializers.SaleStatSerializer" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.serializers.ModelSerializer</span></code></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="sales.serializers.SaleStatSerializer.Meta">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="headerlink" href="#sales.serializers.SaleStatSerializer.Meta" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.serializers.SaleStatSerializer.Meta.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('id',</span> <span class="pre">'user_sales',</span> <span class="pre">'total_sale',</span> <span class="pre">'total_saleQty',</span> <span class="pre">'datetime',</span> <span class="pre">'sender',</span> <span class="pre">'recipient',</span> <span class="pre">'operator',</span> <span class="pre">'module_id',</span> <span class="pre">'shop',</span> <span class="pre">'products')</span></em><a class="headerlink" href="#sales.serializers.SaleStatSerializer.Meta.fields" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.serializers.SaleStatSerializer.Meta.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#sales.serializers.SaleStatSerializer.Meta.model" title="Permalink to this definition">#</a></dt>
+<dd><p>alias of <a class="reference internal" href="#sales.models.Sale" title="sales.models.Sale"><code class="xref py py-class docutils literal notranslate"><span class="pre">sales.models.Sale</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sales.serializers.SaleStatSerializer.get_total_sale">
+<span class="sig-name descname"><span class="pre">get_total_sale</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sales.serializers.SaleStatSerializer.get_total_sale" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sales.serializers.SaleStatSerializer.get_total_saleQty">
+<span class="sig-name descname"><span class="pre">get_total_saleQty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sales.serializers.SaleStatSerializer.get_total_saleQty" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sales.serializers.SaleStatSerializer.get_user_sales">
+<span class="sig-name descname"><span class="pre">get_user_sales</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sales.serializers.SaleStatSerializer.get_user_sales" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sales.serializers.ShopProductUserRankSerializer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sales.serializers.</span></span><span class="sig-name descname"><span class="pre">ShopProductUserRankSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sales.serializers.ShopProductUserRankSerializer" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.serializers.BaseSerializer</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sales.serializers.ShopProductUserRankSerializer.to_representation">
+<span class="sig-name descname"><span class="pre">to_representation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instance</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sales.serializers.ShopProductUserRankSerializer.to_representation" title="Permalink to this definition">#</a></dt>
+<dd><p>Transform the <em>outgoing</em> native value into primitive data.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sales.serializers.ShopUserRankSerializer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sales.serializers.</span></span><span class="sig-name descname"><span class="pre">ShopUserRankSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sales.serializers.ShopUserRankSerializer" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.serializers.BaseSerializer</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sales.serializers.ShopUserRankSerializer.to_representation">
+<span class="sig-name descname"><span class="pre">to_representation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instance</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sales.serializers.ShopUserRankSerializer.to_representation" title="Permalink to this definition">#</a></dt>
+<dd><p>Transform the <em>outgoing</em> native value into primitive data.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sales.serializers.ShoptoptenUserView">
+<span class="sig-prename descclassname"><span class="pre">sales.serializers.</span></span><span class="sig-name descname"><span class="pre">ShoptoptenUserView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sales.serializers.ShoptoptenUserView" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sales.serializers.StatPurchaseSerializer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sales.serializers.</span></span><span class="sig-name descname"><span class="pre">StatPurchaseSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sales.serializers.StatPurchaseSerializer" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.serializers.BaseSerializer</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sales.serializers.StatPurchaseSerializer.to_representation">
+<span class="sig-name descname"><span class="pre">to_representation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instance</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sales.serializers.StatPurchaseSerializer.to_representation" title="Permalink to this definition">#</a></dt>
+<dd><p>Transform the <em>outgoing</em> native value into primitive data.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sales.serializers.UserRankByProductSerializer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sales.serializers.</span></span><span class="sig-name descname"><span class="pre">UserRankByProductSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sales.serializers.UserRankByProductSerializer" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.serializers.BaseSerializer</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sales.serializers.UserRankByProductSerializer.to_representation">
+<span class="sig-name descname"><span class="pre">to_representation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instance</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sales.serializers.UserRankByProductSerializer.to_representation" title="Permalink to this definition">#</a></dt>
+<dd><p>Transform the <em>outgoing</em> native value into primitive data.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sales.serializers.UserRankByShopSerializer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sales.serializers.</span></span><span class="sig-name descname"><span class="pre">UserRankByShopSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sales.serializers.UserRankByShopSerializer" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.serializers.BaseSerializer</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sales.serializers.UserRankByShopSerializer.to_representation">
+<span class="sig-name descname"><span class="pre">to_representation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instance</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sales.serializers.UserRankByShopSerializer.to_representation" title="Permalink to this definition">#</a></dt>
+<dd><p>Transform the <em>outgoing</em> native value into primitive data.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sales.serializers.UserRankByShopViewSet">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sales.serializers.</span></span><span class="sig-name descname"><span class="pre">UserRankByShopViewSet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sales.serializers.UserRankByShopViewSet" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.viewsets.ViewSet</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sales.serializers.UserRankByShopViewSet.list">
+<span class="sig-name descname"><span class="pre">list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sales.serializers.UserRankByShopViewSet.list" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sales.serializers.all_high_scores">
+<span class="sig-prename descclassname"><span class="pre">sales.serializers.</span></span><span class="sig-name descname"><span class="pre">all_high_scores</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sales.serializers.all_high_scores" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sales.serializers.listOfProdSerializer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sales.serializers.</span></span><span class="sig-name descname"><span class="pre">listOfProdSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sales.serializers.listOfProdSerializer" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.serializers.BaseSerializer</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sales.serializers.listOfProdSerializer.to_representation">
+<span class="sig-name descname"><span class="pre">to_representation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instance</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sales.serializers.listOfProdSerializer.to_representation" title="Permalink to this definition">#</a></dt>
+<dd><p>Transform the <em>outgoing</em> native value into primitive data.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sales.serializers.listOfProdView">
+<span class="sig-prename descclassname"><span class="pre">sales.serializers.</span></span><span class="sig-name descname"><span class="pre">listOfProdView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sales.serializers.listOfProdView" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-sales.urls">
+<span id="sales-urls-module"></span><h2>sales.urls module<a class="headerlink" href="#module-sales.urls" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="module-sales.views">
+<span id="sales-views-module"></span><h2>sales.views module<a class="headerlink" href="#module-sales.views" title="Permalink to this headline">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="sales.views.HistorySaleUserViewSet">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sales.views.</span></span><span class="sig-name descname"><span class="pre">HistorySaleUserViewSet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sales.views.HistorySaleUserViewSet" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.viewsets.ViewSet</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sales.views.HistorySaleUserViewSet.list">
+<span class="sig-name descname"><span class="pre">list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sales.views.HistorySaleUserViewSet.list" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sales.views.RankBestPurchaserViewset">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sales.views.</span></span><span class="sig-name descname"><span class="pre">RankBestPurchaserViewset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sales.views.RankBestPurchaserViewset" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.viewsets.ViewSet</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sales.views.RankBestPurchaserViewset.list">
+<span class="sig-name descname"><span class="pre">list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sales.views.RankBestPurchaserViewset.list" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sales.views.RankUserProductPurchaseViewset">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sales.views.</span></span><span class="sig-name descname"><span class="pre">RankUserProductPurchaseViewset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sales.views.RankUserProductPurchaseViewset" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.viewsets.ViewSet</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sales.views.RankUserProductPurchaseViewset.list">
+<span class="sig-name descname"><span class="pre">list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sales.views.RankUserProductPurchaseViewset.list" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sales.views.RankUserShopPurchaseViewset">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sales.views.</span></span><span class="sig-name descname"><span class="pre">RankUserShopPurchaseViewset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sales.views.RankUserShopPurchaseViewset" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.viewsets.ViewSet</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sales.views.RankUserShopPurchaseViewset.list">
+<span class="sig-name descname"><span class="pre">list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sales.views.RankUserShopPurchaseViewset.list" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sales.views.SaleList">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sales.views.</span></span><span class="sig-name descname"><span class="pre">SaleList</span></span><a class="headerlink" href="#sales.views.SaleList" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="shops.html#shops.mixins.ShopMixin" title="shops.mixins.ShopMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">shops.mixins.ShopMixin</span></code></a>, <a class="reference internal" href="borgia.html#borgia.views.BorgiaFormView" title="borgia.views.BorgiaFormView"><code class="xref py py-class docutils literal notranslate"><span class="pre">borgia.views.BorgiaFormView</span></code></a></p>
+<p>View to list sales.</p>
+<p>The sale are displayed for a shop. A manager of a shop can only see sales
+relatives to his own shop. Association managers can switch to see other shops.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Note:</dt>
+<dd class="field-odd"><p>only sales are listed here. Sales come from a shop, for other</p>
+</dd>
+</dl>
+<p>types of transactions, please refer to other classes (RechargingList,
+TransfertList and ExceptionnalMovementList).</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.views.SaleList.date_begin">
+<span class="sig-name descname"><span class="pre">date_begin</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#sales.views.SaleList.date_begin" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.views.SaleList.date_end">
+<span class="sig-name descname"><span class="pre">date_end</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#sales.views.SaleList.date_end" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.views.SaleList.form_class">
+<span class="sig-name descname"><span class="pre">form_class</span></span><a class="headerlink" href="#sales.views.SaleList.form_class" title="Permalink to this definition">#</a></dt>
+<dd><p>alias of <a class="reference internal" href="#sales.forms.SaleListSearchDateForm" title="sales.forms.SaleListSearchDateForm"><code class="xref py py-class docutils literal notranslate"><span class="pre">sales.forms.SaleListSearchDateForm</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sales.views.SaleList.form_query">
+<span class="sig-name descname"><span class="pre">form_query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sales.views.SaleList.form_query" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sales.views.SaleList.form_valid">
+<span class="sig-name descname"><span class="pre">form_valid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">form</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sales.views.SaleList.form_valid" title="Permalink to this definition">#</a></dt>
+<dd><p>If the form is valid, redirect to the supplied URL.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sales.views.SaleList.get_context_data">
+<span class="sig-name descname"><span class="pre">get_context_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sales.views.SaleList.get_context_data" title="Permalink to this definition">#</a></dt>
+<dd><p>Insert the form into the context dict.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.views.SaleList.lm_active">
+<span class="sig-name descname"><span class="pre">lm_active</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'lm_sale_list'</span></em><a class="headerlink" href="#sales.views.SaleList.lm_active" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.views.SaleList.menu_type">
+<span class="sig-name descname"><span class="pre">menu_type</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'shops'</span></em><a class="headerlink" href="#sales.views.SaleList.menu_type" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.views.SaleList.permission_required">
+<span class="sig-name descname"><span class="pre">permission_required</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'sales.view_sale'</span></em><a class="headerlink" href="#sales.views.SaleList.permission_required" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.views.SaleList.query_shop">
+<span class="sig-name descname"><span class="pre">query_shop</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#sales.views.SaleList.query_shop" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.views.SaleList.search">
+<span class="sig-name descname"><span class="pre">search</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#sales.views.SaleList.search" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.views.SaleList.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'sales/sale_shop_list.html'</span></em><a class="headerlink" href="#sales.views.SaleList.template_name" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sales.views.SaleRetrieve">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sales.views.</span></span><span class="sig-name descname"><span class="pre">SaleRetrieve</span></span><a class="headerlink" href="#sales.views.SaleRetrieve" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sales.mixins.SaleMixin" title="sales.mixins.SaleMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">sales.mixins.SaleMixin</span></code></a>, <a class="reference internal" href="borgia.html#borgia.views.BorgiaFormView" title="borgia.views.BorgiaFormView"><code class="xref py py-class docutils literal notranslate"><span class="pre">borgia.views.BorgiaFormView</span></code></a></p>
+<p>Retrieve a sale.</p>
+<p>A sale comes from a shop, for other type of transaction, please refer to
+other classes (RechargingRetrieve, TransfertRetrieve,
+ExceptionnalMovementRetrieve).</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sales.views.SaleRetrieve.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sales.views.SaleRetrieve.get" title="Permalink to this definition">#</a></dt>
+<dd><p>Handle GET requests: instantiate a blank version of the form.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.views.SaleRetrieve.menu_type">
+<span class="sig-name descname"><span class="pre">menu_type</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'shops'</span></em><a class="headerlink" href="#sales.views.SaleRetrieve.menu_type" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.views.SaleRetrieve.permission_required">
+<span class="sig-name descname"><span class="pre">permission_required</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'sales.view_sale'</span></em><a class="headerlink" href="#sales.views.SaleRetrieve.permission_required" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.views.SaleRetrieve.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'sales/sale_retrieve.html'</span></em><a class="headerlink" href="#sales.views.SaleRetrieve.template_name" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sales.views.SaleViewSet">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sales.views.</span></span><span class="sig-name descname"><span class="pre">SaleViewSet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sales.views.SaleViewSet" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.viewsets.ModelViewSet</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.views.SaleViewSet.basename">
+<span class="sig-name descname"><span class="pre">basename</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#sales.views.SaleViewSet.basename" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.views.SaleViewSet.description">
+<span class="sig-name descname"><span class="pre">description</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#sales.views.SaleViewSet.description" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.views.SaleViewSet.detail">
+<span class="sig-name descname"><span class="pre">detail</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#sales.views.SaleViewSet.detail" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.views.SaleViewSet.filter_backends">
+<span class="sig-name descname"><span class="pre">filter_backends</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;class</span> <span class="pre">'django_filters.rest_framework.backends.DjangoFilterBackend'&gt;]</span></em><a class="headerlink" href="#sales.views.SaleViewSet.filter_backends" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.views.SaleViewSet.filterset_fields">
+<span class="sig-name descname"><span class="pre">filterset_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['sender',</span> <span class="pre">'datetime']</span></em><a class="headerlink" href="#sales.views.SaleViewSet.filterset_fields" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.views.SaleViewSet.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#sales.views.SaleViewSet.name" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.views.SaleViewSet.queryset">
+<span class="sig-name descname"><span class="pre">queryset</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;QuerySet</span> <span class="pre">[&lt;Sale:</span> <span class="pre">Achat</span> <span class="pre">Foyer,</span> <span class="pre">Grimbergen</span> <span class="pre">de</span> <span class="pre">Printemps</span> <span class="pre">x</span> <span class="pre">25cl&gt;,</span> <span class="pre">&lt;Sale:</span> <span class="pre">Achat</span> <span class="pre">Foyer,</span> <span class="pre">Sköll&gt;,</span> <span class="pre">&lt;Sale:</span> <span class="pre">Achat</span> <span class="pre">Foyer,</span> <span class="pre">Picon</span> <span class="pre">x</span> <span class="pre">4cl,</span> <span class="pre">Grimbergen</span> <span class="pre">de</span> <span class="pre">Printemps</span> <span class="pre">x</span> <span class="pre">25cl&gt;,</span> <span class="pre">&lt;Sale:</span> <span class="pre">Achat</span> <span class="pre">Foyer,</span> <span class="pre">Sköll&gt;,</span> <span class="pre">&lt;Sale:</span> <span class="pre">Achat</span> <span class="pre">Foyer,</span> <span class="pre">Sköll&gt;,</span> <span class="pre">&lt;Sale:</span> <span class="pre">Achat</span> <span class="pre">Foyer,</span> <span class="pre">Sköll&gt;,</span> <span class="pre">&lt;Sale:</span> <span class="pre">Achat</span> <span class="pre">Foyer,</span> <span class="pre">Finnbarra</span> <span class="pre">Demi-sec</span> <span class="pre">x</span> <span class="pre">25cl&gt;,</span> <span class="pre">&lt;Sale:</span> <span class="pre">Achat</span> <span class="pre">Foyer,</span> <span class="pre">Zarote</span> <span class="pre">x</span> <span class="pre">25cl&gt;,</span> <span class="pre">&lt;Sale:</span> <span class="pre">Achat</span> <span class="pre">Foyer,</span> <span class="pre">Sköll&gt;,</span> <span class="pre">&lt;Sale:</span> <span class="pre">Achat</span> <span class="pre">Foyer,</span> <span class="pre">Finnbarra</span> <span class="pre">Demi-sec</span> <span class="pre">x</span> <span class="pre">25cl&gt;,</span> <span class="pre">&lt;Sale:</span> <span class="pre">Achat</span> <span class="pre">Foyer,</span> <span class="pre">Sköll&gt;,</span> <span class="pre">&lt;Sale:</span> <span class="pre">Achat</span> <span class="pre">Foyer,</span> <span class="pre">Zarote</span> <span class="pre">x</span> <span class="pre">50cl&gt;,</span> <span class="pre">&lt;Sale:</span> <span class="pre">Achat</span> <span class="pre">Foyer,</span> <span class="pre">Sköll&gt;,</span> <span class="pre">&lt;Sale:</span> <span class="pre">Achat</span> <span class="pre">Foyer,</span> <span class="pre">Sköll&gt;,</span> <span class="pre">&lt;Sale:</span> <span class="pre">Achat</span> <span class="pre">Foyer,</span> <span class="pre">Sköll&gt;,</span> <span class="pre">&lt;Sale:</span> <span class="pre">Achat</span> <span class="pre">Foyer,</span> <span class="pre">Sköll&gt;,</span> <span class="pre">&lt;Sale:</span> <span class="pre">Achat</span> <span class="pre">Foyer,</span> <span class="pre">Sköll&gt;,</span> <span class="pre">&lt;Sale:</span> <span class="pre">Achat</span> <span class="pre">Foyer,</span> <span class="pre">Sköll&gt;,</span> <span class="pre">&lt;Sale:</span> <span class="pre">Achat</span> <span class="pre">Foyer,</span> <span class="pre">Sköll&gt;,</span> <span class="pre">&lt;Sale:</span> <span class="pre">Achat</span> <span class="pre">Foyer,</span> <span class="pre">Sköll&gt;,</span> <span class="pre">'...(remaining</span> <span class="pre">elements</span> <span class="pre">truncated)...']&gt;</span></em><a class="headerlink" href="#sales.views.SaleViewSet.queryset" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.views.SaleViewSet.serializer_class">
+<span class="sig-name descname"><span class="pre">serializer_class</span></span><a class="headerlink" href="#sales.views.SaleViewSet.serializer_class" title="Permalink to this definition">#</a></dt>
+<dd><p>alias of <a class="reference internal" href="#sales.serializers.SaleSerializer" title="sales.serializers.SaleSerializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">sales.serializers.SaleSerializer</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.views.SaleViewSet.suffix">
+<span class="sig-name descname"><span class="pre">suffix</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#sales.views.SaleViewSet.suffix" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sales.views.Saledownload_xlsx">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sales.views.</span></span><span class="sig-name descname"><span class="pre">Saledownload_xlsx</span></span><a class="headerlink" href="#sales.views.Saledownload_xlsx" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="shops.html#shops.mixins.ShopMixin" title="shops.mixins.ShopMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">shops.mixins.ShopMixin</span></code></a>, <a class="reference internal" href="borgia.html#borgia.views.BorgiaView" title="borgia.views.BorgiaView"><code class="xref py py-class docutils literal notranslate"><span class="pre">borgia.views.BorgiaView</span></code></a></p>
+<p>Download sales (Jquery with SaleListSearchDateForm) from a shop in a xlsx file</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.views.Saledownload_xlsx.date_begin">
+<span class="sig-name descname"><span class="pre">date_begin</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#sales.views.Saledownload_xlsx.date_begin" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.views.Saledownload_xlsx.date_end">
+<span class="sig-name descname"><span class="pre">date_end</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#sales.views.Saledownload_xlsx.date_end" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.views.Saledownload_xlsx.form_class">
+<span class="sig-name descname"><span class="pre">form_class</span></span><a class="headerlink" href="#sales.views.Saledownload_xlsx.form_class" title="Permalink to this definition">#</a></dt>
+<dd><p>alias of <a class="reference internal" href="#sales.forms.SaleListSearchDateForm" title="sales.forms.SaleListSearchDateForm"><code class="xref py py-class docutils literal notranslate"><span class="pre">sales.forms.SaleListSearchDateForm</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sales.views.Saledownload_xlsx.form_query">
+<span class="sig-name descname"><span class="pre">form_query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sales.views.Saledownload_xlsx.form_query" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.views.Saledownload_xlsx.menu_type">
+<span class="sig-name descname"><span class="pre">menu_type</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'shops'</span></em><a class="headerlink" href="#sales.views.Saledownload_xlsx.menu_type" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.views.Saledownload_xlsx.permission_required">
+<span class="sig-name descname"><span class="pre">permission_required</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'sales.view_sale'</span></em><a class="headerlink" href="#sales.views.Saledownload_xlsx.permission_required" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sales.views.Saledownload_xlsx.post">
+<span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sales.views.Saledownload_xlsx.post" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.views.Saledownload_xlsx.search">
+<span class="sig-name descname"><span class="pre">search</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#sales.views.Saledownload_xlsx.search" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sales.views.Saledownload_xlsx.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'sales/sale_shop_list.html'</span></em><a class="headerlink" href="#sales.views.Saledownload_xlsx.template_name" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sales.views.StatUserPurchase">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sales.views.</span></span><span class="sig-name descname"><span class="pre">StatUserPurchase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sales.views.StatUserPurchase" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.viewsets.ViewSet</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sales.views.StatUserPurchase.list">
+<span class="sig-name descname"><span class="pre">list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sales.views.StatUserPurchase.list" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sales.views.all_high_scores">
+<span class="sig-prename descclassname"><span class="pre">sales.views.</span></span><span class="sig-name descname"><span class="pre">all_high_scores</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sales.views.all_high_scores" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sales.views.get_history_sale">
+<span class="sig-prename descclassname"><span class="pre">sales.views.</span></span><span class="sig-name descname"><span class="pre">get_history_sale</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sales.views.get_history_sale" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sales.views.get_live_2hours_history_sale">
+<span class="sig-prename descclassname"><span class="pre">sales.views.</span></span><span class="sig-name descname"><span class="pre">get_live_2hours_history_sale</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sales.views.get_live_2hours_history_sale" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sales.views.get_sales_podium">
+<span class="sig-prename descclassname"><span class="pre">sales.views.</span></span><span class="sig-name descname"><span class="pre">get_sales_podium</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sales.views.get_sales_podium" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sales.views.get_total_sale">
+<span class="sig-prename descclassname"><span class="pre">sales.views.</span></span><span class="sig-name descname"><span class="pre">get_total_sale</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sales.views.get_total_sale" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-sales">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-sales" title="Permalink to this headline">#</a></h2>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#subpackages">Subpackages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submodules">Submodules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-sales.apps">sales.apps module</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-sales.forms">sales.forms module</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-sales.mixins">sales.mixins module</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-sales.models">sales.models module</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-sales.serializers">sales.serializers module</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-sales.urls">sales.urls module</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-sales.views">sales.views module</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-sales">Module contents</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="_sources/sales.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, Josue Gauthier.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
