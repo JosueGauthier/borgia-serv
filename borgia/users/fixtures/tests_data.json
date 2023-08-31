@@ -87,7 +87,8 @@
             "campus": "ME",
             "phone": null,
             "groups": [
-                1, 5
+                1,
+                5
             ],
             "user_permissions": []
         }

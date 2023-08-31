@@ -1,28 +1,21 @@
 import base64
-from rest_framework.response import Response
-from rest_framework import status
-from users.serializers import LoginSerializer
-from django.contrib.auth import login, logout
-from rest_framework import views
-import json
-import requests
 import datetime
 import decimal
+import json
+import logging
 
-from django.contrib.auth import authenticate
-from django.contrib.auth.decorators import login_required
+import requests
+from borgia.views import BorgiaFormView, BorgiaView
+from configurations.utils import configuration_get
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.core.exceptions import ObjectDoesNotExist, PermissionDenied
 from django.db.models import Q
-from django.http import Http404, HttpResponseRedirect
+from django.http import Http404
 from django.shortcuts import HttpResponse, redirect, render
 from django.urls import reverse
 from django.utils.timezone import now
 from django.views.decorators.csrf import csrf_exempt
-from finances.serializers import *
-
-from borgia.views import BorgiaFormView, BorgiaView
-from configurations.utils import configuration_get
 from finances.forms import (
     ExceptionnalMovementForm,
     GenericListSearchDateForm,
@@ -40,12 +33,19 @@ from finances.models import (
     Transfert,
 )
 from finances.utils import (
-    verify_token_lydia,
     calculate_lydia_fee_from_total,
     calculate_total_amount_lydia,
+    verify_token_lydia,
 )
+from rest_framework import status, views
+from rest_framework.response import Response
 from users.mixins import UserMixin
 from users.models import User
+from users.serializers import LoginSerializer
+
+from .serializers import LydiaStateAPISerializer, SelfLydiaCreateAPISerializer
+
+logger = logging.getLogger(__name__)
 
 
 class RechargingList(LoginRequiredMixin, PermissionRequiredMixin, BorgiaFormView):
@@ -608,10 +608,12 @@ class RechargingCreate(UserMixin, BorgiaFormView):
 
 # : OAuth2 authentication
 
+from borgia.settings import CLIENT_ID, CLIENT_SECRET
+
 
 def get_viva_wallet_access_token():
-    client_id = "cgm307gy1r3uwpvrilir2osbd5j8vdu416wasah2e9su3.apps.vivapayments.com"
-    client_secret = "OT1hz4F799aa6wwXgGAqLYXKcTpZjS"
+    client_id = CLIENT_ID
+    client_secret = CLIENT_SECRET
     token_url = "https://demo-accounts.vivapayments.com/connect/token"
 
     # Encode the client_id and client_secret in base64
@@ -630,10 +632,10 @@ def get_viva_wallet_access_token():
     if response.status_code == 200:
         token_data = response.json()
         access_token = token_data.get("access_token")
-
+        logger.debug("Get Viva Access token OK")
         return access_token
     else:
-        # Handle error response
+        logger.critical("Get Viva Access token error")
         return None
 
 

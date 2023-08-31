@@ -9,20 +9,26 @@ from .models import Shop, Product
 class ShopSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Shop
-        fields = ('id', 'name', 'description', 'color',
-                  'image', 'correcting_factor_activated')
+        fields = (
+            "id",
+            "name",
+            "description",
+            "color",
+            "image",
+            "correcting_factor_activated",
+        )
 
 
 class SelfSaleModuleSerializer(serializers.ModelSerializer):
     class Meta:
         model = SelfSaleModule
-        fields = '__all__'
+        fields = "__all__"
 
 
 class OperatorSaleModuleSerializer(serializers.ModelSerializer):
     class Meta:
         model = OperatorSaleModule
-        fields = '__all__'
+        fields = "__all__"
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -31,8 +37,18 @@ class ProductSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product
-        fields = ('id', 'name', 'unit', 'shop', 'is_manual', 'manual_price',
-                  'correcting_factor', 'is_active', 'is_removed', 'product_image')
+        fields = (
+            "id",
+            "name",
+            "unit",
+            "shop",
+            "is_manual",
+            "manual_price",
+            "correcting_factor",
+            "is_active",
+            "is_removed",
+            "product_image",
+        )
 
 
 class ShopStatSerializer(serializers.ModelSerializer):
@@ -41,149 +57,138 @@ class ShopStatSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Shop
-        fields = ('id', 'image', 'name', 'total_sale_of_shop',
-                  'total_sale_amount_of_shop')
+        fields = (
+            "id",
+            "image",
+            "name",
+            "total_sale_of_shop",
+            "total_sale_amount_of_shop",
+        )
 
     def get_total_sale_amount_of_shop(self, obj):
         totalsaleamountofshop = SaleProduct.objects.filter(
-            sale__shop__id=obj.id).aggregate(Sum('price'))['price__sum']
+            sale__shop__id=obj.id
+        ).aggregate(Sum("price"))["price__sum"]
         return totalsaleamountofshop
 
     def get_total_sale_of_shop(self, obj):
-        totalsaleofshop = SaleProduct.objects.filter(
-            sale__shop__id=obj.id).count()
+        totalsaleofshop = SaleProduct.objects.filter(sale__shop__id=obj.id).count()
         return totalsaleofshop
 
 
 class ProductBaseSerializer(serializers.BaseSerializer):
     def to_representation(self, instance):
-
         #! id_parent_category
         try:
             id_parent_category = Category.objects.filter(
-                products=instance.id, content_type=20).values_list('id')[0][0]
+                products=instance.id, content_type=20
+            ).values_list("id")[0][0]
         except:
             id_parent_category = 0
 
         #!module_id_parent_category
         try:
             module_id_parent_category = Category.objects.filter(
-                products=instance.id).values_list('module_id')[0][0]
+                products=instance.id
+            ).values_list("module_id")[0][0]
         except:
             module_id_parent_category = 0
 
         #! contentType_parent_category
         try:
             contentType_parent_category = Category.objects.filter(
-                products=instance.id).values_list('content_type__model')[0][0]
+                products=instance.id
+            ).values_list("content_type__model")[0][0]
         except:
             contentType_parent_category = 0
 
         #! id_categoryproduct_table
         try:
             id_categoryproduct_table = CategoryProduct.objects.filter(
-                product=instance.id).values_list('id')[0][0]
+                product=instance.id
+            ).values_list("id")[0][0]
             product_quantity = CategoryProduct.objects.filter(
-                product=instance.id).values_list('quantity')[0][0]
+                product=instance.id
+            ).values_list("quantity")[0][0]
         except:
             id_categoryproduct_table = 0
             product_quantity = 0
 
         return {
-            'id': instance.id,
-            'name': instance.name,
-            'unit': instance.unit,
-            'shop': instance.shop.id,
-            'is_manual': instance.is_manual,
-            'manual_price': instance.manual_price,
-            'correcting_factor': instance.correcting_factor,
-            'is_active': instance.is_active,
-            'is_removed': instance.is_removed,
-            'product_image': instance.product_image,
-            'id_parent_category': id_parent_category,
-            'module_id_parent_category': module_id_parent_category,
-            'contentType_parent_category': contentType_parent_category,
-            'id_categoryproduct_table': id_categoryproduct_table,
-            'product_quantity': product_quantity
+            "id": instance.id,
+            "name": instance.name,
+            "unit": instance.unit,
+            "shop": instance.shop.id,
+            "is_manual": instance.is_manual,
+            "manual_price": instance.manual_price,
+            "correcting_factor": instance.correcting_factor,
+            "is_active": instance.is_active,
+            "is_removed": instance.is_removed,
+            "product_image": instance.product_image,
+            "id_parent_category": id_parent_category,
+            "module_id_parent_category": module_id_parent_category,
+            "contentType_parent_category": contentType_parent_category,
+            "id_categoryproduct_table": id_categoryproduct_table,
+            "product_quantity": product_quantity,
         }
 
 
 class CreateShopSerializer(serializers.Serializer):
+    shop_name = serializers.CharField(write_only=True)
 
-    shop_name = serializers.CharField(
-        write_only=True
-    )
+    shop_description = serializers.CharField(write_only=True)
 
-    shop_description = serializers.CharField(
-        write_only=True
-    )
-
-    shop_image = serializers.CharField(
-        write_only=True
-    )
-    shop_color = serializers.CharField(
-        write_only=True,
-        required=False
-    )
-    correcting_factor_activated = serializers.CharField(
-        write_only=True,
-        required=False
-    )
+    shop_image = serializers.CharField(write_only=True)
+    shop_color = serializers.CharField(write_only=True, required=False)
+    correcting_factor_activated = serializers.CharField(write_only=True, required=False)
 
     def validate(self, attrs):
+        shop_name = attrs.get("shop_name")
+        shop_description = attrs.get("shop_description")
+        shop_image = attrs.get("shop_image")
+        shop_color = attrs.get("shop_color")
+        correcting_factor_activated = attrs.get("correcting_factor_activated")
 
-        shop_name = attrs.get('shop_name')
-        shop_description = attrs.get('shop_description')
-        shop_image = attrs.get('shop_image')
-        shop_color = attrs.get('shop_color')
-        correcting_factor_activated = attrs.get('correcting_factor_activated')
-
-        attrs['shop'] = [shop_name, shop_description,
-                         shop_image, shop_color, correcting_factor_activated]
+        attrs["shop"] = [
+            shop_name,
+            shop_description,
+            shop_image,
+            shop_color,
+            correcting_factor_activated,
+        ]
         return attrs
 
 
 class UpdateShopSerializer(serializers.Serializer):
+    shop_id = serializers.IntegerField(write_only=True)
 
-    shop_id = serializers.IntegerField(
-        write_only=True
-    )
+    shop_description = serializers.CharField(write_only=True, required=False)
 
-    shop_description = serializers.CharField(
-        write_only=True,
-        required=False
-    )
+    shop_image = serializers.CharField(write_only=True, required=False)
 
-    shop_image = serializers.CharField(
-        write_only=True,
-        required=False
-    )
-
-    correcting_factor_activated = serializers.BooleanField(
-        write_only=True
-    )
+    correcting_factor_activated = serializers.BooleanField(write_only=True)
 
     def validate(self, attrs):
+        shop_id = attrs.get("shop_id")
+        shop_description = attrs.get("shop_description")
+        shop_image = attrs.get("shop_image")
+        correcting_factor_activated = attrs.get("correcting_factor_activated")
 
-        shop_id = attrs.get('shop_id')
-        shop_description = attrs.get('shop_description')
-        shop_image = attrs.get('shop_image')
-        correcting_factor_activated = attrs.get('correcting_factor_activated')
-
-        attrs['shop'] = [shop_id, shop_description,
-                         shop_image, correcting_factor_activated]
+        attrs["shop"] = [
+            shop_id,
+            shop_description,
+            shop_image,
+            correcting_factor_activated,
+        ]
         return attrs
 
 
 class DeleteShopSerializer(serializers.Serializer):
-
-    shop_id = serializers.IntegerField(
-        write_only=True
-    )
+    shop_id = serializers.IntegerField(write_only=True)
 
     def validate(self, attrs):
-        shop_id = attrs.get('shop_id')
-        attrs['shop'] = [shop_id]
+        shop_id = attrs.get("shop_id")
+        attrs["shop"] = [shop_id]
         return attrs
 
 
@@ -200,13 +205,9 @@ class CreateProductSerializer(serializers.Serializer):
     :type product_image : string
     """
 
-    product_name = serializers.CharField(
-        write_only=True
-    )
+    product_name = serializers.CharField(write_only=True)
 
-    price_is_manual = serializers.BooleanField(
-        write_only=True
-    )
+    price_is_manual = serializers.BooleanField(write_only=True)
 
     manual_price = serializers.DecimalField(
         write_only=True,
@@ -217,15 +218,9 @@ class CreateProductSerializer(serializers.Serializer):
         write_only=True,
     )
 
-    is_active = serializers.BooleanField(
-        write_only=True
-    )
+    is_active = serializers.BooleanField(write_only=True)
 
-    product_unit = serializers.CharField(
-        write_only=True,
-        required=False
-
-    )
+    product_unit = serializers.CharField(write_only=True, required=False)
 
     correcting_factor = serializers.DecimalField(
         write_only=True,
@@ -233,23 +228,28 @@ class CreateProductSerializer(serializers.Serializer):
         max_digits=9,
     )
 
-    product_image = serializers.CharField(
-        write_only=True
-    )
+    product_image = serializers.CharField(write_only=True)
 
     def validate(self, attrs):
+        product_name = attrs.get("product_name")
+        price_is_manual = attrs.get("price_is_manual")
+        manual_price = attrs.get("manual_price")
+        shop_id = attrs.get("shop_id")
+        is_active = attrs.get("is_active")
+        product_unit = attrs.get("product_unit")
+        correcting_factor = attrs.get("correcting_factor")
+        product_image = attrs.get("product_image")
 
-        product_name = attrs.get('product_name')
-        price_is_manual = attrs.get('price_is_manual')
-        manual_price = attrs.get('manual_price')
-        shop_id = attrs.get('shop_id')
-        is_active = attrs.get('is_active')
-        product_unit = attrs.get('product_unit')
-        correcting_factor = attrs.get('correcting_factor')
-        product_image = attrs.get('product_image')
-
-        attrs['product'] = [product_name, price_is_manual,
-                            manual_price, shop_id, is_active, product_unit, correcting_factor, product_image]
+        attrs["product"] = [
+            product_name,
+            price_is_manual,
+            manual_price,
+            shop_id,
+            is_active,
+            product_unit,
+            correcting_factor,
+            product_image,
+        ]
         return attrs
 
 
@@ -265,18 +265,11 @@ class UpdateProductSerializer(serializers.Serializer):
 
     """
 
-    product_id = serializers.CharField(
-        write_only=True
-    )
+    product_id = serializers.CharField(write_only=True)
 
-    product_name = serializers.CharField(
-        write_only=True, required=False
+    product_name = serializers.CharField(write_only=True, required=False)
 
-    )
-
-    price_is_manual = serializers.BooleanField(
-        write_only=True, required=False
-    )
+    price_is_manual = serializers.BooleanField(write_only=True, required=False)
 
     manual_price = serializers.DecimalField(
         write_only=True,
@@ -285,9 +278,7 @@ class UpdateProductSerializer(serializers.Serializer):
         required=False,
     )
 
-    is_active = serializers.BooleanField(
-        write_only=True
-    )
+    is_active = serializers.BooleanField(write_only=True)
 
     product_unit = serializers.CharField(
         write_only=True,
@@ -295,55 +286,51 @@ class UpdateProductSerializer(serializers.Serializer):
     )
 
     correcting_factor = serializers.DecimalField(
-        write_only=True,
-        decimal_places=4,
-        max_digits=9,
-        required=False
+        write_only=True, decimal_places=4, max_digits=9, required=False
     )
 
-    product_image = serializers.CharField(
-        write_only=True,
-        required=False
-    )
+    product_image = serializers.CharField(write_only=True, required=False)
 
     def validate(self, attrs):
+        product_id = attrs.get("product_id")
+        product_name = attrs.get("product_name")
+        price_is_manual = attrs.get("price_is_manual")
+        manual_price = attrs.get("manual_price")
+        is_active = attrs.get("is_active")
+        product_unit = attrs.get("product_unit")
+        correcting_factor = attrs.get("correcting_factor")
+        product_image = attrs.get("product_image")
 
-        product_id = attrs.get('product_id')
-        product_name = attrs.get('product_name')
-        price_is_manual = attrs.get('price_is_manual')
-        manual_price = attrs.get('manual_price')
-        is_active = attrs.get('is_active')
-        product_unit = attrs.get('product_unit')
-        correcting_factor = attrs.get('correcting_factor')
-        product_image = attrs.get('product_image')
-
-        attrs['product'] = [product_id, product_name, price_is_manual,
-                            manual_price, is_active, product_unit, correcting_factor, product_image]
+        attrs["product"] = [
+            product_id,
+            product_name,
+            price_is_manual,
+            manual_price,
+            is_active,
+            product_unit,
+            correcting_factor,
+            product_image,
+        ]
         return attrs
 
 
 class DeleteProductSerializer(serializers.Serializer):
-    """
-    """
+    """ """
 
-    product_id = serializers.CharField(
-        write_only=True
-    )
+    product_id = serializers.CharField(write_only=True)
 
     def validate(self, attrs):
-
-        product_id = attrs.get('product_id')
-        attrs['product'] = [product_id]
+        product_id = attrs.get("product_id")
+        attrs["product"] = [product_id]
         return attrs
 
 
-logger = logging.getLogger('django')
+# logger = logging.getLogger('django')
 
 
 class SearchAllProductSerializer(serializers.BaseSerializer):
-
     def to_representation(self, instance):
-        category = self.context.get('category')
+        category = self.context.get("category")
 
         # #! id_parent_category
         # try:
@@ -369,27 +356,29 @@ class SearchAllProductSerializer(serializers.BaseSerializer):
         #! id_categoryproduct_table
         try:
             id_categoryproduct_table = CategoryProduct.objects.filter(
-                product=instance.id, category=category.id).values_list('id')[0][0]
+                product=instance.id, category=category.id
+            ).values_list("id")[0][0]
             product_quantity = CategoryProduct.objects.filter(
-                product=instance.id, category=category.id).values_list('quantity')[0][0]
+                product=instance.id, category=category.id
+            ).values_list("quantity")[0][0]
         except:
             id_categoryproduct_table = 0
             product_quantity = 0
 
         return {
-            'id': instance.id,
-            'name': instance.name,
-            'unit': instance.unit,
-            'shop': instance.shop.id,
-            'is_manual': instance.is_manual,
-            'manual_price': instance.manual_price,
-            'correcting_factor': instance.correcting_factor,
-            'is_active': instance.is_active,
-            'is_removed': instance.is_removed,
-            'product_image': instance.product_image,
-            'id_parent_category': category.id,
-            'module_id_parent_category': category.module_id,
-            'contentType_parent_category': category.content_type.model,
-            'id_categoryproduct_table': id_categoryproduct_table,
-            'product_quantity': product_quantity
+            "id": instance.id,
+            "name": instance.name,
+            "unit": instance.unit,
+            "shop": instance.shop.id,
+            "is_manual": instance.is_manual,
+            "manual_price": instance.manual_price,
+            "correcting_factor": instance.correcting_factor,
+            "is_active": instance.is_active,
+            "is_removed": instance.is_removed,
+            "product_image": instance.product_image,
+            "id_parent_category": category.id,
+            "module_id_parent_category": category.module_id,
+            "contentType_parent_category": category.content_type.model,
+            "id_categoryproduct_table": id_categoryproduct_table,
+            "product_quantity": product_quantity,
         }

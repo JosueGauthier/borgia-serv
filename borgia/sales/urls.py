@@ -1,10 +1,14 @@
 from django.urls import include, path
-from sales.views import Saledownload_xlsx, RankUserProductPurchaseViewset, get_live_2hours_history_sale, get_total_sale, SaleList, SaleRetrieve, SaleViewSet, get_history_sale, all_high_scores, StatUserPurchase, HistorySaleUserViewSet, RankBestPurchaserViewset, RankUserShopPurchaseViewset
 from rest_framework import routers
-
+from sales.views import (
+    Saledownload_xlsx,
+    SaleList,
+    SaleRetrieve,
+    SaleViewSet,
+)
 
 router = routers.DefaultRouter()
-router.register(r'sale', SaleViewSet)
+router.register(r"sale", SaleViewSet)
 
 # :DEACTIVATE stats uri API
 # router.register(r'user-history-allsale', HistorySaleUserViewSet,
@@ -17,22 +21,26 @@ router.register(r'sale', SaleViewSet)
 #                 basename='rank-user-product')
 
 sales_patterns = [
-
-
-    path('api-links/sale/', include(router.urls)),
-
+    path("api-links/sale/", include(router.urls)),
     # :DEACTIVATE stats uri API
     # path('api-links/total/', get_total_sale),
     # path('api-links/history/', get_history_sale),
     # path('api-links/live-sales/', get_live_2hours_history_sale),
     # path('api-links/scores/', all_high_scores),
-
-
-    path('shops/<int:shop_pk>/sales/', include([
-        path('', SaleList.as_view(), name='url_sale_list'),
-        path('<int:sale_pk>/', SaleRetrieve.as_view(),
-             name='url_sale_retrieve'),
-        path('xlsx/download/', Saledownload_xlsx.as_view(),
-             name='url_sales_download_xlsx')
-    ]))
+    path(
+        "shops/<int:shop_pk>/sales/",
+        include(
+            [
+                path("", SaleList.as_view(), name="url_sale_list"),
+                path(
+                    "<int:sale_pk>/", SaleRetrieve.as_view(), name="url_sale_retrieve"
+                ),
+                path(
+                    "xlsx/download/",
+                    Saledownload_xlsx.as_view(),
+                    name="url_sales_download_xlsx",
+                ),
+            ]
+        ),
+    ),
 ]

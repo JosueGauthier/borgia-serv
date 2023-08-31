@@ -163,26 +163,106 @@
         "fields": {
             "name": "chiefs-firstshop",
             "permissions": [
-                ["change_config_operatorsalemodule", "modules", "operatorsalemodule"],
-                ["use_operatorsalemodule", "modules", "operatorsalemodule"],
-                ["view_config_operatorsalemodule", "modules", "operatorsalemodule"],
-                ["change_config_selfsalemodule", "modules", "selfsalemodule"],
-                ["view_config_selfsalemodule", "modules", "selfsalemodule"],
-                ["view_sale", "sales", "sale"],
-                ["add_product", "shops", "product"],
-                ["change_price_product", "shops", "product"],
-                ["change_product", "shops", "product"],
-                ["delete_product", "shops", "product"],
-                ["view_product", "shops", "product"],
-                ["change_shop", "shops", "shop"],
-                ["view_shop", "shops", "shop"],
-                ["add_inventory", "stocks", "inventory"],
-                ["view_inventory", "stocks", "inventory"],
-                ["add_stockentry", "stocks", "stockentry"],
-                ["view_stockentry", "stocks", "stockentry"],
-                ["add_user", "users", "user"],
-                ["manage_associates-firstshop_group", "users", "user"],
-                ["view_user", "users", "user"]
+                [
+                    "change_config_operatorsalemodule",
+                    "modules",
+                    "operatorsalemodule"
+                ],
+                [
+                    "use_operatorsalemodule",
+                    "modules",
+                    "operatorsalemodule"
+                ],
+                [
+                    "view_config_operatorsalemodule",
+                    "modules",
+                    "operatorsalemodule"
+                ],
+                [
+                    "change_config_selfsalemodule",
+                    "modules",
+                    "selfsalemodule"
+                ],
+                [
+                    "view_config_selfsalemodule",
+                    "modules",
+                    "selfsalemodule"
+                ],
+                [
+                    "view_sale",
+                    "sales",
+                    "sale"
+                ],
+                [
+                    "add_product",
+                    "shops",
+                    "product"
+                ],
+                [
+                    "change_price_product",
+                    "shops",
+                    "product"
+                ],
+                [
+                    "change_product",
+                    "shops",
+                    "product"
+                ],
+                [
+                    "delete_product",
+                    "shops",
+                    "product"
+                ],
+                [
+                    "view_product",
+                    "shops",
+                    "product"
+                ],
+                [
+                    "change_shop",
+                    "shops",
+                    "shop"
+                ],
+                [
+                    "view_shop",
+                    "shops",
+                    "shop"
+                ],
+                [
+                    "add_inventory",
+                    "stocks",
+                    "inventory"
+                ],
+                [
+                    "view_inventory",
+                    "stocks",
+                    "inventory"
+                ],
+                [
+                    "add_stockentry",
+                    "stocks",
+                    "stockentry"
+                ],
+                [
+                    "view_stockentry",
+                    "stocks",
+                    "stockentry"
+                ],
+                [
+                    "add_user",
+                    "users",
+                    "user"
+                ],
+                [
+                    "manage_associates-firstshop_group",
+                    "users",
+                    "user"
+                ],
+                [
+                    "view_user",
+                    "users",
+                    "user"
+                ]
             ]
         }
     },
@@ -191,20 +271,76 @@
         "fields": {
             "name": "associates-firstshop",
             "permissions": [
-                ["use_operatorsalemodule", "modules", "operatorsalemodule"],
-                ["view_config_operatorsalemodule", "modules", "operatorsalemodule"],
-                ["view_config_selfsalemodule", "modules", "selfsalemodule"],
-                ["view_sale", "sales", "sale"],
-                ["add_product", "shops", "product"],
-                ["change_product", "shops", "product"],
-                ["view_product", "shops", "product"],
-                ["view_shop", "shops", "shop"],
-                ["add_inventory", "stocks", "inventory"],
-                ["view_inventory", "stocks", "inventory"],
-                ["add_stockentry", "stocks", "stockentry"],
-                ["view_stockentry", "stocks", "stockentry"],
-                ["add_user", "users", "user"],
-                ["view_user", "users", "user"]
+                [
+                    "use_operatorsalemodule",
+                    "modules",
+                    "operatorsalemodule"
+                ],
+                [
+                    "view_config_operatorsalemodule",
+                    "modules",
+                    "operatorsalemodule"
+                ],
+                [
+                    "view_config_selfsalemodule",
+                    "modules",
+                    "selfsalemodule"
+                ],
+                [
+                    "view_sale",
+                    "sales",
+                    "sale"
+                ],
+                [
+                    "add_product",
+                    "shops",
+                    "product"
+                ],
+                [
+                    "change_product",
+                    "shops",
+                    "product"
+                ],
+                [
+                    "view_product",
+                    "shops",
+                    "product"
+                ],
+                [
+                    "view_shop",
+                    "shops",
+                    "shop"
+                ],
+                [
+                    "add_inventory",
+                    "stocks",
+                    "inventory"
+                ],
+                [
+                    "view_inventory",
+                    "stocks",
+                    "inventory"
+                ],
+                [
+                    "add_stockentry",
+                    "stocks",
+                    "stockentry"
+                ],
+                [
+                    "view_stockentry",
+                    "stocks",
+                    "stockentry"
+                ],
+                [
+                    "add_user",
+                    "users",
+                    "user"
+                ],
+                [
+                    "view_user",
+                    "users",
+                    "user"
+                ]
             ]
         }
     },
@@ -213,26 +349,106 @@
         "fields": {
             "name": "chiefs-secondshop",
             "permissions": [
-                ["change_config_operatorsalemodule", "modules", "operatorsalemodule"],
-                ["use_operatorsalemodule", "modules", "operatorsalemodule"],
-                ["view_config_operatorsalemodule", "modules", "operatorsalemodule"],
-                ["change_config_selfsalemodule", "modules", "selfsalemodule"],
-                ["view_config_selfsalemodule", "modules", "selfsalemodule"],
-                ["view_sale", "sales", "sale"],
-                ["add_product", "shops", "product"],
-                ["change_price_product", "shops", "product"],
-                ["change_product", "shops", "product"],
-                ["delete_product", "shops", "product"],
-                ["view_product", "shops", "product"],
-                ["change_shop", "shops", "shop"],
-                ["view_shop", "shops", "shop"],
-                ["add_inventory", "stocks", "inventory"],
-                ["view_inventory", "stocks", "inventory"],
-                ["add_stockentry", "stocks", "stockentry"],
-                ["view_stockentry", "stocks", "stockentry"],
-                ["add_user", "users", "user"],
-                ["manage_associates-secondshop_group", "users", "user"],
-                ["view_user", "users", "user"]
+                [
+                    "change_config_operatorsalemodule",
+                    "modules",
+                    "operatorsalemodule"
+                ],
+                [
+                    "use_operatorsalemodule",
+                    "modules",
+                    "operatorsalemodule"
+                ],
+                [
+                    "view_config_operatorsalemodule",
+                    "modules",
+                    "operatorsalemodule"
+                ],
+                [
+                    "change_config_selfsalemodule",
+                    "modules",
+                    "selfsalemodule"
+                ],
+                [
+                    "view_config_selfsalemodule",
+                    "modules",
+                    "selfsalemodule"
+                ],
+                [
+                    "view_sale",
+                    "sales",
+                    "sale"
+                ],
+                [
+                    "add_product",
+                    "shops",
+                    "product"
+                ],
+                [
+                    "change_price_product",
+                    "shops",
+                    "product"
+                ],
+                [
+                    "change_product",
+                    "shops",
+                    "product"
+                ],
+                [
+                    "delete_product",
+                    "shops",
+                    "product"
+                ],
+                [
+                    "view_product",
+                    "shops",
+                    "product"
+                ],
+                [
+                    "change_shop",
+                    "shops",
+                    "shop"
+                ],
+                [
+                    "view_shop",
+                    "shops",
+                    "shop"
+                ],
+                [
+                    "add_inventory",
+                    "stocks",
+                    "inventory"
+                ],
+                [
+                    "view_inventory",
+                    "stocks",
+                    "inventory"
+                ],
+                [
+                    "add_stockentry",
+                    "stocks",
+                    "stockentry"
+                ],
+                [
+                    "view_stockentry",
+                    "stocks",
+                    "stockentry"
+                ],
+                [
+                    "add_user",
+                    "users",
+                    "user"
+                ],
+                [
+                    "manage_associates-secondshop_group",
+                    "users",
+                    "user"
+                ],
+                [
+                    "view_user",
+                    "users",
+                    "user"
+                ]
             ]
         }
     },
@@ -241,20 +457,76 @@
         "fields": {
             "name": "associates-secondshop",
             "permissions": [
-                ["use_operatorsalemodule", "modules", "operatorsalemodule"],
-                ["view_config_operatorsalemodule", "modules", "operatorsalemodule"],
-                ["view_config_selfsalemodule", "modules", "selfsalemodule"],
-                ["view_sale", "sales", "sale"],
-                ["add_product", "shops", "product"],
-                ["change_product", "shops", "product"],
-                ["view_product", "shops", "product"],
-                ["view_shop", "shops", "shop"],
-                ["add_inventory", "stocks", "inventory"],
-                ["view_inventory", "stocks", "inventory"],
-                ["add_stockentry", "stocks", "stockentry"],
-                ["view_stockentry", "stocks", "stockentry"],
-                ["add_user", "users", "user"],
-                ["view_user", "users", "user"]
+                [
+                    "use_operatorsalemodule",
+                    "modules",
+                    "operatorsalemodule"
+                ],
+                [
+                    "view_config_operatorsalemodule",
+                    "modules",
+                    "operatorsalemodule"
+                ],
+                [
+                    "view_config_selfsalemodule",
+                    "modules",
+                    "selfsalemodule"
+                ],
+                [
+                    "view_sale",
+                    "sales",
+                    "sale"
+                ],
+                [
+                    "add_product",
+                    "shops",
+                    "product"
+                ],
+                [
+                    "change_product",
+                    "shops",
+                    "product"
+                ],
+                [
+                    "view_product",
+                    "shops",
+                    "product"
+                ],
+                [
+                    "view_shop",
+                    "shops",
+                    "shop"
+                ],
+                [
+                    "add_inventory",
+                    "stocks",
+                    "inventory"
+                ],
+                [
+                    "view_inventory",
+                    "stocks",
+                    "inventory"
+                ],
+                [
+                    "add_stockentry",
+                    "stocks",
+                    "stockentry"
+                ],
+                [
+                    "view_stockentry",
+                    "stocks",
+                    "stockentry"
+                ],
+                [
+                    "add_user",
+                    "users",
+                    "user"
+                ],
+                [
+                    "view_user",
+                    "users",
+                    "user"
+                ]
             ]
         }
     },
@@ -263,26 +535,106 @@
         "fields": {
             "name": "chiefs-emptyshop",
             "permissions": [
-                ["change_config_operatorsalemodule", "modules", "operatorsalemodule"],
-                ["use_operatorsalemodule", "modules", "operatorsalemodule"],
-                ["view_config_operatorsalemodule", "modules", "operatorsalemodule"],
-                ["change_config_selfsalemodule", "modules", "selfsalemodule"],
-                ["view_config_selfsalemodule", "modules", "selfsalemodule"],
-                ["view_sale", "sales", "sale"],
-                ["add_product", "shops", "product"],
-                ["change_price_product", "shops", "product"],
-                ["change_product", "shops", "product"],
-                ["delete_product", "shops", "product"],
-                ["view_product", "shops", "product"],
-                ["change_shop", "shops", "shop"],
-                ["view_shop", "shops", "shop"],
-                ["add_inventory", "stocks", "inventory"],
-                ["view_inventory", "stocks", "inventory"],
-                ["add_stockentry", "stocks", "stockentry"],
-                ["view_stockentry", "stocks", "stockentry"],
-                ["add_user", "users", "user"],
-                ["manage_associates-emptyshop_group", "users", "user"],
-                ["view_user", "users", "user"]
+                [
+                    "change_config_operatorsalemodule",
+                    "modules",
+                    "operatorsalemodule"
+                ],
+                [
+                    "use_operatorsalemodule",
+                    "modules",
+                    "operatorsalemodule"
+                ],
+                [
+                    "view_config_operatorsalemodule",
+                    "modules",
+                    "operatorsalemodule"
+                ],
+                [
+                    "change_config_selfsalemodule",
+                    "modules",
+                    "selfsalemodule"
+                ],
+                [
+                    "view_config_selfsalemodule",
+                    "modules",
+                    "selfsalemodule"
+                ],
+                [
+                    "view_sale",
+                    "sales",
+                    "sale"
+                ],
+                [
+                    "add_product",
+                    "shops",
+                    "product"
+                ],
+                [
+                    "change_price_product",
+                    "shops",
+                    "product"
+                ],
+                [
+                    "change_product",
+                    "shops",
+                    "product"
+                ],
+                [
+                    "delete_product",
+                    "shops",
+                    "product"
+                ],
+                [
+                    "view_product",
+                    "shops",
+                    "product"
+                ],
+                [
+                    "change_shop",
+                    "shops",
+                    "shop"
+                ],
+                [
+                    "view_shop",
+                    "shops",
+                    "shop"
+                ],
+                [
+                    "add_inventory",
+                    "stocks",
+                    "inventory"
+                ],
+                [
+                    "view_inventory",
+                    "stocks",
+                    "inventory"
+                ],
+                [
+                    "add_stockentry",
+                    "stocks",
+                    "stockentry"
+                ],
+                [
+                    "view_stockentry",
+                    "stocks",
+                    "stockentry"
+                ],
+                [
+                    "add_user",
+                    "users",
+                    "user"
+                ],
+                [
+                    "manage_associates-emptyshop_group",
+                    "users",
+                    "user"
+                ],
+                [
+                    "view_user",
+                    "users",
+                    "user"
+                ]
             ]
         }
     },
@@ -291,20 +643,76 @@
         "fields": {
             "name": "associates-emptyshop",
             "permissions": [
-                ["use_operatorsalemodule", "modules", "operatorsalemodule"],
-                ["view_config_operatorsalemodule", "modules", "operatorsalemodule"],
-                ["view_config_selfsalemodule", "modules", "selfsalemodule"],
-                ["view_sale", "sales", "sale"],
-                ["add_product", "shops", "product"],
-                ["change_product", "shops", "product"],
-                ["view_product", "shops", "product"],
-                ["view_shop", "shops", "shop"],
-                ["add_inventory", "stocks", "inventory"],
-                ["view_inventory", "stocks", "inventory"],
-                ["add_stockentry", "stocks", "stockentry"],
-                ["view_stockentry", "stocks", "stockentry"],
-                ["add_user", "users", "user"],
-                ["view_user", "users", "user"]
+                [
+                    "use_operatorsalemodule",
+                    "modules",
+                    "operatorsalemodule"
+                ],
+                [
+                    "view_config_operatorsalemodule",
+                    "modules",
+                    "operatorsalemodule"
+                ],
+                [
+                    "view_config_selfsalemodule",
+                    "modules",
+                    "selfsalemodule"
+                ],
+                [
+                    "view_sale",
+                    "sales",
+                    "sale"
+                ],
+                [
+                    "add_product",
+                    "shops",
+                    "product"
+                ],
+                [
+                    "change_product",
+                    "shops",
+                    "product"
+                ],
+                [
+                    "view_product",
+                    "shops",
+                    "product"
+                ],
+                [
+                    "view_shop",
+                    "shops",
+                    "shop"
+                ],
+                [
+                    "add_inventory",
+                    "stocks",
+                    "inventory"
+                ],
+                [
+                    "view_inventory",
+                    "stocks",
+                    "inventory"
+                ],
+                [
+                    "add_stockentry",
+                    "stocks",
+                    "stockentry"
+                ],
+                [
+                    "view_stockentry",
+                    "stocks",
+                    "stockentry"
+                ],
+                [
+                    "add_user",
+                    "users",
+                    "user"
+                ],
+                [
+                    "view_user",
+                    "users",
+                    "user"
+                ]
             ]
         }
     }
