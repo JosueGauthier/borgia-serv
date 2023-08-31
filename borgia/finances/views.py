@@ -608,13 +608,19 @@ class RechargingCreate(UserMixin, BorgiaFormView):
 
 # : OAuth2 authentication
 
-from borgia.settings import CLIENT_ID, CLIENT_SECRET
+from borgia.settings import (
+    CLIENT_ID,
+    CLIENT_SECRET,
+    VIVA_ACCOUNTS_URL_BASE,
+    VIVA_API_URL_BASE,
+    VIVA_PAYMENTS_URL_BASE,
+)
 
 
 def get_viva_wallet_access_token():
     client_id = CLIENT_ID
     client_secret = CLIENT_SECRET
-    token_url = "https://demo-accounts.vivapayments.com/connect/token"
+    token_url = VIVA_ACCOUNTS_URL_BASE + "connect/token"
 
     # Encode the client_id and client_secret in base64
     credentials = f"{client_id}:{client_secret}"
@@ -648,7 +654,7 @@ def create_viva_wallet_payment_order(access_token, context):
     Returns:
         string: return the payment order number access that can be used by the customer to use Smart Checkout of Viva Wallet
     """
-    order_url = "https://demo-api.vivapayments.com/checkout/v2/orders"
+    order_url = VIVA_API_URL_BASE + "checkout/v2/orders"
 
     headers = {
         "Content-Type": "application/json",
@@ -698,8 +704,7 @@ def create_viva_wallet_payment_order(access_token, context):
 
 def get_viva_wallet_transaction(access_token, transaction_id):
     transaction_url = (
-        "https://demo-api.vivapayments.com/checkout/v2/transactions/"
-        + str(transaction_id)
+        VIVA_API_URL_BASE + "checkout/v2/transactions/" + str(transaction_id)
     )
 
     headers = {
@@ -852,9 +857,7 @@ class SelfLydiaCreate(LoginRequiredMixin, BorgiaFormView):
 
         orderCode = create_viva_wallet_payment_order(access_token, context)
 
-        return redirect(
-            "https://demo.vivapayments.com/web/checkout?ref=" + str(orderCode)
-        )
+        return redirect(VIVA_PAYMENTS_URL_BASE + "web/checkout?ref=" + str(orderCode))
 
 
 class SelfLydiaConfirm(LoginRequiredMixin, BorgiaView):
