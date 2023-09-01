@@ -56,10 +56,6 @@ class ShopModuleSaleView(ShopModuleMixin, BorgiaFormView):
     :type self.permission_required_operatorsale: string
     """
 
-    logger.critical("Payment system is not responding")
-    print("ccc")
-    logger.info("Payment transaction finished with status=")
-
     permission_required_self = "modules.use_selfsalemodule"
     permission_required_operator = "modules.use_operatorsalemodule"
     template_name = "modules/shop_module_sale.html"

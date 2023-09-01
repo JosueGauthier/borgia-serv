@@ -1,0 +1,18 @@
+{% extends 'base_sober.html' %}
+
+{% block content %}
+<div class="panel panel-default">
+  <div class="panel-heading">
+    Détails d'une entrée de facture lié à {{ billsentry.shop }}
+  </div>
+  <div class="panel-body">
+    <ul>
+      <li>Magasin : {{ billsentry.shop }}</li>
+      <li>Opérateur : {{ billsentry.operator }}</li>
+      <li>Date : {{ billsentry.datetime }}</li>
+      <li>Nom de la facture : {{ billsentry.billname }}</li>
+      <li>Montant : {{ billsentry.billamount }}€</li>
+    </ul>
+  </div>
+</div>
+{% endblock %}

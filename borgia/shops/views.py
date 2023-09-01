@@ -23,6 +23,7 @@ from shops.forms import (
 )
 from shops.mixins import ProductMixin, ShopMixin
 from shops.models import Product, Shop
+from stocks.models import BillsEntry
 from users.serializers import LoginSerializer
 
 from .models import Product, Shop
@@ -140,6 +141,7 @@ class ShopCheckup(ShopMixin, BorgiaFormView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["stock"] = self.info_stock()
+        context["bills"] = self.info_bills()
         context["transaction"] = self.info_transaction()
         context["info"] = self.info_checkup()
         return context
@@ -188,6 +190,25 @@ class ShopCheckup(ShopMixin, BorgiaFormView):
             "is_current_month": current_month,
         }
 
+    def bills_data(self, q_bills):
+        if self.date_begin is None:
+            self.date_begin = datetime.date.today().replace(day=1)
+
+        if self.date_end is None:
+            today = datetime.date.today()
+            self.date_end = today + datetime.timedelta(days=1)
+
+        q_bills = q_bills.filter(datetime__gte=self.date_begin)
+        q_bills = q_bills.filter(datetime__lte=self.date_end)
+
+
+        bills_amount = sum(s.billamount for s in q_bills)
+
+        return {
+            "bills_amount": bills_amount,
+            "bills_nb": q_bills.count(),
+        }
+
     def info_stock(self):
         return {}
 
@@ -201,6 +222,14 @@ class ShopCheckup(ShopMixin, BorgiaFormView):
         except (ZeroDivisionError, decimal.DivisionByZero, decimal.DivisionUndefined):
             mean = 0
         return {"value": value, "nb": nb, "mean": mean}
+
+    def info_bills(self):
+        q_bills = BillsEntry.objects.filter(shop=self.shop)
+        bills_data = self.bills_data(q_bills)
+        bills_nb = bills_data.get("bills_nb")
+        bills_amount = bills_data.get("bills_amount")
+
+        return {"value": bills_amount, "nb": bills_nb}
 
     def info_checkup(self):
         q_sales = Sale.objects.filter(shop=self.shop)
@@ -222,6 +251,112 @@ class ShopCheckup(ShopMixin, BorgiaFormView):
         initial["date_end"] = self.date_end
         initial["products"] = self.products
         return initial
+
+
+# class ShopCheckupV1(ShopMixin, BorgiaFormView):s
+#     """
+#     Display data about a shop.
+
+#     You can see checkup of your own shop only.
+#     If you're not a manager of a shop, you need the permission 'view_shop'
+#     """
+
+#     permission_required = "shops.view_shop"
+#     menu_type = "shops"
+#     template_name = "shops/shop_checkup.html"
+#     form_class = ShopCheckupSearchForm
+#     lm_active = "lm_shop_checkup"
+
+#     date_begin = None
+#     date_end = None
+#     products = None
+#     sales_value = None
+
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context["stock"] = self.info_stock()
+#         context["transaction"] = self.info_transaction()
+#         context["info"] = self.info_checkup()
+#         return context
+
+#     def get_form_kwargs(self):
+#         kwargs_form = super().get_form_kwargs()
+#         kwargs_form["shop"] = self.shop
+#         return kwargs_form
+
+#     def form_valid(self, form):
+#         if form.cleaned_data["date_begin"]:
+#             self.date_begin = form.cleaned_data["date_begin"]
+#         if form.cleaned_data["date_end"]:
+#             self.date_end = form.cleaned_data["date_end"]
+#         if form.cleaned_data["products"]:
+#             self.products = form.cleaned_data["products"]
+
+#         return self.get(self.request, self.args, self.kwargs)
+
+#     def info_sales(self, q_sales):
+#         current_month = False
+#         if self.date_begin is None:
+#             self.date_begin = datetime.date.today().replace(day=1)
+
+#         if self.date_end is None:
+#             self.date_end = datetime.date.today()
+
+#         q_sales = q_sales.filter(datetime__gte=self.date_begin)
+#         q_sales = q_sales.filter(datetime__lte=self.date_end)
+
+#         if self.products:
+#             q_sales = q_sales.filter(products__pk__in=[p.pk for p in self.products])
+
+#         if self.sales_value is None:
+#             self.sales_value = sum(s.amount() for s in q_sales)
+
+#         if (
+#             self.date_begin == datetime.date.today().replace(day=1)
+#             and self.date_end == datetime.date.today()
+#         ):
+#             current_month = True
+
+#         return {
+#             "value": self.sales_value,
+#             "nb": q_sales.count(),
+#             "is_current_month": current_month,
+#         }
+
+#     def info_stock(self):
+#         return {}
+
+#     def info_transaction(self):
+#         q_sales = Sale.objects.filter(shop=self.shop)
+#         info_sales = self.info_sales(q_sales)
+#         value = info_sales.get("value")
+#         nb = info_sales.get("nb")
+#         try:
+#             mean = round(value / nb, 2)
+#         except (ZeroDivisionError, decimal.DivisionByZero, decimal.DivisionUndefined):
+#             mean = 0
+#         return {"value": value, "nb": nb, "mean": mean}
+
+#     def info_checkup(self):
+#         q_sales = Sale.objects.filter(shop=self.shop)
+#         info_sales = self.info_sales(q_sales)
+#         sale_value = info_sales.get("value")
+#         sale_nb = info_sales.get("nb")
+#         current_month = info_sales.get("is_current_month")
+
+#         return {
+#             "sale": {"value": sale_value, "nb": sale_nb},
+#             "is_current_month": current_month,
+#             "date_begin": self.date_begin,
+#             "date_end": self.date_end,
+#         }
+
+#     def get_initial(self):
+#         initial = super().get_initial()
+#         initial["date_begin"] = self.date_begin
+#         initial["date_end"] = self.date_end
+#         initial["products"] = self.products
+#         return initial
 
 
 class ShopWorkboard(ShopMixin, BorgiaView):

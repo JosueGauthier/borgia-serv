@@ -292,6 +292,7 @@ def get_history_sale(request):
         start_day = strftime(
             str(
                 (
+                    # TODO Change start date of the history sale by september of the current year
                     datetime.datetime.strptime("2022-01-01", "%Y-%m-%d")
                     + datetime.timedelta(days=i)
                 ).date()
