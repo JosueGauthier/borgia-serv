@@ -812,3 +812,6 @@
 {"message": "Watching for file changes with StatReloader", "timestamp": "2023-09-01T11:56:30.448266+00:00", "level": "INFO", "context": {}, "django": {"app": "borgia", "name": "django.utils.autoreload", "filename": "autoreload.py", "funcName": "run_with_reloader", "msecs": 447.0}}
 {"message": "/borgia-app/Borgia/borgia/shops/views.py changed, reloading.", "timestamp": "2023-09-01T11:59:59.062148+00:00", "level": "INFO", "context": {}, "django": {"app": "borgia", "name": "django.utils.autoreload", "filename": "autoreload.py", "funcName": "trigger_reload", "msecs": 61.0}}
 {"message": "Watching for file changes with StatReloader", "timestamp": "2023-09-01T11:59:59.635549+00:00", "level": "INFO", "context": {}, "django": {"app": "borgia", "name": "django.utils.autoreload", "filename": "autoreload.py", "funcName": "run_with_reloader", "msecs": 635.0}}
+{}
+{}
+{}

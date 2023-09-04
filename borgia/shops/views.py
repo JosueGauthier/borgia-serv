@@ -201,7 +201,6 @@ class ShopCheckup(ShopMixin, BorgiaFormView):
         q_bills = q_bills.filter(datetime__gte=self.date_begin)
         q_bills = q_bills.filter(datetime__lte=self.date_end)
 
-
         bills_amount = sum(s.billamount for s in q_bills)
 
         return {
@@ -234,13 +233,17 @@ class ShopCheckup(ShopMixin, BorgiaFormView):
     def info_checkup(self):
         q_sales = Sale.objects.filter(shop=self.shop)
         info_sales = self.info_sales(q_sales)
+        q_bills = BillsEntry.objects.filter(shop=self.shop)
+        info_bills = self.bills_data(q_bills)
         sale_value = info_sales.get("value")
         sale_nb = info_sales.get("nb")
         current_month = info_sales.get("is_current_month")
+        balance = info_sales.get("value") - info_bills.get("bills_amount")
 
         return {
             "sale": {"value": sale_value, "nb": sale_nb},
             "is_current_month": current_month,
+            "balance": balance,
             "date_begin": self.date_begin,
             "date_end": self.date_end,
         }
