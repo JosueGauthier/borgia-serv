@@ -1,0 +1,18 @@
+html[data-theme="light"] {
+  --pst-color-primary: rgb(36, 36, 36);
+  /* --pst-color-secondary: rgb(27, 181, 0); */
+  --pst-color-background: rgb(234, 234, 234);
+}
+
+html[data-theme="dark"] {
+  --pst-color-primary: rgb(249, 249, 249);
+  /* --pst-color-secondary: rgb(27, 181, 0); */
+  --pst-color-background: #232a2f;
+}
+
+a {
+  color: rgb(69, 157, 185);
+}
+a:visited {
+  color: rgb(69, 157, 185);
+}

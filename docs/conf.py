@@ -26,12 +26,12 @@ django.setup()
 
 # -- Project information -----------------------------------------------------
 
-project = "borgia"
-copyright = "2023, Josue Gauthier"
-author = "Josue Gauthier"
+project = "Borgia"
+copyright = "2023, Josué Gauthier"
+author = "Josué Gauthier"
 
 # The full version, including alpha/beta/rc tags
-release = "2"
+release = "V2"
 
 
 # -- General configuration ---------------------------------------------------
@@ -39,7 +39,7 @@ release = "2"
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ["sphinx.ext.autodoc"]
+extensions = ["sphinx.ext.autodoc", "myst_parser"]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]
@@ -61,3 +61,7 @@ html_theme = "pydata_sphinx_theme"
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ["_static"]
+
+html_css_files = [
+    "css/custom.css",
+]

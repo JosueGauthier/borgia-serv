@@ -3,3 +3,5 @@
 .history/*
 borgia/borgia/settings.py
 package-lock.json
+.docs/_build
+.docs/_build/*

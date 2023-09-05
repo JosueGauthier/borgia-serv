@@ -1,0 +1,883 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Production setup &#8212; Borgia V2 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=f5b3c8be" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script src="../_static/documentation_options.js?v=bd9c5055"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'install/install_prod';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Get started" href="../getstarted/getstarted.html" />
+    <link rel="prev" title="Development setup" href="install_dev.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Borgia V2 documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../test.html">
+                        Example Markdown
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../tutorial/shop_tutorial.html">
+                        Documentation - Gestion d’un magasin
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="install_dev.html">
+                        Development setup
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="#">
+                        Production setup
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../getstarted/getstarted.html">
+                        Get started
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../test.html">
+                        Example Markdown
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../tutorial/shop_tutorial.html">
+                        Documentation - Gestion d’un magasin
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="install_dev.html">
+                        Development setup
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="#">
+                        Production setup
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../getstarted/getstarted.html">
+                        Get started
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">Production setup</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <p align="center">
+   <img src="../_static/img/borgia-logo-light.png" />
+</p>
+<section id="production-setup">
+<h1>Production setup<a class="headerlink" href="#production-setup" title="Link to this heading">#</a></h1>
+<section id="documentation-installation">
+<h2>Documentation - Installation<a class="headerlink" href="#documentation-installation" title="Link to this heading">#</a></h2>
+<p>Build : 5.1+
+Licence : <a class="reference external" href="https://github.com/borgia-app/Borgia/blob/master/license.txt">GNU GPL version 3</a></p>
+</section>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<p>This guide allows you to install, configure and operate Borgia on a production web server.</p>
+<p>The entire installation is done on a server running Linux. The distribution is not important, but the guide is written for a Debian distribution, if this is not the case certain commands (notably the package installation commands) may need to be adapted.</p>
+<blockquote>
+<div><p><strong>This install version use Gunicorn as replacement of uwsgi/wsgi</strong></p>
+</div></blockquote>
+<p>The Gunicorn and Nginx part is strongly inspired from <a class="reference external" href="https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-22-04">this very good guide</a> made by : Erin Glass &amp; Jamon Camisso on Digital Ocean.</p>
+</section>
+<section id="first-server-configuration">
+<h2>First server configuration<a class="headerlink" href="#first-server-configuration" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>All of the following commands must be carried out using <code class="docutils literal notranslate"><span class="pre">sudo</span></code>, except in exceptional cases to the contrary and explicitly indicated below.</p></li>
+<li><p>It is preferable that the entire server is configured on a virtual machine (VM) and not on the physical server directly. It can thus easily be copied, saved or reset.</p></li>
+<li><p>In order for the guide to be clearer, it is decided to work in a specific folder named <code class="docutils literal notranslate"><span class="pre">borgia-app</span></code> located at the root of the server (<code class="docutils literal notranslate"><span class="pre">/borgia-app</span></code>). It is obviously possible to change this directory, the commands will therefore have to be modified.</p></li>
+</ul>
+</section>
+<section id="before-starting">
+<h2>Before starting<a class="headerlink" href="#before-starting" title="Link to this heading">#</a></h2>
+<section id="update-the-server">
+<h3>Update the server:<a class="headerlink" href="#update-the-server" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">apt-get</span> <span class="pre">update</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">apt-get</span> <span class="pre">upgrade</span></code></p></li>
+</ul>
+</section>
+<section id="remove-apache-if-installed">
+<h3>Remove Apache if installed:<a class="headerlink" href="#remove-apache-if-installed" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">apt-get</span> <span class="pre">purge</span> <span class="pre">apache2</span></code></p></li>
+</ul>
+</section>
+<section id="install-necessary-packages-for-the-rest-of-the-installation">
+<h3>Install necessary packages for the rest of the installation:<a class="headerlink" href="#install-necessary-packages-for-the-rest-of-the-installation" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">curl</span> <span class="pre">apt-transport-https</span></code></p></li>
+</ul>
+</section>
+<section id="install-all-necessary-packages">
+<h3>Install all necessary packages:<a class="headerlink" href="#install-all-necessary-packages" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">install</span> <span class="pre">build-essential</span> <span class="pre">libssl-dev</span> <span class="pre">libffi-dev</span> <span class="pre">libjpeg-dev</span> <span class="pre">python3-venv</span> <span class="pre">python3-dev</span> <span class="pre">libpq-dev</span> <span class="pre">postgresql</span> <span class="pre">postgresql-contrib</span> <span class="pre">nginx</span> <span class="pre">curl</span> <span class="pre">git</span></code></p></li>
+</ul>
+</section>
+<section id="creating-the-postgresql-database-and-user">
+<h3>Creating the PostgreSQL Database and User<a class="headerlink" href="#creating-the-postgresql-database-and-user" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">-u</span> <span class="pre">postgres</span> <span class="pre">psql</span></code></p></li>
+</ul>
+<p>Inside the <code class="docutils literal notranslate"><span class="pre">postgres=#</span></code> terminal :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CREATE</span> <span class="n">DATABASE</span> <span class="n">borgia</span><span class="p">;</span>
+<span class="n">CREATE</span> <span class="n">USER</span> <span class="n">myprojectuser</span> <span class="n">WITH</span> <span class="n">PASSWORD</span> <span class="s1">&#39;password&#39;</span><span class="p">;</span>
+<span class="n">ALTER</span> <span class="n">ROLE</span> <span class="n">myprojectuser</span> <span class="n">SET</span> <span class="n">client_encoding</span> <span class="n">TO</span> <span class="s1">&#39;utf8&#39;</span><span class="p">;</span>
+<span class="n">ALTER</span> <span class="n">ROLE</span> <span class="n">myprojectuser</span> <span class="n">SET</span> <span class="n">default_transaction_isolation</span> <span class="n">TO</span> <span class="s1">&#39;read committed&#39;</span><span class="p">;</span>
+<span class="n">ALTER</span> <span class="n">ROLE</span> <span class="n">myprojectuser</span> <span class="n">SET</span> <span class="n">timezone</span> <span class="n">TO</span> <span class="s1">&#39;UTC&#39;</span><span class="p">;</span>
+<span class="n">GRANT</span> <span class="n">ALL</span> <span class="n">PRIVILEGES</span> <span class="n">ON</span> <span class="n">DATABASE</span> <span class="n">myproject</span> <span class="n">TO</span> <span class="n">myprojectuser</span><span class="p">;</span>
+\<span class="n">q</span>
+
+</pre></div>
+</div>
+</section>
+<section id="installation-of-yarn">
+<h3>Installation of Yarn<a class="headerlink" href="#installation-of-yarn" title="Link to this heading">#</a></h3>
+<p>Explicit case of Debian, otherwise see <a class="reference external" href="https://yarnpkg.com/lang/en/docs/install/">here</a></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">curl</span> <span class="pre">-sS</span> <span class="pre">https://dl.yarnpkg.com/debian/pubkey.gpg</span> <span class="pre">|</span> <span class="pre">sudo</span> <span class="pre">apt-key</span> <span class="pre">add</span> <span class="pre">-</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">echo</span> <span class="pre">&quot;deb</span> <span class="pre">https://dl.yarnpkg.com/debian/</span> <span class="pre">stable</span> <span class="pre">main&quot;</span> <span class="pre">|</span> <span class="pre">sudo</span> <span class="pre">tee</span> <span class="pre">/etc/apt/sources.list.d/yarn.list</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">apt-get</span> <span class="pre">update</span> <span class="pre">&amp;&amp;</span> <span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">yarn</span></code></p></li>
+</ul>
+</section>
+<section id="create-the-borgia-root-folder">
+<h3>Create the Borgia root folder:<a class="headerlink" href="#create-the-borgia-root-folder" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">mkdir</span> <span class="pre">/borgia-app</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">/borgia-app</span></code></p></li>
+</ul>
+</section>
+</section>
+<section id="copy-of-borgia">
+<h2>Copy of Borgia<a class="headerlink" href="#copy-of-borgia" title="Link to this heading">#</a></h2>
+<p>In <code class="docutils literal notranslate"><span class="pre">/borgia-app</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">https://github.com/borgia-app/Borgia.git</span></code></p></li>
+</ul>
+<p>Then in <code class="docutils literal notranslate"><span class="pre">/borgia-app/Borgia</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">tags/RELEASE_TO_UTILISER</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">-b</span> <span class="pre">production_RELEASE_TO_USE</span></code></p></li>
+</ul>
+<section id="creating-a-python-virtual-environment-for-your-project">
+<h3>Creating a Python Virtual Environment for your Project<a class="headerlink" href="#creating-a-python-virtual-environment-for-your-project" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">-m</span> <span class="pre">venv</span> <span class="pre">venv</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">venv/bin/activate</span></code></p></li>
+</ul>
+</section>
+</section>
+<section id="installation-of-packages-necessary-for-the-application">
+<h2>Installation of packages necessary for the application<a class="headerlink" href="#installation-of-packages-necessary-for-the-application" title="Link to this heading">#</a></h2>
+<p>In <code class="docutils literal notranslate"><span class="pre">/borgia-app/Borgia</span></code> and in the virtual environment install the <code class="docutils literal notranslate"><span class="pre">prod.txt</span></code> requirement file.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">pip3</span> <span class="pre">install</span> <span class="pre">-r</span> <span class="pre">requirements/prod.txt</span></code></p></li>
+</ul>
+<p>And finally, outside the virtual environment:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">yarn</span> <span class="pre">global</span> <span class="pre">add</span> <span class="pre">less</span></code></p></li>
+</ul>
+</section>
+<section id="software-configuration">
+<h2>Software configuration<a class="headerlink" href="#software-configuration" title="Link to this heading">#</a></h2>
+<section id="vital-parameters">
+<h3>Vital parameters<a class="headerlink" href="#vital-parameters" title="Link to this heading">#</a></h3>
+<p>Copy the file <code class="docutils literal notranslate"><span class="pre">/borgia-app/Borgia/contrib/production/settings.py</span></code> to <code class="docutils literal notranslate"><span class="pre">/borgia-app/Borgia/borgia/borgia/settings.py</span></code> and:</p>
+<ul class="simple">
+<li><p>Modify the <code class="docutils literal notranslate"><span class="pre">SECRET_KEY</span> <span class="pre">=</span></code> line by indicating a random private key. For example, <a class="reference external" href="https://randomkeygen.com/">this site</a> allows you to generate keys, choose at least “CodeIgniter Encryption Keys”, for example: <code class="docutils literal notranslate"><span class="pre">SECRET_KEY</span> <span class="pre">=</span> <span class="pre">'AAHHBxi0qHiVWWk6J1bVWCMdF45p6X9t'</span></code>.</p></li>
+<li><p>Make sure <code class="docutils literal notranslate"><span class="pre">DEBUG</span> <span class="pre">=</span> <span class="pre">False</span></code>.</p></li>
+<li><p>Modify the <code class="docutils literal notranslate"><span class="pre">ALLOWED_HOSTS</span> <span class="pre">=</span></code> line by indicating the domains or subdomains accepted by the application. For example: <code class="docutils literal notranslate"><span class="pre">ALLOWED_HOSTS</span> <span class="pre">=</span> <span class="pre">['sibers.borgia-app.com',</span> <span class="pre">'borgia-me.ueam.net']</span></code>.</p></li>
+</ul>
+</section>
+<section id="database">
+<h3>Database<a class="headerlink" href="#database" title="Link to this heading">#</a></h3>
+<p>In the <code class="docutils literal notranslate"><span class="pre">/borgia-app/Borgia/borgia/borgia/settings.py</span></code> file, modify the part:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">DATABASES</span> <span class="o">=</span> <span class="p">{</span>
+<span class="o">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>by indicating the name of the database, the user name and the password defined during the configuration of the latter. For example :</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">DATABASES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;ENGINE&#39;</span><span class="p">:</span> <span class="s1">&#39;django.db.backends.postgresql_psycopg2&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;NAME&#39;</span><span class="p">:</span> <span class="s1">&#39;borgia&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;USER&#39;</span><span class="p">:</span> <span class="s1">&#39;borgiauser&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;PASSWORD&#39;</span><span class="p">:</span> <span class="s1">&#39;password&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;HOST&#39;</span><span class="p">:</span> <span class="s1">&#39;localhost&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;PORT&#39;</span><span class="p">:</span> <span class="s1">&#39;5432&#39;</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="mail-server">
+<h3>Mail server<a class="headerlink" href="#mail-server" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Create a Google email account via the site <a class="reference external" href="https://www.google.com/gmail/">Gmail</a> and note the user name <strong>MAIL_USER_NAME</strong> and the password <strong>MAIL_PASSWORD</strong>.</p></li>
+</ul>
+<p>In the <code class="docutils literal notranslate"><span class="pre">/borgia-app/Borgia/borgia/borgia/settings.py</span></code> file:</p>
+<ul class="simple">
+<li><p>Modify the lines <code class="docutils literal notranslate"><span class="pre">DEFAULT_FROM_EMAIL</span></code>, <code class="docutils literal notranslate"><span class="pre">SERVER_EMAIL</span></code> and <code class="docutils literal notranslate"><span class="pre">EMAIL_HOST_USER</span></code> by indicating the email <strong>USER_NAME_MAIL</strong>.</p></li>
+<li><p>Modify the <code class="docutils literal notranslate"><span class="pre">EMAIL_HOST_PASSWORD</span></code> line by indicating the correct password <strong>MOT_DE_PASSE_MAIL</strong>.</p></li>
+</ul>
+</section>
+<section id="administrators">
+<h3>Administrators<a class="headerlink" href="#administrators" title="Link to this heading">#</a></h3>
+<p>Administrators receive emails in the event of problems using Borgia. For example, if the database is inaccessible, Borgia will automatically send an email to the administrators. These emails are valuable and allow errors to be corrected. Indeed, the debug interface used in development is not accessible here and emails replace it. It is appropriate to add at least one administrator who will store any error emails to then debug or transfer to the Borgia maintainers team.</p>
+<p>To add administrators, indicate the email addresses in the <code class="docutils literal notranslate"><span class="pre">ADMINS=</span></code> line in the <code class="docutils literal notranslate"><span class="pre">/borgia-app/Borgia/borgia/borgia/settings.py</span></code> file.</p>
+</section>
+</section>
+<section id="database-migration">
+<h2>Database migration<a class="headerlink" href="#database-migration" title="Link to this heading">#</a></h2>
+<p>In <code class="docutils literal notranslate"><span class="pre">/borgia-app/Borgia/borgia</span></code> and in the virtual environment:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">manage.py</span> <span class="pre">makemigrations</span> <span class="pre">configurations</span> <span class="pre">users</span> <span class="pre">shops</span> <span class="pre">finances</span> <span class="pre">events</span> <span class="pre">modules</span> <span class="pre">sales</span> <span class="pre">stocks</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">manage.py</span> <span class="pre">migrate</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">manage.py</span> <span class="pre">loaddata</span> <span class="pre">initial</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">manage.py</span> <span class="pre">collectstatic</span> <span class="pre">--clear</span></code> by accepting the alert</p></li>
+</ul>
+<p>Then, enter the password for the administrator account (which will be deactivated later):</p>
+<p>Changing the password of the first user <code class="docutils literal notranslate"><span class="pre">AE_ENSAM</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">manage.py</span> <span class="pre">shell</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">users.models</span> <span class="pre">import</span> <span class="pre">User</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">u</span> <span class="pre">=</span> <span class="pre">User.objects.get(pk=1)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">u.set_password(&quot;NEW_PASSWORD&quot;)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">u.save()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">exit()</span></code></p></li>
+</ul>
+</section>
+<section id="intermediate-test">
+<h2>Intermediate test<a class="headerlink" href="#intermediate-test" title="Link to this heading">#</a></h2>
+<section id="ufw-configuration">
+<h3>UFW configuration<a class="headerlink" href="#ufw-configuration" title="Link to this heading">#</a></h3>
+<p>If you followed the initial server setup guide, you should have a UFW firewall protecting your server. In order to test the development server, you need to allow access to the port you’ll be using.</p>
+<p>Create exception for port 8000 :</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">ufw</span> <span class="pre">allow</span> <span class="pre">8000</span></code></p></li>
+</ul>
+</section>
+<section id="run-the-server">
+<h3>Run the server<a class="headerlink" href="#run-the-server" title="Link to this heading">#</a></h3>
+<p>The command in the virtual environment <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">manage.py</span> <span class="pre">runserver</span> <span class="pre">0.0.0.0:8000</span></code> should start the server and should not report any errors. If this is the case, continue to the rest and end of the installation guide.</p>
+<p>In your web browser, visit your server’s domain name or IP address followed by port 8000 : http://server_domain_or_IP:8000</p>
+</section>
+</section>
+<section id="optionnal-testing-gunicorns-ability-to-serve-the-project">
+<h2>Optionnal : testing Gunicorn’s ability to serve the project<a class="headerlink" href="#optionnal-testing-gunicorns-ability-to-serve-the-project" title="Link to this heading">#</a></h2>
+<p>The last thing you need to do before leaving your virtual environment is test Gunicorn to make sure that it can serve the application. You can do this by entering the project directory and using gunicorn to load the project’s WSGI module:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">/borgia-app/Borgia/borgia</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gunicorn</span> <span class="pre">--bind</span> <span class="pre">0.0.0.0:8000</span> <span class="pre">borgia.wsgi</span></code></p></li>
+</ul>
+</section>
+<section id="deactivate-the-venv">
+<h2>Deactivate the venv<a class="headerlink" href="#deactivate-the-venv" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">deactivate</span></code></p></li>
+</ul>
+</section>
+<section id="creating-systemd-socket-and-service-files-for-gunicorn">
+<h2>Creating systemd Socket and Service Files for Gunicorn<a class="headerlink" href="#creating-systemd-socket-and-service-files-for-gunicorn" title="Link to this heading">#</a></h2>
+<p>You have tested that Gunicorn can interact with our Django application, but you should now implement a more robust way of starting and stopping the application server. To accomplish this, you’ll make systemd service and socket files.</p>
+<p>The Gunicorn socket will be created at boot and will listen for connections. When a connection occurs, systemd will automatically start the Gunicorn process to handle the connection.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">nano</span> <span class="pre">/etc/systemd/system/gunicorn.socket</span></code></p></li>
+</ul>
+<p>Inside put the following content :</p>
+<div class="highlight-conf notranslate"><div class="highlight"><pre><span></span>
+[Unit]
+Description=gunicorn socket
+
+[Socket]
+ListenStream=/run/gunicorn.sock
+
+[Install]
+WantedBy=sockets.target
+
+
+</pre></div>
+</div>
+<p>Next, create and open a systemd service file for Gunicorn with sudo privileges in your text editor. The service filename should match the socket filename with the exception of the extension:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">nano</span> <span class="pre">/etc/systemd/system/gunicorn.service</span></code></p></li>
+</ul>
+<div class="highlight-conf notranslate"><div class="highlight"><pre><span></span>[Unit]
+Description=gunicorn daemon
+Requires=gunicorn.socket
+After=network.target
+
+[Service]
+User=josue
+Group=www-data
+WorkingDirectory=/borgia-app/Borgia/borgia
+ExecStart=/usr/bin/gunicorn \
+          --access-logfile - \
+          --workers 3 \
+          --bind unix:/run/gunicorn.sock \
+          borgia.wsgi:application
+
+[Install]
+WantedBy=multi-user.target
+</pre></div>
+</div>
+<p>You can now start and enable the Gunicorn socket. This will create the socket file at /run/gunicorn.sock now and at boot. When a connection is made to that socket, systemd will automatically start the gunicorn.service to handle it:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">start</span> <span class="pre">gunicorn.socket</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">enable</span> <span class="pre">gunicorn.socket</span></code></p></li>
+</ul>
+<section id="checking-for-the-gunicorn-socket-file">
+<h3>Checking for the Gunicorn Socket File<a class="headerlink" href="#checking-for-the-gunicorn-socket-file" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">status</span> <span class="pre">gunicorn.socket</span></code></p></li>
+</ul>
+<p>You should receive an output like this:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Output
+●<span class="w"> </span>gunicorn.socket<span class="w"> </span>-<span class="w"> </span>gunicorn<span class="w"> </span>socket
+<span class="w">     </span>Loaded:<span class="w"> </span>loaded<span class="w"> </span><span class="o">(</span>/etc/systemd/system/gunicorn.socket<span class="p">;</span><span class="w"> </span>enabled<span class="p">;</span><span class="w"> </span>vendor<span class="w"> </span>preset:<span class="w"> </span>enabled<span class="o">)</span>
+<span class="w">     </span>Active:<span class="w"> </span>active<span class="w"> </span><span class="o">(</span>listening<span class="o">)</span><span class="w"> </span>since<span class="w"> </span>Mon<span class="w"> </span><span class="m">2022</span>-04-18<span class="w"> </span><span class="m">17</span>:53:25<span class="w"> </span>UTC<span class="p">;</span><span class="w"> </span>5s<span class="w"> </span>ago
+<span class="w">   </span>Triggers:<span class="w"> </span>●<span class="w"> </span>gunicorn.service
+<span class="w">     </span>Listen:<span class="w"> </span>/run/gunicorn.sock<span class="w"> </span><span class="o">(</span>Stream<span class="o">)</span>
+<span class="w">     </span>CGroup:<span class="w"> </span>/system.slice/gunicorn.socket
+
+Apr<span class="w"> </span><span class="m">18</span><span class="w"> </span><span class="m">17</span>:53:25<span class="w"> </span>django<span class="w"> </span>systemd<span class="o">[</span><span class="m">1</span><span class="o">]</span>:<span class="w"> </span>Listening<span class="w"> </span>on<span class="w"> </span>gunicorn<span class="w"> </span>socket.
+</pre></div>
+</div>
+<p>Next, check for the existence of the gunicorn.sock file within the /run directory:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">file</span> <span class="pre">/run/gunicorn.sock</span></code></p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Output</span>
+<span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">gunicorn</span><span class="o">.</span><span class="n">sock</span><span class="p">:</span> <span class="n">socket</span>
+</pre></div>
+</div>
+<p>If the systemctl status command indicated that an error occurred or if you do not find the gunicorn.sock file in the directory, it’s an indication that the Gunicorn socket was not able to be created correctly. Check the Gunicorn socket’s logs by typing:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">journalctl</span> <span class="pre">-u</span> <span class="pre">gunicorn.socket</span></code></p></li>
+</ul>
+<p>Take another look at your /etc/systemd/system/gunicorn.socket file to fix any problems before continuing.</p>
+</section>
+<section id="testing-socket-activation">
+<h3>Testing Socket Activation<a class="headerlink" href="#testing-socket-activation" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">status</span> <span class="pre">gunicorn</span></code></p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Output
+○ gunicorn.service - gunicorn daemon
+     Loaded: loaded (/etc/systemd/system/gunicorn.service; disabled; vendor preset: enabled)
+     Active: inactive (dead)
+TriggeredBy: ● gunicorn.socket
+
+</pre></div>
+</div>
+<p>If it’s OK you can run :</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">daemon-reload</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">restart</span> <span class="pre">gunicorn</span></code></p></li>
+</ul>
+</section>
+</section>
+<section id="configure-nginx-to-proxy-pass-to-gunicorn">
+<h2>Configure Nginx to Proxy Pass to Gunicorn<a class="headerlink" href="#configure-nginx-to-proxy-pass-to-gunicorn" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">nano</span> <span class="pre">/etc/nginx/sites-available/borgia</span></code></p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">server</span> <span class="p">{</span>
+   
+    <span class="n">listen</span> <span class="mi">80</span><span class="p">;</span>
+    <span class="n">server_name</span> <span class="n">YOUR</span><span class="o">.</span><span class="n">DOMAINNAME</span><span class="o">.</span><span class="n">COM</span><span class="p">;</span>
+
+    <span class="n">location</span> <span class="o">=</span> <span class="o">/</span><span class="n">favicon</span><span class="o">.</span><span class="n">ico</span> <span class="p">{</span> <span class="n">access_log</span> <span class="n">off</span><span class="p">;</span> <span class="n">log_not_found</span> <span class="n">off</span><span class="p">;</span> <span class="p">}</span>
+
+
+    <span class="n">location</span> <span class="o">/</span><span class="n">media</span>  <span class="p">{</span>
+        <span class="n">alias</span> <span class="o">/</span><span class="n">borgia</span><span class="o">-</span><span class="n">app</span><span class="o">/</span><span class="n">Borgia</span><span class="o">/</span><span class="n">borgia</span><span class="o">/</span><span class="n">static</span><span class="o">/</span><span class="n">media</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">location</span> <span class="o">/</span><span class="n">static</span> <span class="p">{</span>
+        <span class="n">alias</span> <span class="o">/</span><span class="n">borgia</span><span class="o">-</span><span class="n">app</span><span class="o">/</span><span class="n">Borgia</span><span class="o">/</span><span class="n">borgia</span><span class="o">/</span><span class="n">static</span><span class="o">/</span><span class="n">static_root</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    
+    <span class="n">location</span> <span class="o">/</span> <span class="p">{</span>
+        <span class="n">include</span> <span class="n">proxy_params</span><span class="p">;</span>
+        <span class="n">proxy_pass</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">unix</span><span class="p">:</span><span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">gunicorn</span><span class="o">.</span><span class="n">sock</span><span class="p">;</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+
+
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">ln</span> <span class="pre">-s</span> <span class="pre">/etc/nginx/sites-available/borgia</span> <span class="pre">/etc/nginx/sites-enabled</span></code></p></li>
+</ul>
+<p>Check the nginx configuration :</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">nginx</span> <span class="pre">-t</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">restart</span> <span class="pre">nginx</span></code></p></li>
+</ul>
+<section id="allow-nginx-through-the-ufw-firewall">
+<h3>Allow Nginx through the UFW firewall<a class="headerlink" href="#allow-nginx-through-the-ufw-firewall" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">ufw</span> <span class="pre">delete</span> <span class="pre">allow</span> <span class="pre">8000</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">ufw</span> <span class="pre">allow</span> <span class="pre">'Nginx</span> <span class="pre">Full'</span></code></p></li>
+</ul>
+<p>You should now be able to go to your server’s domain or IP address to view your application.</p>
+<blockquote>
+<div><p>Note: After configuring Nginx, the next step should be securing traffic to the server using SSL/TLS. This is important because without it, all information, including passwords are sent over the network in plain text.
+If you have a domain name, the easiest way to get an SSL certificate to secure your traffic is using Let’s Encrypt. Follow <a class="reference external" href="https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-22-04">this guide</a> to set up Let’s Encrypt with Nginx on Ubuntu 22.04.
+Follow the procedure using the Nginx server block you created in this guide.</p>
+</div></blockquote>
+</section>
+</section>
+<section id="save-to-git">
+<h2>Save to git<a class="headerlink" href="#save-to-git" title="Link to this heading">#</a></h2>
+<p>Finally, you should save this entire configuration on a production branch (sudo not necessary here):</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add.</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-m</span> <span class="pre">&quot;production&quot;</span></code></p></li>
+</ul>
+<blockquote>
+<div><p><strong>It is not recommended to push this branch as it could contain sensitive information like keys and passwords.</strong></p>
+</div></blockquote>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="install_dev.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Development setup</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../getstarted/getstarted.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Get started</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation-installation">Documentation - Installation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#first-server-configuration">First server configuration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#before-starting">Before starting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#update-the-server">Update the server:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#remove-apache-if-installed">Remove Apache if installed:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-necessary-packages-for-the-rest-of-the-installation">Install necessary packages for the rest of the installation:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-all-necessary-packages">Install all necessary packages:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-the-postgresql-database-and-user">Creating the PostgreSQL Database and User</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-of-yarn">Installation of Yarn</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-the-borgia-root-folder">Create the Borgia root folder:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#copy-of-borgia">Copy of Borgia</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-python-virtual-environment-for-your-project">Creating a Python Virtual Environment for your Project</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-of-packages-necessary-for-the-application">Installation of packages necessary for the application</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#software-configuration">Software configuration</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vital-parameters">Vital parameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#database">Database</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mail-server">Mail server</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#administrators">Administrators</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#database-migration">Database migration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intermediate-test">Intermediate test</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ufw-configuration">UFW configuration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-the-server">Run the server</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optionnal-testing-gunicorns-ability-to-serve-the-project">Optionnal : testing Gunicorn’s ability to serve the project</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deactivate-the-venv">Deactivate the venv</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-systemd-socket-and-service-files-for-gunicorn">Creating systemd Socket and Service Files for Gunicorn</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#checking-for-the-gunicorn-socket-file">Checking for the Gunicorn Socket File</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-socket-activation">Testing Socket Activation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configure-nginx-to-proxy-pass-to-gunicorn">Configure Nginx to Proxy Pass to Gunicorn</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#allow-nginx-through-the-ufw-firewall">Allow Nginx through the UFW firewall</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#save-to-git">Save to git</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../_sources/install/install_prod.md.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, Josué Gauthier.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.5.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
