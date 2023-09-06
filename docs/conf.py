@@ -65,3 +65,21 @@ html_static_path = ["_static"]
 html_css_files = [
     "css/custom.css",
 ]
+
+html_logo = "_static/img/logoImageText.png"
+
+
+html_theme_options = {
+    "icon_links": [
+        {
+            # Label for this link
+            "name": "GitHub",
+            # URL where the link will redirect
+            "url": "https://github.com/JosueGauthier/borgia-serv/tree/sibers",  # required
+            # Icon class (if "type": "fontawesome"), or path to local image (if "type": "local")
+            "icon": "fa-brands fa-square-github",
+            # The type of image to be used (see below for details)
+            "type": "fontawesome",
+        }
+    ],
+}

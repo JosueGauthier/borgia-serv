@@ -1,13 +1,6 @@
-<p align="center">
-   <img src="../_static/img/borgia-logo-light.png" />
-</p>
-
 # Development setup
 
 ## Documentation - Installation
-
-Build : 5.1+
-Licence : [GNU GPL version 3](https://github.com/borgia-app/Borgia/blob/master/license.txt)
 
 ## Introduction
 

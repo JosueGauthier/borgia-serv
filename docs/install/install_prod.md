@@ -1,14 +1,6 @@
-<p align="center">
-   <img src="../_static/img/borgia-logo-light.png" />
-</p>
-
 # Production setup
 
 ## Documentation - Installation
-
-Build : 5.1+
-Licence : [GNU GPL version 3](https://github.com/borgia-app/Borgia/blob/master/license.txt)
-
 
 ## Introduction
 
@@ -222,7 +214,7 @@ The Gunicorn socket will be created at boot and will listen for connections. Whe
 
 Inside put the following content : 
 
-```conf 
+```
 
 [Unit]
 Description=gunicorn socket
@@ -240,7 +232,7 @@ Next, create and open a systemd service file for Gunicorn with sudo privileges i
 
 - `sudo nano /etc/systemd/system/gunicorn.service`
 
-```conf
+```
 [Unit]
 Description=gunicorn daemon
 Requires=gunicorn.socket
