@@ -25,6 +25,13 @@ class SelfSaleModuleSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class SelfSaleShopSerializer(serializers.ModelSerializer):
+    shop = ShopSerializer()
+    class Meta:
+        model = SelfSaleModule
+        fields = ["id","state","delay_post_purchase","limit_purchase","logout_post_purchase","shop"]
+
+
 class OperatorSaleModuleSerializer(serializers.ModelSerializer):
     class Meta:
         model = OperatorSaleModule

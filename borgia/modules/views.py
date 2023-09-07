@@ -893,6 +893,7 @@ class CategoryListView(views.APIView):
 
 
 class SelfSaleShopListView(generics.GenericAPIView):
+    queryset = SelfSaleModule.objects.filter(state=True)
     filter_backends = [filters.SearchFilter]
     search_fields = ["name"]
 
@@ -907,6 +908,7 @@ class SelfSaleShopListView(generics.GenericAPIView):
 
 
 class AllCategoriesListView(generics.GenericAPIView):
+    queryset = SelfSaleModule.objects.filter(state=True)
     filter_backends = [filters.SearchFilter]
     search_fields = ["name"]
 
@@ -934,6 +936,7 @@ class AllCategoriesListView(generics.GenericAPIView):
 
 
 class AllProductsInSelfSaleListView(generics.GenericAPIView):
+    queryset = SelfSaleModule.objects.filter(state=True)
     filter_backends = [filters.SearchFilter]
     search_fields = ["name"]
 

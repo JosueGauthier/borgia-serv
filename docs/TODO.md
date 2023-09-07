@@ -1,6 +1,0 @@
-- see for an API documentation 
-- Faire un guide d'utilisation en EN
-- Intégrer la doc Grafana
-- Parler de l'application Borgia
-- Essayer de mettre en place une Section Navigation voir ( https://pydata-sphinx-theme.readthedocs.io/en/stable/user_guide/index.html)
-- 

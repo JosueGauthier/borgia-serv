@@ -11,6 +11,7 @@ from shops.views import (ProductBaseViewSet, ProductCreate, ProductDeactivate, P
 router = routers.DefaultRouter()
 
 router.register(r'selfsale-modules', views.SelfSaleModuleViewSet)
+router.register(r'selfsale-shop', views.SelfSaleShopViewSet)
 router.register(r'operatorsale-modules', views.OperatorSaleModuleViewSet)
 
 

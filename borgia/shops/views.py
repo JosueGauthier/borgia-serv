@@ -36,6 +36,7 @@ from .serializers import (
     ProductBaseSerializer,
     ProductSerializer,
     SelfSaleModuleSerializer,
+    SelfSaleShopSerializer,
     ShopStatSerializer,
     UpdateProductSerializer,
     UpdateShopSerializer,
@@ -650,6 +651,12 @@ class SelfSaleModuleViewSet(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ["shop", "state"]
 
+class SelfSaleShopViewSet(viewsets.ModelViewSet):
+    queryset = SelfSaleModule.objects.filter(state=True)
+    
+    serializer_class = SelfSaleShopSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ["shop", "state"]
 
 class OperatorSaleModuleViewSet(viewsets.ModelViewSet):
     queryset = OperatorSaleModule.objects.all()
