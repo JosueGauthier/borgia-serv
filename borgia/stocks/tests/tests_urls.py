@@ -9,7 +9,8 @@ class StocksNamedURLTests(TestCase):
         expected_named_urls = [
             ('url_stockentry_list', [], {'shop_pk': 53}),
             ('url_stockentry_create', [], {'shop_pk': 53}),
-            ('url_stockentry_retrieve', [], {'shop_pk': 53, 'stockentry_pk': 53}),
+            ('url_stockentry_retrieve', [], {
+             'shop_pk': 53, 'stockentry_pk': 53}),
             ('url_inventory_list', [], {'shop_pk': 53}),
             ('url_inventory_create', [], {'shop_pk': 53}),
             ('url_inventory_retrieve', [], {'shop_pk': 53, 'inventory_pk': 53})
@@ -19,4 +20,5 @@ class StocksNamedURLTests(TestCase):
                 try:
                     reverse(name, args=args, kwargs=kwargs)
                 except NoReverseMatch:
-                    self.fail("Reversal of url named '%s' failed with NoReverseMatch" % name)
+                    self.fail(
+                        "Reversal of url named '%s' failed with NoReverseMatch" % name)

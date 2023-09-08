@@ -1,10 +1,6 @@
-{% extends 'base_sober.html'%}
-
-{% block content %}
+{% extends 'base_sober.html'%} {% block content %}
 <div class="panel panel-primary">
-  <div class="panel-heading">
-    Résumé d'une vente depuis le {{ module }}
-  </div>
+  <div class="panel-heading">Résumé d'une vente depuis le {{ module }}</div>
   <div class="panel-body">
     <ul>
       <li>Opérateur : {{ sale.operator }}</li>
@@ -19,7 +15,4 @@
   </div>
 </div>
 
-{% if delay %}
-    {% include 'modules/js/timing_delay.html' with delay=delay %}
-{% endif %}
-{% endblock %}
+{% if delay %} {% include 'modules/js/timing_delay.html' with delay=delay %} {% endif %} {% endblock %}

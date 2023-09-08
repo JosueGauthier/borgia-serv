@@ -54,7 +54,8 @@ class BaseGeneralStocksViewsTest(BaseStocksViewsTest):
     def offline_user_redirection(self):
         response_offline_user = Client().get(self.get_url(self.shop1.pk))
         self.assertEqual(response_offline_user.status_code, 302)
-        self.assertRedirects(response_offline_user, get_login_url_redirected(self.get_url(self.shop1.pk)))
+        self.assertRedirects(response_offline_user, get_login_url_redirected(
+            self.get_url(self.shop1.pk)))
 
 
 class StockEntryListViewTest(BaseGeneralStocksViewsTest):
@@ -99,29 +100,36 @@ class StockEntryRetrieveViewTest(BaseStocksViewsTest):
         return reverse(self.url_view, kwargs={'shop_pk': shop_pk, 'stockentry_pk': stockentry_pk})
 
     def as_president_get(self):
-        response1_client1 = self.client1.get(self.get_url(self.shop1.pk, self.stockentry1.pk))
+        response1_client1 = self.client1.get(
+            self.get_url(self.shop1.pk, self.stockentry1.pk))
         self.assertEqual(response1_client1.status_code, 200)
 
     def as_chief_get(self):
-        response1_client3 = self.client3.get(self.get_url(self.shop1.pk, self.stockentry1.pk))
+        response1_client3 = self.client3.get(
+            self.get_url(self.shop1.pk, self.stockentry1.pk))
         self.assertEqual(response1_client3.status_code, 200)
 
     def not_existing_stockentry_get(self):
-        response_client1 = self.client1.get(self.get_url(self.shop1.pk, '5353'))
+        response_client1 = self.client1.get(
+            self.get_url(self.shop1.pk, '5353'))
         self.assertEqual(response_client1.status_code, 404)
 
     def not_existing_shop_get(self):
-        response_client1 = self.client1.get(self.get_url('5353', self.stockentry1.pk))
+        response_client1 = self.client1.get(
+            self.get_url('5353', self.stockentry1.pk))
         self.assertEqual(response_client1.status_code, 404)
 
     def not_allowed_user_get(self):
-        response_client2 = self.client2.get(self.get_url(self.shop1.pk, self.stockentry1.pk))
+        response_client2 = self.client2.get(
+            self.get_url(self.shop1.pk, self.stockentry1.pk))
         self.assertEqual(response_client2.status_code, 403)
 
     def offline_user_redirection(self):
-        response_offline_user = Client().get(self.get_url(self.shop1.pk, self.stockentry1.pk))
+        response_offline_user = Client().get(
+            self.get_url(self.shop1.pk, self.stockentry1.pk))
         self.assertEqual(response_offline_user.status_code, 302)
-        self.assertRedirects(response_offline_user, get_login_url_redirected(self.get_url(self.shop1.pk, self.stockentry1.pk)))
+        self.assertRedirects(response_offline_user, get_login_url_redirected(
+            self.get_url(self.shop1.pk, self.stockentry1.pk)))
 
 
 class InventoryListViewTest(BaseGeneralStocksViewsTest):
@@ -166,26 +174,33 @@ class InventoryRetrieveViewTest(BaseStocksViewsTest):
         return reverse(self.url_view, kwargs={'shop_pk': shop_pk, 'inventory_pk': inventory_pk})
 
     def as_president_get(self):
-        response1_client1 = self.client1.get(self.get_url(self.shop1.pk, self.inventory1.pk))
+        response1_client1 = self.client1.get(
+            self.get_url(self.shop1.pk, self.inventory1.pk))
         self.assertEqual(response1_client1.status_code, 200)
 
     def as_chief_get(self):
-        response1_client3 = self.client3.get(self.get_url(self.shop1.pk, self.inventory1.pk))
+        response1_client3 = self.client3.get(
+            self.get_url(self.shop1.pk, self.inventory1.pk))
         self.assertEqual(response1_client3.status_code, 200)
 
     def not_existing_stockentry_get(self):
-        response_client1 = self.client1.get(self.get_url(self.shop1.pk, '5353'))
+        response_client1 = self.client1.get(
+            self.get_url(self.shop1.pk, '5353'))
         self.assertEqual(response_client1.status_code, 404)
 
     def not_existing_shop_get(self):
-        response_client1 = self.client1.get(self.get_url('5353', self.inventory1.pk))
+        response_client1 = self.client1.get(
+            self.get_url('5353', self.inventory1.pk))
         self.assertEqual(response_client1.status_code, 404)
 
     def not_allowed_user_get(self):
-        response_client2 = self.client2.get(self.get_url(self.shop1.pk, self.inventory1.pk))
+        response_client2 = self.client2.get(
+            self.get_url(self.shop1.pk, self.inventory1.pk))
         self.assertEqual(response_client2.status_code, 403)
 
     def offline_user_redirection(self):
-        response_offline_user = Client().get(self.get_url(self.shop1.pk, self.inventory1.pk))
+        response_offline_user = Client().get(
+            self.get_url(self.shop1.pk, self.inventory1.pk))
         self.assertEqual(response_offline_user.status_code, 302)
-        self.assertRedirects(response_offline_user, get_login_url_redirected(self.get_url(self.shop1.pk, self.inventory1.pk)))
+        self.assertRedirects(response_offline_user, get_login_url_redirected(
+            self.get_url(self.shop1.pk, self.inventory1.pk)))

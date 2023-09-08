@@ -28,7 +28,7 @@ class StockEntry(models.Model):
         string = ""
         for sep in self.stockentryproduct_set.all():
             string += sep.__str__() + ", "
-        string = string[0 : len(string) - 2]
+        string = string[0: len(string) - 2]
         return string
 
 
@@ -91,7 +91,8 @@ class Inventory(models.Model):
 
     def update_correcting_factors(self):
         for inventoryproduct in self.inventoryproduct_set.all():
-            inventoryproduct.product.update_correcting_factor(inventoryproduct.quantity)
+            inventoryproduct.product.update_correcting_factor(
+                inventoryproduct.quantity)
 
 
 class InventoryProduct(models.Model):

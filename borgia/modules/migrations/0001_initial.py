@@ -19,12 +19,15 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Category',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=254, verbose_name='Nom')),
                 ('module_id', models.PositiveIntegerField()),
                 ('order', models.PositiveIntegerField(default=0)),
-                ('category_image', models.CharField(max_length=10000, verbose_name='category_image')),
-                ('content_type', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='contenttypes.contenttype')),
+                ('category_image', models.CharField(
+                    max_length=10000, verbose_name='category_image')),
+                ('content_type', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE, to='contenttypes.contenttype')),
             ],
             options={
                 'default_permissions': (),
@@ -33,12 +36,17 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='SelfSaleModule',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
                 ('state', models.BooleanField(default=False, verbose_name='Activé')),
-                ('delay_post_purchase', models.IntegerField(blank=True, null=True, validators=[django.core.validators.MinValueValidator(Decimal('0'))], verbose_name="Durée d'affichage du résumé de commande")),
-                ('limit_purchase', models.DecimalField(blank=True, decimal_places=2, max_digits=9, null=True, validators=[django.core.validators.MinValueValidator(Decimal('0'))], verbose_name='Montant limite de commande')),
-                ('logout_post_purchase', models.BooleanField(default=False, verbose_name='Deconnexion après une vente')),
-                ('shop', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='%(app_label)s_%(class)s_shop', to='shops.shop')),
+                ('delay_post_purchase', models.IntegerField(blank=True, null=True, validators=[
+                 django.core.validators.MinValueValidator(Decimal('0'))], verbose_name="Durée d'affichage du résumé de commande")),
+                ('limit_purchase', models.DecimalField(blank=True, decimal_places=2, max_digits=9, null=True, validators=[
+                 django.core.validators.MinValueValidator(Decimal('0'))], verbose_name='Montant limite de commande')),
+                ('logout_post_purchase', models.BooleanField(
+                    default=False, verbose_name='Deconnexion après une vente')),
+                ('shop', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,
+                 related_name='%(app_label)s_%(class)s_shop', to='shops.shop')),
             ],
             options={
                 'permissions': (('use_selfsalemodule', 'Can use the self sale module'), ('change_config_selfsalemodule', 'Can change the config for self sale module'), ('view_config_selfsalemodule', 'Can view the config for self sale module')),
@@ -48,13 +56,19 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='OperatorSaleModule',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
                 ('state', models.BooleanField(default=False, verbose_name='Activé')),
-                ('delay_post_purchase', models.IntegerField(blank=True, null=True, validators=[django.core.validators.MinValueValidator(Decimal('0'))], verbose_name="Durée d'affichage du résumé de commande")),
-                ('limit_purchase', models.DecimalField(blank=True, decimal_places=2, max_digits=9, null=True, validators=[django.core.validators.MinValueValidator(Decimal('0'))], verbose_name='Montant limite de commande')),
-                ('logout_post_purchase', models.BooleanField(default=False, verbose_name='Deconnexion après une vente')),
-                ('ask_password', models.BooleanField(default=False, verbose_name='Demande du mot de passe')),
-                ('shop', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='%(app_label)s_%(class)s_shop', to='shops.shop')),
+                ('delay_post_purchase', models.IntegerField(blank=True, null=True, validators=[
+                 django.core.validators.MinValueValidator(Decimal('0'))], verbose_name="Durée d'affichage du résumé de commande")),
+                ('limit_purchase', models.DecimalField(blank=True, decimal_places=2, max_digits=9, null=True, validators=[
+                 django.core.validators.MinValueValidator(Decimal('0'))], verbose_name='Montant limite de commande')),
+                ('logout_post_purchase', models.BooleanField(
+                    default=False, verbose_name='Deconnexion après une vente')),
+                ('ask_password', models.BooleanField(
+                    default=False, verbose_name='Demande du mot de passe')),
+                ('shop', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,
+                 related_name='%(app_label)s_%(class)s_shop', to='shops.shop')),
             ],
             options={
                 'permissions': (('use_operatorsalemodule', 'Can use the operator sale module'), ('change_config_operatorsalemodule', 'Can change the config for operator sale module'), ('view_config_operatorsalemodule', 'Can view the config for operator sale module')),
@@ -64,10 +78,13 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='CategoryProduct',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
                 ('quantity', models.PositiveIntegerField()),
-                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='modules.category')),
-                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='shops.product')),
+                ('category', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE, to='modules.category')),
+                ('product', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE, to='shops.product')),
             ],
             options={
                 'default_permissions': (),
@@ -76,6 +93,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='category',
             name='products',
-            field=models.ManyToManyField(through='modules.CategoryProduct', to='shops.product'),
+            field=models.ManyToManyField(
+                through='modules.CategoryProduct', to='shops.product'),
         ),
     ]

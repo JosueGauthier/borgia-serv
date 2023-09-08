@@ -17,27 +17,40 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Shop',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=255, validators=[django.core.validators.RegexValidator(message='Ne doit contenir que des lettres\n                                minuscules, sans espace ni caractère\n                                spécial.', regex='^[a-z]+$')], verbose_name='Code')),
+                ('id', models.AutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
+                ('name', models.CharField(max_length=255, validators=[django.core.validators.RegexValidator(
+                    message='Ne doit contenir que des lettres\n                                minuscules, sans espace ni caractère\n                                spécial.', regex='^[a-z]+$')], verbose_name='Code')),
                 ('description', models.TextField(verbose_name='Description')),
-                ('color', models.CharField(max_length=255, validators=[django.core.validators.RegexValidator(message='Doit être dans le format #F4FA58', regex='^#[A-Za-z0-9]{6}')], verbose_name='Couleur')),
-                ('correcting_factor_activated', models.BooleanField(default=True, verbose_name='Activation du facteur de correction')),
+                ('color', models.CharField(max_length=255, validators=[django.core.validators.RegexValidator(
+                    message='Doit être dans le format #F4FA58', regex='^#[A-Za-z0-9]{6}')], verbose_name='Couleur')),
+                ('correcting_factor_activated', models.BooleanField(
+                    default=True, verbose_name='Activation du facteur de correction')),
                 ('image', models.TextField(verbose_name='imagelink')),
             ],
         ),
         migrations.CreateModel(
             name='Product',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=255, verbose_name='Nom')),
-                ('unit', models.CharField(blank=True, choices=[('CL', 'cl'), ('G', 'g')], max_length=255, null=True, verbose_name='Unité')),
-                ('is_manual', models.BooleanField(default=False, verbose_name='Gestion manuelle du prix')),
-                ('manual_price', models.DecimalField(decimal_places=2, default=0, max_digits=9, validators=[django.core.validators.MinValueValidator(Decimal('0'))], verbose_name='Prix manuel')),
-                ('correcting_factor', models.DecimalField(decimal_places=4, default=1, max_digits=9, validators=[django.core.validators.MinValueValidator(Decimal('0'))], verbose_name='Facteur correcteur de ventes')),
-                ('is_active', models.BooleanField(default=True, verbose_name='Actif')),
-                ('is_removed', models.BooleanField(default=False, verbose_name='Retiré')),
-                ('product_image', models.CharField(max_length=10000, verbose_name='Image')),
-                ('shop', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='shops.shop')),
+                ('unit', models.CharField(blank=True, choices=[
+                 ('CL', 'cl'), ('G', 'g')], max_length=255, null=True, verbose_name='Unité')),
+                ('is_manual', models.BooleanField(default=False,
+                 verbose_name='Gestion manuelle du prix')),
+                ('manual_price', models.DecimalField(decimal_places=2, default=0, max_digits=9, validators=[
+                 django.core.validators.MinValueValidator(Decimal('0'))], verbose_name='Prix manuel')),
+                ('correcting_factor', models.DecimalField(decimal_places=4, default=1, max_digits=9, validators=[
+                 django.core.validators.MinValueValidator(Decimal('0'))], verbose_name='Facteur correcteur de ventes')),
+                ('is_active', models.BooleanField(
+                    default=True, verbose_name='Actif')),
+                ('is_removed', models.BooleanField(
+                    default=False, verbose_name='Retiré')),
+                ('product_image', models.CharField(
+                    max_length=10000, verbose_name='Image')),
+                ('shop', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE, to='shops.shop')),
             ],
             options={
                 'permissions': (('change_price_product', 'Can change price of a product'),),

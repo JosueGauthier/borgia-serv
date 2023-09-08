@@ -21,27 +21,37 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Inventory',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('datetime', models.DateTimeField(default=django.utils.timezone.now, verbose_name='Date')),
-                ('operator', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ('id', models.AutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
+                ('datetime', models.DateTimeField(
+                    default=django.utils.timezone.now, verbose_name='Date')),
+                ('operator', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),
         migrations.CreateModel(
             name='StockEntry',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('datetime', models.DateTimeField(default=django.utils.timezone.now, verbose_name='Date')),
-                ('operator', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ('id', models.AutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
+                ('datetime', models.DateTimeField(
+                    default=django.utils.timezone.now, verbose_name='Date')),
+                ('operator', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),
         migrations.CreateModel(
             name='StockEntryProduct',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
                 ('quantity', models.PositiveIntegerField()),
-                ('price', models.DecimalField(decimal_places=2, default=0, max_digits=9, validators=[django.core.validators.MinValueValidator(Decimal('0'))], verbose_name='Prix')),
-                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='shops.product')),
-                ('stockentry', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='stocks.stockentry')),
+                ('price', models.DecimalField(decimal_places=2, default=0, max_digits=9, validators=[
+                 django.core.validators.MinValueValidator(Decimal('0'))], verbose_name='Prix')),
+                ('product', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE, to='shops.product')),
+                ('stockentry', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE, to='stocks.stockentry')),
             ],
             options={
                 'default_permissions': (),
@@ -50,20 +60,25 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='stockentry',
             name='products',
-            field=models.ManyToManyField(through='stocks.StockEntryProduct', to='shops.product'),
+            field=models.ManyToManyField(
+                through='stocks.StockEntryProduct', to='shops.product'),
         ),
         migrations.AddField(
             model_name='stockentry',
             name='shop',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='shops.shop'),
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, to='shops.shop'),
         ),
         migrations.CreateModel(
             name='InventoryProduct',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
                 ('quantity', models.PositiveIntegerField()),
-                ('inventory', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='stocks.inventory')),
-                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='shops.product')),
+                ('inventory', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE, to='stocks.inventory')),
+                ('product', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE, to='shops.product')),
             ],
             options={
                 'default_permissions': (),
@@ -72,11 +87,13 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='inventory',
             name='products',
-            field=models.ManyToManyField(through='stocks.InventoryProduct', to='shops.product'),
+            field=models.ManyToManyField(
+                through='stocks.InventoryProduct', to='shops.product'),
         ),
         migrations.AddField(
             model_name='inventory',
             name='shop',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='shops.shop'),
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, to='shops.shop'),
         ),
     ]

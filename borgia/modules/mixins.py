@@ -78,7 +78,7 @@ class ShopModuleMixin(ShopMixin):
         raise ImproperlyConfigured(
             'Error in {0}. {1} value should be either self_sales or operator_sales'.format(
                 self.__class__.__name__, self.module_class)
-            )
+        )
 
 
 class ShopModuleCategoryMixin(ShopModuleMixin):

@@ -174,7 +174,8 @@ class ShopCheckup(ShopMixin, BorgiaFormView):
         q_sales = q_sales.filter(datetime__lte=self.date_end)
 
         if self.products:
-            q_sales = q_sales.filter(products__pk__in=[p.pk for p in self.products])
+            q_sales = q_sales.filter(
+                products__pk__in=[p.pk for p in self.products])
 
         if self.sales_value is None:
             self.sales_value = sum(s.amount() for s in q_sales)
@@ -406,7 +407,8 @@ class ShopWorkboard(ShopMixin, BorgiaView):
         amounts = [0 for _ in range(0, len(weeks))]
         total = 0
         for obj in weeklist:
-            string = str(obj.datetime.isocalendar()[1]) + "-" + str(obj.datetime.year)
+            string = str(obj.datetime.isocalendar()[
+                         1]) + "-" + str(obj.datetime.year)
             if string in weeks:
                 amounts[weeks.index(string)] += obj.amount()
                 total += obj.amount()
@@ -422,7 +424,8 @@ class ShopWorkboard(ShopMixin, BorgiaView):
                 week_start = start.isocalendar()[1]
             if i == end.year:
                 week_end = end.isocalendar()[1]
-            weeklist += [str(j) + "-" + str(i) for j in range(week_start, week_end + 1)]
+            weeklist += [str(j) + "-" + str(i)
+                         for j in range(week_start, week_end + 1)]
         return weeklist
 
 
@@ -522,7 +525,8 @@ class ProductDeactivate(ProductMixin, BorgiaView):
         return redirect(
             reverse(
                 "url_product_retrieve",
-                kwargs={"shop_pk": self.shop.pk, "product_pk": self.product.pk},
+                kwargs={"shop_pk": self.shop.pk,
+                        "product_pk": self.product.pk},
             )
         )
 
@@ -617,7 +621,8 @@ class ProductUpdatePrice(ProductMixin, BorgiaFormView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["margin_profit"] = configuration_get("MARGIN_PROFIT").get_value()
+        context["margin_profit"] = configuration_get(
+            "MARGIN_PROFIT").get_value()
         return context
 
     def get_initial(self):
@@ -651,12 +656,14 @@ class SelfSaleModuleViewSet(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ["shop", "state"]
 
+
 class SelfSaleShopViewSet(viewsets.ModelViewSet):
     queryset = SelfSaleModule.objects.filter(state=True)
-    
+
     serializer_class = SelfSaleShopSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ["shop", "state"]
+
 
 class OperatorSaleModuleViewSet(viewsets.ModelViewSet):
     queryset = OperatorSaleModule.objects.all()

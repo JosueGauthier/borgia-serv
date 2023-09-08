@@ -19,7 +19,7 @@ class Category(models.Model):
     products /
     order /
     category_image /
-    
+
     :note:: Using generic foreign keys, filter api doesn't work. It doesn't
     work with ModelForm too.
     :note:: Should we use several category types here ? In order to use filter
@@ -46,13 +46,12 @@ class Category(models.Model):
         return self.name
 
 
-
 class CategoryProduct(models.Model):
     """
     category
     product 
     quantity
-    
+
     """
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
@@ -136,8 +135,10 @@ class ShopModule(Module):
         """
         raise ImproperlyConfigured(
             '{0} is using get_module_class() of ShopModule model.'
-            'You must override {0}.get_module_class().'.format(self.__class__.__name__)
+            'You must override {0}.get_module_class().'.format(
+                self.__class__.__name__)
         )
+
 
 class SelfSaleModule(ShopModule):
     """
@@ -147,7 +148,8 @@ class SelfSaleModule(ShopModule):
         default_permissions = ()
         permissions = (
             ('use_selfsalemodule', 'Can use the self sale module'),
-            ('change_config_selfsalemodule', 'Can change the config for self sale module'),
+            ('change_config_selfsalemodule',
+             'Can change the config for self sale module'),
             ('view_config_selfsalemodule', 'Can view the config for self sale module')
         )
 
@@ -169,10 +171,13 @@ class OperatorSaleModule(ShopModule):
         default_permissions = ()
         permissions = (
             ('use_operatorsalemodule', 'Can use the operator sale module'),
-            ('change_config_operatorsalemodule', 'Can change the config for operator sale module'),
-            ('view_config_operatorsalemodule', 'Can view the config for operator sale module')
+            ('change_config_operatorsalemodule',
+             'Can change the config for operator sale module'),
+            ('view_config_operatorsalemodule',
+             'Can view the config for operator sale module')
         )
-    ask_password = models.BooleanField('Demande du mot de passe',default=False)
+    ask_password = models.BooleanField(
+        'Demande du mot de passe', default=False)
 
     def __str__(self):
         return 'Module de vente par opérateur du magasin ' + self.shop.__str__()

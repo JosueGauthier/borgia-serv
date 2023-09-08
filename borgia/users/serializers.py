@@ -1,7 +1,8 @@
+from django.contrib.auth.backends import ModelBackend
 from django.contrib.auth import authenticate
 from rest_framework import serializers
 
-from django.contrib.auth.models import Group,Permission
+from django.contrib.auth.models import Group, Permission
 
 
 from .models import User
@@ -65,12 +66,13 @@ class GroupSerializer(serializers.ModelSerializer):
             'permissions',
         ]
         depth = 1
-        
+
+
 class PermissionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Permission
-        fields = [          
+        fields = [
             'id',
             'name',
             'content_type',
@@ -78,14 +80,12 @@ class PermissionSerializer(serializers.ModelSerializer):
         ]
         depth = 1
 
-from django.contrib.auth.backends import ModelBackend
-
-
 
 class UserSerializer(serializers.ModelSerializer):
-    
+
     class Meta:
         model = User
-        #fields = '__all__'
-        exclude = ('password','last_login',"is_superuser","is_staff","jwt_iat" )
+        # fields = '__all__'
+        exclude = ('password', 'last_login',
+                   "is_superuser", "is_staff", "jwt_iat")
         depth = 2

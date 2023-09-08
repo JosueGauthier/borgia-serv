@@ -58,7 +58,6 @@ class LateralMenuMixin(ContextMixin):
             else:
                 return shops_lateral_menu(nav_tree, self.request.user, self.shop)
 
-
     def get_menu(self):
         """
         Override it with your custom menu.

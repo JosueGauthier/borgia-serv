@@ -21,18 +21,29 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Event',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('description', models.CharField(max_length=254, verbose_name='Description')),
-                ('date', models.DateField(default=django.utils.timezone.now, verbose_name='Date Evenement')),
-                ('datetime', models.DateTimeField(default=django.utils.timezone.now, verbose_name='Date Paiement')),
-                ('price', models.DecimalField(blank=True, decimal_places=2, max_digits=9, null=True, validators=[django.core.validators.MinValueValidator(Decimal('0'))], verbose_name='Prix')),
-                ('bills', models.CharField(blank=True, max_length=254, null=True, verbose_name='Facture(s)')),
+                ('id', models.AutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
+                ('description', models.CharField(
+                    max_length=254, verbose_name='Description')),
+                ('date', models.DateField(
+                    default=django.utils.timezone.now, verbose_name='Date Evenement')),
+                ('datetime', models.DateTimeField(
+                    default=django.utils.timezone.now, verbose_name='Date Paiement')),
+                ('price', models.DecimalField(blank=True, decimal_places=2, max_digits=9, null=True, validators=[
+                 django.core.validators.MinValueValidator(Decimal('0'))], verbose_name='Prix')),
+                ('bills', models.CharField(blank=True, max_length=254,
+                 null=True, verbose_name='Facture(s)')),
                 ('done', models.BooleanField(default=False, verbose_name='Terminé')),
-                ('payment_by_ponderation', models.BooleanField(default=False, verbose_name='Paiement par pondération')),
-                ('remark', models.CharField(blank=True, max_length=254, null=True, verbose_name='Remarque')),
-                ('allow_self_registeration', models.BooleanField(default=True, verbose_name='Autoriser la self-préinscription')),
-                ('date_end_registration', models.DateField(blank=True, null=True, verbose_name='Date de fin de self-préinscription')),
-                ('manager', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='manager', to=settings.AUTH_USER_MODEL)),
+                ('payment_by_ponderation', models.BooleanField(
+                    default=False, verbose_name='Paiement par pondération')),
+                ('remark', models.CharField(blank=True,
+                 max_length=254, null=True, verbose_name='Remarque')),
+                ('allow_self_registeration', models.BooleanField(
+                    default=True, verbose_name='Autoriser la self-préinscription')),
+                ('date_end_registration', models.DateField(blank=True,
+                 null=True, verbose_name='Date de fin de self-préinscription')),
+                ('manager', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,
+                 related_name='manager', to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'permissions': (('self_register_event', 'Can self register to an event'), ('proceed_payment_event', 'Can proceed to payment for an event')),
@@ -41,11 +52,14 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='WeightsUser',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
                 ('weights_registeration', models.IntegerField(default=0)),
                 ('weights_participation', models.IntegerField(default=0)),
-                ('event', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='events.event')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ('event', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE, to='events.event')),
+                ('user', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'default_permissions': (),
@@ -54,6 +68,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='event',
             name='users',
-            field=models.ManyToManyField(through='events.WeightsUser', to=settings.AUTH_USER_MODEL),
+            field=models.ManyToManyField(
+                through='events.WeightsUser', to=settings.AUTH_USER_MODEL),
         ),
     ]

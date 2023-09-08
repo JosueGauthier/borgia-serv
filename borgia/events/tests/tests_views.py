@@ -17,6 +17,7 @@ class BaseEventsViewsTestCase(BaseBorgiaViewsTestCase):
      - event1, managed by user3.
      - event2, managed by user3, done
     """
+
     def setUp(self):
         super().setUp()
 
@@ -54,7 +55,8 @@ class BaseGeneralEventViewsTestCase(BaseEventsViewsTestCase):
     def offline_user_redirection(self):
         response_offline_user = Client().get(self.get_url())
         self.assertEqual(response_offline_user.status_code, 302)
-        self.assertRedirects(response_offline_user, get_login_url_redirected(self.get_url()))
+        self.assertRedirects(response_offline_user,
+                             get_login_url_redirected(self.get_url()))
 
 
 class EventListViewTests(BaseGeneralEventViewsTestCase):
@@ -111,7 +113,8 @@ class BaseFocusEventViewsTestCase(BaseEventsViewsTestCase):
     def offline_user_redirection(self):
         response_offline_user = Client().get(self.get_url(self.event1.pk))
         self.assertEqual(response_offline_user.status_code, 302)
-        self.assertRedirects(response_offline_user, get_login_url_redirected(self.get_url(self.event1.pk)))
+        self.assertRedirects(response_offline_user, get_login_url_redirected(
+            self.get_url(self.event1.pk)))
 
 
 class EventUpdateViewTests(BaseFocusEventViewsTestCase):

@@ -1,10 +1,6 @@
-{% extends 'base_sober.html' %}
-
-{% block content %}
+{% extends 'base_sober.html' %} {% block content %}
 <div class="panel panel-default">
-  <div class="panel-heading">
-    Détails d'une entrée de stock du magasin {{ stockentry.shop }}
-  </div>
+  <div class="panel-heading">Détails d'une entrée de stock du magasin {{ stockentry.shop }}</div>
   <div class="panel-body">
     <ul>
       <li>Magasin : {{ stockentry.shop }}</li>
@@ -22,10 +18,8 @@
       <tr>
         <td>{{ stockentryproduct.product }}</td>
         <td>
-          {{ stockentryproduct.quantity }}
-          {% if stockentryproduct.product.unit %}
-          {{ stockentryproduct.product.get_unit_display }}
-          {% endif %}
+          {{ stockentryproduct.quantity }} {% if stockentryproduct.product.unit %} {{
+          stockentryproduct.product.get_unit_display }} {% endif %}
         </td>
         <td>{{ stockentryproduct.price }}€</td>
       </tr>

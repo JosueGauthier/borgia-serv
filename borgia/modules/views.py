@@ -155,7 +155,8 @@ class ShopModuleSaleView(ShopModuleMixin, BorgiaFormView):
         context = self.get_context_data()
 
         if self.module.logout_post_purchase:
-            success_url = reverse("url_logout") + "?next=" + self.get_success_url()
+            success_url = reverse("url_logout") + \
+                "?next=" + self.get_success_url()
         else:
             success_url = self.get_success_url()
         context["sale"] = sale
@@ -167,7 +168,8 @@ class ShopModuleSaleView(ShopModuleMixin, BorgiaFormView):
     def get_success_url(self):
         return reverse(
             "url_shop_module_sale",
-            kwargs={"shop_pk": self.shop.pk, "module_class": self.module_class},
+            kwargs={"shop_pk": self.shop.pk,
+                    "module_class": self.module_class},
         )
 
 
@@ -232,7 +234,8 @@ class ShopModuleConfigUpdateView(ShopModuleMixin, BorgiaFormView):
     def get_success_url(self):
         return reverse(
             "url_shop_module_config",
-            kwargs={"shop_pk": self.shop.pk, "module_class": self.module_class},
+            kwargs={"shop_pk": self.shop.pk,
+                    "module_class": self.module_class},
         )
 
 
@@ -297,7 +300,8 @@ class ShopModuleCategoryCreateView(ShopModuleMixin, BorgiaView):
 
         for product_form in cat_form.cleaned_data:
             try:
-                product = Product.objects.get(pk=product_form["product"].split("/")[0])
+                product = Product.objects.get(
+                    pk=product_form["product"].split("/")[0])
                 if product.unit:
                     quantity = int(product_form["quantity"])
                 else:
@@ -320,7 +324,8 @@ class ShopModuleCategoryCreateView(ShopModuleMixin, BorgiaView):
         """
         return reverse(
             "url_shop_module_config",
-            kwargs={"shop_pk": self.shop.pk, "module_class": self.module_class},
+            kwargs={"shop_pk": self.shop.pk,
+                    "module_class": self.module_class},
         )
 
 
@@ -386,7 +391,8 @@ class ShopModuleCategoryUpdateView(ShopModuleCategoryMixin, BorgiaView):
         CategoryProduct.objects.filter(category=self.category).delete()
         for product_form in cat_form.cleaned_data:
             try:
-                product = Product.objects.get(pk=product_form["product"].split("/")[0])
+                product = Product.objects.get(
+                    pk=product_form["product"].split("/")[0])
                 if product.unit:
                     quantity = int(product_form["quantity"])
                 else:
@@ -403,7 +409,8 @@ class ShopModuleCategoryUpdateView(ShopModuleCategoryMixin, BorgiaView):
     def get_success_url(self):
         return reverse(
             "url_shop_module_config",
-            kwargs={"shop_pk": self.shop.pk, "module_class": self.module_class},
+            kwargs={"shop_pk": self.shop.pk,
+                    "module_class": self.module_class},
         )
 
 
@@ -432,7 +439,8 @@ class ShopModuleCategoryDeleteView(ShopModuleCategoryMixin, BorgiaView):
     def get_success_url(self):
         return reverse(
             "url_shop_module_config",
-            kwargs={"shop_pk": self.shop.pk, "module_class": self.module_class},
+            kwargs={"shop_pk": self.shop.pk,
+                    "module_class": self.module_class},
         )
 
 
@@ -886,7 +894,8 @@ class CategoryListView(views.APIView):
         module_id = self_sale.id
 
         # Filter categories associated with module_id
-        categories = Category.objects.filter(module_id=module_id, content_type_id=20)
+        categories = Category.objects.filter(
+            module_id=module_id, content_type_id=20)
 
         serializer = CategorySerializer(categories, many=True)
         return Response(serializer.data)
@@ -901,7 +910,8 @@ class SelfSaleShopListView(generics.GenericAPIView):
         filteredSelfSaleModules = SelfSaleModule.objects.filter(state=True)
         shop_ids = filteredSelfSaleModules.values_list("shop", flat=True)
 
-        filteredShops = self.filter_queryset(Shop.objects.filter(id__in=shop_ids))
+        filteredShops = self.filter_queryset(
+            Shop.objects.filter(id__in=shop_ids))
 
         serializer = ShopSerializer(filteredShops, many=True)
         return Response(serializer.data)
@@ -917,7 +927,8 @@ class AllCategoriesListView(generics.GenericAPIView):
         shop_ids = filteredSelfSaleModules.values_list("shop", flat=True)
         filteredShops = Shop.objects.filter(id__in=shop_ids)
 
-        self_sales_modules = SelfSaleModule.objects.filter(shop__in=filteredShops)
+        self_sales_modules = SelfSaleModule.objects.filter(
+            shop__in=filteredShops)
 
         if not self_sales_modules:
             return Response({"message": "Aucuns self-sale trouvé"}, status=404)
@@ -927,7 +938,8 @@ class AllCategoriesListView(generics.GenericAPIView):
         for self_sale_module in self_sales_modules:
             module_id = self_sale_module.id
             categories = self.filter_queryset(
-                Category.objects.filter(module_id=module_id, content_type_id=20)
+                Category.objects.filter(
+                    module_id=module_id, content_type_id=20)
             )
             all_categories.extend(categories)
 
@@ -945,7 +957,8 @@ class AllProductsInSelfSaleListView(generics.GenericAPIView):
         shop_ids = filteredSelfSaleModules.values_list("shop", flat=True)
         filteredShops = Shop.objects.filter(id__in=shop_ids)
 
-        self_sales_modules = SelfSaleModule.objects.filter(shop__in=filteredShops)
+        self_sales_modules = SelfSaleModule.objects.filter(
+            shop__in=filteredShops)
 
         if not self_sales_modules:
             return Response({"message": "Aucuns self-sale trouvé"}, status=404)
@@ -959,7 +972,8 @@ class AllProductsInSelfSaleListView(generics.GenericAPIView):
             )
 
             for category in categories:
-                category_products = self.filter_queryset(category.products.all())
+                category_products = self.filter_queryset(
+                    category.products.all())
 
                 serializer = SearchAllProductSerializer(
                     category_products,

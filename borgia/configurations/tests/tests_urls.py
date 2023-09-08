@@ -18,4 +18,5 @@ class ConfigurationsNamedURLTests(TestCase):
                 try:
                     reverse(name, args=args, kwargs=kwargs)
                 except NoReverseMatch:
-                    self.fail("Reversal of url named '%s' failed with NoReverseMatch" % name)
+                    self.fail(
+                        "Reversal of url named '%s' failed with NoReverseMatch" % name)

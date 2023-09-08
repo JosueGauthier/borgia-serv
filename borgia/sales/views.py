@@ -337,7 +337,8 @@ def get_live_2hours_history_sale(request):
     time_step = 30
 
     for i in range(0, 7200, time_step):
-        start_range = strftime(str(temps_debut + datetime.timedelta(seconds=i)))
+        start_range = strftime(
+            str(temps_debut + datetime.timedelta(seconds=i)))
         end_range = strftime(
             str(temps_debut + datetime.timedelta(seconds=(i + time_step)))
         )
@@ -372,7 +373,8 @@ def get_sales_podium(request):
             Sum("price")
         )
     )
-    data.append(SaleProduct.objects.filter(sale__sender__username="73An220").count())
+    data.append(SaleProduct.objects.filter(
+        sale__sender__username="73An220").count())
 
     data.append({"user_sum": user_sum["price__sum"]})
 

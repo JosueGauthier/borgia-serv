@@ -28,7 +28,7 @@ urlpatterns = [
     path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
     #: LOGGING
     path("", include("django_prometheus.urls")),
-    #:ADMIN
+    # :ADMIN
     path("admin/", admin.site.urls),
     #: AUTHENTIFICATIONS
     path("", ModulesLoginView.as_view(), name="url_login"),
@@ -73,8 +73,9 @@ urlpatterns = [
     ),
     #: WORKBOARDS
     path("members/", MembersWorkboard.as_view(), name="url_members_workboard"),
-    path("managers/", ManagersWorkboard.as_view(), name="url_managers_workboard"),
-    ###: APPS ###
+    path("managers/", ManagersWorkboard.as_view(),
+         name="url_managers_workboard"),
+    ### : APPS ###
     path("", include(configurations_patterns)),
     path("", include(events_patterns)),
     path("", include(finances_patterns)),

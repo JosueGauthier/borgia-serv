@@ -2,6 +2,7 @@ from django.test import TestCase
 
 from configurations.models import Configuration
 
+
 def create_configurations(values, configurations_list):
     """
     Helper for creating configurations in a list.
@@ -14,10 +15,12 @@ def create_configurations(values, configurations_list):
             value_type=tuple_value[1]
         ))
 
+
 class ConfigurationTestCase(TestCase):
     """
     Tests for the Configuration model.
     """
+
     def setUp(self):
         integer_values = [
             ('1', 'i'), ('1.0', 'i'), ('1.23', 'i'),

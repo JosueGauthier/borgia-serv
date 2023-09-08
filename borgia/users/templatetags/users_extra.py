@@ -17,31 +17,33 @@ def has_perm(user, permission_required):
 def get_transaction_model(transaction):
     return transaction.__class__.__name__
 
+
 @register.filter(name='get_transaction_label')
 def get_transaction_label(transaction):
     name = transaction.__class__.__name__
     if name == "Event":
-       return ("Evénement",
-               transaction.description.capitalize() + ' le ' + transaction.date.strftime("%d %h %Y"))
+        return ("Evénement",
+                transaction.description.capitalize() + ' le ' + transaction.date.strftime("%d %h %Y"))
     elif name == "Recharging":
-       recharging_solution = transaction.content_solution.__class__.__name__
-       label = recharging_solution
-       if recharging_solution == 'Lydia':
-          label += " n°"+ transaction.content_solution.id_from_lydia
-       elif recharging_solution == 'Cheque':
-          label += " n°" + transaction.content_solution.cheque_number
-       return ("Rechargement", label)
+        recharging_solution = transaction.content_solution.__class__.__name__
+        label = recharging_solution
+        if recharging_solution == 'Lydia':
+            label += " n°" + transaction.content_solution.id_from_lydia
+        elif recharging_solution == 'Cheque':
+            label += " n°" + transaction.content_solution.cheque_number
+        return ("Rechargement", label)
     elif name == "Transfert":
-       return ("Transfert",
-         'De ' + transaction.sender.__str__() +
-         ' à ' + transaction.recipient.__str__() +
-         ', '+ transaction.justification
-       )
+        return ("Transfert",
+                'De ' + transaction.sender.__str__() +
+                ' à ' + transaction.recipient.__str__() +
+                ', ' + transaction.justification
+                )
     elif name == "Sale":
-       return ("Achat"+" "+ transaction.shop.name,
-               transaction.string_products())
+        return ("Achat"+" " + transaction.shop.name,
+                transaction.string_products())
     elif name == "ExceptionnalMovement":
-       return ("Mouvement exceptionnel", 'De '+transaction.operator.__str__()+' le '+ transaction.datetime.strftime("%d %h %Y"))
+        return ("Mouvement exceptionnel", 'De '+transaction.operator.__str__()+' le ' + transaction.datetime.strftime("%d %h %Y"))
+
 
 @register.inclusion_tag('breadcrumbs.html', takes_context=True)
 def breadcrumbs(context):
@@ -74,6 +76,7 @@ def order_by(attr, request):
 def get_center_name():
     return configuration_get('CENTER_NAME').get_value()
 
+
 @register.simple_tag
 def set_default_template():
     default_template = getattr(settings, "DEFAULT_TEMPLATE", None)
@@ -81,6 +84,7 @@ def set_default_template():
         return 'less/_bootstrap-' + default_template + '.less'
     else:
         return 'less/_bootstrap-light.less'
+
 
 @register.simple_tag
 def set_template(template_name):
@@ -92,6 +96,7 @@ def set_template(template_name):
     else:
         return 'less/_bootstrap-light.less'
 
+
 @register.simple_tag
 def set_brand(template_name):
     default_template = getattr(settings, "DEFAULT_TEMPLATE", None)
@@ -101,6 +106,7 @@ def set_brand(template_name):
         return 'img/borgia-logo-' + default_template + '.png'
     else:
         return 'img/borgia-logo-light.png'
+
 
 @register.filter
 def group_name(group):

@@ -13,7 +13,8 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='billsentry',
             name='billname',
-            field=models.TextField(default='Test init', verbose_name='Bill name'),
+            field=models.TextField(default='Test init',
+                                   verbose_name='Bill name'),
             preserve_default=False,
         ),
     ]

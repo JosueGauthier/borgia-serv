@@ -48,7 +48,8 @@ class HistorySaleUserSerializer(serializers.BaseSerializer):
             day = startDay + datetime.timedelta(days=i)
             dayPlusOne = startDay + datetime.timedelta(days=1 + i)
             price_sum = SaleProduct.objects.filter(
-                sale__datetime__range=[day, dayPlusOne], sale__sender=instance.id
+                sale__datetime__range=[
+                    day, dayPlusOne], sale__sender=instance.id
             ).aggregate(Sum("price"))["price__sum"]
 
             formatted_day = datetime.datetime.strptime(
@@ -211,7 +212,8 @@ def all_high_scores(request):
 
 def ShoptoptenUserView(id):
     queryset = User.objects.all()
-    serializer = UserRankByShopSerializer(queryset, many=True, context={"shop_id": id})
+    serializer = UserRankByShopSerializer(
+        queryset, many=True, context={"shop_id": id})
     sortedList = sorted(
         serializer.data, key=itemgetter("montant_achats_par_shop"), reverse=True
     )[:10]

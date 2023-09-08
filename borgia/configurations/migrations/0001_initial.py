@@ -14,11 +14,14 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Configuration',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=100, unique=True, verbose_name='Nom')),
+                ('id', models.AutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
+                ('name', models.CharField(max_length=100,
+                 unique=True, verbose_name='Nom')),
                 ('description', models.TextField(verbose_name='Description')),
                 ('value', models.CharField(max_length=500, verbose_name='Valeur')),
-                ('value_type', models.CharField(choices=[('s', 'string'), ('i', 'integer'), ('f', 'float'), ('b', 'boolean')], max_length=1, verbose_name='Type')),
+                ('value_type', models.CharField(choices=[('s', 'string'), ('i', 'integer'), (
+                    'f', 'float'), ('b', 'boolean')], max_length=1, verbose_name='Type')),
             ],
             options={
                 'default_permissions': ('change', 'view'),

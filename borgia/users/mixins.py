@@ -12,6 +12,7 @@ class UserMixin(LoginRequiredMixin, PermissionRequiredMixin, ContextMixin):
     """
     Permission and context mixin for user model.
     """
+
     def __init__(self):
         self.user = None
 
@@ -25,7 +26,7 @@ class UserMixin(LoginRequiredMixin, PermissionRequiredMixin, ContextMixin):
         except ObjectDoesNotExist:
             raise Http404
         self.user.forecast_balance()
-        
+
     def add_context_objects(self):
         """
         Override to add more context objects for the view.
@@ -46,6 +47,7 @@ class GroupMixin(LoginRequiredMixin, PermissionRequiredMixin, ContextMixin):
     """
     Permission and context mixin for group model.
     """
+
     def __init__(self):
         self.group = None
         self.group
@@ -59,7 +61,7 @@ class GroupMixin(LoginRequiredMixin, PermissionRequiredMixin, ContextMixin):
             self.group = Group.objects.get(pk=self.kwargs['group_pk'])
         except ObjectDoesNotExist:
             raise Http404
-        
+
     def add_context_objects(self):
         """
         Override to add more context objects for the view.

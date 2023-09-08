@@ -39,7 +39,8 @@ class StockEntryListView(ShopMixin, BorgiaFormView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["stockentry_list"] = self.form_query(self.shop.stockentry_set.all())
+        context["stockentry_list"] = self.form_query(
+            self.shop.stockentry_set.all())
         return context
 
     def get_form_kwargs(self):
@@ -74,7 +75,8 @@ class StockEntryCreateView(ShopMixin, BorgiaView):
 
     def get(self, request, *args, **kwargs):
         context = self.get_context_data(**kwargs)
-        stockentry_product_form = formset_factory(StockEntryProductForm, extra=1)
+        stockentry_product_form = formset_factory(
+            StockEntryProductForm, extra=1)
         context["stockentry_form"] = stockentry_product_form(
             form_kwargs={"shop": self.shop}
         )
@@ -82,12 +84,15 @@ class StockEntryCreateView(ShopMixin, BorgiaView):
         return render(request, self.template_name, context=context)
 
     def post(self, request, *args, **kwargs):
-        stockentry = StockEntry.objects.create(operator=request.user, shop=self.shop)
+        stockentry = StockEntry.objects.create(
+            operator=request.user, shop=self.shop)
 
         # TODO: Verify formset with django 2.x
-        stockentry_product_form = formset_factory(StockEntryProductForm, extra=1)
+        stockentry_product_form = formset_factory(
+            StockEntryProductForm, extra=1)
         stockentry_form = stockentry_product_form(
-            request.POST, form_kwargs={"shop": self.shop, "empty_permitted": False}
+            request.POST, form_kwargs={
+                "shop": self.shop, "empty_permitted": False}
         )
         add_inventory_form = AdditionnalDataStockEntryForm(request.POST)
 
@@ -164,7 +169,8 @@ class StockEntryRetrieveView(ShopMixin, BorgiaView):
         Raise Http404 is stockentry doesn't exist.
         """
         try:
-            self.stockentry = StockEntry.objects.get(pk=self.kwargs["stockentry_pk"])
+            self.stockentry = StockEntry.objects.get(
+                pk=self.kwargs["stockentry_pk"])
         except ObjectDoesNotExist:
             raise Http404
         if self.stockentry.shop.pk != self.shop.pk:
@@ -195,7 +201,8 @@ class InventoryListView(ShopMixin, BorgiaFormView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["inventory_list"] = self.form_query(self.shop.inventory_set.all())
+        context["inventory_list"] = self.form_query(
+            self.shop.inventory_set.all())
         return context
 
     def get_form_kwargs(self):
@@ -249,12 +256,14 @@ class InventoryCreateView(ShopMixin, BorgiaView):
             InventoryProductForm, formset=BaseInventoryProductFormSet, extra=1
         )
         inventory_formset = inventory_product_formset(
-            request.POST, form_kwargs={"shop": self.shop, "empty_permitted": False}
+            request.POST, form_kwargs={
+                "shop": self.shop, "empty_permitted": False}
         )
         additionnal_data_form = AdditionnalDataInventoryForm(request.POST)
 
         if inventory_formset.is_valid() and additionnal_data_form.is_valid():
-            inventory = Inventory.objects.create(operator=request.user, shop=self.shop)
+            inventory = Inventory.objects.create(
+                operator=request.user, shop=self.shop)
 
             # Ids in the form
             if inventory_formset.is_valid():
@@ -325,7 +334,8 @@ class InventoryRetrieveView(ShopMixin, BorgiaView):
         Raise Http404 is inventory doesn't exist.
         """
         try:
-            self.inventory = Inventory.objects.get(pk=self.kwargs["inventory_pk"])
+            self.inventory = Inventory.objects.get(
+                pk=self.kwargs["inventory_pk"])
         except ObjectDoesNotExist:
             raise Http404
         if self.inventory.shop.pk != self.shop.pk:
@@ -376,9 +386,11 @@ def get_normalized_price(
         price = decimal.Decimal(form_amount)
     else:
         if form_unit_quantity == "G" and form_unit_amount == "KG":
-            price = decimal.Decimal(form_amount * decimal.Decimal(form_quantity / 1000))
+            price = decimal.Decimal(
+                form_amount * decimal.Decimal(form_quantity / 1000))
         elif form_unit_quantity == "CL" and form_unit_amount == "L":
-            price = decimal.Decimal(form_amount * decimal.Decimal(form_quantity / 100))
+            price = decimal.Decimal(
+                form_amount * decimal.Decimal(form_quantity / 100))
         else:
             price = decimal.Decimal(form_amount * form_quantity)
 
@@ -401,7 +413,8 @@ class BillsEntryListView(ShopMixin, BorgiaFormView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["billsentry_list"] = self.form_query(self.shop.billsentry_set.all())
+        context["billsentry_list"] = self.form_query(
+            self.shop.billsentry_set.all())
         return context
 
     def get_form_kwargs(self):
@@ -469,7 +482,8 @@ class BillsEntryRetrieveView(ShopMixin, BorgiaView):
         Raise Http404 if billsentry doesn't exist.
         """
         try:
-            self.billsentry = BillsEntry.objects.get(pk=self.kwargs["billsentry_pk"])
+            self.billsentry = BillsEntry.objects.get(
+                pk=self.kwargs["billsentry_pk"])
         except ObjectDoesNotExist:
             raise Http404
         if self.billsentry.shop.pk != self.shop.pk:

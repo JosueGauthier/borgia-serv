@@ -57,7 +57,8 @@ class AuthViewNamedURLTests(TestCase):
                 try:
                     reverse(name, args=args, kwargs=kwargs)
                 except NoReverseMatch:
-                    self.fail("Reversal of url named '%s' failed with NoReverseMatch" % name)
+                    self.fail(
+                        "Reversal of url named '%s' failed with NoReverseMatch" % name)
 
 
 class BaseAuthViewsTestCase(TestCase):
@@ -73,7 +74,8 @@ class BaseAuthViewsTestCase(TestCase):
         response_offline_user = Client().get(
             reverse(self.url_view))
         self.assertEqual(response_offline_user.status_code, 302)
-        self.assertRedirects(response_offline_user, get_login_url_redirected(self.get_url()))
+        self.assertRedirects(response_offline_user,
+                             get_login_url_redirected(self.get_url()))
 
     def get_url(self):
         return reverse(self.url_view)
@@ -103,7 +105,8 @@ class LoginViewTests(BaseAuthViewsTestCase):
         self.assertTrue(user_logged.is_authenticated)
 
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, LOGIN_REDIRECT_URL, fetch_redirect_response=False)
+        self.assertRedirects(response, LOGIN_REDIRECT_URL,
+                             fetch_redirect_response=False)
 
     def test_wrong_credentials(self):
         client = Client()
@@ -243,8 +246,9 @@ class BaseWorkboardsTestCase(BaseBorgiaViewsTestCase):
         response_offline_user = Client().get(
             reverse(self.url_view))
         self.assertEqual(response_offline_user.status_code, 302)
-        self.assertRedirects(response_offline_user, get_login_url_redirected(self.get_url()))
-   
+        self.assertRedirects(response_offline_user,
+                             get_login_url_redirected(self.get_url()))
+
     def get_url(self):
         return reverse(self.url_view)
 

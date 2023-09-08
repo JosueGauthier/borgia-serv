@@ -23,7 +23,8 @@ class BaseConfigurationsViewsTest(BaseBorgiaViewsTestCase):
     def offline_user_redirection(self):
         response_offline_user = Client().get(self.get_url())
         self.assertEqual(response_offline_user.status_code, 302)
-        self.assertRedirects(response_offline_user, get_login_url_redirected(self.get_url()))
+        self.assertRedirects(response_offline_user,
+                             get_login_url_redirected(self.get_url()))
 
 
 class GlobalConfigTest(BaseConfigurationsViewsTest):
@@ -76,6 +77,7 @@ class LydiaConfigTest(BaseConfigurationsViewsTest):
 
     def test_offline_user_redirection(self):
         super().offline_user_redirection()
+
 
 class BalanceConfigTest(BaseConfigurationsViewsTest):
     url_view = 'url_balance_config'

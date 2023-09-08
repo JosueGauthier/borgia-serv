@@ -172,7 +172,7 @@ class Event(models.Model):
             e = self.weightsuser_set.get(user=user)
 
             if weight == 0 and ((is_participant and e.weights_registeration == 0)
-                or (not is_participant and e.weights_participation == 0)):
+                                or (not is_participant and e.weights_participation == 0)):
                 e.delete()
                 # Deleted if both values are 0
 
@@ -194,7 +194,7 @@ class Event(models.Model):
             return 0
 
     def get_price_of_user(self, user):
-            # Calcul du prix par weight
+        # Calcul du prix par weight
         if isinstance(self.price, decimal.Decimal):
             weight_of_user = self.get_weight_of_user(user)
             if not self.payment_by_ponderation:

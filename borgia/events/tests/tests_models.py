@@ -172,7 +172,8 @@ class EventModelTestCase(TestCase):
         event_total_price.change_weight(self.user1, 10, is_participant=True)
         event_total_price.change_weight(self.user2, 5, is_participant=False)
         event_total_price.change_weight(self.user2, 40, is_participant=True)
-        event_total_price.pay_by_total(self.manager, self.banker, decimal.Decimal(100.00))
+        event_total_price.pay_by_total(
+            self.manager, self.banker, decimal.Decimal(100.00))
 
         # Get users with updated balance
         self.user1 = User.objects.get(pk=self.user1.pk)

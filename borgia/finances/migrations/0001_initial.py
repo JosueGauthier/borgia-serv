@@ -21,12 +21,18 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Transfert',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('datetime', models.DateTimeField(default=django.utils.timezone.now, verbose_name='Date')),
-                ('justification', models.TextField(blank=True, null=True, verbose_name='Justification')),
-                ('amount', models.DecimalField(decimal_places=2, default=0, max_digits=9, validators=[django.core.validators.MinValueValidator(Decimal('0'))], verbose_name='Montant')),
-                ('recipient', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='recipient_transfert', to=settings.AUTH_USER_MODEL)),
-                ('sender', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='sender_transfert', to=settings.AUTH_USER_MODEL)),
+                ('id', models.AutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
+                ('datetime', models.DateTimeField(
+                    default=django.utils.timezone.now, verbose_name='Date')),
+                ('justification', models.TextField(
+                    blank=True, null=True, verbose_name='Justification')),
+                ('amount', models.DecimalField(decimal_places=2, default=0, max_digits=9, validators=[
+                 django.core.validators.MinValueValidator(Decimal('0'))], verbose_name='Montant')),
+                ('recipient', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,
+                 related_name='recipient_transfert', to=settings.AUTH_USER_MODEL)),
+                ('sender', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,
+                 related_name='sender_transfert', to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'default_permissions': ('add', 'view'),
@@ -35,12 +41,17 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Recharging',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('datetime', models.DateTimeField(default=django.utils.timezone.now, verbose_name='Date')),
+                ('id', models.AutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
+                ('datetime', models.DateTimeField(
+                    default=django.utils.timezone.now, verbose_name='Date')),
                 ('solution_id', models.PositiveIntegerField()),
-                ('content_type', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='contenttypes.contenttype')),
-                ('operator', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='operator_recharging', to=settings.AUTH_USER_MODEL)),
-                ('sender', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='sender_recharging', to=settings.AUTH_USER_MODEL)),
+                ('content_type', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE, to='contenttypes.contenttype')),
+                ('operator', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,
+                 related_name='operator_recharging', to=settings.AUTH_USER_MODEL)),
+                ('sender', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,
+                 related_name='sender_recharging', to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'default_permissions': ('add', 'view'),
@@ -49,13 +60,20 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Lydia',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('amount', models.DecimalField(decimal_places=2, default=0, max_digits=9, validators=[django.core.validators.MinValueValidator(Decimal('0'))], verbose_name='Montant')),
-                ('date_operation', models.DateField(default=django.utils.timezone.now, verbose_name='Date')),
-                ('id_from_lydia', models.CharField(max_length=255, verbose_name='Numéro unique')),
-                ('is_online', models.BooleanField(default=True, verbose_name='Paiement en ligne')),
-                ('fee', models.DecimalField(decimal_places=2, default=0, max_digits=9, validators=[django.core.validators.MinValueValidator(Decimal('0'))], verbose_name='Frais lydia')),
-                ('sender', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ('id', models.AutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
+                ('amount', models.DecimalField(decimal_places=2, default=0, max_digits=9, validators=[
+                 django.core.validators.MinValueValidator(Decimal('0'))], verbose_name='Montant')),
+                ('date_operation', models.DateField(
+                    default=django.utils.timezone.now, verbose_name='Date')),
+                ('id_from_lydia', models.CharField(
+                    max_length=255, verbose_name='Numéro unique')),
+                ('is_online', models.BooleanField(
+                    default=True, verbose_name='Paiement en ligne')),
+                ('fee', models.DecimalField(decimal_places=2, default=0, max_digits=9, validators=[
+                 django.core.validators.MinValueValidator(Decimal('0'))], verbose_name='Frais lydia')),
+                ('sender', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'abstract': False,
@@ -65,13 +83,19 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ExceptionnalMovement',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('datetime', models.DateTimeField(default=django.utils.timezone.now, verbose_name='Date')),
-                ('justification', models.TextField(blank=True, null=True, verbose_name='Justification')),
-                ('amount', models.DecimalField(decimal_places=2, default=0, max_digits=9, validators=[django.core.validators.MinValueValidator(Decimal('0'))], verbose_name='Montant')),
+                ('id', models.AutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
+                ('datetime', models.DateTimeField(
+                    default=django.utils.timezone.now, verbose_name='Date')),
+                ('justification', models.TextField(
+                    blank=True, null=True, verbose_name='Justification')),
+                ('amount', models.DecimalField(decimal_places=2, default=0, max_digits=9, validators=[
+                 django.core.validators.MinValueValidator(Decimal('0'))], verbose_name='Montant')),
                 ('is_credit', models.BooleanField(default=False)),
-                ('operator', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='sender_exceptionnal_movement', to=settings.AUTH_USER_MODEL)),
-                ('recipient', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='recipient_exceptionnal_movement', to=settings.AUTH_USER_MODEL)),
+                ('operator', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,
+                 related_name='sender_exceptionnal_movement', to=settings.AUTH_USER_MODEL)),
+                ('recipient', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,
+                 related_name='recipient_exceptionnal_movement', to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'default_permissions': ('add', 'view'),
@@ -80,12 +104,18 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Cheque',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('amount', models.DecimalField(decimal_places=2, default=0, max_digits=9, validators=[django.core.validators.MinValueValidator(Decimal('0'))], verbose_name='Montant')),
-                ('is_cashed', models.BooleanField(default=False, verbose_name='Est encaissé')),
-                ('signature_date', models.DateField(default=django.utils.timezone.now, verbose_name='Date de signature')),
-                ('cheque_number', models.CharField(max_length=7, validators=[django.core.validators.RegexValidator('^[0-9]{7}$', 'Numéro de chèque\n                                                        invalide')], verbose_name='Numéro de chèque')),
-                ('sender', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ('id', models.AutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
+                ('amount', models.DecimalField(decimal_places=2, default=0, max_digits=9, validators=[
+                 django.core.validators.MinValueValidator(Decimal('0'))], verbose_name='Montant')),
+                ('is_cashed', models.BooleanField(
+                    default=False, verbose_name='Est encaissé')),
+                ('signature_date', models.DateField(
+                    default=django.utils.timezone.now, verbose_name='Date de signature')),
+                ('cheque_number', models.CharField(max_length=7, validators=[django.core.validators.RegexValidator(
+                    '^[0-9]{7}$', 'Numéro de chèque\n                                                        invalide')], verbose_name='Numéro de chèque')),
+                ('sender', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'abstract': False,
@@ -95,9 +125,12 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Cash',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('amount', models.DecimalField(decimal_places=2, default=0, max_digits=9, validators=[django.core.validators.MinValueValidator(Decimal('0'))], verbose_name='Montant')),
-                ('sender', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ('id', models.AutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
+                ('amount', models.DecimalField(decimal_places=2, default=0, max_digits=9, validators=[
+                 django.core.validators.MinValueValidator(Decimal('0'))], verbose_name='Montant')),
+                ('sender', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'abstract': False,

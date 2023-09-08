@@ -245,7 +245,6 @@ class EventFinish(EventMixin, BorgiaFormView):
     form_class = EventFinishForm
     need_ongoing_event = True
 
-
     def __init__(self):
         super().__init__()
         self.total_weights_participants = None
@@ -265,7 +264,8 @@ class EventFinish(EventMixin, BorgiaFormView):
                 return False
 
             try:
-                self.ponderation_price = round(self.event.price / self.total_weights_participants, 2)
+                self.ponderation_price = round(
+                    self.event.price / self.total_weights_participants, 2)
             except TypeError:
                 self.ponderation_price = 0
             return True
@@ -579,7 +579,7 @@ class EventDownloadXlsx(EventMixin, LoginRequiredMixin, BorgiaView):
         columns = ['Username', 'Pondération',
                    'Infos (Non utilisées) ->', 'Nom Prénom', 'Bucque']
         ws.append(columns)
-        for col in ['A','B','C','D','E']:
+        for col in ['A', 'B', 'C', 'D', 'E']:
             ws.column_dimensions[col].width = 30
 
         state = request.POST.get("state", "")
@@ -591,7 +591,7 @@ class EventDownloadXlsx(EventMixin, LoginRequiredMixin, BorgiaView):
                 # Contains the years selected
                 list_year_result = years
                 users = User.objects.filter(year__in=list_year_result, is_active=True).exclude(
-                    groups=get_members_group(is_externals=True)).order_by('-year','username')
+                    groups=get_members_group(is_externals=True)).order_by('-year', 'username')
                 for u in users:
                     ws.append([u.username, '', '', u.last_name +
                                ' ' + u.first_name, u.surname])
@@ -617,8 +617,9 @@ class EventDownloadXlsx(EventMixin, LoginRequiredMixin, BorgiaView):
 
         # Return the file
         response = HttpResponse(save_virtual_workbook(wb),
-                   content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-        response['Content-Disposition'] = 'attachment; filename=event-'+str(self.event.datetime.date())+".xlsx"
+                                content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        response['Content-Disposition'] = 'attachment; filename=event-' + \
+            str(self.event.datetime.date())+".xlsx"
         return response
 
 

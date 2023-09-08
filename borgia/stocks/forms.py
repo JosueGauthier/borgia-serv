@@ -41,7 +41,8 @@ class StockEntryProductForm(forms.Form):
     unit_quantity = forms.ChoiceField(
         label="Unité quantité",
         choices=(
-            [("UNIT", "produits"), ("CL", "cl"), ("L", "L"), ("G", "g"), ("KG", "kg")]
+            [("UNIT", "produits"), ("CL", "cl"),
+             ("L", "L"), ("G", "g"), ("KG", "kg")]
         ),
         widget=forms.Select(
             attrs={
@@ -96,9 +97,11 @@ class StockEntryProductForm(forms.Form):
     unit_inventory = forms.ChoiceField(
         label="Unité quantité",
         choices=(
-            [("UNIT", "produits"), ("CL", "cl"), ("L", "L"), ("G", "g"), ("KG", "kg")]
+            [("UNIT", "produits"), ("CL", "cl"),
+             ("L", "L"), ("G", "g"), ("KG", "kg")]
         ),
-        widget=forms.Select(attrs={"class": "form-control selectpicker unit_quantity"}),
+        widget=forms.Select(
+            attrs={"class": "form-control selectpicker unit_quantity"}),
         required=False,
     )
 
@@ -201,7 +204,8 @@ class InventoryProductForm(forms.Form):
     unit_quantity = forms.ChoiceField(
         label="Unité quantité",
         choices=(
-            [("UNIT", "produits"), ("CL", "cl"), ("L", "L"), ("G", "g"), ("KG", "kg")]
+            [("UNIT", "produits"), ("CL", "cl"),
+             ("L", "L"), ("G", "g"), ("KG", "kg")]
         ),
         widget=forms.Select(
             attrs={

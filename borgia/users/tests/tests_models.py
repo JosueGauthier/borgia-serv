@@ -36,8 +36,10 @@ class UserTest(TestCase):
                          'userWithLastName')
 
     def test_get_full_name(self):
-        self.assertEqual(self.user_only_username.get_full_name(), 'userOnlyUsername')
-        self.assertEqual(self.user_all_fields.get_full_name(), 'surname 53ME215')
+        self.assertEqual(
+            self.user_only_username.get_full_name(), 'userOnlyUsername')
+        self.assertEqual(self.user_all_fields.get_full_name(),
+                         'surname 53ME215')
         self.assertEqual(self.user_with_first_name.get_full_name(),
                          'userWithFirstName')
         self.assertEqual(self.user_with_last_name.get_full_name(),
@@ -116,6 +118,7 @@ class ListYearTest(TestCase):
     """
     Be careful : user1 is ignored (in the current BDD, user1 is the admin)
     """
+
     def setUp(self):
         self.user1 = User.objects.create(username='user1', year=2010)
         self.user2 = User.objects.create(username='user2', year=2011)

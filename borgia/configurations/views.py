@@ -41,8 +41,8 @@ class ConfigurationIndexView(LoginRequiredMixin, PermissionRequiredMixin, Latera
         context['tax_fee_lydia'] = configuration_get('TAX_FEE_LYDIA')
         context['balance_threshold_purchase'] = configuration_get(
             "BALANCE_THRESHOLD_PURCHASE")
-        #context['balance_threshold_mail_alert'] = configuration_get("BALANCE_THRESHOLD_MAIL_ALERT")
-        #context['balance_frequency_mail_alert'] = configuration_get("BALANCE_FREQUENCY_MAIL_ALERT")
+        # context['balance_threshold_mail_alert'] = configuration_get("BALANCE_THRESHOLD_MAIL_ALERT")
+        # context['balance_frequency_mail_alert'] = configuration_get("BALANCE_FREQUENCY_MAIL_ALERT")
         return context
 
 
@@ -206,8 +206,8 @@ class ConfigurationBalanceView(ConfigurationChangeBaseView):
         initial = super().get_initial()
         initial['balance_threshold_purchase'] = configuration_get(
             'BALANCE_THRESHOLD_PURCHASE').get_value()
-        #initial['balance_threshold_mail_alert'] = configuration_get('BALANCE_THRESHOLD_MAIL_ALERT').get_value()
-        #initial['balance_frequency_mail_alert'] = configuration_get('BALANCE_FREQUENCY_MAIL_ALERT').get_value()
+        # initial['balance_threshold_mail_alert'] = configuration_get('BALANCE_THRESHOLD_MAIL_ALERT').get_value()
+        # initial['balance_frequency_mail_alert'] = configuration_get('BALANCE_FREQUENCY_MAIL_ALERT').get_value()
         return initial
 
     def form_valid(self, form):

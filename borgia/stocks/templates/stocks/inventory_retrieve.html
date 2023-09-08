@@ -1,10 +1,6 @@
-{% extends 'base_sober.html' %}
-
-{% block content %}
+{% extends 'base_sober.html' %} {% block content %}
 <div class="panel panel-default">
-  <div class="panel-heading">
-    Détails d'un inventaire du stock du magasin {{ inventory.shop }}
-  </div>
+  <div class="panel-heading">Détails d'un inventaire du stock du magasin {{ inventory.shop }}</div>
   <div class="panel-body">
     <ul>
       <li>Magasin : {{ inventory.shop }}</li>
@@ -19,9 +15,7 @@
       {% for inventoryproduct in inventory.inventoryproduct_set.all %}
       <tr>
         <td>{{ inventoryproduct.product }}</td>
-        <td>
-          {{ inventoryproduct.get_quantity_display }}
-        </td>
+        <td>{{ inventoryproduct.get_quantity_display }}</td>
       </tr>
       {% endfor %}
     </table>

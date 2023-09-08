@@ -22,21 +22,29 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Sale',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('datetime', models.DateTimeField(default=django.utils.timezone.now, verbose_name='Date')),
+                ('id', models.AutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
+                ('datetime', models.DateTimeField(
+                    default=django.utils.timezone.now, verbose_name='Date')),
                 ('module_id', models.PositiveIntegerField()),
-                ('content_type', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='contenttypes.contenttype')),
-                ('operator', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='operator_sale', to=settings.AUTH_USER_MODEL)),
+                ('content_type', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE, to='contenttypes.contenttype')),
+                ('operator', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,
+                 related_name='operator_sale', to=settings.AUTH_USER_MODEL)),
             ],
         ),
         migrations.CreateModel(
             name='SaleProduct',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
                 ('quantity', models.PositiveIntegerField()),
-                ('price', models.DecimalField(decimal_places=2, default=0, max_digits=9, validators=[django.core.validators.MinValueValidator(Decimal('0'))], verbose_name='Prix')),
-                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='shops.product')),
-                ('sale', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='sales.sale')),
+                ('price', models.DecimalField(decimal_places=2, default=0, max_digits=9, validators=[
+                 django.core.validators.MinValueValidator(Decimal('0'))], verbose_name='Prix')),
+                ('product', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE, to='shops.product')),
+                ('sale', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE, to='sales.sale')),
             ],
             options={
                 'default_permissions': (),
@@ -45,21 +53,25 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='sale',
             name='products',
-            field=models.ManyToManyField(through='sales.SaleProduct', to='shops.product'),
+            field=models.ManyToManyField(
+                through='sales.SaleProduct', to='shops.product'),
         ),
         migrations.AddField(
             model_name='sale',
             name='recipient',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='recipient_sale', to=settings.AUTH_USER_MODEL),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,
+                                    related_name='recipient_sale', to=settings.AUTH_USER_MODEL),
         ),
         migrations.AddField(
             model_name='sale',
             name='sender',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='sender_sale', to=settings.AUTH_USER_MODEL),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,
+                                    related_name='sender_sale', to=settings.AUTH_USER_MODEL),
         ),
         migrations.AddField(
             model_name='sale',
             name='shop',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='shops.shop'),
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, to='shops.shop'),
         ),
     ]
