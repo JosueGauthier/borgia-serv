@@ -1,3 +1,10 @@
+from borgia.settings import (
+    CLIENT_ID,
+    CLIENT_SECRET,
+    VIVA_ACCOUNTS_URL_BASE,
+    VIVA_API_URL_BASE,
+    VIVA_PAYMENTS_URL_BASE,
+)
 import base64
 import datetime
 import decimal
@@ -109,11 +116,13 @@ class RechargingList(LoginRequiredMixin, PermissionRequiredMixin, BorgiaFormView
                         "total"
                     ] += recharging.content_solution.amount
                     info["lydia_face2face"]["nb"] += 1
-                    info["lydia_face2face"]["ids"].append(recharging.content_solution)
+                    info["lydia_face2face"]["ids"].append(
+                        recharging.content_solution)
                 else:
                     info["lydia_online"]["total"] += recharging.content_solution.amount
                     info["lydia_online"]["nb"] += 1
-                    info["lydia_online"]["ids"].append(recharging.content_solution)
+                    info["lydia_online"]["ids"].append(
+                        recharging.content_solution)
             info["total"]["total"] += recharging.content_solution.amount
             info["total"]["nb"] += 1
         return info
@@ -178,7 +187,8 @@ class RechargingRetrieve(LoginRequiredMixin, PermissionRequiredMixin, BorgiaView
         Raise Http404 is shop doesn't exist.
         """
         try:
-            self.recharging = Recharging.objects.get(pk=self.kwargs["recharging_pk"])
+            self.recharging = Recharging.objects.get(
+                pk=self.kwargs["recharging_pk"])
         except ObjectDoesNotExist:
             raise Http404
 
@@ -280,7 +290,8 @@ class TransfertRetrieve(LoginRequiredMixin, PermissionRequiredMixin, BorgiaView)
         Raise Http404 is shop doesn't exist.
         """
         try:
-            self.transfert = Transfert.objects.get(pk=self.kwargs["transfert_pk"])
+            self.transfert = Transfert.objects.get(
+                pk=self.kwargs["transfert_pk"])
         except ObjectDoesNotExist:
             raise Http404
 
@@ -608,14 +619,6 @@ class RechargingCreate(UserMixin, BorgiaFormView):
 
 # : OAuth2 authentication
 
-from borgia.settings import (
-    CLIENT_ID,
-    CLIENT_SECRET,
-    VIVA_ACCOUNTS_URL_BASE,
-    VIVA_API_URL_BASE,
-    VIVA_PAYMENTS_URL_BASE,
-)
-
 
 def get_viva_wallet_access_token():
     client_id = CLIENT_ID
@@ -757,15 +760,18 @@ class SelfLydiaCreate(LoginRequiredMixin, BorgiaFormView):
             ).get_value()
 
             if self.enable_fee_lydia:
-                base_fee_lydia = configuration_get(name="BASE_FEE_LYDIA").get_value()
+                base_fee_lydia = configuration_get(
+                    name="BASE_FEE_LYDIA").get_value()
                 self.base_fee_lydia = decimal.Decimal(base_fee_lydia).quantize(
                     decimal.Decimal(".01")
                 )
-                ratio_fee_lydia = configuration_get(name="RATIO_FEE_LYDIA").get_value()
+                ratio_fee_lydia = configuration_get(
+                    name="RATIO_FEE_LYDIA").get_value()
                 self.ratio_fee_lydia = decimal.Decimal(ratio_fee_lydia).quantize(
                     decimal.Decimal(".01")
                 )
-                tax_fee_lydia = configuration_get(name="TAX_FEE_LYDIA").get_value()
+                tax_fee_lydia = configuration_get(
+                    name="TAX_FEE_LYDIA").get_value()
                 self.tax_fee_lydia = decimal.Decimal(tax_fee_lydia).quantize(
                     decimal.Decimal(".01")
                 )
@@ -813,7 +819,8 @@ class SelfLydiaCreate(LoginRequiredMixin, BorgiaFormView):
             user.save()
 
         context = self.get_context_data()
-        context["vendor_token"] = configuration_get("VENDOR_TOKEN_LYDIA").get_value()
+        context["vendor_token"] = configuration_get(
+            "VENDOR_TOKEN_LYDIA").get_value()
         context["confirm_url"] = self.request.build_absolute_uri(
             reverse("url_self_lydia_confirm")
         )
@@ -886,7 +893,8 @@ class SelfLydiaConfirm(LoginRequiredMixin, BorgiaView):
         transaction_id = request.GET.get("t")
 
         access_token = get_viva_wallet_access_token()
-        transaction_data = get_viva_wallet_transaction(access_token, transaction_id)
+        transaction_data = get_viva_wallet_transaction(
+            access_token, transaction_id)
 
         transaction_amount = transaction_data.get("amount")
 
@@ -955,7 +963,8 @@ def viva_wallet_borgia_balance_refill(
             configuration_get("TAX_FEE_LYDIA").get_value()
         ).quantize(decimal.Decimal(".01"))
 
-        fee = calculate_lydia_fee_from_total(total_amount, base_fee, ratio_fee, tax_fee)
+        fee = calculate_lydia_fee_from_total(
+            total_amount, base_fee, ratio_fee, tax_fee)
         recharging_amount = total_amount - fee
 
     lydia = Lydia.objects.create(
@@ -1100,7 +1109,8 @@ class SelfLydiaCreateAPI(views.APIView):
         user = self.request.user
 
         context = {}
-        context["vendor_token"] = configuration_get("VENDOR_TOKEN_LYDIA").get_value()
+        context["vendor_token"] = configuration_get(
+            "VENDOR_TOKEN_LYDIA").get_value()
 
         context["confirm_url"] = self.request.build_absolute_uri(
             reverse("url_self_lydia_confirm")
@@ -1130,7 +1140,8 @@ class SelfLydiaCreateAPI(views.APIView):
 
         # total_amount = recharging_amount
 
-        enable_fee_lydia = configuration_get(name="ENABLE_FEE_LYDIA").get_value()
+        enable_fee_lydia = configuration_get(
+            name="ENABLE_FEE_LYDIA").get_value()
 
         tax_fee = decimal.Decimal(
             configuration_get("TAX_FEE_LYDIA").get_value()
@@ -1199,7 +1210,8 @@ class LydiaStateAPI(views.APIView):
         user = self.request.user
 
         context = {}
-        context["vendor_token"] = configuration_get("VENDOR_TOKEN_LYDIA").get_value()
+        context["vendor_token"] = configuration_get(
+            "VENDOR_TOKEN_LYDIA").get_value()
 
         serializerSelfLydiaCreateAPI = LydiaStateAPISerializer(
             data=self.request.data, context={"request": self.request}

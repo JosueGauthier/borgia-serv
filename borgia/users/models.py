@@ -110,7 +110,8 @@ class User(AbstractUser):
              "_group", 'Can manage vice presidents group'),
             ("manage_" + TREASURERS_GROUP_NAME + \
              "_group", 'Can manage treasurers group'),
-            ("manage_" + INTERNALS_GROUP_NAME + "_group", 'Can manage members group'),
+            ("manage_" + INTERNALS_GROUP_NAME + \
+             "_group", 'Can manage members group'),
             ("manage_" + EXTERNALS_GROUP_NAME + \
              "_group", 'Can manage externals group'),
 

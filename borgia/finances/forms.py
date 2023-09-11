@@ -52,7 +52,8 @@ class TransfertCreateForm(forms.Form):
             raise forms.ValidationError("L'utilisateur a été desactivé !")
         if self.sender == recipient:
             # Send to self : Impossible
-            raise forms.ValidationError("Vous ne pouvez pas transferez à vous même !")
+            raise forms.ValidationError(
+                "Vous ne pouvez pas transferez à vous même !")
 
         return recipient
 
@@ -105,7 +106,8 @@ class ExceptionnalMovementForm(forms.Form):
         widget=forms.TextInput(attrs={"class": "autocomplete_username"}),
         validators=[autocomplete_username_validator],
     )
-    operator_password = forms.CharField(label="Mot de passe", widget=PasswordInput)
+    operator_password = forms.CharField(
+        label="Mot de passe", widget=PasswordInput)
 
     def clean(self):
         cleaned_data = super().clean()
@@ -114,7 +116,8 @@ class ExceptionnalMovementForm(forms.Form):
             operator_username = cleaned_data["operator_username"]
             operator_password = cleaned_data["operator_password"]
             if (
-                authenticate(username=operator_username, password=operator_password)
+                authenticate(username=operator_username,
+                             password=operator_password)
                 is None
             ):
                 raise forms.ValidationError("Echec d'authentification")
@@ -145,7 +148,8 @@ class RechargingCreateForm(forms.Form):
         widget=forms.TextInput(attrs={"class": "autocomplete_username"}),
         validators=[autocomplete_username_validator],
     )
-    operator_password = forms.CharField(label="Mot de passe", widget=PasswordInput)
+    operator_password = forms.CharField(
+        label="Mot de passe", widget=PasswordInput)
 
     def __init__(self, **kwargs):
         self.user = kwargs.pop("user")
@@ -184,7 +188,8 @@ class RechargingCreateForm(forms.Form):
 
             if operator_password and operator_password:
                 if (
-                    authenticate(username=operator_username, password=operator_password)
+                    authenticate(username=operator_username,
+                                 password=operator_password)
                     is None
                 ):
                     raise forms.ValidationError("Echec d'authentification")
@@ -217,7 +222,8 @@ class SelfLydiaCreateForm(forms.Form):
 
 
 class SetPriceProductBaseForm(forms.Form):
-    is_manual = forms.BooleanField(label="Gestion manuelle du prix", required=False)
+    is_manual = forms.BooleanField(
+        label="Gestion manuelle du prix", required=False)
     manual_price = forms.DecimalField(
         label="Prix manuel", decimal_places=2, max_digits=9, min_value=0, required=False
     )

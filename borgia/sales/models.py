@@ -107,7 +107,7 @@ class SaleProduct(models.Model):
     product 
     quantity 
     price 
-    
+
     """
     sale = models.ForeignKey(Sale, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)

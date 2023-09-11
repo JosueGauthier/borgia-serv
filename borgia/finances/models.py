@@ -129,7 +129,8 @@ class ExceptionnalMovement(models.Model):
 
     def __str__(self):
         return (
-            "Mouvement exceptionnel de " + str(self.amount) + "€, " + self.justification
+            "Mouvement exceptionnel de " +
+            str(self.amount) + "€, " + self.justification
         )
 
     def pay(self):

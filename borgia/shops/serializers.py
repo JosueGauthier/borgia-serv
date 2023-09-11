@@ -27,9 +27,11 @@ class SelfSaleModuleSerializer(serializers.ModelSerializer):
 
 class SelfSaleShopSerializer(serializers.ModelSerializer):
     shop = ShopSerializer()
+
     class Meta:
         model = SelfSaleModule
-        fields = ["id","state","delay_post_purchase","limit_purchase","logout_post_purchase","shop"]
+        fields = ["id", "state", "delay_post_purchase",
+                  "limit_purchase", "logout_post_purchase", "shop"]
 
 
 class OperatorSaleModuleSerializer(serializers.ModelSerializer):
@@ -79,7 +81,8 @@ class ShopStatSerializer(serializers.ModelSerializer):
         return totalsaleamountofshop
 
     def get_total_sale_of_shop(self, obj):
-        totalsaleofshop = SaleProduct.objects.filter(sale__shop__id=obj.id).count()
+        totalsaleofshop = SaleProduct.objects.filter(
+            sale__shop__id=obj.id).count()
         return totalsaleofshop
 
 
@@ -147,7 +150,8 @@ class CreateShopSerializer(serializers.Serializer):
 
     shop_image = serializers.CharField(write_only=True)
     shop_color = serializers.CharField(write_only=True, required=False)
-    correcting_factor_activated = serializers.CharField(write_only=True, required=False)
+    correcting_factor_activated = serializers.CharField(
+        write_only=True, required=False)
 
     def validate(self, attrs):
         shop_name = attrs.get("shop_name")

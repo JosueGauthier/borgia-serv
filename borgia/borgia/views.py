@@ -68,17 +68,17 @@ class ModulesLoginView(LoginView):
         self_urls = [l['self_module_rev_link'] for l in shop_list]
         shop_urls = operator_urls + self_urls
         if next in shop_urls:
-           url_parts = [i for i in next.split("/") if i]
-           if "self_sales" in url_parts:
-               readable_url = "Vente directe - "
-           elif "operator_sales" in url_parts:
-               readable_url = "Vente par opérateur - "
-           if "shops" in url_parts:
-               shop = Shop.objects.get(pk=int(url_parts[1]))
-               if shop:
-                  readable_url += shop.name.capitalize()
+            url_parts = [i for i in next.split("/") if i]
+            if "self_sales" in url_parts:
+                readable_url = "Vente directe - "
+            elif "operator_sales" in url_parts:
+                readable_url = "Vente par opérateur - "
+            if "shops" in url_parts:
+                shop = Shop.objects.get(pk=int(url_parts[1]))
+                if shop:
+                    readable_url += shop.name.capitalize()
         if readable_url == "":
-           readable_url = next
+            readable_url = next
         return readable_url
 
     def get_context_data(self, **kwargs):
@@ -88,10 +88,13 @@ class ModulesLoginView(LoginView):
         context['shop_list'] = []
         for shop in Shop.objects.all():
             operator_module = shop.modules_operatorsalemodule_shop.first()
-            operator_module_rev_link = reverse('url_shop_module_sale', kwargs={'shop_pk': shop.pk, 'module_class': 'operator_sales'})
-            operator_module_link = self.add_next_to_login(operator_module_rev_link)
+            operator_module_rev_link = reverse('url_shop_module_sale', kwargs={
+                                               'shop_pk': shop.pk, 'module_class': 'operator_sales'})
+            operator_module_link = self.add_next_to_login(
+                operator_module_rev_link)
             self_module = shop.modules_selfsalemodule_shop.first()
-            self_module_rev_link = reverse('url_shop_module_sale', kwargs={'shop_pk': shop.pk, 'module_class': 'self_sales'})
+            self_module_rev_link = reverse('url_shop_module_sale', kwargs={
+                                           'shop_pk': shop.pk, 'module_class': 'self_sales'})
             self_module_link = self.add_next_to_login(self_module_rev_link)
             context['shop_list'].append({
                 'shop': shop,
@@ -103,7 +106,8 @@ class ModulesLoginView(LoginView):
                 'self_module_rev_link': self_module_rev_link
             })
         if context['next']:
-           context['humanized_next'] = self.readable_shop_url(context['next'], context['shop_list'])
+            context['humanized_next'] = self.readable_shop_url(
+                context['next'], context['shop_list'])
         return context
 
 

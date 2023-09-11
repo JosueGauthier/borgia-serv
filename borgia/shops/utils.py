@@ -222,7 +222,8 @@ def shops_lateral_menu(nav_tree, user, shop):
                 id_link="lm_operatorsale_module",
                 url=reverse(
                     "url_shop_module_config",
-                    kwargs={"shop_pk": shop.pk, "module_class": "operator_sales"},
+                    kwargs={"shop_pk": shop.pk,
+                            "module_class": "operator_sales"},
                 ),
             )
         )
